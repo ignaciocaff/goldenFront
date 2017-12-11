@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Directive } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 @Component({
     selector: 'header',
@@ -8,5 +8,4 @@ import { Router, NavigationExtras } from '@angular/router';
     providers: []
 })
 export class HeaderComponent {
-
 }

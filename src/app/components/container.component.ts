@@ -9,4 +9,8 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class ContainerComponent {
 
+    constructor(
+        private router: Router
+    ) {
+    }
 }
