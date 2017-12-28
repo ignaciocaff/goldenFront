@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { HeaderComponent } from './header/index';
 import { NavComponent } from './nav/index';
 import { AsideComponent } from './aside/index';
@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JugadoresCargaComponent } from './common/jugadores/index';
 import { FormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
+import { LoginComponent, LoginCargaComponent } from './common/login/index'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HomeRoutingModule } from './container-routing.module';
     AsideComponent,
     SectionComponent,
     FooterComponent,
-    JugadoresCargaComponent
+    JugadoresCargaComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { HomeRoutingModule } from './container-routing.module';
     HomeRoutingModule
   ],
   providers: [],
-  exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent, FooterComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
+    FooterComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class ContainerModule { }

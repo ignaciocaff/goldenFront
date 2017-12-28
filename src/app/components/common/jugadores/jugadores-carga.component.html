@@ -22,7 +22,7 @@
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                      <input [disabled]="visualizable" [(ngModel)]="jugador.nro_documento" name="nroDoc" required #nroDoc='ngModel' class="form-control" type="text" on-blur="consultarDatosjugador()">
+                      <input [(ngModel)]="jugador.nro_documento" name="nroDoc" required #nroDoc='ngModel' class="form-control" type="text" on-blur="consultarDatosjugador()">
                     </div>
                     <div *ngIf="nroDoc.errors && (nroDoc.dirty || nroDoc.touched)" class="error">
                       Documento es un campo requerido

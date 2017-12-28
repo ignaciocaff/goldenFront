@@ -1,5 +1,6 @@
-import { Component, Directive } from '@angular/core';
+import { Component, Directive, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { LoginComponent } from '../common/login/index';
 @Component({
     selector: 'header',
     moduleId: module.id,
@@ -8,4 +9,6 @@ import { Router, NavigationExtras } from '@angular/router';
     providers: []
 })
 export class HeaderComponent {
+    @ViewChild(LoginComponent) login: LoginComponent;
+
 }
