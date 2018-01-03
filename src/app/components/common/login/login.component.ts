@@ -1,4 +1,4 @@
-import { Component, ViewChild, Inject, forwardRef } from '@angular/core';
+import { Component, ViewChild, Inject, forwardRef, ElementRef } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { LoginCargaComponent } from './index';
 import { Usuario } from '../../../entities/index'
@@ -7,7 +7,6 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { AuthenticationService } from '../../../services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { CustomToastOption } from '../../../services/index';
-
 @Component({
     selector: 'login',
     moduleId: module.id,
@@ -16,6 +15,7 @@ import { CustomToastOption } from '../../../services/index';
     providers: [AuthenticationService]
 })
 export class LoginComponent {
+    @ViewChild('closeBtn') closeBtn: ElementRef;
     @BlockUI() blockUI: NgBlockUI;
     public usuario = new Usuario();
     constructor(private authenticationService: AuthenticationService, public toastr: ToastsManager) { }
@@ -26,10 +26,15 @@ export class LoginComponent {
             data => {
                 this.blockUI.stop();
                 this.toastr.info("Bienvenido a Golden", "Info");
+                this.closeModal();
             },
             error => {
                 this.blockUI.stop();
                 this.toastr.error("El usuario y/o la contraseña son incorrectos", "Error!");
             });
+    }
+
+    private closeModal(): void {
+        this.closeBtn.nativeElement.click();
     }
 }
