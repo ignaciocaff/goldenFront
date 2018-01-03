@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
 
 import {
     Jugador,
@@ -38,5 +40,7 @@ export class JugadoresCargaComponent {
         this.existeJugador = false;
         this.visualizable = false;
     }
+
+//METODOS-----------------------------------------------------------------------
 
 }
