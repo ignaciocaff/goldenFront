@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { ContainerComponent } from './components/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,8 @@ import { ContainerComponent } from './components/index';
 export class AppComponent {
   @ViewChild(ContainerComponent) container: ContainerComponent;
   title = 'app';
+
+  constructor(public toastr: ToastsManager, vRef: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vRef);
+  }
 }

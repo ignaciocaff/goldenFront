@@ -8,9 +8,10 @@ import { FooterComponent } from './footer/index';
 import { MatMenuModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JugadoresCargaComponent } from './common/jugadores/index';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index'
+
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LoginComponent, LoginCargaComponent } from './common/login/index'
     MatMenuModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HomeRoutingModule
   ],
   providers: [],

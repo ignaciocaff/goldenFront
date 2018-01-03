@@ -7,3 +7,6 @@ export * from './domicilio';
 export * from './contacto';
 export * from './tipo_documento';
 export * from './estado_civil';
+export * from './usuario';
+export * from './perfil';
+export * from './permiso';
