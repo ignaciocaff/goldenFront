@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: number-input;
+}
+
+.HyperlinkInterno{
+   color: rgb(118, 104, 73);
+   text-decoration: none;
+}
+
+.HyperlinkInterno:visited {
+   color: rgb(118, 104, 73);
+   text-decoration: none;
+}
+
+.HyperlinkInterno:hover {
+   color: rgb(170, 145, 93);
+   text-decoration: none;
+   font-weight: bold;
+}
+
+.HyperlinkInterno:active{
+   color: rgb(170, 145, 93);
+   text-decoration: none;
+
+}
