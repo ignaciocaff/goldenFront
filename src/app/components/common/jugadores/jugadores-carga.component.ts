@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, NgControl } from '@angular/forms';
-import { MyErrorStateMatcher } from '../error-matcher.component';
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
+
+
 import {
     Jugador,
     TipoDocumento,
@@ -39,11 +41,6 @@ export class JugadoresCargaComponent {
         this.visualizable = false;
     }
 
-    emailFormControl = new FormControl('', [
-        Validators.required,
-        Validators.email,
-    ]);
-
-    matcher = new MyErrorStateMatcher();
+//METODOS-----------------------------------------------------------------------
 
 }
