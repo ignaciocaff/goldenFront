@@ -4,9 +4,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ContainerModule, ContainerComponent } from './components/index';
 import { ImageUploadModule } from "angular2-image-upload";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent, LoginCargaComponent } from './components/common/login/index'
+import { BlockUIModule } from 'ng-block-ui';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { AuthenticationService } from './services/index'
+import { AppConfig } from './app.config'
+import { ToastOptions } from 'ng2-toastr';
+import { CustomToastOption } from './services/index';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,10 +25,17 @@ import { LoginComponent, LoginCargaComponent } from './components/common/login/i
     ContainerModule,
     MatDialogModule,
     FormsModule,
+    ReactiveFormsModule,
+    BlockUIModule,
+    ToastModule.forRoot(),
     ImageUploadModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthenticationService, AppConfig,
+    {
+      provide: ToastOptions,
+      useClass: CustomToastOption
+    }],
   entryComponents: [
     LoginCargaComponent
   ],
