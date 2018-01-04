@@ -1,7 +1,10 @@
 <!-- Button to Open the Modal -->
-<button type="button" class="btn btn-primary btnStyleAceptar" data-toggle="modal" data-target="#loginModal">
-  Ingresar
-</button>
+<a *ngIf="user == null" class="HyperlinkInterno" data-toggle="modal" data-target="#loginModal">
+  LOGIN
+</a>
+<a *ngIf="user != null" class="HyperlinkInterno" (click)="logOut()">
+  {{user.perfil.n_perfil.toUpperCase()}} | LOGOUT
+</a>
 
 <!-- The Modal -->
 <!-- Modal -->
@@ -34,8 +37,7 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-lock"></i>
               </span>
-              <input [(ngModel)]="usuario.password" name="password" required #password='ngModel' class="form-control" type="password"
-                required="">
+              <input [(ngModel)]="usuario.password" name="password" required #password='ngModel' class="form-control" type="password" required="">
             </div>
           </div>
         </div>

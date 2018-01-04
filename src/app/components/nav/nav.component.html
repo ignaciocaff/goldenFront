@@ -89,7 +89,7 @@
   </div>
   <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
     <div class="dropdown">
-      <button class="dropbtn">ADMINISTRACIÓN</button>
+      <button *ngIf="user != null" class="dropbtn">ADMINISTRACIÓN</button>
       <div class="dropdown-content">
         <a href="#">Configuracion</a>
         <a href="#">Equipos</a>

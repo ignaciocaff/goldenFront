@@ -7,13 +7,16 @@ import {
     JugadoresCargaComponent
 } from './common/jugadores/index';
 import { SectionComponent } from './section/index';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
     {
         path: 'home', component: ContainerComponent,
         children: [
-            { path: 'jugadores-carga', component: JugadoresCargaComponent },
+            {
+                path: 'jugadores-carga', component: JugadoresCargaComponent,
+            }
         ]
     },
     //{ path: '**', component: HomeComponent }

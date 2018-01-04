@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 
 import {
@@ -10,7 +10,7 @@ import {
     Nacionalidad,
     EstadoCivil,
     Provincia,
-    Localidad
+    Localidad, Contacto
 } from '../../../entities/index';
 
 @Component({
@@ -28,6 +28,7 @@ export class JugadoresCargaComponent {
     public jugador = new Jugador();
     public tipoDocumento: TipoDocumento;
     public provincia: Provincia;
+    public contacto: Contacto = new Contacto();
 
     public lsProvincias = new Array<Provincia>();
     public lsLocalidades = new Array<Localidad>();
@@ -37,10 +38,11 @@ export class JugadoresCargaComponent {
 
     constructor(
     ) {
+        this.jugador.contacto = this.contacto;
         this.existeJugador = false;
         this.visualizable = false;
     }
 
-//METODOS-----------------------------------------------------------------------
+    //METODOS-----------------------------------------------------------------------
 
 }
