@@ -6,6 +6,9 @@ import { ContainerComponent } from './index';
 import {
     JugadoresCargaComponent
 } from './common/jugadores/index';
+import {
+    TorneoComponent
+} from './common/torneo/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 
@@ -16,6 +19,9 @@ const homeRoutes: Routes = [
         children: [
             {
                 path: 'jugadores-carga', component: JugadoresCargaComponent,
+            },
+            {
+                path: 'torneo-carga', component: TorneoComponent,
             }
         ]
     },
