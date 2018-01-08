@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index'
 import { TorneoComponent } from './common/torneo/index';
+import { EquipoComponent } from './common/equipo/index';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { TorneoComponent } from './common/torneo/index';
     FooterComponent,
     JugadoresCargaComponent,
     TorneoComponent,
-    LoginComponent
+    LoginComponent,
+    TorneoComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,

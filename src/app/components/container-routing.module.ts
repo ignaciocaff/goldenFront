@@ -9,6 +9,7 @@ import {
 import {
     TorneoComponent
 } from './common/torneo/index';
+import { EquipoComponent } from './common/equipo/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 
@@ -22,6 +23,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'torneo-carga', component: TorneoComponent,
+            },
+            {
+                path: 'equipo-carga', component: EquipoComponent,
             }
         ]
     },

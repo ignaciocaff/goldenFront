@@ -15,3 +15,5 @@ export * from './modalidad_torneo';
 export * from './regla_torneo';
 export * from './tipo_torneo';
 export * from './torneo';
+export * from './club';
+export * from './equipo';
