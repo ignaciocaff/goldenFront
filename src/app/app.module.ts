@@ -12,7 +12,7 @@ import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AuthenticationService } from './services/index'
 import { AppConfig } from './app.config'
 import { ToastOptions } from 'ng2-toastr';
-import { CustomToastOption } from './services/index';
+import { CustomToastOption, SharedService } from './services/index';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { CustomToastOption } from './services/index';
     ImageUploadModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [AuthenticationService, AppConfig,
+  providers: [AuthenticationService, AppConfig, SharedService,
     {
       provide: ToastOptions,
       useClass: CustomToastOption

@@ -1,0 +1,110 @@
+<form #equipoForm="ngForm" name="equipoForm">
+
+
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <h4>
+        Datos del equipo
+      </h4>
+      <p class="text-muted">
+        Ingrese los datos del Equipo
+      </p>
+    </div>
+    <div class="col-md-8 col-sm-8">
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label for="nombre" class="control-label">Nombre</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input [(ngModel)]="equipo.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required="">
+          </div>
+          <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="error">
+            <span class="label label-danger" id="error_Requerido">Campo requerido</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Torneo</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="equipo.torneo" name="torneo" required #torneo='ngModel' class="form-control selectpicker" (ngModelChange)="torneo_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let torneo of lsTorneos" [ngValue]="tipo">{{torneo.nombre}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Categoria</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="equipo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker" (ngModelChange)="categoria_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let categoria of lsCategorias" [ngValue]="tipo">{{categoria.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Club</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="equipo.club" name="club" required #club='ngModel' class="form-control selectpicker" (ngModelChange)="club_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let clubes of lsClub" [ngValue]="tipo">{{club.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group has-feedback">
+        <label class="control-label">Descripción</label>
+        <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar informacion referida al equipo"
+          maxlength="1000"></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="form-group has-feedback">
+        <label class="control-label" for="logo">Seleccione el escudo</label>
+        <div class="inputGroupContainer">
+          <input [(ngModel)]="equipo.logo" type="file" name="logo" #logo='ngModel' class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+    </div>
+  </div>
+</form>

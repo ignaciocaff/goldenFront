@@ -9,7 +9,7 @@ import {
     Jugador,
     TipoDocumento,
     Provincia,
-    Localidad
+    Localidad, Contacto
 } from '../../../entities/index';
 
 import {
@@ -41,6 +41,7 @@ export class JugadoresCargaComponent {
     public jugador = new Jugador();
     public tipoDocumento: TipoDocumento;
     public provincia: Provincia;
+    public contacto: Contacto = new Contacto();
 
     public lsProvincias = new Array<Provincia>();
     public lsLocalidades = new Array<Localidad>();
@@ -53,6 +54,7 @@ export class JugadoresCargaComponent {
         private personaService: PersonaService,
         private dialogService: DialogService,
     ) {
+        this.jugador.contacto = this.contacto;
         this.existeJugador = false;
         this.visualizable = false;
         this.cargarTiposDocumento();

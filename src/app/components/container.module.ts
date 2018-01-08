@@ -11,6 +11,8 @@ import { JugadoresCargaComponent } from './common/jugadores/index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index'
+import { TorneoComponent } from './common/torneo/index';
+import { EquipoComponent } from './common/equipo/index';
 
 
 @NgModule({
@@ -21,7 +23,10 @@ import { LoginComponent, LoginCargaComponent } from './common/login/index'
     SectionComponent,
     FooterComponent,
     JugadoresCargaComponent,
-    LoginComponent
+    TorneoComponent,
+    LoginComponent,
+    TorneoComponent,
+    EquipoComponent
   ],
   imports: [
     BrowserModule,

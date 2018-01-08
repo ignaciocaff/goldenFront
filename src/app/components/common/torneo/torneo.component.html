@@ -1,0 +1,82 @@
+<form #torneoForm="ngForm" name="torneoForm">
+  <div class="row">
+    <div class="col-md-4 col-sm-4">
+      <h4>
+        Datos Torneo
+      </h4>
+      <p class="text-muted">
+        Ingrese los datos del Torneo
+      </p>
+    </div>
+    <div class="col-md-8 col-sm-8">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Tipo Torneo (*)</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="torneo.tipo_torneo" name="tipo_torneo" required #tipo_torneo='ngModel' class="form-control selectpicker"
+              (ngModelChange)="tipo_torneo_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let tipo of lsTipos" [ngValue]="tipo">{{tipo.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Reglas (*)</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="torneo.regla_torneo" name="regla_torneo" required #regla_torneo='ngModel' class="form-control selectpicker"
+              (ngModelChange)="regla_torneo_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let regla of lsReglas" [ngValue]="tipo">{{regla.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Modalidad (*)</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="torneo.modalidad" name="modalidad" required #modalidad='ngModel' class="form-control selectpicker" (ngModelChange)="modalidad_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let modalidad of lsModalidades" [ngValue]="tipo">{{modalidad.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Categoria (*)</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <select [(ngModel)]="torneo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker" (ngModelChange)="categoria_onChanged($event)">
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let categoria of lsCategorias" [ngValue]="tipo">{{categoria.descripcion}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

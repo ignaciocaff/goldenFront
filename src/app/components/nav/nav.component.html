@@ -89,16 +89,16 @@
   </div>
   <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
     <div class="dropdown">
-      <button class="dropbtn">ADMINISTRACIÓN</button>
+      <button *ngIf="user != null" class="dropbtn">ADMINISTRACIÓN</button>
       <div class="dropdown-content">
-        <a href="#">Configuracion</a>
-        <a href="#">Equipos</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Configuracion</a>
+        <a *ngIf=" user != null && user.perfil.n_perfil === 'Administrador'" (click)="equipoCarga_Click()">Equipos</a>
         <a (click)="jugadoresCarga_Click()">Jugadores</a>
-        <a href="#">Generar fixture</a>
-        <a href="#">Categorias</a>
-        <a href="#">Torneos</a>
-        <a href="#">Noticias</a>
-        <a href="#">Sponsors</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Generar fixture</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Categorias</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="torneoCarga_Click()">Torneos</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Noticias</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
       </div>
     </div>
   </div>
