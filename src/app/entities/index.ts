@@ -10,3 +10,8 @@ export * from './estado_civil';
 export * from './usuario';
 export * from './perfil';
 export * from './permiso';
+export * from './categoria_torneo';
+export * from './modalidad_torneo';
+export * from './regla_torneo';
+export * from './tipo_torneo';
+export * from './torneo';
