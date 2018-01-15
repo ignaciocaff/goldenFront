@@ -2,8 +2,8 @@ export class Modalidad {
     public descripcion: string;
     public id_modalidad: number;
     constructor(
-        descripcion?: string,
-        id_modalidad?: number
+        id_modalidad?: number,
+        descripcion?: string
     ) {
         if (descripcion) this.descripcion = descripcion;
         else this.descripcion = null;

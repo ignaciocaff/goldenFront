@@ -11,7 +11,7 @@ import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService } 
     moduleId: module.id,
     templateUrl: './torneo.component.html',
     styleUrls: ['./torneo.component.css'],
-    providers: []
+    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService]
 })
 export class TorneoComponent {
     @ViewChild('torneoForm') torneoForm: FormGroup;
@@ -41,10 +41,10 @@ export class TorneoComponent {
     cargarTipoTorneo() {
         this.tiposTorneoService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let tipo_torneo = new TipoTorneo(
-                        data.json()[i]["id_tipo"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const tipo_torneo = new TipoTorneo(
+                        data[i]['id_tipo'],
+                        data[i]['descripcion']
                     );
                     this.lsTipos.push(tipo_torneo);
                 }
@@ -58,10 +58,10 @@ export class TorneoComponent {
     cargarReglas() {
         this.reglasService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let reglas = new Regla(
-                        data.json()[i]["id_regla"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const reglas = new Regla(
+                        data[i]['id_regla'],
+                        data[i]['descripcion']
                     );
                     this.lsReglas.push(reglas);
                 }
@@ -75,10 +75,10 @@ export class TorneoComponent {
     cargarModalidades() {
         this.modalidadService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let modalidad = new Modalidad(
-                        data.json()[i]["id_modalidad"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const modalidad = new Modalidad(
+                        data[i]['id_modalidad'],
+                        data[i]['descripcion']
                     );
                     this.lsModalidades.push(modalidad);
                 }
@@ -92,10 +92,10 @@ export class TorneoComponent {
     cargarCategorias() {
         this.categoriasService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let categoria = new Categoria(
-                        data.json()[i]["id_categoria"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const categoria = new Categoria(
+                        data[i]['id_categoria'],
+                        data[i]['descripcion']
                     );
                     this.lsCategorias.push(categoria);
                 }

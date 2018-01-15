@@ -3,8 +3,8 @@ export class Regla {
     public id_regla: number;
 
     constructor(
-        descripcion?: string,
-        id_regla?: number
+        id_regla?: number,
+        descripcion?: string
     ) {
         if (descripcion) this.descripcion = descripcion;
         else this.descripcion = null;
