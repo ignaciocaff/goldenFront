@@ -1,9 +1,9 @@
 <!-- Button to Open the Modal -->
-<a *ngIf="user == null" class="HyperlinkInterno" data-toggle="modal" data-target="#loginModal">
-  LOGIN
+<a *ngIf="user == null" class="login" data-toggle="modal" data-target="#loginModal">
+  INGRESAR
 </a>
-<a *ngIf="user != null" class="HyperlinkInterno" (click)="logOut()">
-  {{user.perfil.n_perfil.toUpperCase()}} | LOGOUT
+<a *ngIf="user != null" class="login" (click)="logOut()">
+  {{user.perfil.n_perfil.toUpperCase()}} | SALIR
 </a>
 
 <!-- The Modal -->
@@ -16,7 +16,7 @@
           <span aria-hidden="true" class="glyphicon glyphicon-remove">
           </span>
         </button>
-        <h3 class="modal-title" id="loginModalTitle">Iniciar Sesión</h3>
+        <h3 class="modal-title" id="loginModal  Title">Iniciar Sesión</h3>
       </div>
       <div class="modal-body">
         <div class="form-group has-feedback">
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class=" modal-footer ">
-        <button [disabled]="loading " (click)="login()" type="button" class="btn btnStyleAceptar">Ingresar</button>
+        <button [disabled]="loading " (click)="login()" type="button" class="btn btn-primary">Ingresar</button>
       </div>
     </div>
   </div>
