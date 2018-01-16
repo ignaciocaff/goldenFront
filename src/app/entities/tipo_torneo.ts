@@ -3,8 +3,8 @@ export class TipoTorneo {
     public id_tipo: number;
 
     constructor(
-        descripcion?: string,
-        id_tipo?: number
+        id_tipo?: number,
+        descripcion?: string
     ) {
         if (descripcion) this.descripcion = descripcion;
         else this.descripcion = null;

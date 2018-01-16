@@ -20,8 +20,7 @@
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-list"></i>
             </span>
-            <select [(ngModel)]="torneo.tipo_torneo" name="tipo_torneo" required #tipo_torneo='ngModel' class="form-control selectpicker"
-              (ngModelChange)="tipo_torneo_onChanged($event)">
+            <select [(ngModel)]="torneo.tipoTorneo" name="tipoTorneo" required #tipo_torneo='ngModel' class="form-control selectpicker">
               <option value="null">Elija su opcion</option>
               <option *ngFor="let tipo of lsTipos" [ngValue]="tipo">{{tipo.descripcion}}</option>
             </select>
@@ -37,10 +36,9 @@
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-list"></i>
             </span>
-            <select [(ngModel)]="torneo.regla_torneo" name="regla_torneo" required #regla_torneo='ngModel' class="form-control selectpicker"
-              (ngModelChange)="regla_torneo_onChanged($event)">
+            <select [(ngModel)]="torneo.regla" name="regla" required #regla_torneo='ngModel' class="form-control selectpicker">
               <option value="null">Elija su opcion</option>
-              <option *ngFor="let regla of lsReglas" [ngValue]="tipo">{{regla.descripcion}}</option>
+              <option *ngFor="let regla of lsReglas" [ngValue]="regla">{{regla.descripcion}}</option>
             </select>
           </div>
         </div>
@@ -54,9 +52,9 @@
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-list"></i>
             </span>
-            <select [(ngModel)]="torneo.modalidad" name="modalidad" required #modalidad='ngModel' class="form-control selectpicker" (ngModelChange)="modalidad_onChanged($event)">
+            <select [(ngModel)]="torneo.modalidad" name="modalidad" required #modalidad='ngModel' class="form-control selectpicker">
               <option value="null">Elija su opcion</option>
-              <option *ngFor="let modalidad of lsModalidades" [ngValue]="tipo">{{modalidad.descripcion}}</option>
+              <option *ngFor="let modalidad of lsModalidades" [ngValue]="modalidad">{{modalidad.descripcion}}</option>
             </select>
           </div>
         </div>
@@ -70,13 +68,80 @@
             <span class="input-group-addon">
               <i class="glyphicon glyphicon-list"></i>
             </span>
-            <select [(ngModel)]="torneo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker" (ngModelChange)="categoria_onChanged($event)">
+            <select [(ngModel)]="torneo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker">
               <option value="null">Elija su opcion</option>
-              <option *ngFor="let categoria of lsCategorias" [ngValue]="tipo">{{categoria.descripcion}}</option>
+              <option *ngFor="let categoria of lsCategorias" [ngValue]="categoria">{{categoria.descripcion}}</option>
             </select>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Nombre</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input [(ngModel)]="torneo.nombre" name="nombre" class="form-control" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Descripción</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-user"></i>
+            </span>
+            <input [(ngModel)]="torneo.descripcion" name="descripcion" class="form-control" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Fecha Inicio</label>
+        <div class="inputGroupContainer">
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker'>
+              <input [(ngModel)]="torneo.fecha_inicio" name="fecha_inicio" type='text' class="form-control" type="date" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar">
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Fecha Fin</label>
+        <div class="inputGroupContainer">
+          <div class="form-group">
+            <div class='input-group date' id='datetimepicker'>
+              <input [(ngModel)]="torneo.fecha_fin" name="fecha_fin" type='text' class="form-control" type="date" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar">
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <button (click)="registrarTorneo()" type="button" class="btn btnStyleAceptar">Registrar</button>
     </div>
   </div>
 </form>

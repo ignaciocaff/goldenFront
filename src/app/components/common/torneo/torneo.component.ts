@@ -2,16 +2,17 @@ import { Component, Directive, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Torneo, TipoTorneo, Modalidad, Regla, Categoria } from '../../../entities/index'
+import { Torneo, TipoTorneo, Modalidad, Regla, Categoria } from '../../../entities/index';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService } from '../../../services/index'
+import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService } from '../../../services/index';
+import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'torneo',
     moduleId: module.id,
     templateUrl: './torneo.component.html',
     styleUrls: ['./torneo.component.css'],
-    providers: []
+    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService]
 })
 export class TorneoComponent {
     @ViewChild('torneoForm') torneoForm: FormGroup;
@@ -31,7 +32,7 @@ export class TorneoComponent {
     constructor(private categoriasService: CategoriaService,
         private modalidadService: ModalidadService,
         private reglasService: ReglasService,
-        private tiposTorneoService: TipoTorneoService, ) {
+        private tiposTorneoService: TipoTorneoService, private torneoService: TorneoService, public toastr: ToastsManager) {
         this.cargarCategorias();
         this.cargarModalidades();
         this.cargarReglas();
@@ -41,10 +42,10 @@ export class TorneoComponent {
     cargarTipoTorneo() {
         this.tiposTorneoService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let tipo_torneo = new TipoTorneo(
-                        data.json()[i]["id_tipo"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const tipo_torneo = new TipoTorneo(
+                        data[i]['id_tipo'],
+                        data[i]['descripcion']
                     );
                     this.lsTipos.push(tipo_torneo);
                 }
@@ -58,10 +59,10 @@ export class TorneoComponent {
     cargarReglas() {
         this.reglasService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let reglas = new Regla(
-                        data.json()[i]["id_regla"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const reglas = new Regla(
+                        data[i]['id_regla'],
+                        data[i]['descripcion']
                     );
                     this.lsReglas.push(reglas);
                 }
@@ -75,10 +76,10 @@ export class TorneoComponent {
     cargarModalidades() {
         this.modalidadService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let modalidad = new Modalidad(
-                        data.json()[i]["id_modalidad"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const modalidad = new Modalidad(
+                        data[i]['id_modalidad'],
+                        data[i]['descripcion']
                     );
                     this.lsModalidades.push(modalidad);
                 }
@@ -92,10 +93,10 @@ export class TorneoComponent {
     cargarCategorias() {
         this.categoriasService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let categoria = new Categoria(
-                        data.json()[i]["id_categoria"],
-                        data.json()[i]["descripcion"]
+                for (let i = 0; i < data.length; i++) {
+                    const categoria = new Categoria(
+                        data[i]['id_categoria'],
+                        data[i]['descripcion']
                     );
                     this.lsCategorias.push(categoria);
                 }
@@ -106,6 +107,16 @@ export class TorneoComponent {
             });
     }
 
-
-
+    registrarTorneo() {
+        this.blockUI.start(); // Start blocking
+        this.torneoService.create(this.torneo).subscribe(
+            data => {
+                this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');
+                this.blockUI.stop();
+            },
+            error => {
+                this.toastr.error('El torneo no se ha creado, el nombre ya existe", "Error!');
+                this.blockUI.stop();
+            });
+    }
 }

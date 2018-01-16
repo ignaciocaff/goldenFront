@@ -5,15 +5,15 @@ import { AppConfig } from '../../app.config';
 import { Categoria } from '../../entities/index';
 
 @Injectable()
-export class CategoriaService {
+export class EquipoService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'torneo/categorias').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'torneo/equipos').map((response: Response) => response.json());
     }
 
     getById(id: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/categorias/' + id).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'torneo/equipos' + id).map((response: Response) => response.json());
     }
 
     create(obj: any) {
@@ -21,10 +21,10 @@ export class CategoriaService {
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'torneo/categorias/' + obj.id, obj);
+        return this.http.put(this.config.apiUrl + 'torneo/equipos' + obj.id, obj);
     }
 
-    delete(id: number) {
-        return this.http.delete(this.config.apiUrl + 'torneo/categorias' + id);
-    }
+    // delete(id: number) {
+     //   return this.http.delete(this.config.apiUrl + 'torneo/' + id);
+    // }
 }

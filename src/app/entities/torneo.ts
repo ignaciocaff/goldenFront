@@ -10,9 +10,9 @@ export class Torneo {
     public descripcion: string;
     public fecha_inicio: Date;
     public fecha_fin: Date;
-    public tipo_torneo: TipoTorneo;
+    public tipoTorneo: TipoTorneo;
     public categoria: Categoria;
-    public regla_torneo: Regla;
+    public regla: Regla;
     public modalidad: Modalidad;
     public id_torneo: number;
 
@@ -21,9 +21,9 @@ export class Torneo {
         descripcion?: string,
         fecha_inicio?: Date,
         fecha_fin?: Date,
-        tipo_torneo?: TipoTorneo,
+        tipoTorneo?: TipoTorneo,
         categoria?: Categoria,
-        regla_torneo?: Regla,
+        regla?: Regla,
         modalidad?: Modalidad,
         id_torneo?: number
 
@@ -43,14 +43,14 @@ export class Torneo {
         if (fecha_fin) this.fecha_fin = fecha_fin;
         else this.fecha_fin = null;
 
-        if (tipo_torneo) this.tipo_torneo = tipo_torneo;
-        else this.tipo_torneo = new TipoTorneo();
+        if (tipoTorneo) this.tipoTorneo = tipoTorneo;
+        else this.tipoTorneo = new TipoTorneo();
 
         if (categoria) this.categoria = categoria;
         else this.categoria = new Categoria();
 
-        if (regla_torneo) this.regla_torneo = regla_torneo;
-        else this.regla_torneo = new Regla();;
+        if (regla) this.regla = regla;
+        else this.regla = new Regla();;
 
         if (modalidad) this.modalidad = modalidad;
         else this.modalidad = new Modalidad();

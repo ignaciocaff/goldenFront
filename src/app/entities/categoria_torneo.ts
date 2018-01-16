@@ -2,8 +2,8 @@ export class Categoria {
     public descripcion: string;
     public id_categoria: number;
     constructor(
-        descripcion?: string,
-        id_categoria?: number
+        id_categoria?: number,
+        descripcion?: string
     ) {
         if (descripcion) this.descripcion = descripcion;
         else this.descripcion = null;
