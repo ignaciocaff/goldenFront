@@ -2,16 +2,17 @@ import { Component, Directive, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Torneo, TipoTorneo, Modalidad, Regla, Categoria } from '../../../entities/index'
+import { Torneo, TipoTorneo, Modalidad, Regla, Categoria } from '../../../entities/index';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService } from '../../../services/index'
+import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService } from '../../../services/index';
+import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'torneo',
     moduleId: module.id,
     templateUrl: './torneo.component.html',
     styleUrls: ['./torneo.component.css'],
-    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService]
+    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService]
 })
 export class TorneoComponent {
     @ViewChild('torneoForm') torneoForm: FormGroup;
@@ -31,7 +32,7 @@ export class TorneoComponent {
     constructor(private categoriasService: CategoriaService,
         private modalidadService: ModalidadService,
         private reglasService: ReglasService,
-        private tiposTorneoService: TipoTorneoService, ) {
+        private tiposTorneoService: TipoTorneoService, private torneoService: TorneoService, public toastr: ToastsManager) {
         this.cargarCategorias();
         this.cargarModalidades();
         this.cargarReglas();
@@ -106,6 +107,16 @@ export class TorneoComponent {
             });
     }
 
-
-
+    registrarTorneo() {
+        this.blockUI.start(); // Start blocking
+        this.torneoService.create(this.torneo).subscribe(
+            data => {
+                this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');
+                this.blockUI.stop();
+            },
+            error => {
+                this.toastr.error('El torneo no se ha creado, el nombre ya existe", "Error!');
+                this.blockUI.stop();
+            });
+    }
 }
