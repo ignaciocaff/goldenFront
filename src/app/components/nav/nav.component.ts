@@ -40,4 +40,8 @@ export class NavComponent implements OnInit {
     equipoCarga_Click() {
         this.router.navigate(['home/equipo-carga']);
     }
+
+    configuraciones_Click() {
+        this.router.navigate(['home/configuraciones']);
+    }
 }

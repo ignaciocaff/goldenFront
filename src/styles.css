@@ -39,3 +39,19 @@ input[type="number"]:focus {
 a:hover {
   font-weight: bold;
 }
+
+.multiselect-class-equipos {
+  color: #ccc;
+}
+
+.multiselect-class-equipos .c-token {
+  background: rgb(170, 145, 93) !important;
+}
+
+.multiselect-class-equipos .pure-checkbox label::before {
+  border-color: rgb(170, 145, 93) !important;
+}
+
+.multiselect-class-equipos .pure-checkbox input[type="checkbox"]:checked+label:before {
+  background: rgb(170, 145, 93) !important;
+}

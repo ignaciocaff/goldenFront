@@ -1,0 +1,13 @@
+#container {
+  width: 100%;
+  margin: 1em auto;
+  padding: 0;
+  background: rgba(255, 255, 255, 0);
+}
+
+.items {
+  max-width: 41px;
+  height: 40px;
+  width: 40px;
+  background: rgba(236, 236, 236, 0);
+}

@@ -10,10 +10,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JugadoresCargaComponent } from './common/jugadores/index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
-import { LoginComponent, LoginCargaComponent } from './common/login/index'
+import { LoginComponent, LoginCargaComponent } from './common/login/index';
+import { EscudosComponent } from './common/escudos-bar/index';
+import { ConfiguracionesComponent } from './common/configuraciones/index';
 import { TorneoComponent } from './common/torneo/index';
 import { EquipoComponent } from './common/equipo/index';
 
+import { MultiSelectModule } from 'primeng/primeng';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,9 @@ import { EquipoComponent } from './common/equipo/index';
     TorneoComponent,
     LoginComponent,
     TorneoComponent,
-    EquipoComponent
+    EquipoComponent,
+    EscudosComponent,
+    ConfiguracionesComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +42,15 @@ import { EquipoComponent } from './common/equipo/index';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MultiSelectModule,
+    AngularMultiSelectModule,
+    AngularFontAwesomeModule,
+    Ng2CarouselamosModule
   ],
   providers: [],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
-    FooterComponent],
+    FooterComponent, EscudosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class ContainerModule { }

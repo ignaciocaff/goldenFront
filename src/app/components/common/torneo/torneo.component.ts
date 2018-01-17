@@ -1,4 +1,4 @@
-import { Component, Directive, ViewChild } from '@angular/core';
+import { Component, Directive, ViewChild, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
@@ -14,9 +14,14 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
     styleUrls: ['./torneo.component.css'],
     providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService]
 })
-export class TorneoComponent {
+
+export class TorneoComponent implements OnInit {
     @ViewChild('torneoForm') torneoForm: FormGroup;
     @BlockUI() blockUI: NgBlockUI;
+
+    itemList = [];
+    selectedItems = [];
+    settings = {};
 
     public torneo = new Torneo();
     public lsTipos = new Array<TipoTorneo>();
@@ -39,6 +44,46 @@ export class TorneoComponent {
         this.cargarTipoTorneo();
     }
 
+    ngOnInit() {
+        this.itemList = [
+            { 'id': 1, 'itemName': 'Boca' },
+            { 'id': 2, 'itemName': 'River' },
+            { 'id': 3, 'itemName': 'Talleres' },
+            { 'id': 4, 'itemName': 'Belgrano' },
+            { 'id': 5, 'itemName': 'San Lorenzo' },
+            { 'id': 6, 'itemName': 'Racing' }
+        ];
+
+        this.selectedItems = [];
+
+        this.settings = {
+            singleSelection: false,
+            text: 'Elija los equipos',
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            enableSearchFilter: true,
+            badgeShowLimit: 100,
+            searchAutofocus: true,
+            maxHeight: 500,
+            searchPlaceholderText: 'Buscar',
+            classes: 'multiselect-class-equipos'
+        };
+    }
+    onItemSelect(item: any) {
+        console.log(item);
+        console.log(this.selectedItems);
+    }
+    OnItemDeSelect(item: any) {
+        console.log(item);
+        console.log(this.selectedItems);
+    }
+    onSelectAll(items: any) {
+        console.log(items);
+    }
+    onDeSelectAll(items: any) {
+        console.log(items);
+    }
+
     cargarTipoTorneo() {
         this.tiposTorneoService.getAll().subscribe(
             data => {
@@ -52,7 +97,7 @@ export class TorneoComponent {
             },
             error => {
                 this.lsTipos = new Array<TipoTorneo>();
-                error.json()["Message"];
+                error.json()['Message'];
             });
     }
 
@@ -69,7 +114,7 @@ export class TorneoComponent {
             },
             error => {
                 this.lsReglas = new Array<Regla>();
-                error.json()["Message"];
+                error.json()['Message'];
             });
     }
 
@@ -86,7 +131,7 @@ export class TorneoComponent {
             },
             error => {
                 this.lsModalidades = new Array<Modalidad>();
-                error.json()["Message"];
+                error.json()['Message'];
             });
     }
 
@@ -103,7 +148,7 @@ export class TorneoComponent {
             },
             error => {
                 this.lsCategorias = new Array<Categoria>();
-                error.json()["Message"];
+                error.json()['Message'];
             });
     }
 
@@ -115,7 +160,11 @@ export class TorneoComponent {
                 this.blockUI.stop();
             },
             error => {
+<<<<<<< HEAD
                 this.toastr.error('El torneo no se ha creado, el nombre ya existe", "Error!');
+=======
+                this.toastr.error('El torneo no se ha creado, el nombre ya existe', 'Error!');
+>>>>>>> Nacho
                 this.blockUI.stop();
             });
     }
