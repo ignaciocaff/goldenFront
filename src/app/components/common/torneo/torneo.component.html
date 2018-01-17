@@ -138,10 +138,22 @@
       </div>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-3">
-      <button (click)="registrarTorneo()" type="button" class="btn btnStyleAceptar">Registrar</button>
+      <h5 class="first">
+        <b>Equipos</b>
+      </h5>
+      <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [ngModelOptions]="{standalone: true}" [settings]="settings"
+        (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)" (onSelectAll)="onSelectAll($event)" (onDeSelectAll)="onDeSelectAll($event)">
+      </angular2-multiselect>
+    </div>
+    <div class="col-md-7">
     </div>
   </div>
 </form>
+
+<div class="row">
+  <div class="col-md-6">
+    <button (click)="registrarTorneo()" type="button" class="btn btnStyleAceptar">Registrar</button>
+  </div>
+</div>

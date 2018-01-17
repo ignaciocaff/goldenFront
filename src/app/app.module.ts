@@ -13,6 +13,10 @@ import { AuthenticationService } from './services/index';
 import { AppConfig } from './app.config';
 import { ToastOptions } from 'ng2-toastr';
 import { CustomToastOption, SharedService } from './services/index';
+import { MultiSelectModule } from 'primeng/primeng';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { CustomToastOption, SharedService } from './services/index';
     FormsModule,
     ReactiveFormsModule,
     BlockUIModule,
+    MultiSelectModule,
+    AngularMultiSelectModule,
+    AngularFontAwesomeModule,
+    Ng2CarouselamosModule,
     ToastModule.forRoot(),
     ImageUploadModule.forRoot(),
     AppRoutingModule

@@ -1,8 +1,8 @@
-<div class="col-sm-12 col-md-12" style="background-color: rgb(170, 145, 93);">
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+<div class="row" style="background-color: rgb(41, 41, 41); margin-left:0px; margin-right:0px;">
+  <div class="col-sm-2 col-md-2">
   </div>
   <!-- Primer Boton -->
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+  <div class="col-sm-10 col-md-10">
     <div class="dropdown">
       <button class="dropbtn">INICIO</button>
       <div class="dropdown-content">
@@ -11,9 +11,9 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <!-- Segundo Boton -->
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+
+    <!-- Segundo Boton -->
+
     <div class="dropdown">
       <button class="dropbtn">TORNEO</button>
       <div class="dropdown-content">
@@ -21,10 +21,10 @@
         <a href="#">Master League</a>
         <a href="#">Senior League</a>
       </div>
+
     </div>
-  </div>
-  <!-- Tercer Boton -->
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+    <!-- Tercer Boton -->
+
     <div class="dropdown">
       <button class="dropbtn">NOTICIAS</button>
       <div class="dropdown-content">
@@ -33,9 +33,7 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <!-- Cuarto Boton -->
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+    <!-- Cuarto Boton -->
     <div class="dropdown">
       <button class="dropbtn">FIXTURE</button>
       <div class="dropdown-content">
@@ -44,9 +42,7 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <!-- Quinto Boton -->
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+    <!-- Quinto Boton -->
     <div class="dropdown">
       <button class="dropbtn">POSICIONES</button>
       <div class="dropdown-content">
@@ -55,9 +51,7 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <!-- Sexto Boton -->
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
+    <!-- Sexto Boton -->
     <div class="dropdown">
       <button class="dropbtn">RESULTADOS</button>
       <div class="dropdown-content">
@@ -66,8 +60,6 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
     <div class="dropdown">
       <button class="dropbtn">GOLEADORES</button>
       <div class="dropdown-content">
@@ -76,8 +68,6 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
     <div class="dropdown">
       <button class="dropbtn">EQUIPOS</button>
       <div class="dropdown-content">
@@ -86,12 +76,10 @@
         <a href="#">Link 3</a>
       </div>
     </div>
-  </div>
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
     <div class="dropdown">
       <button *ngIf="user != null" class="dropbtn">ADMINISTRACIÓN</button>
       <div class="dropdown-content">
-        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Configuracion</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="configuraciones_Click()">Configuracion</a>
         <a *ngIf=" user != null && user.perfil.n_perfil === 'Administrador'" href="#">Equipos</a>
         <a (click)="jugadoresCarga_Click()">Jugadores</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Generar fixture</a>
@@ -101,7 +89,5 @@
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
       </div>
     </div>
-  </div>
-  <div class="col-sm-1 col-md-1" style="margin-top: 10px; margin-bottom: 10px">
   </div>
 </div>
