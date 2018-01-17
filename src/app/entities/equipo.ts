@@ -1,7 +1,8 @@
     import {
         TipoTorneo,
         Categoria,
-        Club
+        Club,
+        Torneo
     } from './index';
 
     export class Equipo {
@@ -12,6 +13,7 @@
         public categoria: Categoria;
         public id_equipo: number;
         public club: Club;
+        public torneo: Torneo;
 
         constructor(
             nombre?: string,
@@ -20,7 +22,8 @@
             logo?: File,
             categoria?: Categoria,
             id_equipo?: number,
-            club?: Club
+            club?: Club,
+            torneo?: Torneo
 
         ) {
             if (id_equipo) {
@@ -63,6 +66,12 @@
                 this.club = club;
             } else {
                 this.club = new Club();
+            }
+
+            if (torneo) {
+                this.torneo = torneo;
+            } else {
+                this.torneo = new Torneo();
             }
         }
     }

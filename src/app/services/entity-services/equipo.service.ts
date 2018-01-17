@@ -17,14 +17,14 @@ export class EquipoService {
     }
 
     create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'register', obj);
+        return this.http.post(this.config.apiUrl + 'equipo/registrar', obj);
     }
 
     update(obj: any) {
         return this.http.put(this.config.apiUrl + 'torneo/equipos' + obj.id, obj);
     }
 
-    // delete(id: number) {
-     //   return this.http.delete(this.config.apiUrl + 'torneo/' + id);
-    // }
+     delete(id: number) {
+       return this.http.delete(this.config.apiUrl + 'torneo/' + id);
+    }
 }
