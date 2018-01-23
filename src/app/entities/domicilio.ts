@@ -11,7 +11,6 @@ export class Domicilio {
     public dpto: string;
     public torre: string;
     public localidad: Localidad;
-    public codigo_postal: string;
     public barrio: string;
     public observaciones: string;
 
@@ -23,7 +22,6 @@ export class Domicilio {
         dpto?: string,
         torre?: string,
         localidad?: Localidad,
-        codigo_postal?: string,
         barrio?: string,
         observaciones?: string,
     ) {
@@ -47,9 +45,6 @@ export class Domicilio {
 
         if (localidad) this.localidad = localidad;
         else this.localidad = new Localidad();
-
-        if (codigo_postal) this.codigo_postal = codigo_postal;
-        else this.codigo_postal = null;
 
         if (barrio) this.barrio = barrio;
         else this.barrio = null;

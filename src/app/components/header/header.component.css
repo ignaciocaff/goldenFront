@@ -1,5 +1,21 @@
-#header {
-  background-image: url("/assets/img_index_logo.png");
-  background-repeat: no-repeat;
-  background-color: black;
+#container {
+  width: 100%;
+  margin: 1em auto;
+  padding: 0;
+  background: rgba(255, 255, 255, 0);
+}
+
+.items {
+  max-width: 41px;
+  height: 40px;
+  width: 40px;
+  background: rgba(236, 236, 236, 0);
+}
+
+#logo {
+  margin-bottom: -45px;
+  margin-left: -95px;
+  padding: 0;
+  z-index: 8 !important;
+  position: relative;
 }
