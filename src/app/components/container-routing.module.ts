@@ -10,7 +10,7 @@ import {
     TorneoComponent
 } from './common/torneo/index';
 import {
-    ConfiguracionesComponent
+    ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
@@ -27,7 +27,7 @@ const homeRoutes: Routes = [
                 path: 'torneo-carga', component: TorneoComponent,
             },
             {
-                path: 'configuraciones', component: ConfiguracionesComponent,
+                path: 'configuraciones', component: ConfiguracionesContainerComponent,
             }
         ]
     },

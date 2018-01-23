@@ -1,1 +1,1 @@
-export * from './configuraciones.component';
+export * from './configuraciones.container.component';

@@ -1,17 +1,12 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { FileService } from '../../../services/entity-services/file.service';
-
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { FileService } from '../../../../services/entity-services/file.service';
 @Component({
-    selector: 'configuraciones',
-    moduleId: module.id,
-    templateUrl: './configuraciones.component.html',
-    styleUrls: ['./configuraciones.component.css'],
-    providers: [FileService]
+    selector: 'app-file-upload',
+    templateUrl: './file-upload.component.html',
+    styleUrls: ['./file-upload.component.css'],
 })
-export class ConfiguracionesComponent implements OnInit {
 
+export class FileUploadComponent implements OnInit {
     errors: Array<String> = [];
     dragAreaClass: String = 'dragarea';
     @Input() projectId: Number = 0;
@@ -26,7 +21,7 @@ export class ConfiguracionesComponent implements OnInit {
     ngOnInit() { }
 
     onFileChange(event) {
-        const files = event.target.files;
+        let files = event.target.files;
         this.saveFiles(files);
     }
 
@@ -52,10 +47,9 @@ export class ConfiguracionesComponent implements OnInit {
         this.dragAreaClass = 'dragarea';
         event.preventDefault();
         event.stopPropagation();
-        const files = event.dataTransfer.files;
+        var files = event.dataTransfer.files;
         this.saveFiles(files);
     }
-
     saveFiles(files) {
         this.errors = []; // Clear error
         // Validate file size and allowed extensions
@@ -64,11 +58,11 @@ export class ConfiguracionesComponent implements OnInit {
             return;
         }
         if (files.length > 0) {
-            const formData: FormData = new FormData();
-            for (let j = 0; j < files.length; j++) {
+            let formData: FormData = new FormData();
+            for (var j = 0; j < files.length; j++) {
                 formData.append('file[]', files[j], files[j].name);
             }
-            const parameters = {
+            var parameters = {
                 projectId: this.projectId,
                 sectionId: this.sectionId
             };
@@ -97,13 +91,13 @@ export class ConfiguracionesComponent implements OnInit {
 
     private isValidFileExtension(files) {
         // Make array of file extensions
-        const extensions = (this.fileExt.split(','))
-            .map(function (x) { return x.toLocaleUpperCase().trim(); });
-        for (let i = 0; i < files.length; i++) {
+        var extensions = (this.fileExt.split(','))
+            .map(function (x) { return x.toLocaleUpperCase().trim() });
+        for (var i = 0; i < files.length; i++) {
             // Get file extension
-            const ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
+            var ext = files[i].name.toUpperCase().split('.').pop() || files[i].name;
             // Check the extension exists
-            const exists = extensions.includes(ext);
+            var exists = extensions.includes(ext);
             if (!exists) {
                 this.errors.push('Error (Extension): ' + files[i].name);
             }
@@ -113,10 +107,12 @@ export class ConfiguracionesComponent implements OnInit {
     }
 
     private isValidFileSize(file) {
-        const fileSizeinMB = file.size / (1024 * 1000);
-        const size = Math.round(fileSizeinMB * 100) / 100; // convert upto 2 decimal place
+        var fileSizeinMB = file.size / (1024 * 1000);
+        var size = Math.round(fileSizeinMB * 100) / 100; // convert upto 2 decimal place
         if (size > this.maxSize) {
             this.errors.push('Error (File Size): ' + file.name + ': exceed file size limit of ' + this.maxSize + 'MB ( ' + size + 'MB )');
         }
     }
+
 }
+
