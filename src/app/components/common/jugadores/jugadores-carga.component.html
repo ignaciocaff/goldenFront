@@ -1,5 +1,6 @@
 <form #jugadorForm="ngForm" name="jugadorForm">
   <div class="row">
+
     <div class=col-md-12>
       <div class="row">
         <div class="col-md-3 col-sm-3">
@@ -10,9 +11,9 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
                 <select [(ngModel)]="jugador.equipo" name="equipo" required #equipo='ngModel' class="form-control selectpicker" [disabled]="existejugador"
                   *ngIf="!existejugador">
-                      <option value=" ">Elija su opcion</option>
-                      <!--<option *ngFor="let tipoDocumento of lsTiposDocumento" [ngValue]="tipoDocumento">{{tipoDocumento.n_tipo_documento}}</option>-->
-                  </select>
+                      <option value="null">Elija su opcion</option>
+                      <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
+                    </select>
                 <input [(ngModel)]="jugador.equipo" name="equipo" required #equipo='ngModel' *ngIf="existejugador" [disabled]="existejugador"
                   type="text" class="form-control">
               </div>
@@ -22,6 +23,7 @@
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-12">
       <div class="row">
@@ -53,6 +55,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-md-2">
               <div class="form-group has-feedback">
                 <label class="control-label">Tipo de Documento (*)</label>
@@ -62,14 +65,15 @@
                     <select [(ngModel)]="jugador.tipoDocumento" name="tipoDoc" required #tipoDoc='ngModel' class="form-control selectpicker"
                       [disabled]="existejugador" *ngIf="!existejugador">
                       <option value=" ">Elija su opcion</option>
-                      <option *ngFor="let tipoDocumento of lsTiposDocumento" [ngValue]="tipoDocumento">{{tipoDocumento.n_tipo_documento}}</option>
+                      <option *ngFor="let tipoDocumento of lsTiposDocumento" [ngValue]="tipoDocumento">{{tipoDocumento.descripcion}}</option>
                   </select>
-                    <input [(ngModel)]="jugador.tipoDocumento.n_tipo_documento" name="n_tipo_documento" required #n_tipo_documento='ngModel'
+                    <input [(ngModel)]="jugador.tipoDocumento.descripcion" name="descripcion" required #descripcion='ngModel'
                       *ngIf="existejugador" [disabled]="existejugador" type="text" class="form-control">
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <label for="nombre" class="control-label">Nombre (*)</label>
@@ -119,7 +123,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-md-offset-1">
               <div class="form-group has-feedback">
                 <label class="control-label">Edad</label>
                 <div class="inputGroupContainer">
@@ -321,8 +325,7 @@
             <div class="inputGroupContainer">
               <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon-earphone"></i></span>
-                <input [(ngModel)]="jugador.contacto.telefono_movil" name="telefono_movil" required #telefono_movil='ngModel' class="form-control"
-                  type="text" [disabled]="existejugador">
+                <input [(ngModel)]="jugador.contacto.telefono_movil" name="telefono_movil" required #telefono_movil='ngModel' class="form-control" type="text" [disabled]="existejugador">
               </div>
               <div *ngIf="telefono_movil.errors && (telefono_movil.dirty || telefono_movil.touched)" class="error">
                 <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -336,8 +339,7 @@
             <div class="inputGroupContainer">
               <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon-earphone"></i></span>
-                <input [(ngModel)]="jugador.contacto.telefono_fijo" name="telefono_fijo" #telefono_fijo='ngModel' class="form-control" type="text"
-                  [disabled]="existejugador">
+                <input [(ngModel)]="jugador.contacto.telefono_fijo" name="telefono_fijo" #telefono_fijo='ngModel' class="form-control" type="text" [disabled]="existejugador">
               </div>
             </div>
           </div>

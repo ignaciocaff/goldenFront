@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { AppConfig } from '../../app.config';
+import { Provincia } from '../../entities/index';
 
 @Injectable()
 export class ProvinciaService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'domicilio/provincias', (response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'domicilio/provincias').map((response: Response) => response.json());
     }
 
     getById(id: number) {

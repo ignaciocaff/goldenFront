@@ -9,7 +9,7 @@ export class TipoDocumentoService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'personas/tiposdoc', (response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'personas/tiposdoc').map((response: Response) => response.json());
     }
 
     getById(id: number) {
@@ -27,5 +27,4 @@ export class TipoDocumentoService {
     delete(id: number) {
         return this.http.delete(this.config.apiUrl + 'users/' + id);
     }
-
 }
