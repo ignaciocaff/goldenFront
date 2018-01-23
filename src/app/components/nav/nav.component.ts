@@ -36,6 +36,11 @@ export class NavComponent implements OnInit {
     torneoCarga_Click() {
         this.router.navigate(['home/torneo-carga']);
     }
+
+    equipoCarga_Click() {
+        this.router.navigate(['home/equipo-carga']);
+    }
+
     configuraciones_Click() {
         this.router.navigate(['home/configuraciones']);
     }

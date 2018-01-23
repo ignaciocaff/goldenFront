@@ -4,7 +4,8 @@
   /*background-color: rgb(170, 145, 93);*/
   background-color: rgb(41, 41, 41);
   color: rgb(170, 145, 93);
-  font-size: 12px;
+  padding: 12px;
+  font-size: 14px;
   border: none;
   padding: 8px;
   cursor: pointer;

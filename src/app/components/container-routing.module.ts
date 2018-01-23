@@ -9,6 +9,7 @@ import {
 import {
     TorneoComponent
 } from './common/torneo/index';
+import { EquipoComponent } from './common/equipo/index';
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
@@ -27,7 +28,10 @@ const homeRoutes: Routes = [
                 path: 'torneo-carga', component: TorneoComponent,
             },
             {
-                path: 'configuraciones', component: ConfiguracionesContainerComponent,
+                path: 'equipo-carga', component: EquipoComponent,
+            },
+            {
+                path: 'configuraciones', component: ConfiguracionesComponent,
             }
         ]
     },

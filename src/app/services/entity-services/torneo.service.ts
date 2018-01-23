@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { AppConfig } from '../../app.config';
+import { Torneo } from '../../entities/index';
 
 @Injectable()
 export class TorneoService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'torneo/reglas').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'torneo/todos').map((response: Response) => response.json());
     }
 
     getById(id: number) {

@@ -1,7 +1,5 @@
 import {
     TipoDocumento,
-    EstadoCivil,
-    Nacionalidad,
     Contacto,
     Domicilio
 } from './index';

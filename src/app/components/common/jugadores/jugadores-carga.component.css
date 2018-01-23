@@ -1,3 +1,7 @@
 .invisible {
   visibility: hidden;
 }
+
+input:disabled{
+  background-color: #d1d1d1;
+}

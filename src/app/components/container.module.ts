@@ -13,6 +13,8 @@ import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent } from './common/torneo/index';
+import { EquipoComponent } from './common/equipo/index';
+
 import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -31,6 +33,8 @@ import { FileService } from '../services/entity-services/file.service';
     JugadoresCargaComponent,
     TorneoComponent,
     LoginComponent,
+    TorneoComponent,
+    EquipoComponent,
     EscudosComponent,
     ConfiguracionesContainerComponent,
     FileUploadComponent
