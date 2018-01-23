@@ -9,7 +9,7 @@ export class ClubService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'clubes/').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'club/todos').map((response: Response) => response.json());
     }
 
      getById(id: number) {

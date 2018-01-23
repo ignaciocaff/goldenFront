@@ -66,10 +66,11 @@ export class EquipoComponent {
     cargarTorneos() {
         this.torneoService.getAll().subscribe(
             data => {
-                for (var i = 0; i < data.json().length; i++) {
-                    let torneo = new Torneo(
+                for (let i = 0; i < data.length; i++) {
+                    const torneo = new Torneo(
                         data[i]['id_torneo'],
-                        data[i]['nombre']
+                        data[i]['nombre'],
+                        data[i]['descripcion']
                     );
                     this.lsTorneos.push(torneo);
                 }
@@ -83,10 +84,11 @@ export class EquipoComponent {
     cargarClubes() {
         this.clubService.getAll().subscribe(
             data => {
-                for (let i = 0; i < data.json().length; i++) {
+                for (let i = 0; i < data.length; i++) {
                     const club = new Club(
                         data[i]['id_club'],
-                        data[i]['nombre']
+                        data[i]['nombre'],
+                        data[i]['descripcion']
                     );
                     this.lsClub.push(club);
                 }

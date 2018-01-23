@@ -160,11 +160,7 @@ export class TorneoComponent implements OnInit {
                 this.blockUI.stop();
             },
             error => {
-<<<<<<< HEAD
-                this.toastr.error('El torneo no se ha creado, el nombre ya existe", "Error!');
-=======
                 this.toastr.error('El torneo no se ha creado, el nombre ya existe', 'Error!');
->>>>>>> Nacho
                 this.blockUI.stop();
             });
     }

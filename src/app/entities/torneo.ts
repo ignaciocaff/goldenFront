@@ -6,6 +6,7 @@ import {
 } from './index';
 
 export class Torneo {
+    public id_torneo: number;
     public nombre: string;
     public descripcion: string;
     public fecha_inicio: Date;
@@ -14,9 +15,9 @@ export class Torneo {
     public categoria: Categoria;
     public regla: Regla;
     public modalidad: Modalidad;
-    public id_torneo: number;
 
     constructor(
+        id_torneo?: number,
         nombre?: string,
         descripcion?: string,
         fecha_inicio?: Date,
@@ -24,8 +25,7 @@ export class Torneo {
         tipoTorneo?: TipoTorneo,
         categoria?: Categoria,
         regla?: Regla,
-        modalidad?: Modalidad,
-        id_torneo?: number
+        modalidad?: Modalidad
 
     ) {
         if (id_torneo) this.id_torneo = id_torneo;

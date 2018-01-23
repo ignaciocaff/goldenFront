@@ -25,7 +25,7 @@ export class Persona {
         domicilio?: Domicilio,
         contacto?: Contacto,
         id_persona?: number,
-        edad?:number,
+        edad?: number
     ) {
         if (id_persona) this.id_persona = id_persona;
         else this.id_persona = null;

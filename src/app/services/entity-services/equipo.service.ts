@@ -9,7 +9,7 @@ export class EquipoService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'torneo/equipos').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'equipo/obtenerTodos').map((response: Response) => response.json());
     }
 
     getById(id: number) {

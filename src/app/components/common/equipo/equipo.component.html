@@ -77,7 +77,7 @@
             </span>
             <select [(ngModel)]="equipo.club" name="club" required #club='ngModel' class="form-control selectpicker">
               <option value="null">Elija su opcion</option>
-              <option *ngFor="let club of lsClub" [ngValue]="club">{{club.descripcion}}</option>
+              <option *ngFor="let club of lsClub" [ngValue]="club">{{club.nombre}}</option>
             </select>
           </div>
         </div>

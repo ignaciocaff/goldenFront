@@ -4,12 +4,8 @@
   /*background-color: rgb(170, 145, 93);*/
   background-color: rgb(41, 41, 41);
   color: rgb(170, 145, 93);
-<<<<<<< HEAD
   padding: 12px;
   font-size: 14px;
-=======
-  font-size: 12px;
->>>>>>> Nacho
   border: none;
   padding: 8px;
   cursor: pointer;
@@ -33,15 +29,10 @@
   display: none;
   position: absolute;
   /*background-color: rgba(118, 104, 73, 0.9);*/
-<<<<<<< HEAD
-  background-color: rgba(35,35,35,0.9);
-  min-width: 160px;
-=======
   background-color: rgba(35, 35, 35, 0.9);
   min-width: 120px;
   font-size: 12px;
   font-weight: bold;
->>>>>>> Nacho
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
@@ -60,11 +51,7 @@
 /* Change color of dropdown links on hover */
 
 .dropdown-content a:hover {
-<<<<<<< HEAD
-  background-color: rgb(35,35,35);
-=======
   background-color: rgb(35, 35, 35);
->>>>>>> Nacho
 }
 
 
@@ -78,9 +65,5 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 
 .dropdown:hover .dropbtn {
-<<<<<<< HEAD
-  background-color: rgb(35,35,35);
-=======
   background-color: rgb(35, 35, 35);
->>>>>>> Nacho
 }
