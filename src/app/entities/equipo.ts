@@ -6,22 +6,22 @@
     } from './index';
 
     export class Equipo {
+        public id_equipo: number;
         public nombre: string;
         public descripcion: string;
         public fecha_alta: Date;
         public logo: File;
         public categoria: Categoria;
-        public id_equipo: number;
         public club: Club;
         public torneo: Torneo;
 
         constructor(
+            id_equipo?: number,
             nombre?: string,
             descripcion?: string,
             fecha_alta?: Date,
             logo?: File,
             categoria?: Categoria,
-            id_equipo?: number,
             club?: Club,
             torneo?: Torneo
 

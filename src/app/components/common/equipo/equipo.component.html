@@ -90,7 +90,7 @@
     <div class="col-md-5">
       <div class="form-group has-feedback">
         <label class="control-label">Descripción</label>
-        <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar informacion referida al equipo"
+        <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo."
           maxlength="1000"></textarea>
       </div>
     </div>
@@ -111,7 +111,7 @@
 
   <div class="row">
     <div class="col-md-3">
-      <button (click)="registrarEquipo()" type="button" class="btn btnStyleAceptar">Registrar</button>
+      <button [disabled]="!equipoForm.valid" (click)="registrarEquipo()" type="button" class="btn btn-primary">Registrar</button>
     </div>
   </div>
 </form>
