@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
-import { ConfiguracionesComponent } from './common/configuraciones/index';
 import { TorneoComponent } from './common/torneo/index';
 import { EquipoComponent } from './common/equipo/index';
 
@@ -20,6 +19,9 @@ import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+import { ConfiguracionesContainerComponent } from './common/configuraciones/index';
+import { FileUploadComponent } from './common/configuraciones/file-upload/index';
+import { FileService } from '../services/entity-services/file.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     TorneoComponent,
     EquipoComponent,
     EscudosComponent,
-    ConfiguracionesComponent
+    ConfiguracionesContainerComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     AngularFontAwesomeModule,
     Ng2CarouselamosModule
   ],
-  providers: [],
+  providers: [FileService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

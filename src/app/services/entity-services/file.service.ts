@@ -14,13 +14,13 @@ export class FileService {
         const headers = new Headers();
         const options = new RequestOptions({ headers: headers });
         options.params = parameters;
-        return this.http.post(this.config.apiUrl + 'upload', files, options)
+        return this.http.post(this.config.apiUrl + 'archivos/upload', files, options)
             .map(response => response.json())
             .catch(error => Observable.throw(error));
-
     }
-    getImages() {
-        return this.http.get(this.config.apiUrl + 'getimages')
+    getImages(files) {
+        console.error(files);
+        return this.http.post(this.config.apiUrl + 'archivos/getimages', files)
             .map(response => response.json())
             .catch(error => Observable.throw(error));
     }

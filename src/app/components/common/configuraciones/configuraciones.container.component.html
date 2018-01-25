@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-12">
+    <app-file-upload projectId="GOLDEN" sectionId="CONFIGURACIONES" maxFiles="4" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)">
+    </app-file-upload>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="container">
+      <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+    </div>
+  </div>
+</div>
