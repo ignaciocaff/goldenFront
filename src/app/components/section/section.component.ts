@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { JugadoresCargaComponent } from '../common/jugadores/index'
+import { ConfiguracionesContainerComponent } from '../common/configuraciones/index'
+import { EquipoComponent } from '../common/equipo/index'
 @Component({
     selector: 'section',
     moduleId: module.id,
@@ -11,5 +13,7 @@ import { JugadoresCargaComponent } from '../common/jugadores/index'
 })
 export class SectionComponent {
     @ViewChild(JugadoresCargaComponent) jugadores: JugadoresCargaComponent;
+    @ViewChild(ConfiguracionesContainerComponent) conf: ConfiguracionesContainerComponent;
+    @ViewChild(EquipoComponent) equipo: EquipoComponent;
 
 }

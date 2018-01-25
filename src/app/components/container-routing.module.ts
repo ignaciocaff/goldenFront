@@ -31,7 +31,7 @@ const homeRoutes: Routes = [
                 path: 'equipo-carga', component: EquipoComponent,
             },
             {
-                path: 'configuraciones', component: ConfiguracionesComponent,
+                path: 'configuraciones', component: ConfiguracionesContainerComponent,
             }
         ]
     },

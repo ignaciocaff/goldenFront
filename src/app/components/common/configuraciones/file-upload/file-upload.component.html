@@ -1,10 +1,9 @@
 <div draggable="true" ngClass="{{dragAreaClass}}">
   <div class="row">
     <div class="col-md-12 text-center">
-      <a href="javascript:void(0)" (click)="file.click()">
-        Click to browse
-      </a>
-      Or Drag & Drop to upload your files
+      <button class="btn btn-primary" href="javascript:void(0)" (click)="file.click()">
+        Examinar
+      </button>
       <input type="file" #file [multiple]="(maxFiles > 1)" (change)="onFileChange($event)" style="display:none" />
     </div>
   </div>

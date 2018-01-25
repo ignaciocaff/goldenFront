@@ -12,20 +12,29 @@ import { FileService } from '../../../services/entity-services/file.service';
 })
 export class ConfiguracionesContainerComponent implements OnInit {
 
-    title = 'Image Gallery';
     errorMessage: string;
     images: Array<any> = [];
+    arraySubidas: Array<any> = [];
+    params: string;
 
     constructor(private fileService: FileService) { }
 
     ngOnInit() {
-        this.getImageData();
     }
 
     getImageData() {
-        this.fileService.getImages().subscribe(
+        var subidas = (localStorage.getItem('subidas'));
+        this.arraySubidas = JSON.parse(subidas);
+        this.fileService.getImages(this.arraySubidas).subscribe(
+            data => {
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        this.images.push(data[i]);
+                    }
 
-            data => { this.images = data.result; },
+                }
+                console.error(this.images);
+            },
             error => this.errorMessage = error
         );
     }
@@ -33,6 +42,7 @@ export class ConfiguracionesContainerComponent implements OnInit {
     refreshImages(status) {
         if (status == true) {
             console.log('Uploaded successfully!');
+            this.images = [];
             this.getImageData();
         }
     }

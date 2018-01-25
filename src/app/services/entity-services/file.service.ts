@@ -18,8 +18,9 @@ export class FileService {
             .map(response => response.json())
             .catch(error => Observable.throw(error));
     }
-    getImages() {
-        return this.http.get(this.config.apiUrl + 'archivos/getimages')
+    getImages(files) {
+        console.error(files);
+        return this.http.post(this.config.apiUrl + 'archivos/getimages', files)
             .map(response => response.json())
             .catch(error => Observable.throw(error));
     }

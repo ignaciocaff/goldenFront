@@ -9,14 +9,16 @@ import { FileService } from '../../../../services/entity-services/file.service';
 export class FileUploadComponent implements OnInit {
     errors: Array<String> = [];
     dragAreaClass: String = 'dragarea';
-    @Input() projectId: Number = 0;
-    @Input() sectionId: Number = 0;
-    @Input() fileExt: String = 'JPG, GIF, PNG';
-    @Input() maxFiles: Number = 5;
-    @Input() maxSize: Number = 5; // 5MB
+    @Input() projectId: String;
+    @Input() sectionId: String;
+    @Input() fileExt: String;
+    @Input() maxFiles: Number;
+    @Input() maxSize: Number; // 5MB
     @Output() uploadStatus = new EventEmitter();
 
-    constructor(private fileService: FileService) { }
+    constructor(private fileService: FileService) {
+        localStorage.removeItem('subidas');
+    }
 
     ngOnInit() { }
 
@@ -69,7 +71,10 @@ export class FileUploadComponent implements OnInit {
             this.fileService.upload(formData, parameters)
                 .subscribe(
                 success => {
+                    var jsonData = success.subidas;
+                    localStorage.setItem('subidas', JSON.stringify(jsonData));
                     this.uploadStatus.emit(true);
+
                     console.log(success);
                 },
                 error => {
@@ -82,7 +87,7 @@ export class FileUploadComponent implements OnInit {
     private isValidFiles(files) {
         // Check Number of files
         if (files.length > this.maxFiles) {
-            this.errors.push('Error: At a time you can upload only ' + this.maxFiles + ' files');
+            this.errors.push('Error: Solo podes subir al mismo tiempo ' + this.maxFiles + ' archivos');
             return;
         }
         this.isValidFileExtension(files);
@@ -99,7 +104,7 @@ export class FileUploadComponent implements OnInit {
             // Check the extension exists
             var exists = extensions.includes(ext);
             if (!exists) {
-                this.errors.push('Error (Extension): ' + files[i].name);
+                this.errors.push('Error (Extension no valida): ' + files[i].name);
             }
             // Check file size
             this.isValidFileSize(files[i]);
@@ -110,7 +115,7 @@ export class FileUploadComponent implements OnInit {
         var fileSizeinMB = file.size / (1024 * 1000);
         var size = Math.round(fileSizeinMB * 100) / 100; // convert upto 2 decimal place
         if (size > this.maxSize) {
-            this.errors.push('Error (File Size): ' + file.name + ': exceed file size limit of ' + this.maxSize + 'MB ( ' + size + 'MB )');
+            this.errors.push('Error (Tamaño): ' + file.name + ': excede el tamño de archivo de ' + this.maxSize + 'MB ( ' + size + 'MB )');
         }
     }
 
