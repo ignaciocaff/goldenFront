@@ -83,7 +83,6 @@ export class EquipoComponent {
     }
 
     registrarEquipo() {
-        this.equipo.logo = Number(localStorage.getItem('subidas'));
         this.blockUI.start();
         this.equipoService.create(this.equipo).subscribe(
             data => {
@@ -97,13 +96,13 @@ export class EquipoComponent {
     }
 
     getImageData() {
-        const subidas = (localStorage.getItem('subidas'));
+        var subidas = (localStorage.getItem('subidas'));
         this.arraySubidas = JSON.parse(subidas);
-        this.equipo.logo = Number(localStorage.getItem('subidas'));
+        this.equipo.logo = Number(this.arraySubidas[0]);
         this.fileService.getImages(this.arraySubidas).subscribe(
             data => {
                 if (data) {
-                    for (let i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++) {
                         this.images.push(data[i]);
                     }
 
@@ -115,12 +114,10 @@ export class EquipoComponent {
     }
 
     refreshImages(status) {
-        if (status === true) {
+        if (status == true) {
             console.log('Uploaded successfully!');
             this.images = [];
             this.getImageData();
         }
     }
-
-
 }
