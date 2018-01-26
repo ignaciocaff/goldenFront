@@ -1,38 +1,40 @@
-<form #equipoForm="ngForm" name="equipoForm">
+<div class="flex-item">
+  <form #equipoForm="ngForm" name="equipoForm">
 
 
-  <div class="row">
-    <div class="col-md-4 col-sm-4">
-      <h4>
-        Datos del equipo
-      </h4>
-      <p class="text-muted">
-        Ingrese los datos del Equipo
-      </p>
-    </div>
-    <div class="col-md-8 col-sm-8">
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-3">
-      <div class="form-group has-feedback">
-        <label for="nombre" class="control-label">Nombre</label>
-        <div class="inputGroupContainer">
-          <div class="input-group">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-user"></i>
-            </span>
-            <input [(ngModel)]="equipo.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required="">
-          </div>
-          <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="error">
-            <span class="label label-danger" id="error_Requerido">Campo requerido</span>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <h4>
+          Datos del equipo
+        </h4>
+        <p class="text-muted">
+          Ingrese los datos del Equipo
+        </p>
+      </div>
+      <div class="col-md-8 col-sm-8">
       </div>
     </div>
 
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Nombre</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input [(ngModel)]="equipo.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required="">
+            </div>
+            <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="error">
+              <span class="label label-danger" id="error_Requerido">Campo requerido</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<<<<<<< HEAD
     <div class="col-md-3">
       <div class="form-group has-feedback">
         <label class="control-label">Categoria</label>
@@ -45,11 +47,43 @@
               <option value="null">Elija su opcion</option>
               <option *ngFor="let categoria of lsCategorias" [ngValue]="categoria">{{categoria.descripcion}}</option>
             </select>
+=======
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Torneo</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="equipo.torneo" name="torneo" required #torneo='ngModel' class="form-control selectpicker">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let torneo of lsTorneos" [ngValue]="torneo">{{torneo.nombre}}</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Categoria</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="equipo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let categoria of lsCategorias" [ngValue]="categoria">{{categoria.descripcion}}</option>
+              </select>
+            </div>
+>>>>>>> Nacho
+          </div>
+        </div>
+      </div>
+
+<<<<<<< HEAD
     <div class="col-md-3 inexistente">
       <div class="form-group has-feedback">
         <label class="control-label">Club</label>
@@ -62,22 +96,46 @@
               <option value="null">Elija su opcion</option>
               <option *ngFor="let club of lsClub" [ngValue]="club">{{club.nombre}}</option>
             </select>
+=======
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Club</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="equipo.club" name="club" required #club='ngModel' class="form-control selectpicker">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let club of lsClub" [ngValue]="club">{{club.nombre}}</option>
+              </select>
+            </div>
+>>>>>>> Nacho
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 
+<<<<<<< HEAD
   <div class="row">
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label class="control-label">Descripción</label>
         <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo."
           maxlength="1000"></textarea>
+=======
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group has-feedback">
+          <label class="control-label">Descripción</label>
+          <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo."
+            maxlength="1000"></textarea>
+        </div>
+>>>>>>> Nacho
       </div>
-    </div>
 
+<<<<<<< HEAD
     <div class="col-md-2">
       <div class="form-group has-feedback">
         <label class="control-label" for="logo">Seleccione el escudo</label>
@@ -86,19 +144,31 @@
 
         <div class="container">
           <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+=======
+      <div class="col-md-2">
+        <div class="form-group has-feedback">
+          <label class="control-label" for="logo">Seleccione el escudo</label>
+          <div class="inputGroupContainer">
+            <input [(ngModel)]="equipo.logo" type="file" name="logo" #logo='ngModel' class="form-control" required>
+          </div>
+>>>>>>> Nacho
         </div>
       </div>
-    </div>
 
+<<<<<<< HEAD
 
     <div class="col-md-5">
+=======
+      <div class="col-md-5">
+      </div>
+>>>>>>> Nacho
     </div>
-  </div>
 
 
-  <div class="row">
-    <div class="col-md-3">
-      <button [disabled]="!equipoForm.valid" (click)="registrarEquipo()" type="button" class="btn btn-primary">Registrar</button>
+    <div class="row">
+      <div class="col-md-3">
+        <button [disabled]="!equipoForm.valid" (click)="registrarEquipo()" type="button" class="btn btn-primary">Registrar</button>
+      </div>
     </div>
-  </div>
-</form>
+  </form>
+</div>

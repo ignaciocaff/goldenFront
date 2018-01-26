@@ -55,3 +55,29 @@ a:hover {
 .multiselect-class-equipos .pure-checkbox input[type="checkbox"]:checked+label:before {
   background: rgb(170, 145, 93) !important;
 }
+
+.section-style {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: -webkit-box;
+  display: -moz-box;
+  height: 900px;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row;
+  justify-content: space-around;
+  background-color: white;
+}
+
+.flex-item {
+  padding: 5px;
+  margin: 10px;
+  word-break: break-all;
+}
+
+.container-fluid{
+  max-width:1050px;
+}

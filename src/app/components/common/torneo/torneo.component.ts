@@ -2,17 +2,18 @@ import { Component, Directive, ViewChild, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Torneo, TipoTorneo, Modalidad, Regla, Categoria } from '../../../entities/index';
+import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo } from '../../../entities/index';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService } from '../../../services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { EquipoService } from '../../../services/entity-services/index';
 
 @Component({
     selector: 'torneo',
     moduleId: module.id,
     templateUrl: './torneo.component.html',
     styleUrls: ['./torneo.component.css'],
-    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService]
+    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService, EquipoService]
 })
 
 export class TorneoComponent implements OnInit {
@@ -22,6 +23,8 @@ export class TorneoComponent implements OnInit {
     itemList = [];
     selectedItems = [];
     settings = {};
+    lsEquipos = [];
+    lsEquiposToPost = Array<Equipo>();
 
     public torneo = new Torneo();
     public lsTipos = new Array<TipoTorneo>();
@@ -37,7 +40,10 @@ export class TorneoComponent implements OnInit {
     constructor(private categoriasService: CategoriaService,
         private modalidadService: ModalidadService,
         private reglasService: ReglasService,
-        private tiposTorneoService: TipoTorneoService, private torneoService: TorneoService, public toastr: ToastsManager) {
+        private tiposTorneoService: TipoTorneoService,
+        private torneoService: TorneoService,
+        public toastr: ToastsManager,
+        public equipoService: EquipoService) {
         this.cargarCategorias();
         this.cargarModalidades();
         this.cargarReglas();
@@ -45,14 +51,20 @@ export class TorneoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.itemList = [
-            { 'id': 1, 'itemName': 'Boca' },
-            { 'id': 2, 'itemName': 'River' },
-            { 'id': 3, 'itemName': 'Talleres' },
-            { 'id': 4, 'itemName': 'Belgrano' },
-            { 'id': 5, 'itemName': 'San Lorenzo' },
-            { 'id': 6, 'itemName': 'Racing' }
-        ];
+
+        this.equipoService.getAll().subscribe(
+            data => {
+                this.lsEquipos = data;
+                for (let i = 0; i < data.length; i++) {
+                    var equipo = { id: Number, itemName: String };
+                    equipo['id'] = data[i]['id_equipo'];
+                    equipo['itemName'] = data[i]['nombre'];
+                    this.itemList.push(equipo);
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
 
         this.selectedItems = [];
 
@@ -70,18 +82,36 @@ export class TorneoComponent implements OnInit {
         };
     }
     onItemSelect(item: any) {
-        console.log(item);
-        console.log(this.selectedItems);
+        for (let i = 0; i < this.lsEquipos.length; i++) {
+            if (item.id == this.lsEquipos[i]['id_equipo']) {
+                this.lsEquiposToPost.push(this.lsEquipos[i]);
+            }
+        }
     }
     OnItemDeSelect(item: any) {
-        console.log(item);
-        console.log(this.selectedItems);
+        for (let i = 0; i < this.lsEquipos.length; i++) {
+            if (item.id == this.lsEquipos[i]['id_equipo']) {
+                const index = this.lsEquiposToPost.findIndex((equipo: Equipo) => {
+                    return equipo.id_equipo == item.id;
+                });
+                if (index !== -1) {
+                    this.lsEquiposToPost.splice(index, 1);
+                }
+            }
+        }
     }
     onSelectAll(items: any) {
-        console.log(items);
+        this.lsEquiposToPost = [];
+        for (let i = 0; i < items.length; i++) {
+            for (var j = 0; j < this.lsEquipos.length; j++) {
+                if (items[i]['id'] == this.lsEquipos[j]['id_equipo']) {
+                    this.lsEquiposToPost.push(this.lsEquipos[j]);
+                }
+            }
+        }
     }
     onDeSelectAll(items: any) {
-        console.log(items);
+        this.lsEquiposToPost = [];
     }
 
     cargarTipoTorneo() {
@@ -154,6 +184,7 @@ export class TorneoComponent implements OnInit {
 
     registrarTorneo() {
         this.blockUI.start(); // Start blocking
+        this.torneo.lsEquipos = this.lsEquiposToPost;
         this.torneoService.create(this.torneo).subscribe(
             data => {
                 this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');
