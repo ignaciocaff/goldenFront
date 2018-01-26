@@ -88,11 +88,17 @@ export class EquipoComponent {
             data => {
                 this.toastr.success('El equipo se ha registrado correctamente', 'Exito!');
                 this.blockUI.stop();
+                this.limpiarCampos();
             },
             error => {
                 this.toastr.error('El equipo no se ha registrado, el nombre ya existe para este torneo", "Error!');
                 this.blockUI.stop();
             });
+    }
+
+    limpiarCampos() {
+        this.equipo = new Equipo();
+        //BORRAR LA IMAGEN AL MOMENTO DE LIMPIAR LOS CAMPOS
     }
 
     getImageData() {
