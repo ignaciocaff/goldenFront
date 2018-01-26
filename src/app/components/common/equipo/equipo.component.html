@@ -27,9 +27,6 @@
               </span>
               <input [(ngModel)]="equipo.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required="">
             </div>
-            <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="error">
-              <span class="label label-danger" id="error_Requerido">Campo requerido</span>
-            </div>
           </div>
         </div>
       </div>

@@ -98,7 +98,7 @@ export class EquipoComponent {
 
     limpiarCampos() {
         this.equipo = new Equipo();
-        //BORRAR LA IMAGEN AL MOMENTO DE LIMPIAR LOS CAMPOS
+        this.images = [];
     }
 
     getImageData() {
