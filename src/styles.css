@@ -62,7 +62,7 @@ a:hover {
   list-style: none;
   display: -webkit-box;
   display: -moz-box;
-  height: 900px;
+
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -79,5 +79,5 @@ a:hover {
 }
 
 .container-fluid{
-  max-width:1050px;
+  max-width:80em;
 }
