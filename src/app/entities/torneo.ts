@@ -2,7 +2,8 @@ import {
     TipoTorneo,
     Categoria,
     Regla,
-    Modalidad
+    Modalidad,
+    Equipo
 } from './index';
 
 export class Torneo {
@@ -15,6 +16,7 @@ export class Torneo {
     public categoria: Categoria;
     public regla: Regla;
     public modalidad: Modalidad;
+    public lsEquipos: Array<Equipo>;
 
     constructor(
         id_torneo?: number,
@@ -25,11 +27,14 @@ export class Torneo {
         tipoTorneo?: TipoTorneo,
         categoria?: Categoria,
         regla?: Regla,
-        modalidad?: Modalidad
-
+        modalidad?: Modalidad,
+        lsEquipos?: Array<Equipo>
     ) {
         if (id_torneo) this.id_torneo = id_torneo;
         else this.id_torneo = null;
+
+        if (lsEquipos) this.lsEquipos = lsEquipos;
+        else this.lsEquipos = new Array<Equipo>();
 
         if (nombre) this.nombre = nombre;
         else this.nombre = null;
