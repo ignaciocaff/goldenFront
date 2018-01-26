@@ -22,6 +22,8 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { ConfiguracionesContainerComponent } from './common/configuraciones/index';
 import { FileUploadComponent } from './common/configuraciones/file-upload/index';
 import { FileService } from '../services/entity-services/file.service';
+import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
+
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import { FileService } from '../services/entity-services/file.service';
     AngularFontAwesomeModule,
     Ng2CarouselamosModule
   ],
-  providers: [FileService],
+  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
