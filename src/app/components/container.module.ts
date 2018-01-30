@@ -23,6 +23,8 @@ import { ConfiguracionesContainerComponent } from './common/configuraciones/inde
 import { FileUploadComponent } from './common/configuraciones/file-upload/index';
 import { FileService } from '../services/entity-services/file.service';
 import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/index'
+import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,7 @@ import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/inde
     AngularFontAwesomeModule,
     Ng2CarouselamosModule
   ],
-  providers: [FileService, TorneoEmitter, TorneoLSEmitter],
+  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, TorneoEmitter, TorneoLSEmitter],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

@@ -2,3 +2,14 @@
     visibility: hidden;
   }
   
+  .inexistente{
+    display: none;
+  }
+
+  textarea{
+    resize: none;
+    height: 180px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc; 
+  }

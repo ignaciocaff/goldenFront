@@ -25,26 +25,6 @@
               </span>
               <input [(ngModel)]="equipo.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required="">
             </div>
-            <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="error">
-              <span class="label label-danger" id="error_Requerido">Campo requerido</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="form-group has-feedback">
-          <label class="control-label">Torneo</label>
-          <div class="inputGroupContainer">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
-              <select [(ngModel)]="equipo.torneo" name="torneo" required #torneo='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let torneo of lsTorneos" [ngValue]="torneo">{{torneo.nombre}}</option>
-              </select>
-            </div>
           </div>
         </div>
       </div>
@@ -66,7 +46,14 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-2 text-center">
+        <div class="form-group has-feedback">
+          <label class="control-label" for="logo">Seleccione el escudo</label>
+          <app-file-upload projectId="GOLDEN" sectionId="EQUIPOS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+        </div>
+      </div>
+
+      <div class="col-md-3 inexistente">
         <div class="form-group has-feedback">
           <label class="control-label">Club</label>
           <div class="inputGroupContainer">
@@ -86,7 +73,7 @@
 
 
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-4">
         <div class="form-group has-feedback">
           <label class="control-label">Descripción</label>
           <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo."
@@ -94,14 +81,13 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-2 col-md-offset-2">
         <div class="form-group has-feedback">
-          <label class="control-label" for="logo">Seleccione el escudo</label>
-          <div class="inputGroupContainer">
-            <input [(ngModel)]="equipo.logo" type="file" name="logo" #logo='ngModel' class="form-control" required>
-          </div>
+            <label class="control-label"></label>
+          <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
         </div>
       </div>
+
 
       <div class="col-md-5">
       </div>

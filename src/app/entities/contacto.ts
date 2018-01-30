@@ -1,14 +1,14 @@
 export class Contacto {
 
     public id_contacto: number;
-    public telefono_movil: number;
-    public telefono_fijo: number;
+    public telefono_movil: string;
+    public telefono_fijo: string;
     public email: string;
 
     constructor(
         id_contacto?: number,
-        telefono_movil?: number,
-        telefono_fijo?: number,
+        telefono_movil?: string,
+        telefono_fijo?: string,
         email?: string,
     ) {
         if (id_contacto) this.id_contacto = id_contacto;
