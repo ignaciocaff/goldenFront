@@ -9,11 +9,11 @@ export class CategoriaService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'torneo/categorias').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'categorias').map((response: Response) => response.json());
     }
 
     getById(id: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/categorias/' + id).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'categorias/' + id).map((response: Response) => response.json());
     }
 
     create(obj: any) {
@@ -21,10 +21,10 @@ export class CategoriaService {
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'torneo/categorias/' + obj.id, obj);
+        return this.http.put(this.config.apiUrl + 'categorias/' + obj.id, obj);
     }
 
     delete(id: number) {
-        return this.http.delete(this.config.apiUrl + 'torneo/categorias' + id);
+        return this.http.delete(this.config.apiUrl + 'categorias' + id);
     }
 }

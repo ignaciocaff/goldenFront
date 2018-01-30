@@ -7,6 +7,7 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService } from '../../../services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { EquipoService } from '../../../services/entity-services/index';
+import { TorneoLSEmitter } from '../../../services/common-services/index';
 
 @Component({
     selector: 'torneo',
@@ -43,7 +44,9 @@ export class TorneoComponent implements OnInit {
         private tiposTorneoService: TipoTorneoService,
         private torneoService: TorneoService,
         public toastr: ToastsManager,
-        public equipoService: EquipoService) {
+        public equipoService: EquipoService,
+        private torneoLsEmitter: TorneoLSEmitter,
+        private router: Router) {
         this.cargarCategorias();
         this.cargarModalidades();
         this.cargarReglas();
@@ -188,11 +191,17 @@ export class TorneoComponent implements OnInit {
         this.torneoService.create(this.torneo).subscribe(
             data => {
                 this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');
+                this.torneoLsEmitter.trigger(this.torneo);
+                this.limpiar();
                 this.blockUI.stop();
             },
             error => {
                 this.toastr.error('El torneo no se ha creado, el nombre ya existe', 'Error!');
                 this.blockUI.stop();
             });
+    }
+
+    limpiar() {
+        this.torneo = new Torneo();
     }
 }

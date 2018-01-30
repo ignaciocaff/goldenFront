@@ -12,8 +12,8 @@ export class TorneoService {
         return this.http.get(this.config.apiUrl + 'torneo/todos').map((response: Response) => response.json());
     }
 
-    getById(id: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/' + id).map((response: Response) => response.json());
+    getByName(nombre: String) {
+        return this.http.get(this.config.apiUrl + 'torneo/' + nombre).map((response: Response) => response.json());
     }
 
     create(obj: any) {

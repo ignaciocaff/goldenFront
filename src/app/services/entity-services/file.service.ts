@@ -24,4 +24,10 @@ export class FileService {
             .map(response => response.json())
             .catch(error => Observable.throw(error));
     }
+
+    getImagesByTorneo(id_torneo) {
+        return this.http.get(this.config.apiUrl + 'archivos/getbytorneo/' + id_torneo)
+            .map(response => response.json())
+            .catch(error => Observable.throw(error));
+    }
 }

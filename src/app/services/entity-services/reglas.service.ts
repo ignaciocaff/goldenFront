@@ -9,11 +9,11 @@ export class ReglasService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'torneo/reglas').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'reglas').map((response: Response) => response.json());
     }
 
     getById(id: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/' + id).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'reglas/' + id).map((response: Response) => response.json());
     }
 
     create(obj: any) {
@@ -21,10 +21,10 @@ export class ReglasService {
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'torneo/' + obj.id, obj);
+        return this.http.put(this.config.apiUrl + 'reglas/' + obj.id, obj);
     }
 
     delete(id: number) {
-        return this.http.delete(this.config.apiUrl + 'torneo/' + id);
+        return this.http.delete(this.config.apiUrl + 'reglas/' + id);
     }
 }

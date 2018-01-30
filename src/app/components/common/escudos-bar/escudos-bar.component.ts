@@ -1,7 +1,10 @@
-import { Component, Directive, ViewChild } from '@angular/core';
+import { Component, Directive, ViewChild, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { LoginComponent } from '../../common/login/index';
 import { Subscription } from 'rxjs/Subscription';
+import { TorneoEmitter } from '../../../services/common-services/index';
+import { FileService } from '../../../services/entity-services/file.service';
+import { DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'escudos',
@@ -10,37 +13,39 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['./escudos-bar.component.css'],
     providers: []
 })
-export class EscudosComponent {
+export class EscudosComponent implements OnInit, DoCheck {
     @ViewChild(LoginComponent) login: LoginComponent;
+    nombre: String;
+    images: Array<any> = [];
+    id_torneo: Number;
 
-    items: Array<any> = [];
-    constructor() {
-        this.items = [
-            { name: 'assets/escudos/22 dormida.png' },
-            { name: 'assets/escudos/alfiado.png' },
-            { name: 'assets/escudos/almafuerte.png' },
-            { name: 'assets/escudos/apostoles.png' },
-            { name: 'assets/escudos/black pipol.png' },
-            { name: 'assets/escudos/camorra.png' },
-            { name: 'assets/escudos/cañuelas.png' },
-            { name: 'assets/escudos/casa nilda1.png' },
-            { name: 'assets/escudos/catedral.png' },
-            { name: 'assets/escudos/cvra.png' },
-            { name: 'assets/escudos/escudo.png' },
-            { name: 'assets/escudos/expulsados.png' },
-            { name: 'assets/escudos/invitacion XI.png' },
-            { name: 'assets/escudos/la cruzada.png' },
-            { name: 'assets/escudos/la quinta.png' },
-            { name: 'assets/escudos/lapepenoll.png' },
-            { name: 'assets/escudos/los mas mas.png' },
-            { name: 'assets/escudos/Mala junta.png' },
-            { name: 'assets/escudos/Palito fc.png' },
-            { name: 'assets/escudos/parque.png' },
-            { name: 'assets/escudos/perfil bajo.png' },
-            { name: 'assets/escudos/pura quimica.png' },
-            { name: 'assets/escudos/taladro2.png' },
-            { name: 'assets/escudos/Zona Sur.png' },
-            { name: 'assets/escudos/viejo algarrobo.png' }
-        ]
+    constructor(private torneoEmiiter: TorneoEmitter, private fileService: FileService) {
+
+    }
+
+    ngOnInit() {
+        this.nombre = sessionStorage.getItem('torneo');
+        this.torneoEmiiter.onMyEvent.subscribe((value: string) => this.nombre = value
+        );
+    }
+
+    ngDoCheck() {
+        if (this.id_torneo !== Number(sessionStorage.getItem('id_torneo'))) {
+            this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+            this.getEscudos();
+        }
+    }
+    getEscudos() {
+        this.fileService.getImagesByTorneo(this.id_torneo).subscribe(
+            data => {
+                this.images = [];
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        this.images.push(data[i]);
+                    }
+                }
+            },
+            error => { }
+        );
     }
 }

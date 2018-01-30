@@ -10,7 +10,7 @@
         public nombre: string;
         public descripcion: string;
         public fecha_alta: Date;
-        public logo: File;
+        public logo: number;
         public categoria: Categoria;
         public club: Club;
         public torneo: Torneo;
@@ -20,7 +20,7 @@
             nombre?: string,
             descripcion?: string,
             fecha_alta?: Date,
-            logo?: File,
+            logo?: number,
             categoria?: Categoria,
             club?: Club,
             torneo?: Torneo

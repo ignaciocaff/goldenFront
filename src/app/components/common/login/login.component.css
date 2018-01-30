@@ -39,13 +39,21 @@ h3{
   width: 80% !important;
   margin: 0 auto;
   overflow: hidden;
+  color:black;
   font-family: roboto;
 }
 
 .modal-dialog{
   font-family: roboto;
+  color:black;
 }
 
 .btn{
   width: 100%;
+}
+
+.loginButton{
+  color:white;
+  display: block;
+  float: right;
 }
