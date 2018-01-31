@@ -15,6 +15,7 @@ import {
 } from './common/configuraciones/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
+import { NoticiaCargaComponent } from './common/noticia/index';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -32,6 +33,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'configuraciones', component: ConfiguracionesContainerComponent,
+            },
+            {
+                path: 'noticia-carga', component: NoticiaCargaComponent,
             }
         ]
     },

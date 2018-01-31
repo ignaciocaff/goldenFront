@@ -23,6 +23,8 @@ import { ConfiguracionesContainerComponent } from './common/configuraciones/inde
 import { FileUploadComponent } from './common/configuraciones/file-upload/index';
 import { FileService } from '../services/entity-services/file.service';
 import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
+import { NoticiaCargaComponent } from './common/noticia/index';
+import { CategoriaNoticiaService } from '../services/entity-services/index';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { CategoriaService, TorneoService, ClubService, EquipoService } from '../
     EquipoComponent,
     EscudosComponent,
     ConfiguracionesContainerComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    NoticiaCargaComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,7 @@ import { CategoriaService, TorneoService, ClubService, EquipoService } from '../
     AngularFontAwesomeModule,
     Ng2CarouselamosModule
   ],
-  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService],
+  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

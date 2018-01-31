@@ -13,7 +13,7 @@ import { EquipoService } from '../../../services/entity-services/index';
     moduleId: module.id,
     templateUrl: './torneo.component.html',
     styleUrls: ['./torneo.component.css'],
-    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService, EquipoService]
+    providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, EquipoService]
 })
 
 export class TorneoComponent implements OnInit {

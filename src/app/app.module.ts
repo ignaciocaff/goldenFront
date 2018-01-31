@@ -17,6 +17,8 @@ import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     Ng2CarouselamosModule,
     ToastModule.forRoot(),
     ImageUploadModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot()
   ],
   providers: [AuthenticationService, AppConfig, SharedService,
     {

@@ -2,9 +2,10 @@ import { Component, ViewChild, Input, SimpleChange, AfterViewInit, OnInit, OnDes
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { FormGroupDirective } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Usuario } from '../../entities/index'
+import { Usuario } from '../../entities/index';
 import { OnChanges, AfterViewChecked } from '@angular/core/src/metadata/lifecycle_hooks';
-import { SharedService } from '../../services/index'
+import { SharedService } from '../../services/index';
+
 @Component({
     selector: 'nav',
     moduleId: module.id,
@@ -43,5 +44,9 @@ export class NavComponent implements OnInit {
 
     configuraciones_Click() {
         this.router.navigate(['home/configuraciones']);
+    }
+
+    noticiaCarga_Click() {
+        this.router.navigate(['home/noticia-carga']);
     }
 }
