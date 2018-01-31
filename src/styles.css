@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -79,4 +79,8 @@ a:hover {
 
 .container-fluid{
   max-width:80em;
+}
+
+.montserrat-font {
+  font-family: 'Montserrat', sans-serif;
 }

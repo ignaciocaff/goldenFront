@@ -9,22 +9,22 @@ export class ModalidadService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
-        return this.http.get(this.config.apiUrl + 'torneo/modalidades').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'modalidades').map((response: Response) => response.json());
     }
 
     getById(id: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/' + id).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'modalidades/' + id).map((response: Response) => response.json());
     }
 
     create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'register', obj);
+        return this.http.post(this.config.apiUrl + 'modalidades', obj);
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'torneo/' + obj.id, obj);
+        return this.http.put(this.config.apiUrl + 'modalidades/' + obj.id, obj);
     }
 
     delete(id: number) {
-        return this.http.delete(this.config.apiUrl + 'torneo/' + id);
+        return this.http.delete(this.config.apiUrl + 'modalidades/' + id);
     }
 }

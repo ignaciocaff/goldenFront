@@ -26,6 +26,7 @@ import { CategoriaService, TorneoService, ClubService, EquipoService } from '../
 import { NoticiaCargaComponent } from './common/noticia/index';
 import { CategoriaNoticiaService } from '../services/entity-services/index';
 
+import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/index'
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CategoriaNoticiaService } from '../services/entity-services/index';
     AngularFontAwesomeModule,
     Ng2CarouselamosModule
   ],
-  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService],
+  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService, 
+              TorneoEmitter, TorneoLSEmitter],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

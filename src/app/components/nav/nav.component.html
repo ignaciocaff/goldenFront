@@ -1,4 +1,4 @@
-<div class="row" style="background-color: rgb(41, 41, 41); margin-left:0px; margin-right:0px;">
+<div class="row montserrat-font" style="background-color: rgb(41, 41, 41); margin-left:0px; margin-right:0px;">
   <div class="col-sm-2 col-md-2">
   </div>
   <!-- Primer Boton -->
@@ -17,9 +17,9 @@
     <div class="dropdown">
       <button class="dropbtn">TORNEO</button>
       <div class="dropdown-content">
-        <a href="#">Golden</a>
-        <a href="#">Master League</a>
-        <a href="#">Senior League</a>
+        <a *ngFor="let torneo of lsTorneos" [ngValue]="torneo" (click)="setTorneo(torneo.nombre, torneo.id_torneo)">
+          {{torneo.nombre}}
+        </a>
       </div>
 
     </div>

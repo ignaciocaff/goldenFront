@@ -2,31 +2,52 @@ import { Component, ViewChild, Input, SimpleChange, AfterViewInit, OnInit, OnDes
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { FormGroupDirective } from '@angular/forms';
 import { Location } from '@angular/common';
-import { Usuario } from '../../entities/index';
+import { Usuario, Torneo } from '../../entities/index'
 import { OnChanges, AfterViewChecked } from '@angular/core/src/metadata/lifecycle_hooks';
-import { SharedService } from '../../services/index';
-
+import { SharedService, TorneoService } from '../../services/index';
+import { TorneoEmitter, TorneoLSEmitter } from '../../services/common-services/index';
 @Component({
     selector: 'nav',
     moduleId: module.id,
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
-    providers: []
+    providers: [TorneoService]
 })
 export class NavComponent implements OnInit {
-
+    torneo: Torneo = new Torneo();
     user: Usuario;
+    public lsTorneos = new Array<Torneo>();
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private userService: SharedService
+        private userService: SharedService,
+        private torneoService: TorneoService,
+        private torneoEmitter: TorneoEmitter,
+        private torneoLsEmitter: TorneoLSEmitter
     ) {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+
+        this.torneoLsEmitter.torneoUpdate.subscribe((value) => {
+            this.lsTorneos.push(value)
+        }
+        );
     }
 
     ngOnInit() {
         this.userService.newUserSubject.subscribe(
             data => this.user = data
+        );
+
+        this.torneoService.getAll().subscribe(
+            data => {
+                for (var i = 0; i < data.length; i++) {
+                    let torneo = data[i];
+                    this.lsTorneos.push(torneo);
+                }
+
+            }, error => {
+
+            }
         );
     }
 
@@ -48,5 +69,20 @@ export class NavComponent implements OnInit {
 
     noticiaCarga_Click() {
         this.router.navigate(['home/noticia-carga']);
+    }
+
+    setTorneo(nombre: String, id_torneo: Number) {
+        this.torneoService.getByName(nombre).subscribe(
+            data => {
+                this.torneo = data;
+                sessionStorage.setItem('torneo', String(this.torneo.nombre));
+                sessionStorage.setItem('id_torneo', String(this.torneo.id_torneo));
+                this.router.navigate(['home']);
+                this.torneoEmitter.trigger(this.torneo.nombre);
+            },
+            error => {
+
+            }
+        );
     }
 }
