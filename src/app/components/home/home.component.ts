@@ -82,7 +82,10 @@ export class HomeComponent {
         for (let i = 0; i < this.lsNoticiasPrincipales.length; i++) {
             for (let j = 0; j < this.imagesPPal.length; j++) {
                 if (this.lsNoticiasPrincipales[i].id_thumbnail == this.imagesPPal[j].Id) {
-                    this.lsNotPrincipLink.push({ titulo: this.lsNoticiasPrincipales[i].titulo, ruta: this.imagesPPal[j].ImagePath });
+                    this.lsNotPrincipLink.push({
+                        titulo: this.lsNoticiasPrincipales[i].titulo,
+                        ruta: this.imagesPPal[j].ImagePath,
+                        id_noticia: this.lsNoticiasPrincipales[i].id_noticia });
                 }
             }
         }
@@ -127,7 +130,9 @@ export class HomeComponent {
         for (let i = 0; i < this.lsNoticiasSecundarias.length; i++) {
             for (let j = 0; j < this.imagesSec.length; j++) {
                 if (this.lsNoticiasSecundarias[i].id_thumbnail == this.imagesSec[j].Id) {
-                    this.lsNotSecundLink.push({titulo: this.lsNoticiasSecundarias[i].titulo, ruta: this.imagesSec[j].ImagePath});
+                    this.lsNotSecundLink.push({titulo: this.lsNoticiasSecundarias[i].titulo,
+                        ruta: this.imagesSec[j].ImagePath,
+                        id_noticia: this.lsNoticiasSecundarias[i].id_noticia});
                 }
             }
         }
