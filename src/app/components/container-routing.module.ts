@@ -7,7 +7,7 @@ import {
     JugadoresCargaComponent
 } from './common/jugadores/index';
 import {
-    TorneoComponent
+    TorneoComponent, TorneoUpdateComponent
 } from './common/torneo/index';
 import { EquipoComponent } from './common/equipo/index';
 import {
@@ -26,6 +26,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'torneo-carga', component: TorneoComponent,
+            },
+            {
+                path: 'torneo-update', component: TorneoUpdateComponent,
             },
             {
                 path: 'equipo-carga', component: EquipoComponent,

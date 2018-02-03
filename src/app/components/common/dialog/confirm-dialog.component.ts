@@ -1,23 +1,14 @@
 
-import { MatDialogRef } from '@angular/material';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
     selector: 'confirm-dialog',
-    template: `
-        <h3>{{ title }}</h3>
-        <p>{{ message }}</p>
-        <button type="button" md-raised-button class="btn btn-primary"
-            (click)="dialogRef.close(true)">OK</button>
-        <button type="button" md-button 
-            (click)="dialogRef.close(false)">Cancel</button>`
-})
-export class ConfirmDialogComponent {
-
-    public title: string;
-    public message: string;
-
-    constructor(public dialogRef: MatDialogRef<ConfirmDialogComponent>) {
-        
-    }
-}
+    templateUrl: './confirm-dialog.component.html',
+    styleUrls: ['./confirm-dialog.component.css'],
+  })
+  export class ConfirmationDialog {
+    constructor(public dialogRef: MatDialogRef<ConfirmationDialog>) {}
+  
+    public confirmMessage:string;
+  }

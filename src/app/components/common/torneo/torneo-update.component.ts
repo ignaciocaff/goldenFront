@@ -8,22 +8,28 @@ import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, T
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { EquipoService } from '../../../services/entity-services/index';
 import { TorneoLSEmitter } from '../../../services/common-services/index';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { ConfirmationDialog } from '../../common/dialog/index';
+
 
 @Component({
-    selector: 'torneo',
+    selector: 'torneo-update',
     moduleId: module.id,
-    templateUrl: './torneo.component.html',
-    styleUrls: ['./torneo.component.css'],
+    templateUrl: './torneo-update.component.html',
+    styleUrls: ['./torneo-update.component.css'],
     providers: [TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService, EquipoService]
 })
 
-export class TorneoComponent implements OnInit {
+export class TorneoUpdateComponent implements OnInit {
     @ViewChild('torneoForm') torneoForm: FormGroup;
     @BlockUI() blockUI: NgBlockUI;
+    dialogRef: MatDialogRef<ConfirmationDialog>;
 
     itemList = [];
     selectedItems = [];
+    equiposPDesvincular = [];
     settings = {};
+    public lsTorneos = new Array<Torneo>();
     lsEquipos = [];
     lsEquiposToPost = Array<Equipo>();
 
@@ -46,7 +52,8 @@ export class TorneoComponent implements OnInit {
         public toastr: ToastsManager,
         public equipoService: EquipoService,
         private torneoLsEmitter: TorneoLSEmitter,
-        private router: Router) {
+        private router: Router,
+        public dialog: MatDialog) {
         this.cargarCategorias();
         this.cargarModalidades();
         this.cargarReglas();
@@ -54,21 +61,6 @@ export class TorneoComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        this.equipoService.getAll().subscribe(
-            data => {
-                this.lsEquipos = data;
-                for (let i = 0; i < data.length; i++) {
-                    var equipo = { id: Number, itemName: String };
-                    equipo['id'] = data[i]['id_equipo'];
-                    equipo['itemName'] = data[i]['nombre'];
-                    this.itemList.push(equipo);
-                }
-            },
-            error => {
-                error.json()['Message'];
-            });
-
         this.selectedItems = [];
 
         this.settings = {
@@ -83,6 +75,19 @@ export class TorneoComponent implements OnInit {
             searchPlaceholderText: 'Buscar',
             classes: 'multiselect-class-equipos'
         };
+
+        this.torneoService.getAll().subscribe(
+            data => {
+                for (var i = 0; i < data.length; i++) {
+                    let torneo: Torneo;
+                    torneo = data[i];
+                    this.lsTorneos.push(torneo);
+                }
+
+            }, error => {
+
+            }
+        );
     }
     onItemSelect(item: any) {
         for (let i = 0; i < this.lsEquipos.length; i++) {
@@ -185,20 +190,30 @@ export class TorneoComponent implements OnInit {
             });
     }
 
-    registrarTorneo() {
-        this.blockUI.start(); // Start blocking
+    actualizarTorneo() {
+
         this.torneo.lsEquipos = this.lsEquiposToPost;
-        this.torneoService.create(this.torneo).subscribe(
+        console.log(this.torneo);
+
+        //Aca va el servicio de actualizacion pasandole this.torneo
+        // Si se actualiza correctamente hace : 
+        // this.lsTorneos = [];
+        // this.limpiar();
+        /*this.torneoService.getAll().subscribe(
             data => {
-                this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');
-                this.torneoLsEmitter.trigger(this.torneo);
-                this.limpiar();
-                this.blockUI.stop();
-            },
-            error => {
-                this.toastr.error('El torneo no se ha creado, el nombre ya existe', 'Error!');
-                this.blockUI.stop();
-            });
+                for (var i = 0; i < data.length; i++) {
+                    let torneo: Torneo;
+                    torneo = data[i];
+                    this.lsTorneos.push(torneo);
+                }
+
+            }, error => {
+
+            }
+        );*/
+        //Y dispara el servicio para desvincular los equipos
+        // despues hace  this.equiposPDesvincular = [];
+
     }
 
     limpiar() {
@@ -211,5 +226,100 @@ export class TorneoComponent implements OnInit {
 
     routeModificacion() {
         this.router.navigate(['home/torneo-update']);
+    }
+
+    onTtorneoChange(newValue) {
+        this.torneo.tipoTorneo.id_tipo = this.lsTipos.find(x => x.descripcion == newValue).id_tipo;
+        this.torneo.tipoTorneo.descripcion = newValue;
+    }
+
+    onModalidadChange(newValue) {
+        this.torneo.modalidad.id_modalidad = this.lsModalidades.find(x => x.descripcion == newValue).id_modalidad;
+        this.torneo.modalidad.descripcion = newValue;
+    }
+
+    onReglaChange(newValue) {
+        this.torneo.regla.id_regla = this.lsReglas.find(x => x.descripcion == newValue).id_regla;
+        this.torneo.regla.descripcion = newValue;
+    }
+
+    onCategoriaChange(newValue) {
+        this.openConfirmationDialog(newValue);
+    }
+
+    openConfirmationDialog(newValue) {
+        this.dialogRef = this.dialog.open(ConfirmationDialog, {
+            height: '35%',
+            width: '45%',
+            disableClose: false
+        });
+        this.dialogRef.componentInstance.confirmMessage = "Al cambiar la categoria del torneo, se desvincularan todos los equipos."
+
+        this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.torneo.categoria.id_categoria = this.lsCategorias.find(x => x.descripcion == newValue).id_categoria;
+                this.torneo.categoria.descripcion = newValue;
+                this.equiposPDesvincular = this.lsEquiposToPost;
+                this.selectedItems = [];
+                this.itemList = [];
+                this.lsEquiposToPost = [];
+                this.equipoService.getAll().subscribe(
+                    data => {
+                        this.lsEquipos = data;
+                        for (let i = 0; i < data.length; i++) {
+                            var equipo = { id: Number, itemName: String };
+                            equipo['id'] = data[i]['id_equipo'];
+                            equipo['itemName'] = data[i]['nombre'];
+
+                            if (data[i]['categoria']['id_categoria'] == this.torneo.categoria.id_categoria
+                                && data[i]['torneo']['id_torneo'] == null) {
+                                this.itemList.push(equipo);
+                            }
+                        }
+                    },
+                    error => {
+                        error.json()['Message'];
+                    });
+
+                console.log("Equipos a desvincular:" + JSON.stringify(this.equiposPDesvincular));
+
+            }
+            this.dialogRef = null;
+        });
+    }
+
+    onChange(newValue) {
+        this.itemList = [];
+        this.lsEquiposToPost = [];
+        this.selectedItems = [];
+        let torneo: Torneo = newValue;
+        this.torneo = torneo;
+
+        this.equipoService.getAll().subscribe(
+            data => {
+                this.lsEquipos = data;
+                for (let i = 0; i < data.length; i++) {
+                    var equipo = { id: Number, itemName: String };
+                    equipo['id'] = data[i]['id_equipo'];
+                    equipo['itemName'] = data[i]['nombre'];
+
+                    if (data[i]['categoria']['id_categoria'] == this.torneo.categoria.id_categoria
+                        && data[i]['torneo']['id_torneo'] == null) {
+                        this.itemList.push(equipo);
+                    }
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
+
+
+        for (let i = 0; i < this.torneo.lsEquipos.length; i++) {
+            let lsEquipos = this.torneo.lsEquipos;
+            let id: Number = lsEquipos[i]['id_equipo'];
+            let itemName: String = lsEquipos[i]['nombre'];
+            this.selectedItems.push({ id, itemName });
+            this.lsEquiposToPost.push(lsEquipos[i]);
+        }
     }
 }

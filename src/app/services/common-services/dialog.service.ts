@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Rx';
-import { ConfirmDialogComponent } from '../../components/common/dialog/index';
+//import { ConfirmDialogComponent } from '../../components/common/dialog/index';
 import { LocalidadesCargaComponent } from '../../components/common/localidades/index';
 import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
@@ -14,7 +14,7 @@ export class DialogService {
 
     constructor(private dialog: MatDialog) { }
 
-    public confirm(title: string, message: string): Observable<boolean> {
+    /*public confirm(title: string, message: string): Observable<boolean> {
         let confirmDialogRef: MatDialogRef<ConfirmDialogComponent>;
 
         confirmDialogRef = this.dialog.open(ConfirmDialogComponent);
@@ -22,7 +22,7 @@ export class DialogService {
         confirmDialogRef.componentInstance.message = message;
 
         return confirmDialogRef.afterClosed();
-    }
+    }*/
 
     public agregarLocalidad(provincia: Provincia): Observable<boolean> {
         let localidadesCargaRef: MatDialogRef<LocalidadesCargaComponent>;

@@ -16,6 +16,10 @@ export class EquipoService {
         return this.http.get(this.config.apiUrl + 'torneo/equipos' + id).map((response: Response) => response.json());
     }
 
+    getAllPorTorneo(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo' + id_torneo).map((response: Response) => response.json());
+    }
+
     create(obj: any) {
         return this.http.post(this.config.apiUrl + 'equipo/registrar', obj);
     }
@@ -24,7 +28,7 @@ export class EquipoService {
         return this.http.put(this.config.apiUrl + 'torneo/equipos' + obj.id, obj);
     }
 
-     delete(id: number) {
-       return this.http.delete(this.config.apiUrl + 'torneo/' + id);
+    delete(id: number) {
+        return this.http.delete(this.config.apiUrl + 'torneo/' + id);
     }
 }
