@@ -1,0 +1,27 @@
+<div class="principal">
+  <div class="row">
+    <div class="col-sm-6 col-md-6" *ngFor="let noticia of lsNotPrincipLink">
+      <div class="imagebox" onclick="verNoticia()">
+        <a (click)="verNoticia(noticia.id_noticia)">
+          <img [src]="url + noticia.ruta" class="category-banner img-responsive">
+          <span class="imagebox-desc">{{noticia.titulo}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class= "col-md-12 col-sm-12">
+<div class="secundaria">
+    <div class="row">
+      <div class="col-sm-4 col-md-4" *ngFor="let noticia of lsNotSecundLink">
+        <div class="imagebox" onclick="verNoticia()">
+          <a (click)="verNoticia(noticia.id_noticia)">
+            <img [src]="url + noticia.ruta"  class="category-banner img-responsive">
+            <span class="imagebox-desc">{{noticia.titulo}}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

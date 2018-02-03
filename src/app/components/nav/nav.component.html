@@ -77,7 +77,7 @@
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Generar fixture</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Categorias</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="torneoCarga_Click()">Torneos</a>
-        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Noticias</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="noticiaCarga_Click()">Noticias</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
       </div>
     </div>

@@ -1,0 +1,18 @@
+textarea{
+  resize: none;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc; 
+}
+
+.inexistente{
+  display: none;
+}
+
+.descripcion{
+  margin-bottom: 1em;
+}
+
+.opciones{
+  margin-left: 1em;
+}

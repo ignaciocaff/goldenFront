@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
 
         this.torneoLsEmitter.torneoUpdate.subscribe((value) => {
-            this.lsTorneos.push(value)
+            this.lsTorneos.push(value);
         }
         );
     }
@@ -67,6 +67,10 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/configuraciones']);
     }
 
+    noticiaCarga_Click() {
+        this.router.navigate(['home/noticia-carga']);
+    }
+
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {
@@ -76,7 +80,7 @@ export class NavComponent implements OnInit {
                 this.router.navigate(['home']);
                 this.torneoEmitter.trigger(this.torneo.nombre);
             },
-            erro => {
+            error => {
 
             }
         );

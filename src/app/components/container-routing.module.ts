@@ -15,9 +15,12 @@ import {
 } from './common/configuraciones/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
+import { NoticiaCargaComponent } from './common/noticia/index';
+import { HomeComponent } from './home/index';
+import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 
 const homeRoutes: Routes = [
-    { path: '', pathMatch: 'full', redirectTo: '/home' },
+    { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
     {
         path: 'home', component: ContainerComponent,
         children: [
@@ -35,6 +38,15 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'configuraciones', component: ConfiguracionesContainerComponent,
+            },
+            {
+                path: 'noticia-carga', component: NoticiaCargaComponent,
+            },
+            {
+                path: 'noticias', component: HomeComponent,
+            },
+            {
+                path: 'noticia/:id', component: NoticiaVisualizacionComponent,
             }
         ]
     },

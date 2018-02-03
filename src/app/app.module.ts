@@ -17,6 +17,9 @@ import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
+import { CKEditorModule } from 'ngx-ckeditor';
+
+
 
 @NgModule({
   declarations: [
@@ -35,9 +38,10 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
     AngularMultiSelectModule,
     AngularFontAwesomeModule,
     Ng2CarouselamosModule,
+    CKEditorModule,
     ToastModule.forRoot(),
     ImageUploadModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [AuthenticationService, AppConfig, SharedService,
     {
