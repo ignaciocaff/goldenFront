@@ -5,9 +5,11 @@ import { FooterComponent } from './footer/index';
 import { NavComponent } from './nav/index';
 import { HeaderComponent } from './header/index';
 import { SectionComponent } from './section/index';
-import { TorneoService } from '../services/index'
-import { Torneo } from '../entities/index'
+import { TorneoService } from '../services/index';
+import { Torneo } from '../entities/index';
 import { TorneoEmitter } from '../services/common-services/index';
+import { HomeComponent } from './home/index';
+
 
 @Component({
     selector: 'container',

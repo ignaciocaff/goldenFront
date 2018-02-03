@@ -8,6 +8,4 @@ export * from './jugador.service';
 export * from './torneo.service';
 export * from './club.service';
 export * from './categoriaNoticia.service';
-
-
-
+export * from './noticia.service';

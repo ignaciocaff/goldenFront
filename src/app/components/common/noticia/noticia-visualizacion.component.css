@@ -1,0 +1,50 @@
+.imagebox {
+  background: black;
+  padding: 0px;
+  position: relative;
+  text-align: center;
+  width: 80%;
+}
+
+.foto {
+  padding: 15px 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1.titulo {
+  color: #454545;
+  margin: 0 0 0.45em 0;
+  font-weight: bold;
+}
+
+div{
+    display: block;
+}
+
+div.noticia {
+  color: #343434;
+  line-height: 1.4em;
+  font-size: 1.1em;
+  margin-bottom: 2em;
+  margin-top: 1.6em;
+}
+a.tags {
+    background: rgb(170, 145, 93);;
+    display: inline-block;
+    margin: 0 0.4em 0.4em 0;
+    padding: 0.4em 1em;
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 0.8em;
+    line-height: 16px;
+    text-align: center;
+    color: white;
+}
+
+label {
+  margin-bottom: 0.4em;
+  font-weight: bold;
+}

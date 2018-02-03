@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
 
         this.torneoLsEmitter.torneoUpdate.subscribe((value) => {
-            this.lsTorneos.push(value)
+            this.lsTorneos.push(value);
         }
         );
     }

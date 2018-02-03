@@ -6,20 +6,19 @@ import { DialogService } from '../../../services/common-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
 
-
-
 import {
     Noticia,
     Torneo,
     Club,
-    CategoriaNoticia
+    CategoriaNoticia,
     // Fecha,
 } from '../../../entities/index';
 
 import {
     TorneoService,
     ClubService,
-    CategoriaNoticiaService
+    CategoriaNoticiaService,
+    NoticiaService
 } from '../../../services/entity-services/index';
 
 @Component({
@@ -27,8 +26,7 @@ import {
     moduleId: module.id,
     templateUrl: './noticia-carga.component.html',
     styleUrls: ['./noticia-carga.component.css'],
-    providers: [
-    ]
+    providers: []
 })
 
 export class NoticiaCargaComponent {
@@ -42,7 +40,7 @@ export class NoticiaCargaComponent {
 
     public lsTorneos = new Array<Torneo>();
     public lsClubes = new Array<Club>();
-// public lsFechas = new Array<Fecha>();
+    // public lsFechas = new Array<Fecha>();
     public lsCategoriasNoticias = new Array<CategoriaNoticia>();
 
     errorMessage: string;
@@ -55,14 +53,38 @@ export class NoticiaCargaComponent {
         private clubService: ClubService,
         private categoriaNoticiasService: CategoriaNoticiaService,
         public toastr: ToastsManager,
-        private fileService: FileService
+        private fileService: FileService,
+        private noticiaService: NoticiaService
     ) {
         this.cargarTorneos();
         this.cargarClubes();
         this.cargarCategoriasNoticias();
     }
 
-// METODOS-----------------------------------------------------------------------
+    // METODOS-----------------------------------------------------------------------
+
+    limpiar() {
+        this.noticia = new Noticia();
+        this.images = [];
+    }
+
+    registrarNoticias() {
+        console.log(this.noticia);
+    }
+
+    registrarNoticia() {
+        this.blockUI.start();
+        this.noticiaService.create(this.noticia).subscribe(
+            data => {
+                this.toastr.success('La noticia se ha enviado correctamente.', 'Exito!');
+                this.blockUI.stop();
+                this.limpiar();
+            },
+            error => {
+                this.toastr.error('La noticia no se ha enviado.", "Error!');
+                this.blockUI.stop();
+            });
+    }
 
     cargarTorneos() {
         this.torneoService.getAll().subscribe(

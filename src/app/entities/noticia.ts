@@ -7,7 +7,7 @@ export class Noticia {
     public fecha: Date;
     public torneo: Torneo;
     public club: Club;
-    public categoria_noticia: CategoriaNoticia;
+    public categoriaNoticia: CategoriaNoticia;
     public tags: string;
     public id_thumbnail: number;
 
@@ -18,7 +18,7 @@ export class Noticia {
         fecha?: Date,
         torneo?: Torneo,
         club?: Club,
-        categoria_noticia?: CategoriaNoticia,
+        categoriaNoticia?: CategoriaNoticia,
         tags?: string,
         id_thumbnail?: number
     ) {
@@ -58,10 +58,10 @@ export class Noticia {
             this.club = new Club();
         }
 
-        if (categoria_noticia) {
-            this.categoria_noticia = categoria_noticia;
+        if (categoriaNoticia) {
+            this.categoriaNoticia = categoriaNoticia;
         } else {
-            this.categoria_noticia = new CategoriaNoticia();
+            this.categoriaNoticia = new CategoriaNoticia();
         }
 
         if (tags) {

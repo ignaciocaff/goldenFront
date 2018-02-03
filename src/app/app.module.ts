@@ -17,7 +17,8 @@ import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { CKEditorModule } from 'ngx-ckeditor';
+
 
 
 @NgModule({
@@ -37,11 +38,10 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
     AngularMultiSelectModule,
     AngularFontAwesomeModule,
     Ng2CarouselamosModule,
+    CKEditorModule,
     ToastModule.forRoot(),
     ImageUploadModule.forRoot(),
     AppRoutingModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
   ],
   providers: [AuthenticationService, AppConfig, SharedService,
     {

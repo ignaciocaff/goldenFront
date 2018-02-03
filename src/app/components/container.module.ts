@@ -24,9 +24,13 @@ import { FileUploadComponent } from './common/configuraciones/file-upload/index'
 import { FileService } from '../services/entity-services/file.service';
 import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService } from '../services/entity-services/index';
 
-import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/index'
+import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/index';
+import { CKEditorModule } from 'ngx-ckeditor';
+import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/ck-editor.component';
+import { HomeComponent } from './home/index';
+import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,9 @@ import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/inde
     EscudosComponent,
     ConfiguracionesContainerComponent,
     FileUploadComponent,
-    NoticiaCargaComponent
+    NoticiaCargaComponent,
+    HomeComponent,
+    NoticiaVisualizacionComponent
   ],
   imports: [
     BrowserModule,
@@ -55,12 +61,13 @@ import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/inde
     MultiSelectModule,
     AngularMultiSelectModule,
     AngularFontAwesomeModule,
-    Ng2CarouselamosModule
+    Ng2CarouselamosModule,
+    CKEditorModule
   ],
-  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService, 
-              TorneoEmitter, TorneoLSEmitter],
+  providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
+              TorneoEmitter, TorneoLSEmitter, NoticiaService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
-    FooterComponent, EscudosComponent],
+    FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class ContainerModule { }

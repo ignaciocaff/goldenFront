@@ -12,7 +12,7 @@
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="glyphicon glyphicon-text-height"></i>
-                </span>
+                </span> 
                 <input [(ngModel)]="noticia.titulo" name="titulo" required #titulo='ngModel' class="form-control" type="text" required=""
                   placeholder="Escriba el titulo de la noticia aquí.">
               </div>
@@ -21,27 +21,29 @@
         </div>
 
         <div class="col-md-12 col-sm-12">
-          <div class="row">
+          <div class="row descripcion">
             <h5>
               Cuerpo
             </h5>
-            <div class="inputGroupContainer">
-              <div class="input-group">
-                <span class="input-grou p-addon">
-                  <i class="glyphicon glyphicon-align-justify"></i>
-                </span>
-                <textarea [(ngModel)]="noticia.descripcion" name="descripcion" class="form-control" rows="3" maxlength="10000"></textarea>
-              </div>
-            </div>
+            <ck-editor name="editor1" [(ngModel)]="noticia.descripcion" skin="moono-lisa" lang="es"></ck-editor>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-2 col-md-offset-1">
+            <button type="submit" (click)="registrarNoticia()" class="btn btn-primary">Enviar</button>
+          </div>
+          <div class="col-md-2 col-md-offset-7">
+            <button class="btn btn-default" (click)="limpiar()">Limpiar</button>
           </div>
         </div>
 
       </div>
 
 
-      <div class="col-md-3 col-sm-3 col-md-offset-1 col-sm-offset-1">
+      <div class="col-md-3 col-sm-3 opciones">
 
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12 ">
           <div class="row">
             <div class="form-group has-feedback">
               <label class="control-label">Torneo(*)</label>
@@ -70,7 +72,7 @@
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-list"></i>
                   </span>
-                  <select [(ngModel)]="noticia.categoria_noticia" name="categoria_noticia" required #categoria_noticia='ngModel' class="form-control selectpicker">
+                  <select [(ngModel)]="noticia.categoriaNoticia" name="categoriaNoticia" required #categoriaNoticia='ngModel' class="form-control selectpicker">
                     <option value="null">Elija su opcion</option>
                     <option *ngFor="let categorias of lsCategoriasNoticias" [ngValue]="categorias">{{categorias.descripcion}}</option>
                   </select>
@@ -100,20 +102,21 @@
           </div>
         </div>
 
-        <div class="col-md-12 text-left">
-            <div class="row">
-              <div class="form-group has-feedback">
-                <label class="control-label" for="logo">Seleccione el thumbnail</label>
-                <app-file-upload projectId="GOLDEN" sectionId="NOTICIAS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+        <div class="col-md-12 col-sm-12 text-left">
+          <div class="row">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="logo">Seleccione el thumbnail</label>
+              <app-file-upload projectId="GOLDEN" sectionId="NOTICIAS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <div class="containerr">
+                <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
               </div>
             </div>
-            <div class="row">
-                <div class="container">
-                  <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
-                </div>
-              </div>
           </div>
-
+        </div>
 
         <div class="col-md-12 col-sm-12">
           <div class="row">

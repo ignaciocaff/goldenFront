@@ -5,6 +5,14 @@ textarea{
   border: 2px solid #ccc; 
 }
 
-  .inexistente{
-    display: none;
-  }
+.inexistente{
+  display: none;
+}
+
+.descripcion{
+  margin-bottom: 1em;
+}
+
+.opciones{
+  margin-left: 1em;
+}
