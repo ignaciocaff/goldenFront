@@ -6,7 +6,7 @@
     <div id="container">
       <div *ngFor="let img of images" class="inline-display">
         <div class="images">
-          <img [src]="'http://localhost' + img.ThumbPath" class="img-thumbnail" title="{{img.FileName}}">
+          <img [src]="'http://localhost:50042' + img.ThumbPath" class="img-thumbnail" title="{{img.FileName}}">
         </div>
       </div>
     </div>
