@@ -69,9 +69,9 @@
                       <select [(ngModel)]="jugador.tipoDocumento" name="tipoDoc" required #tipoDoc='ngModel' class="form-control selectpicker"
                         [disabled]="existejugador" *ngIf="!existejugador">
                         <option value=" ">Elija su opcion</option>
-                        <option *ngFor="let tipoDocumento of lsTiposDocumento" [ngValue]="tipoDocumento">{{tipoDocumento.n_tipo_documento}}</option>
+                        <option *ngFor="let tipoDocumento of lsTiposDocumento" [ngValue]="tipoDocumento">{{tipoDocumento.descripcion}}</option>
                       </select>
-                      <input [(ngModel)]="jugador.tipoDocumento.n_tipo_documento" name="n_tipo_documento" required #n_tipo_documento='ngModel'
+                      <input [(ngModel)]="jugador.tipoDocumento.descripcion" name="descripcion" required #descripcion='ngModel'
                         *ngIf="existejugador" [disabled]="existejugador" type="text" class="form-control">
                     </div>
                   </div>

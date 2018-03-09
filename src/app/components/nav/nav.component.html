@@ -4,12 +4,7 @@
   <!-- Primer Boton -->
   <div class="col-sm-10 col-md-10">
     <div class="dropdown">
-      <button class="dropbtn">INICIO</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
+      <button class="dropbtn" (click)="noticias_Click()">INICIO</button>
     </div>
 
     <!-- Segundo Boton -->
@@ -27,46 +22,21 @@
 
     <div class="dropdown">
       <button class="dropbtn">NOTICIAS</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
     </div>
     <!-- Cuarto Boton -->
     <div class="dropdown">
       <button class="dropbtn">FIXTURE</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
     </div>
     <!-- Quinto Boton -->
     <div class="dropdown">
       <button class="dropbtn">POSICIONES</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
     </div>
     <!-- Sexto Boton -->
     <div class="dropdown">
       <button class="dropbtn">RESULTADOS</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
     </div>
     <div class="dropdown">
       <button class="dropbtn">GOLEADORES</button>
-      <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-      </div>
     </div>
     <div class="dropdown">
       <button *ngIf="user != null" class="dropbtn">ADMINISTRACIÓN</button>

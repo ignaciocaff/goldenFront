@@ -57,7 +57,7 @@ export class LoginComponent {
             .subscribe(
             data => {
                 this.blockUI.stop();
-                this.router.navigate(['home']);
+                this.router.navigate(['home/noticias']);
             },
             error => {
                 this.blockUI.stop();

@@ -71,13 +71,17 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/noticia-carga']);
     }
 
+    noticias_Click() {
+        this.router.navigate(['home/noticias']);
+    }
+
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {
                 this.torneo = data;
                 sessionStorage.setItem('torneo', String(this.torneo.nombre));
                 sessionStorage.setItem('id_torneo', String(this.torneo.id_torneo));
-                this.router.navigate(['home']);
+                this.router.navigate(['home/noticias']);
                 this.torneoEmitter.trigger(this.torneo.nombre);
             },
             error => {

@@ -4,6 +4,7 @@ import { NoticiaService } from '../../services/entity-services/index';
 import { FileService } from '../../services/entity-services/file.service';
 import { Noticia } from '../../entities/index';
 import { AppConfig } from '../../app.config';
+import { DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'home',
@@ -12,7 +13,7 @@ import { AppConfig } from '../../app.config';
     styleUrls: ['./home.component.css'],
     providers: []
 })
-export class HomeComponent {
+export class HomeComponent implements DoCheck {
     public lsNoticiasPrincipales = new Array<Noticia>();
     public lsNoticiasSecundarias = new Array<Noticia>();
 
@@ -22,7 +23,7 @@ export class HomeComponent {
     imagesPPal: Array<any> = [];
     imagesSec: Array<any> = [];
     url: string;
-
+    id_torneo: number;
     constructor(
         private noticiaService: NoticiaService,
         private fileService: FileService,
@@ -30,23 +31,29 @@ export class HomeComponent {
         private config: AppConfig
     ) {
         this.url = this.config.imgUrl;
-        this.cargarNoticias();
     }
 
     // METODOS-----------------------------------------------------------------------
+
+    ngDoCheck() {
+        if (this.id_torneo !== Number(sessionStorage.getItem('id_torneo'))) {
+            this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+            this.cargarNoticiasPrincipales();
+            this.cargarNoticiasSecundarias();
+        }
+
+    }
 
     verNoticia(id_noticia) {
         this.router.navigate(['home/noticia/' + id_noticia]);
     }
 
-    cargarNoticias() {
-        this.cargarNoticiasPrincipales();
-        this.cargarNoticiasSecundarias();
-    }
-
     cargarNoticiasPrincipales() {
-        this.noticiaService.getPrincipales(Number(sessionStorage.getItem('id_torneo'))).subscribe(
+        this.noticiaService.getPrincipales(this.id_torneo).subscribe(
             data => {
+                this.lsNoticiasPrincipales = [];
+                this.lsNotPrincipLink = [];
+                this.lsNotSecundLink = [];
                 for (let i = 0; i < data.length; i++) {
                     let noticia = new Noticia();
                     noticia = data[i];
@@ -64,7 +71,6 @@ export class HomeComponent {
         for (let i = 0; i < this.lsNoticiasPrincipales.length; i++) {
             this.fileService.getImagesByNoticia(this.lsNoticiasPrincipales[i].id_noticia).subscribe(
                 data => {
-                    console.log("DATA" + data[i]);
                     this.imagesPPal = [];
                     if (data) {
                         for (var j = 0; j < data.length; j++) {
@@ -85,7 +91,8 @@ export class HomeComponent {
                     this.lsNotPrincipLink.push({
                         titulo: this.lsNoticiasPrincipales[i].titulo,
                         ruta: this.imagesPPal[j].ImagePath,
-                        id_noticia: this.lsNoticiasPrincipales[i].id_noticia });
+                        id_noticia: this.lsNoticiasPrincipales[i].id_noticia
+                    });
                 }
             }
         }
@@ -93,8 +100,9 @@ export class HomeComponent {
 
 
     cargarNoticiasSecundarias() {
-        this.noticiaService.getSecundarias(Number(sessionStorage.getItem('id_torneo'))).subscribe(
+        this.noticiaService.getSecundarias(this.id_torneo).subscribe(
             data => {
+                this.lsNoticiasSecundarias = [];
                 for (let i = 0; i < data.length; i++) {
                     let noticia = new Noticia();
                     noticia = data[i];
@@ -130,9 +138,11 @@ export class HomeComponent {
         for (let i = 0; i < this.lsNoticiasSecundarias.length; i++) {
             for (let j = 0; j < this.imagesSec.length; j++) {
                 if (this.lsNoticiasSecundarias[i].id_thumbnail == this.imagesSec[j].Id) {
-                    this.lsNotSecundLink.push({titulo: this.lsNoticiasSecundarias[i].titulo,
+                    this.lsNotSecundLink.push({
+                        titulo: this.lsNoticiasSecundarias[i].titulo,
                         ruta: this.imagesSec[j].ImagePath,
-                        id_noticia: this.lsNoticiasSecundarias[i].id_noticia});
+                        id_noticia: this.lsNoticiasSecundarias[i].id_noticia
+                    });
                 }
             }
         }
