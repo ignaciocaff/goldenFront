@@ -21,7 +21,7 @@ export class TorneoService {
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'torneo/' + obj.id, obj);
+        return this.http.post(this.config.apiUrl + 'torneo/update', obj);
     }
 
     delete(id: number) {

@@ -93,9 +93,14 @@ export class TorneoUpdateComponent implements OnInit {
         for (let i = 0; i < this.lsEquipos.length; i++) {
             if (item.id == this.lsEquipos[i]['id_equipo']) {
                 this.lsEquiposToPost.push(this.lsEquipos[i]);
+                this.equiposPDesvincular.forEach((item, index) => {
+                    if (item == this.lsEquipos[i]) this.equiposPDesvincular.splice(index, 1);
+                });
             }
         }
+        console.error('En Item Select' + JSON.stringify(this.lsEquiposToPost));
     }
+
     OnItemDeSelect(item: any) {
         for (let i = 0; i < this.lsEquipos.length; i++) {
             if (item.id == this.lsEquipos[i]['id_equipo']) {
@@ -104,9 +109,12 @@ export class TorneoUpdateComponent implements OnInit {
                 });
                 if (index !== -1) {
                     this.lsEquiposToPost.splice(index, 1);
+                    this.equiposPDesvincular.push(this.lsEquipos[i]);
                 }
+
             }
         }
+        console.error('En Item DeSelect' + JSON.stringify(this.lsEquiposToPost));
     }
     onSelectAll(items: any) {
         this.lsEquiposToPost = [];
@@ -117,8 +125,10 @@ export class TorneoUpdateComponent implements OnInit {
                 }
             }
         }
+        console.error('On select all' + JSON.stringify(this.lsEquiposToPost));
     }
     onDeSelectAll(items: any) {
+        this.equiposPDesvincular = this.lsEquiposToPost;
         this.lsEquiposToPost = [];
     }
 
@@ -194,30 +204,32 @@ export class TorneoUpdateComponent implements OnInit {
 
         this.torneo.lsEquipos = this.lsEquiposToPost;
         console.log(this.torneo);
+        console.log(JSON.stringify(this.equiposPDesvincular));
 
-        //Aca va el servicio de actualizacion pasandole this.torneo
-        // Si se actualiza correctamente hace : 
-        // this.lsTorneos = [];
-        // this.limpiar();
-        /*this.torneoService.getAll().subscribe(
+        this.torneoService.update(this.torneo).subscribe(
             data => {
-                for (var i = 0; i < data.length; i++) {
-                    let torneo: Torneo;
-                    torneo = data[i];
-                    this.lsTorneos.push(torneo);
+                if (data) {
+                    this.equipoService.desvincular(this.equiposPDesvincular).subscribe(
+                        data => {
+                            this.toastr.success('El torneo ha sido acctualizado correctamente', 'Exito!');
+                            this.limpiar();
+                        }, error => {
+                            this.toastr.error('No se pudieron desvincular los equipos', 'Error!');
+                        }
+                    )
                 }
-
             }, error => {
-
+                this.toastr.error('No se pudo actualizar el torneo', 'Error!');
             }
-        );*/
-        //Y dispara el servicio para desvincular los equipos
-        // despues hace  this.equiposPDesvincular = [];
-
+        );
     }
 
     limpiar() {
         this.torneo = new Torneo();
+        this.lsEquiposToPost = [];
+        this.equiposPDesvincular = [];
+        this.itemList = [];
+        this.selectedItems = [];
     }
 
     routeAlta() {
@@ -249,11 +261,11 @@ export class TorneoUpdateComponent implements OnInit {
 
     openConfirmationDialog(newValue) {
         this.dialogRef = this.dialog.open(ConfirmationDialog, {
-            height: '35%',
-            width: '45%',
+            height: '200px',
+            width: '300px',
             disableClose: false
         });
-        this.dialogRef.componentInstance.confirmMessage = "Al cambiar la categoria del torneo, se desvincularan todos los equipos."
+        this.dialogRef.componentInstance.confirmMessage = "Se desvincularan todos los equipos."
 
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
@@ -302,9 +314,8 @@ export class TorneoUpdateComponent implements OnInit {
                     var equipo = { id: Number, itemName: String };
                     equipo['id'] = data[i]['id_equipo'];
                     equipo['itemName'] = data[i]['nombre'];
-
                     if (data[i]['categoria']['id_categoria'] == this.torneo.categoria.id_categoria
-                        && data[i]['torneo']['id_torneo'] == null) {
+                        && (data[i]['torneo']['id_torneo'] == this.torneo.id_torneo || data[i]['torneo']['id_torneo'] == null)) {
                         this.itemList.push(equipo);
                     }
                 }

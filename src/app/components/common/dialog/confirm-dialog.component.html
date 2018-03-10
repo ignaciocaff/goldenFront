@@ -1,15 +1,16 @@
 <div class="montserrat-font">
-  <div class="col-md-3">
-    <h1>Confirmar</h1>
-  </div>
+  <h2>Confirmar</h2>
   <div class="row">
     <div class="col-md-12">
       <b>{{confirmMessage}}</b>
     </div>
   </div>
+  <br>
   <div class="row">
     <div class="col-md-6">
       <button type="button" class="btn btn-primary" (click)="dialogRef.close(true)">Confirmar</button>
+    </div>
+    <div class="col-md-6">
       <button type="button" class="btn btn-default" (click)="dialogRef.close(false)">Cancelar</button>
     </div>
   </div>

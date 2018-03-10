@@ -20,6 +20,9 @@ export class EquipoService {
         return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo' + id_torneo).map((response: Response) => response.json());
     }
 
+    desvincular(obj: any) {
+        return this.http.post(this.config.apiUrl + 'equipo/desvincular', obj);
+    }
     create(obj: any) {
         return this.http.post(this.config.apiUrl + 'equipo/registrar', obj);
     }

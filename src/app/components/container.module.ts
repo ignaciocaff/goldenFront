@@ -66,6 +66,7 @@ import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualiz
     Ng2CarouselamosModule,
     CKEditorModule
   ],
+  entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
               TorneoEmitter, TorneoLSEmitter, NoticiaService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
