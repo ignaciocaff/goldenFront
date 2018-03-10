@@ -203,6 +203,8 @@ export class TorneoComponent implements OnInit {
 
     limpiar() {
         this.torneo = new Torneo();
+        this.lsEquipos = [];
+        this.selectedItems = [];
     }
 
     routeAlta() {

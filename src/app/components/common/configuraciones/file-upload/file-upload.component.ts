@@ -18,6 +18,9 @@ export class FileUploadComponent implements OnInit {
 
     constructor(private fileService: FileService) {
         localStorage.removeItem('subidas');
+        localStorage.removeItem('CAMISETAS');
+        localStorage.removeItem('ESCUDOS');
+        localStorage.removeItem('CAMISETAESCUDO');
     }
 
     ngOnInit() { }
@@ -72,7 +75,7 @@ export class FileUploadComponent implements OnInit {
                 .subscribe(
                 success => {
                     var jsonData = success.subidas;
-                    localStorage.setItem('subidas', JSON.stringify(jsonData));
+                    localStorage.setItem(this.sectionId.toString(), JSON.stringify(jsonData));
                     this.uploadStatus.emit(true);
 
                     console.log(success);

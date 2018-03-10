@@ -10,7 +10,7 @@
     <!-- Segundo Boton -->
 
     <div class="dropdown">
-      <button class="dropbtn">TORNEO</button>
+      <button class="dropbtn">CATEGORIA</button>
       <div class="dropdown-content">
         <a *ngFor="let torneo of lsTorneos" [ngValue]="torneo" (click)="setTorneo(torneo.nombre, torneo.id_torneo)">
           {{torneo.nombre}}
@@ -45,8 +45,7 @@
         <a *ngIf=" user != null && user.perfil.n_perfil === 'Administrador'" (click)="equipoCarga_Click()">Equipo</a>
         <a (click)="jugadoresCarga_Click()">Jugadores</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Generar fixture</a>
-        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Categorias</a>
-        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="torneoCarga_Click()">Torneos</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="torneoCarga_Click()">Categoria</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="noticiaCarga_Click()">Noticias</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
       </div>

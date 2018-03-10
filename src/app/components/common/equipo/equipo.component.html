@@ -31,7 +31,7 @@
 
       <div class="col-md-3">
         <div class="form-group has-feedback">
-          <label class="control-label">Categoria</label>
+          <label class="control-label">Tipo Categoría</label>
           <div class="inputGroupContainer">
             <div class="input-group">
               <span class="input-group-addon">
@@ -46,11 +46,24 @@
         </div>
       </div>
 
-      <div class="col-md-2 text-center">
+      <div class="col-md-3">
         <div class="form-group has-feedback">
-          <label class="control-label" for="logo">Seleccione el escudo</label>
-          <app-file-upload projectId="GOLDEN" sectionId="EQUIPOS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+          <label class="control-label">Categoría</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="equipo.torneo" name="categoria" required #categoria='ngModel' class="form-control selectpicker">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let torneo of lsCategoriasTorneo" [ngValue]="torneo">{{torneo.nombre}}</option>
+              </select>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-2">
+
       </div>
 
       <div class="col-md-3 inexistente">
@@ -73,26 +86,58 @@
 
 
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="form-group has-feedback">
           <label class="control-label">Descripción</label>
           <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo."
             maxlength="1000"></textarea>
         </div>
       </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="logo">Seleccione el escudo</label>
+              <app-file-upload projectId="GOLDEN" sectionId="ESCUDOS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('ESCUDOS')"></app-file-upload>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="camiseta">Seleccione camiseta</label>
+              <app-file-upload projectId="GOLDEN" sectionId="CAMISETAS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('CAMISETAS')"></app-file-upload>
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="camisetalogo">Seleccione Foto</label>
+              <app-file-upload projectId="GOLDEN" sectionId="CAMISETAESCUDO" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('CAMISETAESCUDO')"></app-file-upload>
+            </div>
+          </div>
+        </div>
 
-      <div class="col-md-2 col-md-offset-2">
-        <div class="form-group has-feedback">
-            <label class="control-label"></label>
-          <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+        <div class="row">
+          <div class="col-md-4 text-center">
+            <div class="form-group has-feedback">
+              <label class="control-label"></label>
+              <img *ngFor="let img of imagesEscudos" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+            </div>
+          </div>
+          <div class="col-md-4 text-center">
+            <div class="form-group has-feedback">
+              <label class="control-label"></label>
+              <img *ngFor="let img of imagesCamisetas" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+            </div>
+          </div>
+
+          <div class="col-md-4 text-center">
+            <div class="form-group has-feedback">
+              <label class="control-label"></label>
+              <img *ngFor="let img of imagesCE" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+            </div>
+          </div>
         </div>
       </div>
-
-
-      <div class="col-md-5">
-      </div>
     </div>
-
 
     <div class="row">
       <div class="col-md-3">

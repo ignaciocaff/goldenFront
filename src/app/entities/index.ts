@@ -17,3 +17,5 @@ export * from './club';
 export * from './equipo';
 export * from './categoria_noticia';
 export * from './noticia';
+export * from './categoria_equipo';
+

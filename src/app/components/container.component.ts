@@ -45,7 +45,7 @@ export class ContainerComponent implements OnInit {
                     let torneo = data[i];
                     this.lsTorneos.push(torneo);
                 }
-                this.torneo = this.lsTorneos.find(x => x.id_torneo == 1);
+                this.torneo = this.lsTorneos.find(x => x.id_torneo == 25);
                 sessionStorage.setItem('torneo', this.torneo.nombre);
                 sessionStorage.setItem('id_torneo', String(this.torneo.id_torneo));
                 this.torneoEmitter.trigger(this.torneo.nombre);

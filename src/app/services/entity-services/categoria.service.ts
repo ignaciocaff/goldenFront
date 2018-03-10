@@ -8,10 +8,13 @@ import { Categoria } from '../../entities/index';
 export class CategoriaService {
     constructor(private http: Http, private config: AppConfig) { }
 
+    getAllCE() {
+        return this.http.get(this.config.apiUrl + 'categorias_equipos').map((response: Response) => response.json());
+    }
+
     getAll() {
         return this.http.get(this.config.apiUrl + 'categorias').map((response: Response) => response.json());
     }
-
     getById(id: number) {
         return this.http.get(this.config.apiUrl + 'categorias/' + id).map((response: Response) => response.json());
     }

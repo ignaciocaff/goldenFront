@@ -14,7 +14,7 @@ import { FileService } from '../../../services/entity-services/file.service';
     moduleId: module.id,
     templateUrl: './equipo.component.html',
     styleUrls: ['./equipo.component.css'],
-    providers: [ ]
+    providers: []
 })
 export class EquipoComponent {
     @ViewChild('equipoForm') equipoForm: FormGroup;
@@ -25,11 +25,14 @@ export class EquipoComponent {
     public categoria: Categoria;
 
     public lsCategorias = new Array<Categoria>();
+    public lsCategoriasTorneo = new Array<Torneo>();
     public lsTorneos = new Array<Torneo>();
     public lsClub = new Array<Club>();
 
     errorMessage: string;
-    images: Array<any> = [];
+    imagesEscudos: Array<any> = [];
+    imagesCamisetas: Array<any> = [];
+    imagesCE: Array<any> = [];
     arraySubidas: Array<any> = [];
     params: string;
 
@@ -43,10 +46,28 @@ export class EquipoComponent {
     ) {
         this.cargarCategorias();
         this.cargarClubes();
+        this.cargarTorneos();
     }
 
     // METODOS-----------------------------------------------------------------------------
 
+    cargarTorneos() {
+        this.categoriasService.getAllCE().subscribe(
+            data => {
+                for (let i = 0; i < data.length; i++) {
+                    const torneo = new Torneo(
+                        data[i]['id_torneo'],
+                        data[i]['descripcion']
+                    );
+                    this.lsCategoriasTorneo.push(torneo);
+                    console.error(this.lsCategoriasTorneo);
+                }
+            },
+            error => {
+                this.lsCategoriasTorneo = new Array<Torneo>();
+                error.json()['Message'];
+            });
+    }
     cargarCategorias() {
         this.categoriasService.getAll().subscribe(
             data => {
@@ -98,32 +119,43 @@ export class EquipoComponent {
 
     limpiarCampos() {
         this.equipo = new Equipo();
-        this.images = [];
+        this.imagesEscudos = [];
+        this.imagesCamisetas = [];
+        this.imagesCE = [];
     }
 
-    getImageData() {
-        var subidas = (localStorage.getItem('subidas'));
+    getImageData(temp: String) {
+        var subidas = (localStorage.getItem(temp.toString()));
         this.arraySubidas = JSON.parse(subidas);
-        this.equipo.logo = Number(this.arraySubidas[0]);
+        var id_img = Number(this.arraySubidas[0]);
         this.fileService.getImages(this.arraySubidas).subscribe(
             data => {
+                this.arraySubidas = [];
                 if (data) {
                     for (var i = 0; i < data.length; i++) {
-                        this.images.push(data[i]);
+                        if (temp.toString() == 'ESCUDOS') {
+                            this.imagesEscudos = [];
+                            this.imagesEscudos.push(data[i]);
+                            this.equipo.logo = id_img;
+                        } else if (temp.toString() == 'CAMISETAS') {
+                            this.imagesCamisetas = [];
+                            this.imagesCamisetas.push(data[i]);
+                            this.equipo.camiseta = id_img;
+                        } else if (temp.toString() == 'CAMISETAESCUDO') {
+                            this.imagesCE = [];
+                            this.imagesCE.push(data[i]);
+                            this.equipo.camisetalogo = id_img;
+                        }
                     }
 
                 }
-                console.error(this.images);
             },
             error => this.errorMessage = error
         );
     }
 
-    refreshImages(status) {
-        if (status == true) {
-            console.log('Uploaded successfully!');
-            this.images = [];
-            this.getImageData();
-        }
+    refreshImages(temp) {
+        console.log('Uploaded successfully!');
+        this.getImageData(temp);
     }
 }
