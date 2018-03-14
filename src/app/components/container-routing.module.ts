@@ -9,7 +9,7 @@ import {
 import {
     TorneoComponent, TorneoUpdateComponent
 } from './common/torneo/index';
-import { EquipoComponent } from './common/equipo/index';
+import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
@@ -35,6 +35,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'equipo-carga', component: EquipoComponent,
+            },
+            {
+                path: 'equipo-update', component: EquipoUpdateComponent,
             },
             {
                 path: 'configuraciones', component: ConfiguracionesContainerComponent,

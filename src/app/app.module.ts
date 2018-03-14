@@ -18,8 +18,8 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { CKEditorModule } from 'ngx-ckeditor';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,8 @@ import { CKEditorModule } from 'ngx-ckeditor';
     ToastModule.forRoot(),
     ImageUploadModule.forRoot(),
     AppRoutingModule,
+    MatTableModule,
+    CdkTableModule
   ],
   providers: [AuthenticationService, AppConfig, SharedService,
     {

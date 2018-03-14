@@ -7,18 +7,27 @@ import { CategoriaService, ClubService, EquipoService } from '../../../services/
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 
 @Component({
-    selector: 'equipo',
+    selector: 'equipo-update',
     moduleId: module.id,
-    templateUrl: './equipo.component.html',
-    styleUrls: ['./equipo.component.css'],
+    templateUrl: './equipo-update.component.html',
+    styleUrls: ['./equipo-update.component.css'],
     providers: []
 })
-export class EquipoComponent {
+export class EquipoUpdateComponent implements OnInit {
     @ViewChild('equipoForm') equipoForm: FormGroup;
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+
     @BlockUI() blockUI: NgBlockUI;
+
+
+    displayedColumns = ['id', 'name', 'progress'];
+    dataSource: MatTableDataSource<UserData>;
 
     public equipo = new Equipo();
     public club: Club;
@@ -26,7 +35,7 @@ export class EquipoComponent {
 
     public lsCategorias = new Array<Categoria>();
     public lsCategoriasTorneo = new Array<Torneo>();
-    public lsTorneos = new Array<Torneo>();
+    public lsEquipos = new Array<Equipo>();
     public lsClub = new Array<Club>();
 
     errorMessage: string;
@@ -48,8 +57,28 @@ export class EquipoComponent {
         this.cargarCategorias();
         this.cargarClubes();
         this.cargarTorneos();
+
+        const users: UserData[] = [];
+        for (let i = 1; i <= 25; i++) { users.push(createNewUser(i)); }
+
+        // Assign the data to the data source for the table to render
+        this.dataSource = new MatTableDataSource(users);
     }
 
+    ngOnInit() {
+        this.equipoService.getAll().subscribe(
+            data => {
+                for (var i = 0; i < data.length; i++) {
+                    let equipo: Equipo;
+                    equipo = data[i];
+                    this.lsEquipos.push(equipo);
+                }
+
+            }, error => {
+
+            }
+        );
+    }
     // METODOS-----------------------------------------------------------------------------
 
     cargarTorneos() {
@@ -104,7 +133,7 @@ export class EquipoComponent {
             });
     }
 
-    registrarEquipo() {
+    modificarEquipo() {
         this.blockUI.start();
         this.equipoService.create(this.equipo).subscribe(
             data => {
@@ -118,11 +147,46 @@ export class EquipoComponent {
             });
     }
 
+
+    onTipoCategoriaChange(newValue) {
+        this.equipo.categoria.id_categoria = this.lsCategorias.find(x => x.descripcion == newValue).id_categoria;
+        this.equipo.categoria.descripcion = newValue;
+    }
+
+    onCategoriaChange(newValue) {
+        this.equipo.torneo.id_torneo = this.lsCategoriasTorneo.find(x => x.descripcion == newValue).id_torneo;
+        this.equipo.torneo.descripcion = newValue;
+    }
+
+    onChange(newValue) {
+        let equipo: Equipo = newValue;
+        this.equipo = equipo;
+        /*this.equipoService.getAll().subscribe(
+                    data => {
+                        for (let i = 0; i < data.length; i++) {
+                            var equipo = new Equipo();
+                            equipo = data[i];
+                            this.lsEquipos.push(equipo);
+                        }
+                    },
+                    error => {
+                        error.json()['Message'];
+                    });*/
+    }
+
     limpiarCampos() {
         this.equipo = new Equipo();
         this.imagesEscudos = [];
         this.imagesCamisetas = [];
         this.imagesCE = [];
+    }
+
+    routeAlta() {
+        this.router.navigate(['home/equipo-carga']);
+    }
+
+    routeModificacion() {
+        this.router.navigate(['home/equipo-update']);
     }
 
     getImageData(temp: String) {
@@ -155,16 +219,45 @@ export class EquipoComponent {
         );
     }
 
-    routeAlta() {
-        this.router.navigate(['home/equipo-carga']);
-    }
-
-    routeModificacion() {
-        this.router.navigate(['home/equipo-update']);
-    }
-
     refreshImages(temp) {
         console.log('Uploaded successfully!');
         this.getImageData(temp);
     }
+
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
+
+    applyFilter(filterValue: string) {
+        filterValue = filterValue.trim(); // Remove whitespace
+        filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+        this.dataSource.filter = filterValue;
+    }
+}
+/** Builds and returns a new User. */
+function createNewUser(id: number): UserData {
+    const name =
+        NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+        NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+
+    return {
+        id: id.toString(),
+        name: name,
+        progress: Math.round(Math.random() * 100).toString()
+    };
+}
+
+/** Constants used to fill up our data base. */
+const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
+    'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
+const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
+    'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
+    'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+
+
+export interface UserData {
+    id: string;
+    name: string;
+    progress: string;
 }

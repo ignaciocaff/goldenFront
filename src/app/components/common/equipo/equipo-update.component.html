@@ -1,23 +1,29 @@
 <ul class="nav nav-tabs">
-  <li class="nav-item active">
-    <a class="nav-link active" (click)="routeAlta()">Alta</a>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
   </li>
 </ul>
 <div class="flex-item">
   <form #equipoForm="ngForm" name="equipoForm">
     <div class="row">
-      <div class="col-md-4 col-sm-4">
-        <h4>
-          Datos del equipo
-        </h4>
-        <p class="text-muted">
-          Ingrese los datos del Equipo
-        </p>
-      </div>
-      <div class="col-md-8 col-sm-8">
+      <div class="col-md-3 col-sm-3">
+        <h4>Equipos</h4>
+        <div class="form-group has-feedback">
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="equipo" name="equipo" required (change)="onChange(equipo)" class="form-control">
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -31,7 +37,7 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
               </span>
-              <input [(ngModel)]="equipo.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required="">
+              <input [(ngModel)]="equipo.nombre" name="nombre" required class="form-control" type="text">
             </div>
           </div>
         </div>
@@ -45,9 +51,10 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [(ngModel)]="equipo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let categoria of lsCategorias" [ngValue]="categoria">{{categoria.descripcion}}</option>
+              <select [ngModel]="equipo.categoria.descripcion" name="categoria" (ngModelChange)="onTipoCategoriaChange($event)" required
+                class="form-control selectpicker">
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let categoria of lsCategorias">{{categoria.descripcion}}</option>
               </select>
             </div>
           </div>
@@ -62,9 +69,9 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [(ngModel)]="equipo.torneo" name="categoria" required #categoria='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let torneo of lsCategoriasTorneo" [ngValue]="torneo">{{torneo.nombre}}</option>
+              <select [ngModel]="equipo.torneo.nombre" name="categoria" (ngModelChange)="onCategoriaChange($event)" required class="form-control selectpicker">
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let torneo of lsCategoriasTorneo">{{torneo.nombre}}</option>
               </select>
             </div>
           </div>
@@ -82,7 +89,7 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [(ngModel)]="equipo.club" name="club" required #club='ngModel' class="form-control selectpicker">
+              <select [(ngModel)]="equipo.club" name="club" required class="form-control selectpicker">
                 <option value="null">Elija su opcion</option>
                 <option *ngFor="let club of lsClub" [ngValue]="club">{{club.nombre}}</option>
               </select>
@@ -147,10 +154,49 @@
       </div>
     </div>
 
+    <!-- Empieza el funcionamiento de la tabla de jugadores dentro del equipo -->
+
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+      </mat-form-field>
+    </div>
+
+    <div class="example-container mat-elevation-z8">
+
+      <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+        </ng-container>
+
+        <!-- Progress Column -->
+        <ng-container matColumnDef="progress">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Documento </mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+
     <div class="row">
       <div class="col-md-3">
-        <button [disabled]="!equipoForm.valid" (click)="registrarEquipo()" type="button" class="btn btn-primary">Registrar</button>
+        <button [disabled]="!equipoForm.valid" (click)="modificarEquipo()" type="button" class="btn btn-primary">Modificar</button>
       </div>
     </div>
+
   </form>
 </div>
