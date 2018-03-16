@@ -16,6 +16,10 @@ export class EquipoService {
         return this.http.get(this.config.apiUrl + 'torneo/equipos' + id).map((response: Response) => response.json());
     }
 
+    getJugadoresByIdEquipo(id: number) {
+        return this.http.get(this.config.apiUrl + 'equipo/jugadores/' + id).map((response: Response) => response.json());
+    }
+
     getAllPorTorneo(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo' + id_torneo).map((response: Response) => response.json());
     }
@@ -23,12 +27,15 @@ export class EquipoService {
     desvincular(obj: any) {
         return this.http.post(this.config.apiUrl + 'equipo/desvincular', obj);
     }
+    desvincularJugador(id_jugador: number) {
+        return this.http.get(this.config.apiUrl + 'equipo/desvincular/jugadores/' + id_jugador).map((response: Response) => response.json());
+    }
     create(obj: any) {
         return this.http.post(this.config.apiUrl + 'equipo/registrar', obj);
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'torneo/equipos' + obj.id, obj);
+        return this.http.post(this.config.apiUrl + 'equipo/update', obj);
     }
 
     delete(id: number) {

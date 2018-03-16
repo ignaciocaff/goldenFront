@@ -9,7 +9,7 @@ export class CategoriaService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAllCE() {
-        return this.http.get(this.config.apiUrl + 'categorias_equipos').map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'torneo/todos').map((response: Response) => response.json());
     }
 
     getAll() {

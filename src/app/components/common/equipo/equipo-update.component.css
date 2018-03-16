@@ -34,3 +34,7 @@ textarea {
   overflow: auto;
   max-height: 500px;
 }
+
+#boton { 
+    margin-top:10px;
+}

@@ -69,7 +69,7 @@
               <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [ngModel]="equipo.torneo.nombre" name="categoria" (ngModelChange)="onCategoriaChange($event)" required class="form-control selectpicker">
+              <select [ngModel]="equipo.torneo.nombre" name="torneo" (ngModelChange)="onCategoriaChange($event)" required class="form-control selectpicker">
                 <option value=" ">Elija su opcion</option>
                 <option *ngFor="let torneo of lsCategoriasTorneo">{{torneo.nombre}}</option>
               </select>
@@ -155,48 +155,53 @@
     </div>
 
     <!-- Empieza el funcionamiento de la tabla de jugadores dentro del equipo -->
+    <div *ngIf="eligioEquipo">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        </mat-form-field>
+      </div>
 
-    <div class="example-header">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-      </mat-form-field>
+      <div class="example-container mat-elevation-z8">
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="apellido">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.apellido}} </mat-cell>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="nombre">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="nro_documento">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Documento </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.nro_documento}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="id_jugador">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+            <mat-cell *matCellDef="let row"> <i class="glyphicon glyphicon-trash" (click)="eliminarJugador(row.id_jugador)"></i> </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="lsJugadores.length" [pageSize]="30" [pageSizeOptions]="[5, 10, 30]"></mat-paginator>
+      </div>
     </div>
-
-    <div class="example-container mat-elevation-z8">
-
-      <mat-table [dataSource]="dataSource" matSort>
-
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
-        </ng-container>
-
-        <!-- Progress Column -->
-        <ng-container matColumnDef="progress">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Documento </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;">
-        </mat-row>
-      </mat-table>
-
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-    </div>
-
-    <div class="row">
+    <div class="row" id="boton">
       <div class="col-md-3">
         <button [disabled]="!equipoForm.valid" (click)="modificarEquipo()" type="button" class="btn btn-primary">Modificar</button>
       </div>
     </div>
-
   </form>
 </div>

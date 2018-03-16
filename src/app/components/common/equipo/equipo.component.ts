@@ -58,7 +58,7 @@ export class EquipoComponent {
                 for (let i = 0; i < data.length; i++) {
                     const torneo = new Torneo(
                         data[i]['id_torneo'],
-                        data[i]['descripcion']
+                        data[i]['nombre']
                     );
                     this.lsCategoriasTorneo.push(torneo);
                     console.error(this.lsCategoriasTorneo);

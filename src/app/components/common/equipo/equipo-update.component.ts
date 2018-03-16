@@ -2,14 +2,14 @@ import { Component, Directive, ViewChild } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Torneo, Categoria, Club, Equipo } from '../../../entities/index';
+import { Torneo, Categoria, Club, Equipo, Jugador } from '../../../entities/index';
 import { CategoriaService, ClubService, EquipoService } from '../../../services/index';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-
+import { ConfirmationDialog } from '../../common/dialog/index';
 
 @Component({
     selector: 'equipo-update',
@@ -25,9 +25,9 @@ export class EquipoUpdateComponent implements OnInit {
 
     @BlockUI() blockUI: NgBlockUI;
 
+    dialogRef: MatDialogRef<ConfirmationDialog>;
+    displayedColumns = ['apellido', 'nombre', 'nro_documento', 'id_jugador'];
 
-    displayedColumns = ['id', 'name', 'progress'];
-    dataSource: MatTableDataSource<UserData>;
 
     public equipo = new Equipo();
     public club: Club;
@@ -36,7 +36,9 @@ export class EquipoUpdateComponent implements OnInit {
     public lsCategorias = new Array<Categoria>();
     public lsCategoriasTorneo = new Array<Torneo>();
     public lsEquipos = new Array<Equipo>();
+    public lsJugadores = new Array<Jugador>();
     public lsClub = new Array<Club>();
+    dataSource = new MatTableDataSource<Jugador>();
 
     errorMessage: string;
     imagesEscudos: Array<any> = [];
@@ -44,7 +46,7 @@ export class EquipoUpdateComponent implements OnInit {
     imagesCE: Array<any> = [];
     arraySubidas: Array<any> = [];
     params: string;
-
+    eligioEquipo: Boolean;
 
     constructor(
         private categoriasService: CategoriaService,
@@ -52,17 +54,13 @@ export class EquipoUpdateComponent implements OnInit {
         private equipoService: EquipoService,
         public toastr: ToastsManager,
         private fileService: FileService,
-        private router: Router
+        private router: Router,
+        public dialog: MatDialog
     ) {
         this.cargarCategorias();
         this.cargarClubes();
         this.cargarTorneos();
-
-        const users: UserData[] = [];
-        for (let i = 1; i <= 25; i++) { users.push(createNewUser(i)); }
-
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(users);
+        this.eligioEquipo = false;
     }
 
     ngOnInit() {
@@ -71,7 +69,9 @@ export class EquipoUpdateComponent implements OnInit {
                 for (var i = 0; i < data.length; i++) {
                     let equipo: Equipo;
                     equipo = data[i];
-                    this.lsEquipos.push(equipo);
+                    if (equipo.torneo.id_torneo != null && equipo.torneo.id_torneo == JSON.parse(sessionStorage.getItem('id_torneo'))) {
+                        this.lsEquipos.push(equipo);
+                    }
                 }
 
             }, error => {
@@ -87,7 +87,7 @@ export class EquipoUpdateComponent implements OnInit {
                 for (let i = 0; i < data.length; i++) {
                     const torneo = new Torneo(
                         data[i]['id_torneo'],
-                        data[i]['descripcion']
+                        data[i]['nombre']
                     );
                     this.lsCategoriasTorneo.push(torneo);
                     console.error(this.lsCategoriasTorneo);
@@ -135,14 +135,15 @@ export class EquipoUpdateComponent implements OnInit {
 
     modificarEquipo() {
         this.blockUI.start();
-        this.equipoService.create(this.equipo).subscribe(
+        this.equipoService.update(this.equipo).subscribe(
             data => {
-                this.toastr.success('El equipo se ha registrado correctamente', 'Exito!');
+                console.log(this.equipo);
+                this.toastr.success('El equipo se ha modificado correctamente', 'Exito!');
                 this.blockUI.stop();
                 this.limpiarCampos();
             },
             error => {
-                this.toastr.error('El equipo no se ha registrado, el nombre ya existe para este torneo", "Error!');
+                this.toastr.error('El equipo no se ha modificado", "Error!');
                 this.blockUI.stop();
             });
     }
@@ -154,24 +155,54 @@ export class EquipoUpdateComponent implements OnInit {
     }
 
     onCategoriaChange(newValue) {
-        this.equipo.torneo.id_torneo = this.lsCategoriasTorneo.find(x => x.descripcion == newValue).id_torneo;
-        this.equipo.torneo.descripcion = newValue;
+        this.equipo.torneo.id_torneo = this.lsCategoriasTorneo.find(x => x.nombre == newValue).id_torneo;
+        this.equipo.torneo.nombre = newValue;
     }
 
     onChange(newValue) {
         let equipo: Equipo = newValue;
         this.equipo = equipo;
-        /*this.equipoService.getAll().subscribe(
-                    data => {
-                        for (let i = 0; i < data.length; i++) {
-                            var equipo = new Equipo();
-                            equipo = data[i];
-                            this.lsEquipos.push(equipo);
-                        }
-                    },
-                    error => {
-                        error.json()['Message'];
-                    });*/
+        this.eligioEquipo = true;
+        console.log(this.equipo);
+        this.equipoService.getJugadoresByIdEquipo(this.equipo.id_equipo).subscribe(
+            data => {
+                this.dataSource = null;
+                this.lsJugadores = [];
+                for (let i = 0; i < data.length; i++) {
+                    var jugador = new Jugador();
+                    jugador = data[i];
+                    this.lsJugadores.push(jugador);
+                }
+                if (this.lsJugadores.length == 0) {
+                    this.eligioEquipo = false;
+                }
+                this.dataSource = new MatTableDataSource(this.lsJugadores);
+            },
+            error => {
+                error.json()['Message'];
+            });
+
+        this.fileService.getImagesByEquipo(this.equipo.logo).subscribe(
+            data => {
+                this.imagesEscudos = [];
+                this.imagesEscudos.push(data);
+            },
+            error => {
+            });
+        this.fileService.getImagesByEquipo(this.equipo.camiseta).subscribe(
+            data => {
+                this.imagesCamisetas = [];
+                this.imagesCamisetas.push(data);
+            },
+            error => {
+            });
+        this.fileService.getImagesByEquipo(this.equipo.camisetalogo).subscribe(
+            data => {
+                this.imagesCE = [];
+                this.imagesCE.push(data);
+            },
+            error => {
+            });
     }
 
     limpiarCampos() {
@@ -179,6 +210,24 @@ export class EquipoUpdateComponent implements OnInit {
         this.imagesEscudos = [];
         this.imagesCamisetas = [];
         this.imagesCE = [];
+        this.eligioEquipo = false;
+        this.dataSource = null;
+
+        this.equipoService.getAll().subscribe(
+            data => {
+                this.lsEquipos = [];
+                for (var i = 0; i < data.length; i++) {
+                    let equipo: Equipo;
+                    equipo = data[i];
+                    if (equipo.torneo.id_torneo != null && equipo.torneo.id_torneo == JSON.parse(sessionStorage.getItem('id_torneo'))) {
+                        this.lsEquipos.push(equipo);
+                    }
+                }
+
+            }, error => {
+
+            }
+        );
     }
 
     routeAlta() {
@@ -187,6 +236,47 @@ export class EquipoUpdateComponent implements OnInit {
 
     routeModificacion() {
         this.router.navigate(['home/equipo-update']);
+    }
+    eliminarJugador(id_jugador: number) {
+        this.dialogRef = this.dialog.open(ConfirmationDialog, {
+            height: '200px',
+            width: '350px',
+            disableClose: false
+        });
+        this.dialogRef.componentInstance.confirmMessage = "Se eliminara al jugador de este equipo."
+
+        this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.equipoService.desvincularJugador(id_jugador).subscribe(
+                    data => {
+                        if (data) {
+                            this.equipoService.getJugadoresByIdEquipo(this.equipo.id_equipo).subscribe(
+                                data => {
+                                    this.dataSource = null;
+                                    this.lsJugadores = [];
+                                    for (let i = 0; i < data.length; i++) {
+                                        var jugador = new Jugador();
+                                        jugador = data[i];
+                                        this.lsJugadores.push(jugador);
+                                    }
+                                    if (this.lsJugadores.length == 0) {
+                                        this.eligioEquipo = false;
+                                    }
+                                    this.dataSource = new MatTableDataSource(this.lsJugadores);
+                                },
+                                error => {
+                                    error.json()['Message'];
+                                });
+                            this.toastr.success('El jugador se elimino correctamente', 'Exito!');
+                        }
+                    },
+                    error => {
+                        error.json()['Message'];
+                    });
+
+            }
+            this.dialogRef = null;
+        });
     }
 
     getImageData(temp: String) {
@@ -227,6 +317,8 @@ export class EquipoUpdateComponent implements OnInit {
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        this.dataSource.data = this.dataSource.data;
+
     }
 
     applyFilter(filterValue: string) {
@@ -234,30 +326,4 @@ export class EquipoUpdateComponent implements OnInit {
         filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
         this.dataSource.filter = filterValue;
     }
-}
-/** Builds and returns a new User. */
-function createNewUser(id: number): UserData {
-    const name =
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-        NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
-
-    return {
-        id: id.toString(),
-        name: name,
-        progress: Math.round(Math.random() * 100).toString()
-    };
-}
-
-/** Constants used to fill up our data base. */
-const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-    'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-    'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-    'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
-
-
-export interface UserData {
-    id: string;
-    name: string;
-    progress: string;
 }
