@@ -1,0 +1,112 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+<div class="flex-item">
+  <form #canchaForm="ngForm" name="canchaForm">
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <h4>Canchas</h4>
+        <div class="form-group has-feedback">
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="cancha" name="cancha" required (change)="onChange(cancha)" class="form-control">
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Nombre (*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </span>
+              <input [(ngModel)]="cancha.nombre" name="nombre" required class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group has-feedback">
+          <label class="control-label">Capacidad</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                      </span>
+              <input [(ngModel)]="cancha.capacidad" name="capacidad" class="form-control" type="number">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Calle (*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-home"></i>
+                      </span>
+              <input [(ngModel)]="cancha.domicilio.calle" name="calle" required class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group has-feedback">
+          <label class="control-label">Numeracion (*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-home"></i>
+                      </span>
+              <input [(ngModel)]="cancha.domicilio.numeracion" name="numeracion" required class="form-control" type="number">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5">
+        <div class="form-group has-feedback">
+          <label class="control-label">Observaciones</label>
+          <textarea [(ngModel)]="cancha.domicilio.observaciones" name="observaciones" class="form-control" rows="3" placeholder="Utilice este campo para agregar informacion referida a la cancha"
+            maxlength="1000"></textarea>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Barrio</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-home"></i>
+                      </span>
+              <input [(ngModel)]="cancha.domicilio.barrio" name="barrio" class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <button (click)="modificarCancha()" type="button" class="btn btn-primary">Modificar</button>
+      </div>
+    </div>
+  </form>
+</div>

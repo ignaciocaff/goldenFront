@@ -16,6 +16,7 @@ import {
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { NoticiaCargaComponent } from './common/noticia/index';
+import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 
@@ -44,6 +45,12 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'noticia-carga', component: NoticiaCargaComponent,
+            },
+            {
+                path: 'canchas', component: CanchaComponent,
+            },
+            {
+                path: 'canchas-update', component: CanchaUpdateComponent,
             },
             {
                 path: 'noticias', component: HomeComponent,
