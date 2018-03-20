@@ -36,4 +36,10 @@ export class FileService {
             .map(response => response.json())
             .catch(error => Observable.throw(error));
     }
+
+    getImagesByJugador(id_jugador) {
+        return this.http.get(this.config.apiUrl + 'archivos/getbyjugador/' + id_jugador)
+            .map(response => response.json())
+            .catch(error => Observable.throw(error));
+    }
 }
