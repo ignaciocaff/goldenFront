@@ -1,7 +1,7 @@
 <div class="flex-item">
   <form #jugadorForm="ngForm" name="jugadorForm">
     <div class="row">
-      <div class=col-md-12>
+      <div class="col-md-12 col-sm-12">
         <div class="row">
           <div class="col-md-3 col-sm-3">
             <h4>Equipo</h4>
@@ -11,22 +11,39 @@
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-list"></i>
                   </span>
-                  <select [(ngModel)]="jugador.equipo" name="equipo" required #equipo='ngModel' class="form-control" [disabled]="existejugador"
-                    *ngIf="!existejugador">
-                    <option value=" ">Elija su opcion</option>
-                    <option *ngFor="let equipo of lsEquipos" [ngValue]="jugador.equipo">{{equipo.nombre}}</option>
+                  <select [(ngModel)]="jugador.equipo.nombre" name="equipo" required class="form-control" [disabled]="esRepresentante" (ngModelChange)="onEquipoChange($event)">
+                    <option value="null">Elija su opción</option>
+                    <option *ngFor="let equipo of lsEquipos" >{{equipo.nombre}}</option>
                   </select>
-                  <input [(ngModel)]="jugador.equipo" name="equipo" required #equipo='ngModel' *ngIf="existejugador" [disabled]="existejugador"
-                    type="text" class="form-control">
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2">
+            <h5>Rol</h5>
+            <input type="radio" name="rol" [(ngModel)]="jugador.rol" value="jugador"> Jugador
+            <br>
+            <input type="radio" name="rol" [(ngModel)]="jugador.rol" value="director_tecnico"> Director técnico
+            <br>
+            <input type="radio" name="rol" [(ngModel)]="jugador.rol" value="representante"> Representante
+          </div>
+          <div class="col-md-2 text-center col-sm-2">
+            <div class="form-group has-feedback">
+              <label class="control-label" for="logo">Seleccione su foto</label>
+              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3">
+            <div class="form-group has-feedback">
+              <label class="control-label"></label>
+              <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-12">
         <div class="row">
           <div class="col-md-4 col-sm-4">
             <h4>
@@ -40,9 +57,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 col-sm-12">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label class="control-label">Documento (*)</label>
                   <div class="inputGroupContainer">
@@ -50,7 +67,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input [(ngModel)]="jugador.nro_documento" name="nroDoc" required #nroDoc='ngModel' class="form-control" type="number" on-blur="consultarDatosjugador()">
+                      <input [(ngModel)]="jugador.nro_documento" name="nroDoc" required #nroDoc='ngModel' class="form-control" type="number" (blur)="consultarDatosjugador()">
                     </div>
                     <div *ngIf="nroDoc.errors && (nroDoc.dirty || nroDoc.touched)" class="error">
                       <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -58,7 +75,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-2">
                 <div class="form-group has-feedback">
                   <label class="control-label">Tipo Documento (*)</label>
                   <div class="inputGroupContainer">
@@ -66,18 +83,16 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [(ngModel)]="jugador.tipoDocumento" name="tipoDoc" required #tipoDoc='ngModel' class="form-control selectpicker"
+                      <select [ngModel]="jugador.tipoDocumento.descripcion" name="tipoDoc" required class="form-control selectpicker" (ngModelChange)="onTipoDocumentoChange($event)"
                         [disabled]="existejugador" *ngIf="!existejugador">
-                        <option value=" ">Elija su opcion</option>
-                        <option *ngFor="let tipoDocumento of lsTiposDocumento" [ngValue]="tipoDocumento">{{tipoDocumento.descripcion}}</option>
+                        <option value="null">Elija su opción</option>
+                        <option *ngFor="let tipoDocumento of lsTiposDocumento">{{tipoDocumento.descripcion}}</option>
                       </select>
-                      <input [(ngModel)]="jugador.tipoDocumento.descripcion" name="descripcion" required #descripcion='ngModel'
-                        *ngIf="existejugador" [disabled]="existejugador" type="text" class="form-control">
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label for="nombre" class="control-label">Nombre (*)</label>
                   <div class="inputGroupContainer">
@@ -94,7 +109,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label class="control-label">Apellido (*)</label>
                   <div class="inputGroupContainer">
@@ -110,27 +125,26 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1 col-sm-1">
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <label class="control-label">Fecha de Nacimiento (*)</label>
                 <div class="inputGroupContainer">
                   <div class="form-group">
                     <div class='input-group date' id='datetimepicker'>
-                      <input [(ngModel)]="jugador.fecha_nacimiento" min="1950-01-01" name="fecha" required #fecha='ngModel' type='date' class="form-control"
-                        *ngIf="!existejugador" [disabled]="existejugador" (blur)="calcularEdad()" />
+                      <input [ngModel]="jugador.fecha_nacimiento | date:'yyyy-MM-dd'" (ngModelChange)="jugador.fecha_nacimiento = $event" min="1950-01-01"
+                        name="fecha" required type='date' class="form-control" *ngIf="!existejugador" [disabled]="existejugador"
+                        (blur)="calcularEdad()" />
                       <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                       </span>
-                      <input value="{{jugador.fecha_nacimiento | date:'yyyy-MM-dd'}}" type='date' class="form-control" *ngIf="existejugador" [disabled]="existejugador"
-                      />
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-2">
                 <div class="form-group has-feedback">
                   <label class="control-label">Edad</label>
                   <div class="inputGroupContainer">
@@ -146,8 +160,20 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-7">
+              <div class="col-md-3 col-sm-3">
+                <div class="form-group has-feedback">
+                  <label class="control-label">Ocupacion</label>
+                  <div class="inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-briefcase"></i>
+                      </span>
+                      <input [(ngModel)]="jugador.ocupacion" name="ocupacion" #ocupacion='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                    </div>
+                  </div>
+                </div>
               </div>
+              <div class="col-md-4 col-sm-4"></div>
             </div>
           </div>
         </div>
@@ -164,9 +190,9 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 col-sm-12">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label class="control-label">Calle (*)</label>
                   <div class="inputGroupContainer">
@@ -182,7 +208,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 col-sm-2">
                 <div class="form-group has-feedback">
                   <label class="control-label">Numeracion (*)</label>
                   <div class="inputGroupContainer">
@@ -199,7 +225,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1 col-sm-1">
                 <div class="form-group has-feedback">
                   <label class="control-label">Piso</label>
                   <div class="inputGroupContainer">
@@ -210,7 +236,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1 col-sm-1">
                 <div class="form-group has-feedback">
                   <label class="control-label">Dpto</label>
                   <div class="inputGroupContainer">
@@ -221,7 +247,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1 col-sm-1">
                 <div class="form-group has-feedback">
                   <label class="control-label">Torre</label>
                   <div class="inputGroupContainer">
@@ -232,11 +258,11 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4 col-sm-4">
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label class="control-label">Provincia (*)</label>
                   <div class="inputGroupContainer">
@@ -244,18 +270,16 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [(ngModel)]="jugador.domicilio.provincia" name="provincia" required #provincia='ngModel' class="form-control selectpicker"
-                        (ngModelChange)="provincia_onChanged($event)" [disabled]="existejugador" *ngIf="!existejugador">
-                        <option value="null">Elija su opcion</option>
-                        <option *ngFor="let prov of lsProvincias" [ngValue]="prov">{{prov.n_provincia}}</option>
+                      <select [ngModel]="jugador.domicilio.localidad.provincia.n_provincia" name="provincia" required class="form-control selectpicker"
+                        required (ngModelChange)="provincia_onChanged($event)" [disabled]="existejugador" *ngIf="!existejugador">
+                        <option value="null">Elija su opción</option>
+                        <option *ngFor="let prov of lsProvincias">{{prov.n_provincia}}</option>
                       </select>
-                      <input [(ngModel)]="jugador.domicilio.localidad.provincia.n_provincia" name="n_provincia" required #n_provincia='ngModel'
-                        *ngIf="existejugador" [disabled]="existejugador" type="text" class="form-control">
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label class="control-label">Localidad (*)</label>
                   <div class="inputGroupContainer">
@@ -263,21 +287,19 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [(ngModel)]="jugador.domicilio.localidad" name="localidad" required #localidad='ngModel' class="form-control selectpicker"
-                        [disabled]="existejugador" *ngIf="!existejugador">
-                        <option value=" ">Elija su opcion</option>
-                        <option *ngFor="let loc of lsLocalidades" [ngValue]="loc">{{loc.n_localidad}}</option>
+                      <select [ngModel]="jugador.domicilio.localidad.n_localidad" (nModelChange)="onLocalidadChange($event)" name="localidad" required
+                        class="form-control selectpicker" [disabled]="existejugador" *ngIf="!existejugador">
+                        <option value="null">Elija su opción</option>
+                        <option *ngFor="let loc of lsLocalidades">{{loc.n_localidad}}</option>
                       </select>
                       <div class="input-group-btn">
                         <button type="button" class="btn btn-primary" *ngIf="!existejugador" (click)="agregarLocalidad()">+</button>
                       </div>
-                      <input [(ngModel)]="jugador.domicilio.localidad.n_localidad" name="n_localidad" #n_localidad='ngModel' *ngIf="existejugador"
-                        [disabled]="existejugador" type="text" class="form-control">
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
                   <label class="control-label">Barrio</label>
                   <div class="inputGroupContainer">
@@ -290,20 +312,20 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1 col-sm-1">
               </div>
-              <div class="col-md-7">
+              <div class="col-md-7 col-sm-7">
               </div>
             </div>
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-5 col-sm-5">
                 <div class="form-group has-feedback">
                   <label class="control-label">Observaciones</label>
                   <textarea [(ngModel)]="jugador.domicilio.observaciones" name="observaciones" class="form-control" rows="3" placeholder="Utilice este campo para agregar informacion referida al domicilio"
                     maxlength="1000" [disabled]="existejugador"></textarea>
                 </div>
               </div>
-              <div class="col-md-7">
+              <div class="col-md-7 col-sm-7">
               </div>
             </div>
           </div>
@@ -323,7 +345,7 @@
         </div>
         <div class="row">
 
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-3">
             <div class="form-group has-feedback">
               <label class="control-label">Correo Electronico (*)</label>
               <div class="inputGroupContainer">
@@ -334,13 +356,13 @@
                   <input [(ngModel)]="jugador.contacto.email" name="email" required #email='ngModel' class="form-control" type="email" [disabled]="existejugador">
                 </div>
                 <div *ngIf="email.errors && (email.dirty || email.touched)" class="error">
-                  <span class="label label-danger" id="error_Requerido">Campo requerido</span> {{mostrarAlertaError()}}
+                  <span class="label label-danger" id="error_Requerido">Campo requerido</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-3">
             <div class="form-group has-feedback">
               <label class="control-label">Telefono Celular (*)</label>
               <div class="inputGroupContainer">
@@ -357,7 +379,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-3">
             <div class="form-group has-feedback">
               <label class="control-label">Telefono Fijo</label>
               <div class="inputGroupContainer">
@@ -371,13 +393,13 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3 col-sm-3">
           </div>
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 col-md-offset-1">
+      <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1">
         <button type="submit" [disabled]="!jugadorForm.valid || existeJugador" (click)="registrarJugador()" class="btn btn-primary">Registrar</button>
         <button class="btn btn-default" (click)="limpiar()">Limpiar</button>
       </div>

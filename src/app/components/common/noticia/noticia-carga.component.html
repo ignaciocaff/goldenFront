@@ -1,5 +1,5 @@
 <div class="flex-item">
-  <form #torneoForm="ngForm" name="noticiaForm">
+  <form #noticiaForm="ngForm" name="noticiaForm">
     <div class="row">
       <div class="col-md-8 col-sm-8">
 
@@ -12,9 +12,9 @@
               <div class="input-group">
                 <span class="input-group-addon">
                   <i class="glyphicon glyphicon-text-height"></i>
-                </span> 
-                <input [(ngModel)]="noticia.titulo" name="titulo" required #titulo='ngModel' class="form-control" type="text" required=""
-                  placeholder="Escriba el titulo de la noticia aquí.">
+                </span>
+                <input [(ngModel)]="noticia.titulo" name="titulo" required #titulo='ngModel' class="form-control" type="text" 
+                placeholder="Escriba el titulo de la noticia aquí.">
               </div>
             </div>
           </div>
@@ -25,13 +25,13 @@
             <h5>
               Cuerpo
             </h5>
-            <ck-editor name="editor1" [(ngModel)]="noticia.descripcion" skin="moono-lisa" lang="es"></ck-editor>
+            <ck-editor name="editor1" [(ngModel)]="noticia.descripcion" skin="moono-lisa" lang="es" required></ck-editor>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-2 col-md-offset-1">
-            <button type="submit" (click)="registrarNoticia()" class="btn btn-primary">Enviar</button>
+            <button type="submit" (click)="registrarNoticia()" class="btn btn-primary" [disabled]="!noticiaForm.valid">Enviar</button>
           </div>
           <div class="col-md-2 col-md-offset-7">
             <button class="btn btn-default" (click)="limpiar()">Limpiar</button>
@@ -46,14 +46,14 @@
         <div class="col-md-12 col-sm-12 ">
           <div class="row">
             <div class="form-group has-feedback">
-              <label class="control-label">Torneo(*)</label>
+              <label class="control-label">Categoría(*)</label>
               <div class="inputGroupContainer">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-list"></i>
                   </span>
-                  <select [(ngModel)]="noticia.torneo" name="torneo" required #torneo='ngModel' class="form-control selectpicker">
-                    <option value="null">Elija su opcion</option>
+                  <select [(ngModel)]="noticia.torneo" name="torneo" required #torneo='ngModel' class="form-control selectpicker" [disabled]="esGeneral">
+                    <option value="null">Elija su opción</option>
                     <option *ngFor="let torneo of lsTorneos" [ngValue]="torneo">{{torneo.nombre}}</option>
                   </select>
                 </div>
@@ -66,14 +66,14 @@
         <div class="col-md-12 col-sm-12">
           <div class="row">
             <div class="form-group has-feedback">
-              <label class="control-label">Categoria de la noticia</label>
+              <label class="control-label">Categoría de la noticia(*)</label>
               <div class="inputGroupContainer">
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-list"></i>
                   </span>
                   <select [(ngModel)]="noticia.categoriaNoticia" name="categoriaNoticia" required #categoriaNoticia='ngModel' class="form-control selectpicker">
-                    <option value="null">Elija su opcion</option>
+                    <option value="null">Elija su opción</option>
                     <option *ngFor="let categorias of lsCategoriasNoticias" [ngValue]="categorias">{{categorias.descripcion}}</option>
                   </select>
                 </div>
@@ -92,8 +92,8 @@
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-list"></i>
                   </span>
-                  <select [(ngModel)]="noticia.club" name="club" required #club='ngModel' class="form-control selectpicker">
-                    <option value="null">Elija su opcion</option>
+                  <select [(ngModel)]="noticia.club" name="club" #club='ngModel' class="form-control selectpicker">
+                    <option value="null">Elija su opción</option>
                     <option *ngFor="let club of lsClubes" [ngValue]="club">{{club.nombre}}</option>
                   </select>
                 </div>
@@ -127,10 +127,19 @@
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-tags"></i>
                   </span>
-                  <input [(ngModel)]="noticia.tags" name="tags" required #tags='ngModel' class="form-control" type="text" required="">
+                  <input [(ngModel)]="noticia.tags" name="tags" required #tags='ngModel' class="form-control" type="text">
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-sm-12">
+          <div class="row">
+            <label class="custom-control custom-checkbox">
+              <input [(ngModel)]="esGeneral" (change)="noticiaGeneral()" type="checkbox" name="esGeneral">
+              <span class="sp-check">Noticia para todas las categorías</span>
+            </label>
           </div>
         </div>
 

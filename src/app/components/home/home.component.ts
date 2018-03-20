@@ -120,7 +120,6 @@ export class HomeComponent implements DoCheck {
         for (let i = 0; i < this.lsNoticiasSecundarias.length; i++) {
             this.fileService.getImagesByNoticia(this.lsNoticiasSecundarias[i].id_noticia).subscribe(
                 data => {
-                    console.log("DATA" + data[i]);
                     this.imagesSec = [];
                     if (data) {
                         for (var j = 0; j < data.length; j++) {

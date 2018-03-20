@@ -15,6 +15,8 @@ export class Persona {
     public contacto: Contacto;
     public id_persona: number;
     public edad: number;
+    public ocupacion: string;
+    public id_foto: number;
 
     constructor(
         nombre?: string,
@@ -25,7 +27,9 @@ export class Persona {
         domicilio?: Domicilio,
         contacto?: Contacto,
         id_persona?: number,
-        edad?: number
+        edad?: number,
+        ocupacion?: string,
+        id_foto?: number
     ) {
         if (id_persona) this.id_persona = id_persona;
         else this.id_persona = null;
@@ -53,5 +57,11 @@ export class Persona {
 
         if(edad) this.edad = edad;
         else this.edad = null;
+
+        if(ocupacion) this.ocupacion = ocupacion;
+        else this.ocupacion = '';
+
+        if(id_foto) this.id_foto = id_foto;
+        else this.id_foto = null;
     }
 }

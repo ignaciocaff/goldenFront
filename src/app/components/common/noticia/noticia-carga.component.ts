@@ -47,6 +47,7 @@ export class NoticiaCargaComponent {
     images: Array<any> = [];
     arraySubidas: Array<any> = [];
     params: string;
+    esGeneral: boolean = false;
 
     constructor(
         private torneoService: TorneoService,
@@ -162,6 +163,12 @@ export class NoticiaCargaComponent {
             console.log('Uploaded successfully!');
             this.images = [];
             this.getImageData();
+        }
+    }
+
+    noticiaGeneral() {
+        if (this.esGeneral) {
+            this.noticia.torneo.id_torneo = 999;
         }
     }
 

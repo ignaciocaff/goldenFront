@@ -1,9 +1,7 @@
 .imagebox {
-  background: black;
   padding: 0px;
   position: relative;
   text-align: center;
-  width: 80%;
 }
 
 .foto {
@@ -47,4 +45,11 @@ a.tags {
 label {
   margin-bottom: 0.4em;
   font-weight: bold;
+}
+
+div.imagen {
+  max-width: 200px;
+  width: 100%;
+  display: inline-block;
+
 }
