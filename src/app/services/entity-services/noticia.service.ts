@@ -20,7 +20,7 @@ export class NoticiaService {
      }
 
      update(obj: any) {
-         return this.http.put(this.config.apiUrl + 'noticia/' + obj.id, obj);
+         return this.http.post(this.config.apiUrl + 'noticia/update', obj);
      }
 
      delete(id: number) {
@@ -30,9 +30,6 @@ export class NoticiaService {
       getPrincipales(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'noticia/principales/' + id_torneo).map((response: Response) => response.json());
      }
-/*      getPrincipales() {
-        return this.http.get(this.config.apiUrl + 'noticia/principales').map((response: Response) => response.json());
-     } */
 
      getSecundarias(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'noticia/secundarias/' + id_torneo).map((response: Response) => response.json());

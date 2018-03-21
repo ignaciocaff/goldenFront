@@ -3,7 +3,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
-import { Noticia } from '../../../entities/index';
+import { Noticia, Usuario } from '../../../entities/index';
 import { NoticiaService } from '../../../services/entity-services/index';
 
 
@@ -21,14 +21,18 @@ export class NoticiaVisualizacionComponent {
     public noticia = new Noticia();
 
     public id_noti: number;
+    esAdmin: boolean = false;
+    user: Usuario;
 
     constructor(
         private noticiaService: NoticiaService,
         private fileService: FileService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
         this.id_noti = route.snapshot.params['id'];
         this.cargarNoticia();
+        this.esAdministrador();
     }
 
     getThumbnails() {
@@ -59,5 +63,19 @@ export class NoticiaVisualizacionComponent {
                 this.noticia = new Noticia();
                 error.json()['Message'];
             });
+    }
+
+    editarNoticia() {
+        var id_not_edit = String(this.noticia.id_noticia);
+        this.router.navigate(['/home/noticia-carga'], { queryParams: { id: id_not_edit } });
+    }
+
+    esAdministrador() {
+        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (this.user != null) {
+            if (this.user.perfil.id_perfil == 1) {
+                this.esAdmin = true;
+            }
+        }
     }
 }
