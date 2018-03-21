@@ -96,6 +96,7 @@ export class HomeComponent implements DoCheck {
                 }
             }
         }
+        this.lsNotPrincipLink.sort((a,b) => b.id_noticia - a.id_noticia);
     }
 
 
@@ -145,6 +146,7 @@ export class HomeComponent implements DoCheck {
                 }
             }
         }
+        this.lsNotSecundLink.sort((a,b) => b.id_noticia - a.id_noticia);
     }
 
 }
