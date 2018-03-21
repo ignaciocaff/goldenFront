@@ -35,6 +35,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
     MatTableModule,
     CdkTableModule,
     MatInputModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    Ng2DragDropModule.forRoot()
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
