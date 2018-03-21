@@ -200,7 +200,7 @@ export class NoticiaCargaComponent implements OnInit {
     }
 
     getImageData() {
-        var subidas = (localStorage.getItem('subidas'));
+        var subidas = (localStorage.getItem('NOTICIAS'));
         this.arraySubidas = JSON.parse(subidas);
         this.noticia.id_thumbnail = Number(this.arraySubidas[0]);
         this.fileService.getImages(this.arraySubidas).subscribe(

@@ -21,6 +21,8 @@ export class FileUploadComponent implements OnInit {
         localStorage.removeItem('CAMISETAS');
         localStorage.removeItem('ESCUDOS');
         localStorage.removeItem('CAMISETAESCUDO');
+        localStorage.removeItem('NOTICIAS');
+        localStorage.removeItem('JUGADORES');
     }
 
     ngOnInit() { }

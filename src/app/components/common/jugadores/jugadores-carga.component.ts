@@ -268,7 +268,7 @@ export class JugadoresCargaComponent {
     }
 
     getImageData() {
-        var subidas = (localStorage.getItem('subidas'));
+        var subidas = (localStorage.getItem('JUGADORES'));
         this.arraySubidas = JSON.parse(subidas);
         this.jugador.id_foto = Number(this.arraySubidas[0]);
         this.fileService.getImages(this.arraySubidas).subscribe(
