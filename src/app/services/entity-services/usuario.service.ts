@@ -27,4 +27,8 @@ export class UsuarioService {
     delete(id: number) {
         return this.http.delete(this.config.apiUrl + '/users/' + id);
     }
+
+    getEquipoRepresentante(id: number){
+        return this.http.get(this.config.apiUrl + 'user/representante/' + id).map((response: Response) => response.json());
+    }
 }

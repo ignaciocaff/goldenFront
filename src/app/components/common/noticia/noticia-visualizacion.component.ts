@@ -3,7 +3,7 @@ import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
-import { Noticia } from '../../../entities/index';
+import { Noticia, Usuario } from '../../../entities/index';
 import { NoticiaService } from '../../../services/entity-services/index';
 
 
@@ -19,18 +19,20 @@ export class NoticiaVisualizacionComponent {
     images: Array<any> = [];
     public thumbnail: string;
     public noticia = new Noticia();
-    public titulo: string;
+
+    public id_noti: number;
+    esAdmin: boolean = false;
+    user: Usuario;
 
     constructor(
         private noticiaService: NoticiaService,
         private fileService: FileService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router
     ) {
-        this.titulo = "TITULO MALO";
-        this.cargarNoticia(route.snapshot.params['id']);
-        this.thumbnail = '/UploadedFiles/barsa.jpg';
-        console.log("LA NOTICIA QUE ESTAS BUSCANDO ES " + this.noticia);
-        //this.getThumbnails();
+        this.id_noti = route.snapshot.params['id'];
+        this.cargarNoticia();
+        this.esAdministrador();
     }
 
     getThumbnails() {
@@ -40,28 +42,40 @@ export class NoticiaVisualizacionComponent {
                 if (data) {
                     for (var i = 0; i < data.length; i++) {
                         this.images.push(data[i]);
-                        this.thumbnail = data[0]['ThumbPath'];
                     }
                 }
+                //Al ser una sola imagen
+                this.thumbnail = this.images[0].ImagePath;
             },
-            error => { }
+            error => {
+                error.json()['Message'];
+            }
         );
     }
 
-    cargarNoticia(id_noticia) {
-        // Number(sessionStorage.getItem('id_torneo'))
-        console.log("ENTRANDO A CARGAR NOTICIA CON ID: " + id_noticia + "Y CON TITULO: " + this.titulo);
-        this.noticiaService.getById(id_noticia).subscribe(
+    cargarNoticia() {
+        this.noticiaService.getById(this.id_noti).subscribe(
             data => {
-                    this.noticia = data[0];
-                    this.titulo = data[0]['descripcion'];
+                this.noticia = data;
+                this.getThumbnails();
             },
             error => {
                 this.noticia = new Noticia();
                 error.json()['Message'];
             });
-
-        console.log("NOTICIA ANTES DE SALIR DE METODO " + this.noticia.id_noticia + " Y EL TITULO ES: " + this.titulo);
     }
 
+    editarNoticia() {
+        var id_not_edit = String(this.noticia.id_noticia);
+        this.router.navigate(['/home/noticia-carga'], { queryParams: { id: id_not_edit } });
+    }
+
+    esAdministrador() {
+        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (this.user != null) {
+            if (this.user.perfil.id_perfil == 1) {
+                this.esAdmin = true;
+            }
+        }
+    }
 }

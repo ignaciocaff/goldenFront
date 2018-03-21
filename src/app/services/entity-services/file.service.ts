@@ -38,6 +38,9 @@ export class FileService {
 
     getImagesByEquipo(id_equipo) {
         return this.http.get(this.config.apiUrl + 'archivos/getbyequipo/' + id_equipo)
+    }
+    getImagesByJugador(id_jugador) {
+        return this.http.get(this.config.apiUrl + 'archivos/getbyjugador/' + id_jugador)
             .map(response => response.json())
             .catch(error => Observable.throw(error));
     }

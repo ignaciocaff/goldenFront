@@ -26,4 +26,8 @@ export class JugadorService {
      delete(id: number) {
          return this.http.delete(this.config.apiUrl + 'jugador/' + id);
      }
+
+     getByDoc(doc: number) {
+        return this.http.get(this.config.apiUrl + 'jugador/' + doc).map((response: Response) => response.json());
+     }
 }

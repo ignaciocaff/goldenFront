@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DialogService } from '../../../services/common-services/index';
@@ -29,7 +29,7 @@ import {
     providers: []
 })
 
-export class NoticiaCargaComponent {
+export class NoticiaCargaComponent implements OnInit {
     @ViewChild('noticiaForm') noticiaForm: FormGroup;
     @BlockUI() blockUI: NgBlockUI;
 
@@ -47,6 +47,10 @@ export class NoticiaCargaComponent {
     images: Array<any> = [];
     arraySubidas: Array<any> = [];
     params: string;
+    esGeneral: boolean = false;
+    esUpdate: boolean = false;
+
+    public id_noti: number;
 
     constructor(
         private torneoService: TorneoService,
@@ -54,7 +58,10 @@ export class NoticiaCargaComponent {
         private categoriaNoticiasService: CategoriaNoticiaService,
         public toastr: ToastsManager,
         private fileService: FileService,
-        private noticiaService: NoticiaService
+        private noticiaService: NoticiaService,
+        private route: ActivatedRoute,
+        private router: Router
+
     ) {
         this.cargarTorneos();
         this.cargarClubes();
@@ -63,13 +70,51 @@ export class NoticiaCargaComponent {
 
     // METODOS-----------------------------------------------------------------------
 
+    ngOnInit() {
+        this.route.queryParams
+          .filter(params => params.id)
+          .subscribe(params => {    
+            this.id_noti = params.id;
+            this.cargarNoticia(this.id_noti);
+          });
+      }
+
+      cargarNoticia(id) {
+        this.noticiaService.getById(id).subscribe(
+            data => {
+                this.noticia = data;
+                this.getThumbnails();
+                this.esUpdate = true;
+
+                if (this.noticia.torneo.id_torneo == null){
+                    this.esGeneral = true;
+                }
+            },
+            error => {
+                this.noticia = new Noticia();
+                error.json()['Message'];
+            });
+    }
+
+    getThumbnails() {
+        this.fileService.getImagesByNoticia(this.noticia.id_noticia).subscribe(
+            data => {
+                this.images = [];
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        this.images.push(data[i]);
+                    }
+                }
+            },
+            error => {
+                error.json()['Message'];
+            }
+        );
+    }
+
     limpiar() {
         this.noticia = new Noticia();
         this.images = [];
-    }
-
-    registrarNoticias() {
-        console.log(this.noticia);
     }
 
     registrarNoticia() {
@@ -82,6 +127,21 @@ export class NoticiaCargaComponent {
             },
             error => {
                 this.toastr.error('La noticia no se ha enviado.", "Error!');
+                this.blockUI.stop();
+            });
+    }
+
+    actualizarNoticia() {
+        this.blockUI.start();
+        this.noticiaService.update(this.noticia).subscribe(
+            data => {
+                this.toastr.success('La noticia se ha guardado correctamente.', 'Exito!');
+                this.blockUI.stop();                
+                this.router.navigate(['home/noticia/' + this.noticia.id_noticia]);
+                this.limpiar();
+            },
+            error => {
+                this.toastr.error('La noticia no se ha guardado.", "Error!');
                 this.blockUI.stop();
             });
     }
@@ -151,7 +211,6 @@ export class NoticiaCargaComponent {
                     }
 
                 }
-                console.error(this.images);
             },
             error => this.errorMessage = error
         );
@@ -164,5 +223,26 @@ export class NoticiaCargaComponent {
             this.getImageData();
         }
     }
+
+    noticiaGeneral() {
+        if (this.esGeneral) {
+            this.noticia.torneo.id_torneo = null;
+        }
+    }
+
+    onTorneoChange(newValue) {
+        if (newValue != null) {
+            this.noticia.torneo.id_torneo = this.lsTorneos.find(x => x.nombre == newValue).id_torneo;
+            this.noticia.torneo.nombre = newValue;
+        }
+    }
+
+    onCategoriaNoticiaChange(newValue) {
+        if (newValue != null) {
+            this.noticia.categoriaNoticia.id_categoria_noticia = this.lsCategoriasNoticias.find(x  => x.descripcion == newValue).id_categoria_noticia;
+            this.noticia.categoriaNoticia.descripcion = newValue;
+        }
+    }
+
 
 }

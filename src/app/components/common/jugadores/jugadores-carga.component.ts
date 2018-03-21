@@ -4,6 +4,10 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DialogService } from '../../../services/common-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { FileService } from '../../../services/entity-services/file.service';
+import { Usuario } from '../../../entities/index';
+import { SharedService } from '../../../services/index';
+
 
 
 import {
@@ -21,8 +25,10 @@ import {
     LocalidadService,
     PersonaService,
     EquipoService,
-    JugadorService
+    JugadorService,
+    UsuarioService,
 } from '../../../services/entity-services/index';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'jugadores-carga',
@@ -36,15 +42,20 @@ import {
         PersonaService,
         DialogService,
         EquipoService,
-        JugadorService
+        JugadorService,
+        UsuarioService
     ]
 })
 export class JugadoresCargaComponent {
     @ViewChild('jugadorForm') jugadorForm: FormGroup;
     @BlockUI() blockUI: NgBlockUI;
 
+    user: Usuario;
+
     public existeJugador: Boolean;
     public visualizable: Boolean;
+    public esRepresentante: Boolean;
+    public esJugadorBD: Boolean;
     public jugador = new Jugador();
     public tipoDocumento: TipoDocumento;
     public provincia: Provincia;
@@ -55,6 +66,10 @@ export class JugadoresCargaComponent {
     public lsTiposDocumento = new Array<TipoDocumento>();
     public lsEquipos = new Array<Equipo>();
 
+    errorMessage: string;
+    images: Array<any> = [];
+    arraySubidas: Array<any> = [];
+    params: string;
 
     constructor(
         private tipoDocumentoService: TipoDocumentoService,
@@ -64,18 +79,39 @@ export class JugadoresCargaComponent {
         private dialogService: DialogService,
         private equipoService: EquipoService,
         private jugadorService: JugadorService,
-        public toastr: ToastsManager
+        public toastr: ToastsManager,
+        private fileService: FileService,
+        private usuarioService: UsuarioService,
+        private userService: SharedService,
+
     ) {
         this.jugador.contacto = this.contacto;
+        this.jugador.rol = 'jugador';
         this.existeJugador = false;
         this.visualizable = false;
+        this.esRepresentante = false;
+        this.esJugadorBD = false;
         this.cargarTiposDocumento();
         this.cargarProvincias();
         this.cargarEquipos();
-        this.cargarLocalidades();
+        this.verificarUsuario();
     }
 
-// METODOS-----------------------------------------------------------------------
+    // METODOS-----------------------------------------------------------------------
+
+    verificarUsuario() {
+        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+
+        if (this.user.perfil.id_perfil != 1) {
+            this.usuarioService.getEquipoRepresentante(this.user.id_usuario).subscribe(
+                data => {
+                    this.jugador.equipo = data;
+                    this.esRepresentante = true;
+
+                }
+            );
+        }
+    }
 
     cargarTiposDocumento() {
         this.tipoDocumentoService.getAll().subscribe(
@@ -123,9 +159,15 @@ export class JugadoresCargaComponent {
     }
 
     limpiar() {
+        this.jugadorForm.reset();
         this.existeJugador = false;
         this.visualizable = false;
+        this.esJugadorBD = false;
         this.jugador = new Jugador();
+        this.jugador.rol = 'jugador';
+        this.verificarUsuario();
+        this.images = [];
+        this.lsLocalidades = [];
     }
 
     calcularEdad() {
@@ -134,8 +176,12 @@ export class JugadoresCargaComponent {
         this.jugador.edad = fechaActual.getFullYear() - fechaJugador.getFullYear();
 
         if (fechaActual.getMonth() + 1 < fechaJugador.getMonth() + 1 ||
-        (fechaActual.getMonth() + 1 === fechaJugador.getMonth() + 1 && fechaActual.getDate() < fechaJugador.getDate())) {
+            (fechaActual.getMonth() + 1 === fechaJugador.getMonth() + 1 && fechaActual.getDate() < fechaJugador.getDate())) {
             this.jugador.edad--;
+        }
+
+        if (!this.esJugadorBD || this.jugador.edad > 1900) {
+            this.jugador.edad = this.jugador.edad - 1900;
         }
     }
 
@@ -154,6 +200,45 @@ export class JugadoresCargaComponent {
             });
     }
 
+    consultarDatosjugador() {
+        this.jugadorService.getByDoc(this.jugador.nro_documento).subscribe(
+            data => {
+                this.lsLocalidades = [];
+                for (let i = 0; i < data.length; i++) {
+                    let jugador = new Jugador();
+                    jugador = data[i];
+                    jugador.equipo = this.jugador.equipo;
+                    jugador.rol = this.jugador.rol;
+                    this.esJugadorBD = true;
+                    if (this.jugador.id_foto != null) {
+                        jugador.id_foto = this.jugador.id_foto;
+                    }
+                    this.jugador = jugador;
+                    this.calcularEdad();
+                    this.cargarFoto();
+                    this.jugador.domicilio.localidad = jugador.domicilio.localidad.provincia.lsLocalidades.find(x => x.id_localidad != 0);
+                    this.lsLocalidades.push(this.jugador.domicilio.localidad);
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
+    }
+
+    cargarFoto() {
+        this.fileService.getImagesByJugador(this.jugador.id_persona).subscribe(
+            data => {
+                if (data) {
+                    this.images = [];
+                    for (var i = 0; i < data.length; i++) {
+                        this.images.push(data[i]);
+                    }
+                }
+            },
+            error => this.errorMessage = error
+        );
+    }
+
     agregarLocalidad() {
         if (this.provincia.id_provincia != null) {
             this.dialogService.agregarLocalidad(this.provincia).subscribe(
@@ -169,6 +254,7 @@ export class JugadoresCargaComponent {
             data => {
                 this.toastr.success('El jugador se ha registrado correctamente.', 'Exito!');
                 this.blockUI.stop();
+                this.limpiar();
             },
             error => {
                 this.toastr.error('El jugador no se ha registrado.", "Error!');
@@ -176,24 +262,61 @@ export class JugadoresCargaComponent {
             });
     }
 
-// EVENTOS-----------------------------------------------------------------------
-    provincia_onChanged(provincia: Provincia) {
-        this.blockUI.start();
-        this.provincia = provincia;
-        this.localidadService.getByProvincia(provincia.id_provincia).subscribe(
+    // EVENTOS-----------------------------------------------------------------------
+    provincia_onChanged(provincia) {
+        this.onProvinciaChange(provincia);
+    }
+
+    getImageData() {
+        var subidas = (localStorage.getItem('subidas'));
+        this.arraySubidas = JSON.parse(subidas);
+        this.jugador.id_foto = Number(this.arraySubidas[0]);
+        this.fileService.getImages(this.arraySubidas).subscribe(
             data => {
-                this.lsLocalidades = [];
-                for (let i = 0; i < data.length; i++) {
-                    let localidad = new Localidad();
-                    localidad = data[i];
-                    this.lsLocalidades.push(localidad);
+                if (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        this.images.push(data[i]);
+                    }
                 }
-                this.blockUI.stop();
             },
-            error => {
-                this.lsLocalidades = new Array<Localidad>();
-                error.json()['Message'];
-                this.blockUI.stop();
-            });
+            error => this.errorMessage = error
+        );
+    }
+
+    refreshImages(status) {
+        if (status == true) {
+            console.log('Uploaded successfully!');
+            this.images = [];
+            this.getImageData();
+        }
+    }
+
+    onTipoDocumentoChange(newValue) {
+        if (newValue != null) {
+            this.jugador.tipoDocumento.id_tipo_documento = this.lsTiposDocumento.find(x => x.descripcion == newValue).id_tipo_documento;
+            this.jugador.tipoDocumento.descripcion = newValue;
+        }
+    }
+
+    onLocalidadChange(newValue) {
+        this.jugador.domicilio.localidad.id_localidad = this.lsLocalidades.find(x => x.n_localidad == newValue).id_localidad;
+        this.jugador.domicilio.localidad.n_localidad = newValue;
+    }
+
+    onProvinciaChange(newValue) {
+        if (newValue != null) {
+            this.jugador.domicilio.localidad.provincia.id_provincia = this.lsProvincias.find(x => x.n_provincia == newValue).id_provincia;
+            this.jugador.domicilio.localidad.provincia.n_provincia = newValue;
+
+            if (!this.esJugadorBD)
+                this.lsLocalidades = this.lsProvincias.find(x => x.n_provincia == newValue).lsLocalidades;
+        }
+    }
+
+    onEquipoChange(newValue) {
+        if (newValue != null) {
+            this.jugador.equipo.id_equipo = this.lsEquipos.find(x => x.nombre == newValue).id_equipo;
+            this.jugador.equipo.nombre = newValue;
+        }
     }
 }

@@ -1,5 +1,4 @@
-<div class="col-sm-10 col-md-10 col-md-offset-1">
-
+<div class="col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1">
 
   <div class="row foto">
     <div class="col-sm-12 col-md-12">
@@ -11,81 +10,13 @@
 
   <div class="row">
     <div class="col-sm-12 col-md-12">
-      <h1>Boca tiene una decena de jugadores con chances de ir a Rusia 2018. Conocé caso por caso y qué posibilidades reales tiene cada uno.</h1>
+      <h1>{{noticia.titulo}}</h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-12 col-md-12">
-      <div class="noticia">
-        <!--         {{noticia.descripcion}} -->
-        <p>La visita de Sampaoli a la pr&aacute;ctica de Boca y la charla de 90 minutos con Guillermo no es casualidad: el Xeneize
-          puede ser una importante fuente para la selecta lista de los 23 que ir&aacute;n a Rusia. Hay al menos cinco candidatos,
-          que con los cuatro colombianos en consideraci&oacute;n por Pekerman y N&aacute;ndez, que est&aacute; m&aacute;s
-          adentro que afuera de la n&oacute;mina celeste para la cita m&aacute;xima del f&uacute;tbol, conforman un grupo
-          de &iexcl;10 jugadores! del club potencialmente mundialistas.&nbsp;
-          <strong>Conoc&eacute; caso por caso:</strong>
-        </p>
-
-        <p>
-          <strong>ARGENTINA</strong>
-        </p>
-
-        <p>
-          <strong>Cristian Pav&oacute;n:</strong>&nbsp;anduvo bien en la &uacute;ltima gira y dej&oacute; una buena impresi&oacute;n.
-          Cumple los requisitos que el DT pretende para ese puesto. Un pie en Rusia.</p>
-
-        <p>
-          <strong>Carlos Tevez:</strong>&nbsp;al &iacute;dolo le falta estar al 100%, pero se postul&oacute; y Sampaoli no lo baj&oacute;.
-          Semestre clave. &quot;Tengo que romperla estos cuatro meses&quot;, asegur&oacute; el Apache.</p>
-
-        <p>
-          <strong>Dar&iacute;o Benedetto:</strong>&nbsp;termin&oacute; jugando las Eliminatorias, pero se lesion&oacute; y es dif&iacute;cil
-          que llegue para el Mundial.</p>
-
-        <p>
-          <strong>Fernando Gago:</strong>&nbsp;casi similar al Pipa. Recambio top para el medio, apunta a volver en marzo. Muy justito.</p>
-
-        <p>
-          <strong>Pablo P&eacute;rez:</strong>&nbsp;uno de los players que Sampaoli sigue de cerca. En buen nivel, pelear&aacute;
-          un lugar en la lista de 23.</p>
-
-        <p>
-          <a href="https://www.ole.com.ar/boca-juniors/boca-ingresos-mundial-programa-retribucion-fifa_0_1954004690.html" target="_blank">
-            <em>
-              <strong>Mir&aacute; tambi&eacute;n: D&oacute;lares que hablan ruso</strong>
-            </em>
-          </a>
-        </p>
-
-        <p>
-          <strong>COLOMBIA</strong>
-        </p>
-
-        <p>
-          <strong>Frank Fabra:</strong>&nbsp;habitu&eacute; de las citaciones de Pekerman, en 2017 se consolid&oacute; como titular.
-          Pasaje en mano.</p>
-
-        <p>
-          <strong>Edwin Cardona:</strong>&nbsp;pieza clave para Jos&eacute;, tiene asegurada su participaci&oacute;n en la Copa del
-          Mundo.</p>
-
-        <p>
-          <strong>Wilmar Barrios:</strong>&nbsp;aunque no siempre es titular (depende del sistema que use Jos&eacute;), es casi un
-          n&uacute;mero puesto.</p>
-
-        <p>
-          <strong>Sebasti&aacute;n P&eacute;rez:</strong>&nbsp;la larga inactividad lo margin&oacute; de la consideraci&oacute;n.
-          Para estar deber&aacute; sumar m&aacute;s rodaje.</p>
-
-        <p>
-          <strong>URUGUAY</strong>
-        </p>
-
-        <p>
-          <strong>Nahitan N&aacute;ndez:</strong>&nbsp;el Maestro Tab&aacute;rez lo tiene tan en cuenta que lo incluy&oacute; como
-          titular al final de las Eliminatorias. Ideal para un equipo que mete y propone.</p>
-
+      <div class="noticia" [innerHTML]="noticia.descripcion">
       </div>
     </div>
   </div>
@@ -94,9 +25,14 @@
     <div class="col-md-12 col-sm-12">
       <label>Temas</label>
       <div class="tags">
-        <!--           {{noticia.tags}} -->
-        <a class="tags"> Noticia, Prueba, Boca, Sampaoli</a>
+        <a class="tags"> {{noticia.tags}}</a>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+        <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin" >Editar</button>
     </div>
   </div>
 
