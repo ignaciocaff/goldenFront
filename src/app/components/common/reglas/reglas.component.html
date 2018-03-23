@@ -1,0 +1,63 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+<div class="flex-item">
+  <form #reglaForm="ngForm" name="reglaForm">
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <h4>
+          Reglas
+        </h4>
+        <p class="text-muted">
+          Ingrese los datos de la regla
+        </p>
+      </div>
+      <div class="col-md-8 col-sm-8">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Descripción(*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input [(ngModel)]="regla.descripcion" name="descripcion" required class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Categoría</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="regla.torneo" name="torneo" required #torneo='ngModel' class="form-control selectpicker" >
+                <option value="null">Elija su opción</option>
+                <option *ngFor="let torneo of lsCategoriasTorneo" [ngValue]="torneo">{{torneo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <button (click)="registrarRegla()" type="button" class="btn btn-primary" [disabled]="!reglaForm.valid">Registrar</button>
+      </div>
+    </div>
+  </form>
+</div>

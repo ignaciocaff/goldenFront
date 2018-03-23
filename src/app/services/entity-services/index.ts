@@ -10,4 +10,6 @@ export * from './club.service';
 export * from './categoriaNoticia.service';
 export * from './noticia.service';
 export * from './cancha.service';
-
+export * from './reglas.service';
+export * from './categoria.service';
+export * from './regla-torneo.service';

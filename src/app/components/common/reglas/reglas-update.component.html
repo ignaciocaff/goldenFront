@@ -1,0 +1,71 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+
+
+<div class="flex-item">
+  <form #reglaForm="ngForm" name="reglaForm">
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <h4>Reglas</h4>
+        <div class="form-group has-feedback">
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="regla" name="regla" required (change)="onReglaChange(regla)" class="form-control">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let regla of lsReglas" [ngValue]="regla">{{regla.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Descripcion(*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user"></i>
+              </span>
+              <input [(ngModel)]="regla.descripcion" name="descripcion"  class="form-control" type="text" required>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Categoría</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="regla.torneo.nombre" name="torneo"  #torneo='ngModel' class="form-control selectpicker" (change)="onTorneoChange(regla.torneo.nombre)" required>
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let torneo of lsCategoriasTorneo" >{{torneo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <button (click)="modificarRegla()" type="button" class="btn btn-primary">Modificar</button>
+      </div>
+    </div>
+  </form>
+</div>

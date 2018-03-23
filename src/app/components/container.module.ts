@@ -26,7 +26,7 @@ import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/inde
 import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService, CanchaService, ReglaTorneoService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -35,6 +35,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
+import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
 import { Ng2DragDropModule } from 'ng2-drag-drop';
 
 @NgModule({
@@ -59,7 +60,9 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
     HomeComponent,
     NoticiaVisualizacionComponent,
     CanchaComponent,
-    CanchaUpdateComponent
+    CanchaUpdateComponent,
+    ReglasComponent,
+    ReglasUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,7 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
-    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService],
+    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, ReglaTorneoService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

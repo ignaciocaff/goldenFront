@@ -17,11 +17,11 @@ export class ReglasService {
     }
 
     create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'register', obj);
+        return this.http.post(this.config.apiUrl + 'reglas/registrar', obj);
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'reglas/' + obj.id, obj);
+        return this.http.post(this.config.apiUrl + 'reglas/update', obj);
     }
 
     delete(id: number) {

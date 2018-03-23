@@ -19,6 +19,7 @@ import { NoticiaCargaComponent } from './common/noticia/index';
 import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
+import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -57,6 +58,12 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'noticia/:id', component: NoticiaVisualizacionComponent,
+            },
+            {
+                path: 'reglas', component: ReglasComponent,
+            },
+            {
+                path: 'reglas-update', component: ReglasUpdateComponent,
             }
         ]
     },
