@@ -5,7 +5,7 @@ import { NavComponent } from './nav/index';
 import { AsideComponent } from './aside/index';
 import { SectionComponent } from './section/index';
 import { FooterComponent } from './footer/index';
-import { MatMenuModule, MatInputModule, MatPaginatorModule, MatPaginatorIntl } from '@angular/material';
+import { MatMenuModule, MatInputModule, MatPaginatorModule, MatPaginatorIntl, MatSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JugadoresCargaComponent } from './common/jugadores/index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +14,8 @@ import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
 import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
+import { ZonaComponent, ZonaUpdateComponent } from './common/zona/index';
+
 
 import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -35,7 +37,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
-import { Ng2DragDropModule } from 'ng2-drag-drop';
+import { NgxDnDModule } from '@swimlane/ngx-dnd';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
     HomeComponent,
     NoticiaVisualizacionComponent,
     CanchaComponent,
-    CanchaUpdateComponent
+    CanchaUpdateComponent,
+    ZonaComponent,
+    ZonaUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,7 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
     CdkTableModule,
     MatInputModule,
     MatPaginatorModule,
-    Ng2DragDropModule.forRoot()
+    NgxDnDModule
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,

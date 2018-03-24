@@ -49,6 +49,7 @@
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="noticiaCarga_Click()">Noticias</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="canchaCarga_Click()">Canchas</a>
+         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="zonaCarga_Click()">Zonas</a>
       </div>
     </div>
   </div>

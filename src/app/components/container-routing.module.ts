@@ -13,6 +13,7 @@ import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
+import { ZonaComponent, ZonaUpdateComponent } from './common/zona/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { NoticiaCargaComponent } from './common/noticia/index';
@@ -57,6 +58,12 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'noticia/:id', component: NoticiaVisualizacionComponent,
+            },
+            {
+                path: 'zona-carga', component: ZonaComponent,
+            },
+            {
+                path: 'zona-update', component: ZonaUpdateComponent,
             }
         ]
     },
