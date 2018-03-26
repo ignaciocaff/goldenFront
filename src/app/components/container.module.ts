@@ -37,6 +37,7 @@ import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
 import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
 import { Ng2DragDropModule } from 'ng2-drag-drop';
+import { LocalidadesCargaComponent } from './common/localidades';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
     CanchaComponent,
     CanchaUpdateComponent,
     ReglasComponent,
-    ReglasUpdateComponent
+    ReglasUpdateComponent,
+    LocalidadesCargaComponent
   ],
   imports: [
     BrowserModule,

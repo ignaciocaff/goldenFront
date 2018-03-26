@@ -238,10 +238,10 @@ export class JugadoresCargaComponent {
     }
 
     agregarLocalidad() {
-        if (this.provincia.id_provincia != null) {
-            this.dialogService.agregarLocalidad(this.provincia).subscribe(
+        if (this.jugador.domicilio.localidad.provincia.id_provincia != null) {
+            this.dialogService.agregarLocalidad(this.jugador.domicilio.localidad.provincia).subscribe(
                 result => {
-                    this.provincia_onChanged(this.provincia);
+                    this.provincia_onChanged(this.jugador.domicilio.localidad.provincia);
                 });
         }
     }
