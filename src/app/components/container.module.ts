@@ -7,7 +7,7 @@ import { SectionComponent } from './section/index';
 import { FooterComponent } from './footer/index';
 import { MatMenuModule, MatInputModule, MatPaginatorModule, MatPaginatorIntl } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JugadoresCargaComponent } from './common/jugadores/index';
+import { JugadoresCargaComponent, JugadoresUpdateComponent } from './common/jugadores/index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index';
@@ -46,6 +46,7 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
     SectionComponent,
     FooterComponent,
     JugadoresCargaComponent,
+    JugadoresUpdateComponent,
     TorneoComponent,
     TorneoUpdateComponent,
     LoginComponent,

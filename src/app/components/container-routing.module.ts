@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent } from './index';
 
 import {
-    JugadoresCargaComponent
+    JugadoresCargaComponent, JugadoresUpdateComponent
 } from './common/jugadores/index';
 import {
     TorneoComponent, TorneoUpdateComponent
@@ -28,6 +28,9 @@ const homeRoutes: Routes = [
         children: [
             {
                 path: 'jugadores-carga', component: JugadoresCargaComponent,
+            },
+            {
+                path: 'jugadores-update', component: JugadoresUpdateComponent,
             },
             {
                 path: 'torneo-carga', component: TorneoComponent,

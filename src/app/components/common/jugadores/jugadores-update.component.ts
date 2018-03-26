@@ -31,10 +31,10 @@ import {
 import { stringify } from '@angular/compiler/src/util';
 
 @Component({
-    selector: 'jugadores-carga',
+    selector: 'jugadores-update',
     moduleId: module.id,
-    templateUrl: './jugadores-carga.component.html',
-    styleUrls: ['./jugadores-carga.component.css'],
+    templateUrl: './jugadores-update.component.html',
+    styleUrls: ['./jugadores-update.component.css'],
     providers: [
         TipoDocumentoService,
         ProvinciaService,
@@ -46,16 +46,17 @@ import { stringify } from '@angular/compiler/src/util';
         UsuarioService
     ]
 })
-export class JugadoresCargaComponent {
+export class JugadoresUpdateComponent {
     @ViewChild('jugadorForm') jugadorForm: FormGroup;
     @BlockUI() blockUI: NgBlockUI;
 
     user: Usuario;
 
     public existeJugador: Boolean = false;
-    public visualizable: Boolean = false;
-    public esRepresentante: Boolean = false;
-    public esJugadorBD: Boolean = false;
+    public equipoSeleccionado: Boolean = false;
+    public visualizable: Boolean;
+    public esRepresentante: Boolean;
+    public esJugadorBD: Boolean;
     public jugador = new Jugador();
     public tipoDocumento: TipoDocumento;
     public provincia: Provincia;
@@ -84,31 +85,19 @@ export class JugadoresCargaComponent {
         private usuarioService: UsuarioService,
         private userService: SharedService,
         private router: Router
-
     ) {
         this.jugador.contacto = this.contacto;
         this.jugador.rol = 'jugador';
+        this.visualizable = false;
+        this.esRepresentante = false;
+        this.esJugadorBD = false;
         this.cargarTiposDocumento();
         this.cargarProvincias();
         this.cargarEquipos();
-        this.verificarUsuario();
     }
 
     // METODOS-----------------------------------------------------------------------
 
-    verificarUsuario() {
-        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-        this.blockUI.start();
-        if (this.user.perfil.id_perfil != 1) {
-            this.usuarioService.getEquipoRepresentante(this.user.id_usuario).subscribe(
-                data => {
-                    this.jugador.equipo = data;
-                    this.esRepresentante = true;
-                    this.blockUI.stop();
-                }
-            );
-        } else { this.blockUI.stop();}
-    }
 
     cargarTiposDocumento() {
         this.tipoDocumentoService.getAll().subscribe(
@@ -162,7 +151,6 @@ export class JugadoresCargaComponent {
         this.esJugadorBD = false;
         this.jugador = new Jugador();
         this.jugador.rol = 'jugador';
-        this.verificarUsuario();
         this.images = [];
         this.lsLocalidades = [];
     }
@@ -198,15 +186,15 @@ export class JugadoresCargaComponent {
     }
 
     consultarDatosjugador() {
-        this.blockUI.start();
-        this.jugadorService.getByDoc(this.jugador.nro_documento).subscribe(
+        this.jugadorService.obtenerJugador(this.jugador).subscribe(
             data => {
                 this.lsLocalidades = [];
-                    let jugador = new Jugador();
+                if (data['id_jugador'] != null) {
+                    var jugador = new Jugador();
                     jugador = data;
                     jugador.equipo = this.jugador.equipo;
-                    jugador.rol = this.jugador.rol;
                     this.esJugadorBD = true;
+                    this.existeJugador = true;
                     if (this.jugador.id_foto != null) {
                         jugador.id_foto = this.jugador.id_foto;
                     }
@@ -215,11 +203,13 @@ export class JugadoresCargaComponent {
                     this.cargarFoto();
                     this.jugador.domicilio.localidad = jugador.domicilio.localidad.provincia.lsLocalidades.find(x => x.id_localidad != 0);
                     this.lsLocalidades.push(this.jugador.domicilio.localidad);
-                    this.blockUI.stop();
+                } else {
+                    this.toastr.error('No existe un jugador con ese número de documento en ese equipo.", "Error!');
+                }
+
             },
             error => {
                 error.json()['Message'];
-                this.blockUI.stop();
             });
     }
 
@@ -250,12 +240,12 @@ export class JugadoresCargaComponent {
         this.blockUI.start();
         this.jugadorService.create(this.jugador).subscribe(
             data => {
-                this.toastr.success('El jugador se ha registrado correctamente.', 'Exito!');
+                this.toastr.success('El jugador se ha modificado correctamente.', 'Exito!');
                 this.blockUI.stop();
                 this.limpiar();
             },
             error => {
-                this.toastr.error('El jugador no se ha registrado.", "Error!');
+                this.toastr.error('El jugador no se ha modificado.", "Error!');
                 this.blockUI.stop();
             });
     }
@@ -320,9 +310,14 @@ export class JugadoresCargaComponent {
     }
 
     onEquipoChange(newValue) {
+        if (newValue == "null") {
+            this.equipoSeleccionado = false;
+        }
         if (newValue != null) {
             this.jugador.equipo.id_equipo = this.lsEquipos.find(x => x.nombre == newValue).id_equipo;
             this.jugador.equipo.nombre = newValue;
+            this.equipoSeleccionado = true;
         }
+
     }
 }
