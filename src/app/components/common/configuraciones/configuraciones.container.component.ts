@@ -13,11 +13,14 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 export class ConfiguracionesContainerComponent implements OnInit {
 
 
-    constructor() {
+    constructor(public toastr: ToastsManager,
+        private router: Router) {
+
+
 
     }
 
     ngOnInit() {
-
+        this.router.navigate(['home/configuraciones/horarios-carga']);
     }
 }

@@ -15,7 +15,7 @@ import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
 import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
 import { ZonaComponent, ZonaUpdateComponent } from './common/zona/index';
-
+import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 
 import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -28,7 +28,7 @@ import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/inde
 import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -63,7 +63,9 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
     CanchaComponent,
     CanchaUpdateComponent,
     ZonaComponent,
-    ZonaUpdateComponent
+    ZonaUpdateComponent,
+    HorariosComponent,
+    HorariosUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,7 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
-    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService],
+    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, HorarioService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

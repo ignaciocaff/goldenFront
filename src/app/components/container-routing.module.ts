@@ -20,6 +20,7 @@ import { NoticiaCargaComponent } from './common/noticia/index';
 import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
+import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -43,6 +44,16 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'configuraciones', component: ConfiguracionesContainerComponent,
+                children: [
+                    { path: 'horarios-carga', component: HorariosComponent },
+                    { path: 'horarios-update', component: HorariosUpdateComponent },
+                    { path: 'canchas', component: HorariosComponent },
+                    { path: 'sponsors', component: HorariosComponent },
+                    { path: 'reglas', component: HorariosComponent },
+                    { path: 'reglamento', component: HorariosComponent },
+                    { path: 'planilla', component: HorariosComponent },
+                    { path: 'visualizacion', component: HorariosComponent }
+                ]
             },
             {
                 path: 'noticia-carga', component: NoticiaCargaComponent,

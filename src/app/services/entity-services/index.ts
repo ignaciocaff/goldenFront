@@ -11,4 +11,4 @@ export * from './categoriaNoticia.service';
 export * from './noticia.service';
 export * from './cancha.service';
 export * from './zona.service';
-
+export * from './horario.service';
