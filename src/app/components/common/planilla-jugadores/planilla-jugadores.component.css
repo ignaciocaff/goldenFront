@@ -1,0 +1,21 @@
+body {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: ;
+    grid-template-areas: "decla decla decla"
+                         "jugadores jugadores jugadores"
+                         "footer footer footer"
+}
+
+.declaracion {
+    grid-area: decla;
+    border: 3px;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+.jugadores {
+    grid-area: jugadores;
+}
