@@ -1,0 +1,124 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" (click)="routeAlta()">Alta</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <ngx-section class="shadow">
+        <div>
+          <div *ngIf="zonaA.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona A">
+            </div>
+            <ngx-dnd-container [model]="zonaA" dropZone="multiple-target-a" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaA)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaB.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona B">
+            </div>
+            <ngx-dnd-container [model]="zonaB" dropZone="multiple-target-b" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaB)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaC.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona C">
+            </div>
+            <ngx-dnd-container [model]="zonaC" dropZone="multiple-target-c" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaC)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaD.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona D">
+            </div>
+            <ngx-dnd-container [model]="zonaD" dropZone="multiple-target-d" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaD)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaE.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona E">
+            </div>
+            <ngx-dnd-container [model]="zonaE" dropZone="multiple-target-e" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaE)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaF.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona F">
+            </div>
+            <ngx-dnd-container [model]="zonaF" dropZone="multiple-target-f" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaF)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaG.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona G">
+            </div>
+            <ngx-dnd-container [model]="zonaG" dropZone="multiple-target-g" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaG)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+          <div *ngIf="zonaH.length >0" fxFlex="25%">
+            <div>
+              <hr class="hr-text textTitle" data-content="Zona H">
+            </div>
+            <ngx-dnd-container [model]="zonaH" dropZone="multiple-target-h" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              [removeOnSpill]="true" [moves]="zona(zonaH)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
+
+        </div>
+      </ngx-section>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button (click)="modificarZona()" [disabled]="!zonas.length ==0" type="button" class="btn btn-primary">Actualizar</button>
+    </div>
+  </div>
+</div>

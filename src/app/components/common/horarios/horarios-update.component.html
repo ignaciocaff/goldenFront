@@ -1,0 +1,88 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+<div class="flex-item">
+  <form #horarioForm="ngForm" name="horarioForm">
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group has-feedback">
+          <label class="control-label">Horarios</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="horarioFijo" name="horarioFijo" required class="form-control selectpicker" (ngModelChange)="onHorarioChange(horarioFijo)"
+                required=''>
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}} {{horario.turno.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Inicio</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-time"></i>
+              </span>
+              <input [(ngModel)]="horarioFijo.inicio" name="inicio" required class="form-control" type="time">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Fin</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-time"></i>
+              </span>
+              <input [(ngModel)]="horarioFijo.fin" name="fin" required class="form-control" type="time">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Turno</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="horarioFijo.turno.descripcion" name="turno" required class="form-control selectpicker" required='' (ngModelChange)="onTurnoChange($event)">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let turno of turnos">{{turno.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <button [disabled]="!horarioForm.valid" (click)="modificarHorario()" type="button" class="btn btn-primary">Actualizar</button>
+      </div>
+    </div>
+  </form>
+</div>

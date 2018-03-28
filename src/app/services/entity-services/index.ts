@@ -13,3 +13,5 @@ export * from './cancha.service';
 export * from './reglas.service';
 export * from './categoria.service';
 export * from './regla-torneo.service';
+export * from './zona.service';
+export * from './horario.service';
