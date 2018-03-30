@@ -14,7 +14,7 @@ import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
 import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
-import { ZonaComponent, ZonaUpdateComponent } from './common/zona/index';
+import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 
 import { MultiSelectModule } from 'primeng/primeng';
@@ -24,11 +24,11 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { ConfiguracionesContainerComponent } from './common/configuraciones/index';
 import { FileUploadComponent } from './common/configuraciones/file-upload/index';
 import { FileService } from '../services/entity-services/file.service';
-import { TorneoEmitter, TorneoLSEmitter } from '../services/common-services/index'
+import { TorneoEmitter, TorneoLSEmitter, ParserService } from '../services/common-services/index'
 import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -38,6 +38,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
+import { FixtureComponent } from "./common/fixture/index";
 
 @NgModule({
   declarations: [
@@ -64,8 +65,10 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
     CanchaUpdateComponent,
     ZonaComponent,
     ZonaUpdateComponent,
+    ZonaDeleteComponent,
     HorariosComponent,
-    HorariosUpdateComponent
+    HorariosUpdateComponent,
+    FixtureComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +90,7 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
-    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, HorarioService],
+    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, HorarioService, ParserService, FixtureService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

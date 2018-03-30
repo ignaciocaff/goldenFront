@@ -24,7 +24,7 @@ export class ZonaService {
         return this.http.post(this.config.apiUrl + 'zona/update', obj);
     }
 
-    delete(id: number) {
-        return this.http.delete(this.config.apiUrl + 'zona/' + id);
+    delete(obj: any) {
+        return this.http.post(this.config.apiUrl + 'zona/eliminar', obj);
     }
 }

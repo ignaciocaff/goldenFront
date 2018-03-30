@@ -1,13 +1,13 @@
-export class Turno {
-    public id: number;
+export class TipoFixture {
+    public id_tipo: number;
     public descripcion: string;
 
     constructor(
-        id?: number,
+        id_tipo?: number,
         descripcion?: string
     ) {
-        if (id) this.id = id;
-        else this.id = null;
+        if (id_tipo) this.id_tipo = id_tipo;
+        else this.id_tipo = null;
 
         if (descripcion) this.descripcion = descripcion;
         else this.descripcion = null;

@@ -13,7 +13,7 @@ import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
-import { ZonaComponent, ZonaUpdateComponent } from './common/zona/index';
+import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { NoticiaCargaComponent } from './common/noticia/index';
@@ -21,6 +21,7 @@ import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
+import { FixtureComponent } from "./common/fixture/index";
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -75,6 +76,12 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'zona-update', component: ZonaUpdateComponent,
+            },
+            {
+                path: 'zona-delete', component: ZonaDeleteComponent,
+            },
+            {
+                path: 'fixture-armado', component: FixtureComponent,
             }
         ]
     },

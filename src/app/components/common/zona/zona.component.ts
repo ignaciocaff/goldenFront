@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmi
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { FileService } from '../../../services/entity-services/file.service';
-import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona } from '../../../entities/index';
+import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, IEquipo } from '../../../entities/index';
 import { EquipoService, ZonaService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
@@ -39,8 +39,9 @@ export class ZonaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.equipoService.getAll().subscribe(
+        this.equipoService.getAllSinZona().subscribe(
             data => {
+                this.equipos = [];
                 for (var j = 0; j < data.length; j++) {
                     var equipo = new IEquipo();
                     if (this.id_torneo == data[j]['torneo']['id_torneo']) {
@@ -222,6 +223,7 @@ export class ZonaComponent implements OnInit {
         this.zonaH = [];
         this.zonas = [];
         this.cantidadZonas = null;
+        this.equipos = [];
         this.ngOnInit();
     }
 
@@ -265,30 +267,8 @@ export class ZonaComponent implements OnInit {
     routeModificacion() {
         this.router.navigate(['home/zona-update']);
     }
-}
 
-export class IEquipo {
-    nombre: string;
-    id_equipo: number;
-    imagePath: string;
-    logo: number;
-
-    constructor(
-        nombre?: string,
-        id_equipo?: number,
-        imagePath?: string,
-        logo?: number
-    ) {
-        if (nombre) this.nombre = nombre;
-        else this.nombre = null;
-
-        if (id_equipo) this.id_equipo = id_equipo;
-        else this.id_equipo = null;
-
-        if (imagePath) this.imagePath = imagePath;
-        else this.imagePath = null;
-
-        if (logo) this.logo = logo;
-        else this.logo = null;
+    routeEliminar() {
+        this.router.navigate(['home/zona-delete']);
     }
 }

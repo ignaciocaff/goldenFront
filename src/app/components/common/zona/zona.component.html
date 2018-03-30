@@ -5,6 +5,9 @@
   <li class="nav-item">
     <a class="nav-link" (click)="routeModificacion()">Modificación</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeEliminar()">Eliminación</a>
+  </li>
 </ul>
 <div class="row">
   <div class="col-md-3 col-sm-3">
@@ -25,7 +28,7 @@
 <div class="row">
   <ngx-section class="shadow">
     <div>
-      <div>
+      <div *ngIf="equipos.length > 0">
         <div>
           <hr class="hr-text textTitle" data-content="Equipos">
         </div>
@@ -139,6 +142,6 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <button (click)="comprobacionZonasVacias()" [disabled]="!equipos.length ==0" type="button" class="btn btn-primary">Registrar</button>
+    <button (click)="comprobacionZonasVacias()" type="button" class="btn btn-primary">Registrar</button>
   </div>
 </div>

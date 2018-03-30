@@ -12,3 +12,4 @@ export * from './noticia.service';
 export * from './cancha.service';
 export * from './zona.service';
 export * from './horario.service';
+export * from './fixture.service';

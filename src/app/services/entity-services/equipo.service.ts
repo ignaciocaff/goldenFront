@@ -24,6 +24,14 @@ export class EquipoService {
         return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo' + id_torneo).map((response: Response) => response.json());
     }
 
+    getAllPorZona(id_zona: number) {
+        return this.http.get(this.config.apiUrl + 'equipo/equiposPorZona/' + id_zona).map((response: Response) => response.json());
+    }
+
+    getAllSinZona() {
+        return this.http.get(this.config.apiUrl + 'equipo/equiposSinZona/').map((response: Response) => response.json());
+    }
+
     desvincular(obj: any) {
         return this.http.post(this.config.apiUrl + 'equipo/desvincular', obj);
     }
