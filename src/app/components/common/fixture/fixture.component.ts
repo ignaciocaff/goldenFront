@@ -33,15 +33,18 @@ export class FixtureComponent implements OnInit {
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
     id_torneo: number;
+    check: Boolean = false;
 
     constructor(private fileService: FileService, public equipoService: EquipoService,
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
-    }
 
+        this.fecha.fecha = new Date();
+    }
     ngOnInit() {
+        this.fecha.fecha = new Date();
         this.zonaService.getAll(this.id_torneo).subscribe(
             data => {
                 this.lsZonas = [];
@@ -85,6 +88,8 @@ export class FixtureComponent implements OnInit {
     }
 
     public equiposPorZona(zona: Zona) {
+        this.cantidadPartidos = null;
+        this.partidos = [];
         this.equipoService.getAllPorZona(zona.id_zona).subscribe(
             data => {
                 this.equipos = [];
@@ -132,28 +137,23 @@ export class FixtureComponent implements OnInit {
     }
 
     public dibujarPartidos() {
-        console.error(this.cantidadPartidos);
-
+        this.partidos = [];
         for (var i = 0; i < this.cantidadPartidos; i++) {
             this.partidos.push(new IPartido());
         }
-        console.error(this.partidos);
     }
 
     enfrentamiento(obj: any) {
-        console.error(obj);
     }
 
     registrarFecha() {
-        console.error(this.partidos);
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
-        console.error(lsPartidos);
-
-        this.fixtureService.create(lsPartidos).subscribe(
+        this.fixtureService.create(lsPartidos, this.zona.id_zona).subscribe(
             data => {
                 if (data) {
                     console.error("Se resgistro bien");
+                    this.limpiarCampos();
                 }
             }, error => {
 
@@ -162,8 +162,26 @@ export class FixtureComponent implements OnInit {
 
     }
 
+    verificacionComponentes() {
+        for (var i = 0; i < this.partidos.length; i++) {
+            if (this.partidos[i].local.length == 0 || this.partidos[i].visitante.length == 0) {
+                this.check = false;
+            } else {
+                this.check = true;
+            }
+        }
+        return this.check;
+    }
+
     limpiarCampos() {
+
         this.ngOnInit();
+        this.partidos = [];
+        this.cantidadPartidos = null;
+        this.fecha.fecha = new Date();
+    }
+
+    limpiarComp() {
     }
 
 
@@ -173,5 +191,16 @@ export class FixtureComponent implements OnInit {
 
     routeModificacion() {
         this.router.navigate(['home/fixture-armado']);
+    }
+
+    verificarFecha() {
+        if (this.fecha.fecha != null && this.zona.id_zona != null) {
+            this.fixtureService.verificarFecha(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
+                data => {
+                }, error => {
+                    this.toastr.error('La fecha elegida ya fue creada, seleccione otra opcion', 'Error');
+                }
+            );
+        }
     }
 }

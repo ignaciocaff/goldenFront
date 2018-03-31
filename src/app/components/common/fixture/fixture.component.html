@@ -15,7 +15,8 @@
           <span class="input-group-addon">
                 <i class="glyphicon glyphicon-calendar"></i>
               </span>
-          <input [(ngModel)]="fecha.fecha" name="fecha" type='text' class="form-control" type="date" />
+          <input [ngModel]="fecha.fecha | date:'yyyy-MM-dd'" name="fecha" class="form-control" (ngModelChange)="fecha.fecha = $event"
+            type="date" />
         </div>
       </div>
     </div>
@@ -28,7 +29,8 @@
           <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-          <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker" (ngModelChange)="equiposPorZona(zona)">
+          <select [(ngModel)]="zona" name="zona" [disabled]="fecha.fecha == null" required class="form-control selectpicker" (blur)="verificarFecha();"
+            (ngModelChange)="equiposPorZona(zona)">
                 <option value="null">Elija su opcion</option>
                 <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
               </select>
@@ -44,7 +46,8 @@
           <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                       </span>
-          <input [(ngModel)]="cantidadPartidos" name="cantidadPartidos" required class="form-control" type="number" (blur)="dibujarPartidos()">
+          <input [(ngModel)]="cantidadPartidos" [disabled]="!zona.id_zona != 0" name="cantidadPartidos" required class="form-control"
+            type="number" (blur)="dibujarPartidos()">
         </div>
       </div>
     </div>
@@ -74,7 +77,7 @@
           <div class="col-md-3 col-sm-3">
             <div class="textEquipo"> Local</div>
             <ngx-dnd-container [model]="partido.local" dropZone="multiple-target-a" [copy]="false" [dropZones]="['multiple-target-b','multiple-equipos', 'multiple-target-a']"
-              [removeOnSpill]="true" (drop)="enfrentamiento(partido.local)">
+              [removeOnSpill]="true" (drop)="verificacionComponentes()">
               <ng-template let-item="model">
                 <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
@@ -87,7 +90,7 @@
           <div class="col-md-3 col-sm-3">
             <div class="textEquipo">Visitante</div>
             <ngx-dnd-container [model]="partido.visitante" dropZone="multiple-target-b" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-equipos']"
-              [removeOnSpill]="true" (drop)="enfrentamiento(partido.visitante)">
+              [removeOnSpill]="true" (drop)="verificacionComponentes()">
               <ng-template let-item="model">
                 <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
@@ -142,6 +145,6 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <button (click)="registrarFecha()" type="button" class="btn btn-primary">Registrar</button>
+    <button (click)="registrarFecha()" [disabled]="!check" type="button" class="btn btn-primary">Registrar</button>
   </div>
 </div>

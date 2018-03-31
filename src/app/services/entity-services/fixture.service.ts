@@ -8,11 +8,15 @@ import { Categoria } from '../../entities/index';
 export class FixtureService {
     constructor(private http: Http, private config: AppConfig) { }
 
-    create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'fecha/registrar', obj);
+    create(obj: any, id_zona: number) {
+        return this.http.post(this.config.apiUrl + 'fecha/registrar/' + id_zona, obj);
     }
 
     update(obj: any) {
         return this.http.post(this.config.apiUrl + 'fecha/modificar', obj);
+    }
+
+    verificarFecha(obj: any, id_zona: number, id_torneo: number) {
+        return this.http.post(this.config.apiUrl + 'fecha/verificar/' + id_zona + '/' + id_torneo, obj);
     }
 }
