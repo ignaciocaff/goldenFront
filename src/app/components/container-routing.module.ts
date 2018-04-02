@@ -21,6 +21,8 @@ import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
+import { PlanillaJugadoresComponent } from './common/planilla-jugadores/index';
+
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 
 const homeRoutes: Routes = [
@@ -53,9 +55,10 @@ const homeRoutes: Routes = [
                     { path: 'horarios-update', component: HorariosUpdateComponent },
                     { path: 'canchas', component: HorariosComponent },
                     { path: 'sponsors', component: HorariosComponent },
-                    { path: 'reglas', component: HorariosComponent },
+                    { path: 'reglas', component: ReglasComponent },
+                    { path: 'reglas-update', component: ReglasUpdateComponent },
                     { path: 'reglamento', component: HorariosComponent },
-                    { path: 'planilla', component: HorariosComponent },
+                    { path: 'planilla', component: PlanillaJugadoresComponent },
                     { path: 'visualizacion', component: HorariosComponent }
                 ]
             },
@@ -73,12 +76,6 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'noticia/:id', component: NoticiaVisualizacionComponent,
-            },
-            {
-                path: 'reglas', component: ReglasComponent,
-            },
-            {
-                path: 'reglas-update', component: ReglasUpdateComponent,
             },
             {
                 path: 'zona-carga', component: ZonaComponent,

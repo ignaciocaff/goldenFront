@@ -107,7 +107,7 @@ export class JugadoresCargaComponent {
                     this.blockUI.stop();
                 }
             );
-        } else { this.blockUI.stop();}
+        } else { this.blockUI.stop(); }
     }
 
     cargarTiposDocumento() {
@@ -201,7 +201,8 @@ export class JugadoresCargaComponent {
         this.blockUI.start();
         this.jugadorService.getByDoc(this.jugador.nro_documento).subscribe(
             data => {
-                this.lsLocalidades = [];
+                if (data['id_persona'] != null) {
+                    this.lsLocalidades = [];
                     let jugador = new Jugador();
                     jugador = data;
                     jugador.equipo = this.jugador.equipo;
@@ -216,6 +217,7 @@ export class JugadoresCargaComponent {
                     this.jugador.domicilio.localidad = jugador.domicilio.localidad.provincia.lsLocalidades.find(x => x.id_localidad != 0);
                     this.lsLocalidades.push(this.jugador.domicilio.localidad);
                     this.blockUI.stop();
+                }
             },
             error => {
                 error.json()['Message'];

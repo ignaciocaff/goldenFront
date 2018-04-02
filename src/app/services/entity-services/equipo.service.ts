@@ -21,7 +21,7 @@ export class EquipoService {
     }
 
     getAllPorTorneo(id_torneo: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo' + id_torneo).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo/' + id_torneo).map((response: Response) => response.json());
     }
 
     desvincular(obj: any) {
@@ -40,5 +40,9 @@ export class EquipoService {
 
     delete(id: number) {
         return this.http.delete(this.config.apiUrl + 'torneo/' + id);
+    }
+
+    getiJugadoresByIdEquipo(id: number) {
+        return this.http.get(this.config.apiUrl + 'equipo/ijugadores/' + id).map((response: Response) => response.json());
     }
 }

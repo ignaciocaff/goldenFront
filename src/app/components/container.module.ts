@@ -41,6 +41,7 @@ import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
 import { Ng2DragDropModule } from 'ng2-drag-drop';
 import { LocalidadesCargaComponent } from './common/localidades';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
+import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
     ZonaComponent,
     ZonaUpdateComponent,
     HorariosComponent,
-    HorariosUpdateComponent
+    HorariosUpdateComponent,
+    PlanillaJugadoresComponent
   ],
   imports: [
     BrowserModule,

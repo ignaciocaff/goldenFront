@@ -79,16 +79,14 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/canchas']);
     }
 
-<<<<<<< HEAD
     reglasCarga_click() {
         this.router.navigate(['home/reglas']);
     }
 
-=======
-    zonaCarga_Click(){
-    this.router.navigate(['home/zona-carga']);
+    zonaCarga_Click() {
+        this.router.navigate(['home/zona-carga']);
     }
->>>>>>> Nacho
+
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {

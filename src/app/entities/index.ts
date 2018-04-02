@@ -19,10 +19,7 @@ export * from './categoria_noticia';
 export * from './noticia';
 export * from './categoria_equipo';
 export * from './cancha';
-<<<<<<< HEAD
 export * from './regla_torneo';
-=======
 export * from './zona';
 export * from './turno';
 export * from './horario_fijo';
->>>>>>> Nacho

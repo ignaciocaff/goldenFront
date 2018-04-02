@@ -56,11 +56,11 @@ export class ReglasComponent {
     }
 
     routeAlta() {
-        this.router.navigate(['home/reglas']);
+        this.router.navigate(['home/configuraciones/reglas']);
     }
 
     routeModificacion() {
-        this.router.navigate(['home/reglas-update']);
+        this.router.navigate(['home/configuraciones/reglas-update']);
     }
 
     limpiar() {
