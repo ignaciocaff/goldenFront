@@ -46,19 +46,30 @@
               <br> DNI: {{jugador.nro_doc}}
             </div>
           </div>
-          <div class="llenado col-md-4 col-sm-4">
+          <div class="llenado col-md-4 col-sm-4" *ngIf="jugador.rol =='jugador' || jugador.rol == null">
             <div class="num row">Nº:___________</div>
             <div class="row enblanco">
             </div>
             <div class="firma row">
-                FIRMA
+              FIRMA
+            </div>
+          </div>
+          <div class="llenado-dt col-md-4 col-sm-4" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'">
+            <div class="dt row" *ngIf="jugador.rol == 'director_tecnico'">Director Técnico</div>
+            <div class="rep row" *ngIf="jugador.rol == 'representante'">Representante</div>
+            <div class="row enblanco">
+            </div>
+            <div class="firma row">
+              FIRMA
             </div>
           </div>
           <div class="resultado col-md-2 col-sm-2">
-            <div class="sancion row"></div>
-            <div class="amarilla row"></div>
+            <div [ngClass]="{'sancion row': jugador.rol == 'jugador' || jugador.rol == null, 'sancion-dt row': jugador.rol == 'director_tecnico' || jugador.rol == 'representante'}"></div>
+            <div class="amarilla row" *ngIf="jugador.rol =='jugador' || jugador.rol == null"></div>
+            <div class="amarilla-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
             <div class="roja row"></div>
-            <div class="gol row"></div>
+            <div class="gol row" *ngIf="jugador.rol =='jugador' || jugador.rol == null"></div>
+            <div class="gol-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
           </div>
         </div>
       </div>

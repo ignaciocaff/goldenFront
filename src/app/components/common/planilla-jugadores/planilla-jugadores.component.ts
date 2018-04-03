@@ -169,6 +169,11 @@ export class PlanillaJugadoresComponent {
                 background-color: rgb(222, 222, 222);
                 height: 100px;
               }
+
+              .llenado-dt {
+                background-color: rgb(224,200,138);
+                height: 100px;
+              }
               
               .resultado {
                 border: 2px solid rgb(170, 145, 93);
@@ -181,6 +186,22 @@ export class PlanillaJugadoresComponent {
                 text-align: left;
                 font-size: 12px;
                 height: 22px;
+              }
+
+              .dt {
+                margin: 0 auto;
+                font-weight: bold;
+                font-size: 9px;
+                height: 22px;
+                text-align: center;
+              }
+
+              .rep {
+                margin: 0 auto;
+                font-weight: bold;
+                font-size: 10px;
+                height: 22px;
+                text-align: center;
               }
 
               .enblanco{
@@ -196,13 +217,25 @@ export class PlanillaJugadoresComponent {
               }
               
               .sancion {
-                border-bottom: 2px solid rgb(170, 145, 93);
                 height: 22px;
+              }
+
+              .sancion-dt {
+                height: 22px;
+                background-color: rgb(224,200,138);
               }
               
               .amarilla {
                 border-bottom: 2px solid rgb(170, 145, 93);
+                border-top: 2px solid rgb(170, 145, 93);
                 background-color: rgb(220, 200, 44);
+                height: 22px;
+              }
+              
+              .amarilla-dt {
+                border-bottom: 2px solid rgb(170, 145, 93);
+                border-top: 2px solid rgb(170, 145, 93);
+                background-color: rgb(224,200,138);
                 height: 22px;
               }
               
@@ -213,8 +246,12 @@ export class PlanillaJugadoresComponent {
               }
               
               .gol {
-                /* border: 1px solid rgb(170, 145, 93); */
                 height: 34px;
+              }
+
+              .gol-dt {
+                height: 30px;
+                background-color: rgb(224, 200, 138);
               }
               
               .footer {

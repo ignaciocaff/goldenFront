@@ -5,7 +5,7 @@
 
 .planilla {
   margin-bottom: 30px;
-  visibility: hidden;
+   visibility: hidden;
   display: none;
 }
 .declaracion {
@@ -73,6 +73,11 @@
   height: 100px;
 }
 
+.llenado-dt {
+  background-color: rgb(224,200,138);
+  height: 100px;
+}
+
 .resultado {
   border: 2px solid rgb(170, 145, 93);
   height: 100px;
@@ -95,13 +100,25 @@
 }
 
 .sancion {
-  border-bottom: 2px solid rgb(170, 145, 93);
   height: 22px;
+}
+
+.sancion-dt {
+  height: 22px;
+  background-color: rgb(224,200,138);
 }
 
 .amarilla {
   border-bottom: 2px solid rgb(170, 145, 93);
+  border-top: 2px solid rgb(170, 145, 93);
   background-color: rgb(220, 200, 44);
+  height: 22px;
+}
+
+.amarilla-dt {
+  border-bottom: 2px solid rgb(170, 145, 93);
+  border-top: 2px solid rgb(170, 145, 93);
+  background-color: rgb(224,200,138);
   height: 22px;
 }
 
@@ -113,6 +130,11 @@
 
 .gol {
   height: 34px;
+}
+
+.gol-dt {
+  height: 30px;
+  background-color: rgb(224, 200, 138);
 }
 
 .footer {
