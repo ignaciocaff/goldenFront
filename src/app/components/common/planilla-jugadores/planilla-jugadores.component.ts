@@ -4,7 +4,7 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { EquipoService } from '../../../services/index';
 import { Equipo } from '../../../entities/index';
 import { FileService } from '../../../services/entity-services/file.service';
-import { IEquipo, IJugador } from '../../../entities/interfaces/index';
+import { IEquipoPlanilla, IJugador } from '../../../entities/interfaces/index';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { IEquipo, IJugador } from '../../../entities/interfaces/index';
 export class PlanillaJugadoresComponent {
 
   public lsJugadores = new Array<IJugador>();
-  public lsEquipos = new Array<IEquipo>();
+  public lsEquipos = new Array<IEquipoPlanilla>();
 
   constructor(
     public toastr: ToastsManager,
@@ -33,7 +33,7 @@ export class PlanillaJugadoresComponent {
     this.equipoService.getAllPorTorneo(id_torneo).subscribe(
       data => {
         for (let i = 0; i < data.length; i++) {
-          var equipo = new IEquipo();
+          var equipo = new IEquipoPlanilla();
           equipo = data[i];
           this.lsEquipos.push(equipo);
         }

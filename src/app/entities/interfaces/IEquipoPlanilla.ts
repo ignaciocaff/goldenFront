@@ -1,5 +1,5 @@
 import { IJugador } from './index';
-export class IEquipo {
+export class IEquipoPlanilla {
   public id_equipo: number;
   public nombre: string;
   public lsJugadores: Array<IJugador>;

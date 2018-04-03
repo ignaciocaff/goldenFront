@@ -1,2 +1,2 @@
-export * from './IEquipo';
+export * from './IEquipoPlanilla';
 export * from './IJugador';
