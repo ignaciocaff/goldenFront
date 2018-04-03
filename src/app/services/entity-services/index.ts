@@ -15,3 +15,4 @@ export * from './categoria.service';
 export * from './regla-torneo.service';
 export * from './zona.service';
 export * from './horario.service';
+export * from './fixture.service';

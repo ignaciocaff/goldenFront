@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmi
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { FileService } from '../../../services/entity-services/file.service';
-import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona } from '../../../entities/index';
+import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, IEquipo } from '../../../entities/index';
 import { EquipoService, ZonaService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
@@ -16,7 +16,8 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 })
 export class ZonaUpdateComponent implements OnInit {
 
-    equipos = new Array<IEquipoU>();
+    equiposSinZona = new Array<IEquipo>();
+    equipos = new Array<IEquipo>();
     zonas = new Array<Zona>();
     lsZonas = new Array<Zona>();
     lsEquiposA = new Array<Equipo>();
@@ -68,6 +69,32 @@ export class ZonaUpdateComponent implements OnInit {
             }
         );
 
+        this.equipoService.getAllSinZona().subscribe(
+            data => {
+                this.equiposSinZona = [];
+                for (var j = 0; j < data.length; j++) {
+                    var equipo = new IEquipo();
+                    if (this.id_torneo == data[j]['torneo']['id_torneo']) {
+                        equipo.id_equipo = data[j]['id_equipo'];
+                        equipo.nombre = data[j]['nombre'];
+                        equipo.logo = data[j]['logo'];
+                        this.equiposSinZona.push(equipo);
+                    }
+                }
+                for (let i = 0; i < this.equiposSinZona.length; i++) {
+                    this.fileService.getImagesByEquipo(this.equiposSinZona[i].logo).subscribe(
+                        data => {
+                            if (data['ImagePath'] != null) {
+                                this.equiposSinZona[i].imagePath = data['ImagePath'];
+                            }
+                        },
+                        error => {
+                        });
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
     }
 
     armadoZonas() {
@@ -107,7 +134,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -126,7 +153,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -144,7 +171,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -162,7 +189,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -180,7 +207,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -198,7 +225,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -216,7 +243,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -234,7 +261,7 @@ export class ZonaUpdateComponent implements OnInit {
         for (let f = 0; f < this.lsZonas[i].lsEquipos.length; f++) {
             this.fileService.getImagesByEquipo(this.lsZonas[i].lsEquipos[f].logo).subscribe(
                 data => {
-                    var equipo = new IEquipoU();
+                    var equipo = new IEquipo();
                     this.equipos[f] = equipo;
                     if (data['ImagePath'] != null) {
                         this.equipos[f].imagePath = data['ImagePath'];
@@ -318,6 +345,7 @@ export class ZonaUpdateComponent implements OnInit {
                     } this.lsZonas[j].lsEquipos = this.lsEquiposH;
                     break;
             }
+            console.error(this.lsZonas);
         }
         this.zonaService.update(this.lsZonas).subscribe(
             data => {
@@ -394,30 +422,8 @@ export class ZonaUpdateComponent implements OnInit {
     routeModificacion() {
         this.router.navigate(['home/zona-update']);
     }
-}
 
-export class IEquipoU {
-    nombre: string;
-    id_equipo: number;
-    imagePath: string;
-    logo: number;
-
-    constructor(
-        nombre?: string,
-        id_equipo?: number,
-        imagePath?: string,
-        logo?: number
-    ) {
-        if (nombre) this.nombre = nombre;
-        else this.nombre = null;
-
-        if (id_equipo) this.id_equipo = id_equipo;
-        else this.id_equipo = null;
-
-        if (imagePath) this.imagePath = imagePath;
-        else this.imagePath = null;
-
-        if (logo) this.logo = logo;
-        else this.logo = null;
+    routeEliminar() {
+        this.router.navigate(['home/zona-delete']);
     }
 }

@@ -1,0 +1,34 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeEliminar()">Eliminación</a>
+  </li>
+</ul>
+<div class="row">
+  <div class="col-md-3 col-sm-3">
+    <div class="form-group has-feedback">
+      <label class="control-label">Zona</label>
+      <div class="inputGroupContainer">
+        <div class="input-group">
+          <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+          <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker" (ngModelChange)="equiposPorZona(zona)">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
+              </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <button (click)="borrarZona()" type="button" class="btn btn-primary">Eliminar</button>
+  </div>
+</div>

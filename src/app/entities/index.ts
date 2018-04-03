@@ -23,3 +23,17 @@ export * from './regla_torneo';
 export * from './zona';
 export * from './turno';
 export * from './horario_fijo';
+export * from './estado_partido';
+export * from './resultado';
+export * from './resultado_zona';
+export * from './veedor';
+export * from './arbitro';
+export * from './fecha';
+export * from './estado_fecha';
+export * from './partido';
+export * from './fixture';
+export * from './tipo_fixture';
+export * from './iEquipo';
+export * from './iPartido';
+
+

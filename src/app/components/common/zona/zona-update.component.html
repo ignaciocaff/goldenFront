@@ -8,6 +8,9 @@
         <li class="nav-item active">
           <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="routeEliminar()">Eliminación</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -15,6 +18,18 @@
     <div class="col-md-12 col-sm-12">
       <ngx-section class="shadow">
         <div>
+          <div *ngIf="equiposSinZona.length > 0">
+            <div>
+              <hr class="hr-text textTitle" data-content="Equipos sin zona">
+            </div>
+            <ngx-dnd-container [model]="equiposSinZona" dropZone="multiple-equipos" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
+              (drop)="zona(equiposSinZona)">
+              <ng-template let-item="model">
+                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <div class="row">{{item.nombre}} </div>
+              </ng-template>
+            </ngx-dnd-container>
+          </div>
           <div *ngIf="zonaA.length >0" fxFlex="25%">
             <div>
               <hr class="hr-text textTitle" data-content="Zona A">
