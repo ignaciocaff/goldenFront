@@ -27,4 +27,16 @@ export class ReglasService {
     delete(id: number) {
         return this.http.delete(this.config.apiUrl + 'reglas/' + id);
     }
+    
+    registrarReglamento(obj: any) {
+        return this.http.post(this.config.apiUrl + 'reglamento/registrar', obj);
+    }
+
+    getReglamento(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'reglamento/' + id_torneo).map((response: Response) => response.json());
+    }
+
+    actualizarReglamento(obj: any) {
+        return this.http.post(this.config.apiUrl + 'reglamento/update', obj);
+    }
 }

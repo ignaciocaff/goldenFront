@@ -25,7 +25,7 @@ import { ConfiguracionesContainerComponent } from './common/configuraciones/inde
 import { FileUploadComponent } from './common/configuraciones/file-upload/index';
 import { FileService } from '../services/entity-services/file.service';
 import { TorneoEmitter, TorneoLSEmitter, ParserService } from '../services/common-services/index'
-import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
+import { CategoriaService, TorneoService, ClubService, EquipoService, ReglasService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
 import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService } from '../services/entity-services/index';
@@ -43,6 +43,7 @@ import { LocalidadesCargaComponent } from './common/localidades';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 import { FixtureComponent } from "./common/fixture/index";
+import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,9 @@ import { FixtureComponent } from "./common/fixture/index";
     PlanillaJugadoresComponent,
     FixtureComponent,
     EquiposTorneoComponent,
-    EquipoVisualizacionComponent
+    EquipoVisualizacionComponent,
+    ReglamentoCargaComponent,
+    ReglamentoVisualizacionComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ import { FixtureComponent } from "./common/fixture/index";
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
-    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService],
+    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, 
+    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

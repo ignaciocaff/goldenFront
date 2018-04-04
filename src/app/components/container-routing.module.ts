@@ -22,6 +22,7 @@ import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores/index';
+import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { FixtureComponent } from "./common/fixture/index";
@@ -58,7 +59,7 @@ const homeRoutes: Routes = [
                     { path: 'sponsors', component: HorariosComponent },
                     { path: 'reglas', component: ReglasComponent },
                     { path: 'reglas-update', component: ReglasUpdateComponent },
-                    { path: 'reglamento', component: HorariosComponent },
+                    { path: 'reglamento', component: ReglamentoCargaComponent },
                     { path: 'planilla', component: PlanillaJugadoresComponent },
                     { path: 'visualizacion', component: HorariosComponent }
                 ]
@@ -95,6 +96,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'equipo/:id', component: EquipoVisualizacionComponent,
+            },
+            {
+                path: 'reglamento', component: ReglamentoVisualizacionComponent,
             }
         ]
     },

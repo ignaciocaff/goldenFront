@@ -35,5 +35,4 @@ export * from './fixture';
 export * from './tipo_fixture';
 export * from './iEquipo';
 export * from './iPartido';
-
-
+export * from './reglamento';

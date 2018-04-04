@@ -1,0 +1,24 @@
+<div class="flex-item">
+  <form #reglamentoForm="ngForm" name="reglamentoForm">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="row descripcion">
+          <h4>
+            Descripción del reglamento
+          </h4>
+          <ck-editor id="editor" name="editor2" [(ngModel)]="reglamento.descripcion" skin="moono-lisa" lang="es" required></ck-editor>
+        </div>
+      </div>
+
+      <div class="row descripcion">
+        <div class="col-md-2 col-md-offset-1">
+          <button type="submit" (click)="registrarReglamento()" class="btn btn-primary" *ngIf="!esUpdate" [disabled]="!reglamentoForm.valid">Enviar</button>
+          <button type="submit" (click)="actualizarReglamento()" class="btn btn-primary" *ngIf="esUpdate" [disabled]="!reglamentoForm.valid">Guardar</button>
+        </div>
+        <div class="col-md-2 col-md-offset-7">
+          <button class="btn btn-default" (click)="limpiar()">Limpiar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
