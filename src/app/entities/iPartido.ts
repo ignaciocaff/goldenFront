@@ -1,17 +1,26 @@
 import { IEquipo, Cancha, HorarioFijo } from './index';
 
 export class IPartido {
+    id_partido: number;
     local: Array<IEquipo>;
     visitante: Array<IEquipo>;
     cancha: Cancha;
     horario: HorarioFijo;
+    fecha: Date;
+    id_fixture: number;
 
     constructor(
+        id_partido?: number,
         local?: Array<IEquipo>,
         visitante?: Array<IEquipo>,
         cancha?: Cancha,
-        horario?: HorarioFijo
+        horario?: HorarioFijo,
+        fecha?: Date,
+        id_fixture?: number
     ) {
+        if (id_partido) this.id_partido = id_partido;
+        else this.id_partido = null;
+
         if (local) this.local = local;
         else this.local = new Array<IEquipo>();
 
@@ -23,5 +32,11 @@ export class IPartido {
 
         if (horario) this.horario = horario;
         else this.horario = new HorarioFijo();
+
+        if (fecha) this.fecha = fecha;
+        else this.fecha = null;
+
+        if (id_fixture) this.id_fixture = id_fixture;
+        else this.id_fixture = null;
     }
 }

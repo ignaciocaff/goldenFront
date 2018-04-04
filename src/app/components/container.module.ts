@@ -38,7 +38,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
-import { FixtureComponent } from "./common/fixture/index";
+import { FixtureComponent, FixtureUpdateComponent, FixtureDialog } from "./common/fixture/index";
 
 @NgModule({
   declarations: [
@@ -68,7 +68,9 @@ import { FixtureComponent } from "./common/fixture/index";
     ZonaDeleteComponent,
     HorariosComponent,
     HorariosUpdateComponent,
-    FixtureComponent
+    FixtureComponent,
+    FixtureUpdateComponent,
+    FixtureDialog
   ],
   imports: [
     BrowserModule,
@@ -88,7 +90,7 @@ import { FixtureComponent } from "./common/fixture/index";
     MatPaginatorModule,
     NgxDnDModule
   ],
-  entryComponents: [ConfirmationDialog],
+  entryComponents: [ConfirmationDialog, FixtureDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, HorarioService, ParserService, FixtureService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,

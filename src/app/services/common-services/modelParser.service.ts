@@ -20,6 +20,9 @@ export class ParserService {
             partido.fecha.fecha = fecha.fecha;
             partido.fecha.id_fecha = fecha.id_fecha;
             partido.estado.id_estado = 1;
+            if (partidos[i].id_partido > 0) {
+                partido.id_partido = partidos[i].id_partido;
+            }
 
             for (let j = 0; j < partidos[i].local.length; j++) {
                 local.id_equipo = partidos[i].local[j].id_equipo;

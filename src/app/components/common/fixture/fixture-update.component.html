@@ -1,9 +1,9 @@
 <ul class="nav nav-tabs">
-  <li class="nav-item active">
-    <a class="nav-link active" (click)="routeAlta()">Alta</a>
-  </li>
   <li class="nav-item">
-    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
   </li>
 </ul>
 <div class="row">
@@ -15,7 +15,7 @@
           <span class="input-group-addon">
                 <i class="glyphicon glyphicon-calendar"></i>
               </span>
-          <input [(ngModel)]="fecha.fecha" name="fecha" class="form-control" (ngModelChange)="fecha.fecha = $event" type="date" />
+          <input [(ngModel)]="fecha.fecha" name="fecha" (ngModelChange)="obtenerPartidos(zona)" class="form-control" type="date" />
         </div>
       </div>
     </div>
@@ -28,8 +28,7 @@
           <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-          <select [(ngModel)]="zona" name="zona" [disabled]="fecha.fecha == null" required class="form-control selectpicker" (blur)="verificarFecha();"
-            (ngModelChange)="equiposPorZona(zona)">
+          <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker" (ngModelChange)="obtenerPartidos(zona)">
                 <option value="null">Elija su opcion</option>
                 <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
               </select>
@@ -39,7 +38,7 @@
   </div>
   <div class="col-md-3 col-sm-3">
     <div class="form-group has-feedback">
-      <label class="control-label">Cantidad Partidos</label>
+      <label class="control-label">Cantidad partidos a agregar</label>
       <div class="inputGroupContainer">
         <div class="input-group">
           <span class="input-group-addon">
@@ -100,16 +99,35 @@
             <div class="row">
               <div class="col-md-8 col-sm-8">
                 <div class="form-group has-feedback">
-                  <label class="control-label">Horario</label>
+                  <label class="control-label">Inicio</label>
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-                      <select [(ngModel)]="partido.horario" name="horario" required class="form-control selectpicker" (change)="compararHorarios(partido)"
-                        required=''>
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}}</option>
+                      <select [(ngModel)]="partido.horario.inicio" name="horarioInicio" (blur)="verificacionComponentes()" (change)="compararHorarios(partido);"
+                        required class="form-control" required=''>
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let horario of horarios">{{horario.inicio}}</option>
+              </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-8 col-sm-8">
+                <div class="form-group has-feedback">
+                  <label class="control-label">Fin</label>
+                  <div class="inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+                      <select [(ngModel)]="partido.horario.fin" name="horarioFin" (blur)="verificacionComponentes()" (change)="compararHorarios(partido);"
+                        required class="form-control" required=''>
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let horario of horarios">{{horario.fin}}</option>
               </select>
                     </div>
                   </div>
@@ -125,9 +143,10 @@
                       <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-                      <select [(ngModel)]="partido.cancha" name="cancha" required (change)="compararHorarios(partido)" class="form-control">
+                      <select [(ngModel)]="partido.cancha.nombre" name="cancha" (blur)="verificacionComponentes()" (change)="compararHorarios(partido)"
+                        required class="form-control">
                 <option value=" ">Elija su opcion</option>
-                <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
+                <option *ngFor="let cancha of lsCanchas">{{cancha.nombre}}</option>
               </select>
                     </div>
                   </div>
@@ -136,6 +155,7 @@
             </div>
           </div>
           <div class="col-md-1 col-sm-1">
+            <i class="glyphicon glyphicon-trash" (click)="eliminarPartido(partido)"></i>
           </div>
         </div>
       </div>
@@ -144,6 +164,6 @@
 </div>
 <div class="row">
   <div class="col-md-6 col-sm-6">
-    <button (click)="registrarFecha()" [disabled]="!check" type="button" class="btn btn-primary">Registrar</button>
+    <button (click)="actualizarFecha()" [disabled]="!check" type="button" class="btn btn-primary">Actualizar</button>
   </div>
 </div>
