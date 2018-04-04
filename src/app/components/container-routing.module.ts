@@ -9,7 +9,7 @@ import {
 import {
     TorneoComponent, TorneoUpdateComponent
 } from './common/torneo/index';
-import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
+import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
@@ -89,6 +89,12 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'fixture-armado', component: FixtureComponent,
+            },
+            {
+                path: 'equipos', component: EquiposTorneoComponent,
+            },
+            {
+                path: 'equipo/:id', component: EquipoVisualizacionComponent,
             }
         ]
     },

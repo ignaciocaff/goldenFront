@@ -30,7 +30,7 @@ export class PlanillaJugadoresComponent {
   obtenerEquipos() {
     var id_torneo = Number(sessionStorage.getItem('id_torneo'));
 
-    this.equipoService.getAllPorTorneo(id_torneo).subscribe(
+    this.equipoService.getiEquiposPorTorneo(id_torneo).subscribe(
       data => {
         for (let i = 0; i < data.length; i++) {
           var equipo = new IEquipoPlanilla();

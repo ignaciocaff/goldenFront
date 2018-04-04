@@ -6,6 +6,7 @@ export class IJugador {
     imagePath: string;
     rol: String;
     nro_doc: number;
+    edad: number;
   
     constructor(
       nombre?: string,
@@ -14,7 +15,8 @@ export class IJugador {
       id_equipo?: number,
       imagePath?: string,
       rol?: String,
-      nro_doc?: number
+      nro_doc?: number,
+      edad?: number
     ) {
       if (nombre) this.nombre = nombre;
       else this.nombre = null;
@@ -36,5 +38,8 @@ export class IJugador {
   
       if (nro_doc) this.nro_doc = nro_doc;
       else this.nro_doc = null;
+
+      if(edad) this.edad = edad;
+      else edad = null;
     }
   }

@@ -1,0 +1,199 @@
+li {
+  width: 650px;
+  height: 100px;
+  background-color: #ebebeb;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+li:nth-child(odd) {
+  background-color: white;
+}
+
+.nombre-jugador {
+  font-size: 1.75em;
+  font-weight: bold;
+}
+
+.dato-jugador {
+  font-weight: bold;
+}
+
+.par {
+  margin-left: 0.5em;
+}
+
+.titulo {
+  font-weight: bold;
+  color: rgb(170, 145, 93);
+  text-align: center;
+  font-size: xx-large;
+}
+
+.titulo-jugadores {
+  font-weight: bold;
+  color: rgb(170, 145, 93);
+  text-align: center;
+  font-size: large;
+}
+
+.escudo {
+  width: 160px;
+  height: 160px;
+}
+
+.escudo img {
+  width: 160px;
+  height: 160px;
+}
+
+.encabezado {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.datos {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+p {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.foto-goleador img {
+  width: 160px;
+  height: 160px;
+  border: 2px solid rgb(170, 145, 93);
+}
+
+.datos-goleador {
+  font-size: 10px;
+  background-color: lightgray;
+  text-align: center;
+  text-decoration: none;
+}
+
+.conjunto img {
+  width: 170px;
+  height: auto;
+}
+
+.nombre {
+  color: rgb(170, 145, 93);
+  text-decoration: none;
+}
+
+.jugadores {
+  min-height: 800px;
+}
+
+.conjunto {
+  min-height: 800px;
+}
+
+
+.foto {
+  width: 140px;
+  height: 100px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+.foto img {
+  width: 140px;
+  height: 100px;
+}
+
+.texto-imagen {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  font-size: 10px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(222, 222, 222, 0.2);
+  width: 140px;
+}
+
+.llenado {
+  background-color: rgb(222, 222, 222);
+  height: 100px;
+}
+
+.resultado {
+  border: 2px solid rgb(170, 145, 93);
+  height: 100px;
+  background-color: rgb(222, 222, 222);
+}
+
+.num {
+  font-weight: bold;
+  text-align: left;
+  font-size: 12px;
+  height: 22px;
+}
+
+.firma {
+  font-weight: bold;
+  text-align: left;
+  font-size: 12px;
+  text-align: center;
+  height: 34px;
+}
+
+.sancion {
+  height: 22px;
+}
+
+.amarilla {
+  border-bottom: 2px solid rgb(170, 145, 93);
+  border-top: 2px solid rgb(170, 145, 93);
+  background-color: rgb(220, 200, 44);
+  height: 22px;
+}
+
+.roja {
+  border-bottom: 2px solid rgb(170, 145, 93);
+  background-color: rgb(190, 5, 24);
+  height: 22px;
+}
+
+.gol {
+  height: 34px;
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  &:before {
+    content: ''; // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, rgb(170, 145, 93), transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+    padding: 0 .5em;
+    line-height: 1.5em; // this is really the only tricky part, you need to specify the background color of the container element...
+    color: rgb(170, 145, 93);
+    background-color: #fcfcfa;
+  }
+}

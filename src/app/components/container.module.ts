@@ -13,7 +13,7 @@ import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
-import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
+import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
 import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 
@@ -77,7 +77,9 @@ import { FixtureComponent } from "./common/fixture/index";
     HorariosComponent,
     HorariosUpdateComponent,
     PlanillaJugadoresComponent,
-    FixtureComponent
+    FixtureComponent,
+    EquiposTorneoComponent,
+    EquipoVisualizacionComponent
   ],
   imports: [
     BrowserModule,

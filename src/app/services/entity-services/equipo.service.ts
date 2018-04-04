@@ -13,15 +13,15 @@ export class EquipoService {
     }
 
     getById(id: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/equipos' + id).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'torneo/equipo/' + id).map((response: Response) => response.json());
     }
 
     getJugadoresByIdEquipo(id: number) {
         return this.http.get(this.config.apiUrl + 'equipo/jugadores/' + id).map((response: Response) => response.json());
     }
 
-    getAllPorTorneo(id_torneo: number) {
-        return this.http.get(this.config.apiUrl + 'torneo/equiposPorTorneo/' + id_torneo).map((response: Response) => response.json());
+    getiEquiposPorTorneo(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'torneo/iequiposPorTorneo/' + id_torneo).map((response: Response) => response.json());
     }
 
     getAllPorZona(id_zona: number) {
@@ -52,5 +52,9 @@ export class EquipoService {
 
     getiJugadoresByIdEquipo(id: number) {
         return this.http.get(this.config.apiUrl + 'equipo/ijugadores/' + id).map((response: Response) => response.json());
+    }
+
+    getAllPorTorneo(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'torneo/equipos/todos/' + id_torneo).map((response: Response) => response.json());
     }
 }
