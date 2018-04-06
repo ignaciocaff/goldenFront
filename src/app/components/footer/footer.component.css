@@ -1,3 +1,16 @@
 #footer-mensaje {
   color: white;
+  font-weight: bold;
+}
+
+span {
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+.footer {
+  background-color: rgb(41, 41, 41);
+  line-height: 2em;
 }

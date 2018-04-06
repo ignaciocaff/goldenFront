@@ -6,7 +6,6 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { Noticia, Usuario } from '../../../entities/index';
 import { NoticiaService } from '../../../services/entity-services/index';
 
-
 @Component({
     selector: 'noticia-visualizacion',
     moduleId: module.id,

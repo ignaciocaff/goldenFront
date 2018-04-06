@@ -44,6 +44,8 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 import { FixtureComponent } from "./common/fixture/index";
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 @NgModule({
   declarations: [
@@ -100,7 +102,10 @@ import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './co
     CdkTableModule,
     MatInputModule,
     MatPaginatorModule,
-    NgxDnDModule
+    NgxDnDModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
+    ShareButtonsModule.forRoot()
   ],
   entryComponents: [ConfirmationDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
