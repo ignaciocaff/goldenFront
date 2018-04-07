@@ -38,7 +38,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
-import { FixtureComponent, FixtureUpdateComponent, FixtureDialog } from "./common/fixture/index";
+import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
+import { ResultadoComponent } from "./common/resultado/index";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,9 @@ import { FixtureComponent, FixtureUpdateComponent, FixtureDialog } from "./commo
     HorariosUpdateComponent,
     FixtureComponent,
     FixtureUpdateComponent,
-    FixtureDialog
+    FixtureDialog,
+    FixtureUpdateFechaComponent,
+    ResultadoComponent
   ],
   imports: [
     BrowserModule,

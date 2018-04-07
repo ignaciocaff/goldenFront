@@ -1,0 +1,135 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 col-sm-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Fecha</label>
+        <div class="inputGroupContainer">
+          <div class="input-group date">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </span>
+            <input [(ngModel)]="fecha.fecha" name="fecha" (ngModelChange)="obtenerPartidos(zona)" class="form-control" type="date" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-3">
+      <div class="form-group has-feedback">
+        <label class="control-label">Zona</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+            <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker" (ngModelChange)="obtenerPartidos(zona)">
+                <option value="null">Elija su opcion</option>
+                <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
+              </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <ngx-section class="shadow">
+      <div>
+        <div class="row" *ngFor="let partido of partidos">
+          <div>
+            <hr class="hr-text textTitle" data-content="Partido">
+          </div>
+          <div class="enfrentamiento">
+            <div class="col-md-12 col-sm-12">
+              <div class="row" style="margin-left:25%;">
+                <div class="col-md-3 col-sm-3">
+                  <div class="textEquipo"> Local</div>
+                  <ngx-dnd-container [model]="partido.local" dropZone="multiple-target-a" [moves]="false" [copy]="false" [dropZones]="['multiple-target-b','multiple-equipos', 'multiple-target-a']"
+                    [removeOnSpill]="true" (drop)="verificacionComponentes()">
+                    <ng-template let-item="model">
+                      <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                      <div class="row">{{item.nombre}} </div>
+                    </ng-template>
+                  </ngx-dnd-container>
+                </div>
+                <div class="col-md-1 col-sm-1 randomResult">
+                  <span>2</span>
+                </div>
+                <div class="col-md-1 col-sm-1 random">
+                  <span>VS</span>
+                </div>
+                <div class="col-md-1 col-sm-1 randomResult">
+                  <span>5</span>
+                </div>
+                <div class="col-md-3 offset-md-1 col-sm-3 offset-sm-3">
+                  <div class="textEquipo">Visitante</div>
+                  <ngx-dnd-container [model]="partido.visitante" dropZone="multiple-target-b" [moves]="false" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-equipos']"
+                    [removeOnSpill]="true" (drop)="verificacionComponentes()">
+                    <ng-template let-item="model">
+                      <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                      <div class="row">{{item.nombre}} </div>
+                    </ng-template>
+                  </ngx-dnd-container>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-5 col-sm-5 col-md-offset-1 col-sm-offset-1">
+                  <div class="form-group has-feedback">
+                    <div class="inputGroupContainer">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+                        <select [(ngModel)]="partido.cancha.nombre" name="cancha" (change)="compararHorarios(partido)" required class="form-control">
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let cancha of lsCanchas">{{cancha.nombre}}</option>
+              </select>
+                        <div class="input-group-btn margen">
+                          <img id="logo" src="/assets/pelota.png" height="34" width="34">
+                          <img id="logo" src="/assets/amarilla.png">
+                          <img id="logo" src="/assets/roja.png">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 col-sm-5">
+                  <div class="form-group has-feedback">
+                    <div class="inputGroupContainer">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+                        <select [(ngModel)]="partido.cancha.nombre" name="cancha" (change)="compararHorarios(partido)" required class="form-control">
+                <option value=" ">Elija su opcion</option>
+                <option *ngFor="let cancha of lsCanchas">{{cancha.nombre}}</option>
+              </select>
+                        <div class="input-group-btn margen">
+                          <img id="logo" src="/assets/pelota.png" height="34" width="34">
+                          <img id="logo" src="/assets/amarilla.png">
+                          <img id="logo" src="/assets/roja.png">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ngx-section>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6">
+      <button (click)="actualizarFecha()" [disabled]="!check" type="button" class="btn btn-primary">Actualizar</button>
+    </div>
+  </div>
+</div>

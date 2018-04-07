@@ -1,4 +1,4 @@
-import { IEquipo, Cancha, HorarioFijo } from './index';
+import { IEquipo, Cancha, HorarioFijo, Gol } from './index';
 
 export class IPartido {
     id_partido: number;
@@ -8,6 +8,8 @@ export class IPartido {
     horario: HorarioFijo;
     fecha: Date;
     id_fixture: number;
+    lsGoleadoresVisitantes: Array<Gol>;
+    lsGoleadoresLocales: Array<Gol>;
 
     constructor(
         id_partido?: number,

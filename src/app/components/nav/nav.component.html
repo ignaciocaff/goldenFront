@@ -50,6 +50,7 @@
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="canchaCarga_Click()">Canchas</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="zonaCarga_Click()">Zonas</a>
+        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="resultadoCarga_Click()">Resultados</a>
       </div>
     </div>
   </div>

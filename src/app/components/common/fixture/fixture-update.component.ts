@@ -305,6 +305,10 @@ export class FixtureUpdateComponent implements OnInit {
         this.router.navigate(['home/fixture-update']);
     }
 
+    routeCambioFecha() {
+        this.router.navigate(['home/fixture-update-fecha']);
+    }
+
     eliminarPartido(partido: IPartido) {
         this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
             height: '200px',

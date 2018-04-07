@@ -1,14 +1,17 @@
+import { Jugador } from './index';
 export class IEquipo {
     nombre: string;
     id_equipo: number;
     imagePath: string;
     logo: number;
+    lsJugadores: Array<Jugador>;
 
     constructor(
         nombre?: string,
         id_equipo?: number,
         imagePath?: string,
-        logo?: number
+        logo?: number,
+        lsJugadores?: Array<Jugador>
     ) {
         if (nombre) this.nombre = nombre;
         else this.nombre = null;
@@ -21,5 +24,8 @@ export class IEquipo {
 
         if (logo) this.logo = logo;
         else this.logo = null;
+
+        if (lsJugadores) this.lsJugadores = lsJugadores;
+        else this.lsJugadores = new Array<Jugador>();
     }
 }

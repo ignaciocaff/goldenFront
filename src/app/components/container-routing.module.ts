@@ -21,7 +21,8 @@ import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
-import { FixtureComponent, FixtureUpdateComponent } from "./common/fixture/index";
+import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
+import { ResultadoComponent } from "./common/resultado/index";
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -85,7 +86,15 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'fixture-update', component: FixtureUpdateComponent,
+            },
+            {
+                path: 'fixture-update-fecha', component: FixtureUpdateFechaComponent,
+            },
+            {
+                path: 'resultado-carga', component: ResultadoComponent,
             }
+
+
         ]
     },
     // { path: '**', component: HomeComponent }

@@ -29,4 +29,12 @@ export class FixtureService {
     eliminarPartido(obj: any) {
         return this.http.post(this.config.apiUrl + 'fecha/eliminarPartido', obj).map((response: Response) => response.json())
     }
+
+    obtenerFechas(id_zona: number, id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'fecha/obtenerTodas/' + id_zona + '/' + id_torneo).map((response: Response) => response.json())
+    }
+
+    modificarFecha(obj: any) {
+        return this.http.post(this.config.apiUrl + 'fecha/modificarFecha', obj).map((response: Response) => response.json())
+    }
 }

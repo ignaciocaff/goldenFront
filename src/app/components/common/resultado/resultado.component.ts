@@ -11,19 +11,22 @@ import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureServi
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { FixtureDialog } from './index';
+import { ConfirmationDialog } from '../../common/dialog/index';
+
 
 
 @Component({
-    selector: 'fixture',
+    selector: 'resultado',
     moduleId: module.id,
-    templateUrl: './fixture.component.html',
-    styleUrls: ['./fixture.component.scss'],
+    templateUrl: './resultado.component.html',
+    styleUrls: ['./resultado.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [EquipoService, ZonaService]
 })
-export class FixtureComponent implements OnInit {
-    dialogRef: MatDialogRef<FixtureDialog>;
+export class ResultadoComponent implements OnInit {
+
+    dialogRefBorrado: MatDialogRef<ConfirmationDialog>;
+
     fecha = new Fecha();
     zona = new Zona();
     partidos = new Array<IPartido>();
@@ -32,7 +35,8 @@ export class FixtureComponent implements OnInit {
 
     equipos = new Array<IEquipo>();
     lsZonas = new Array<Zona>();
-
+    local = new Array<IEquipo>();
+    visitante = new Array<IEquipo>();
     cantidadPartidos: number;
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
@@ -44,6 +48,7 @@ export class FixtureComponent implements OnInit {
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+
     }
     ngOnInit() {
         this.zonaService.getAll(this.id_torneo).subscribe(
@@ -86,11 +91,27 @@ export class FixtureComponent implements OnInit {
             error => {
                 error.json()['Message'];
             });
+
+    }
+
+
+    public obtenerPartidos(zona: Zona) {
+
+        this.equiposPorZona(zona);
+        this.cantidadPartidos = null;
+        this.partidos = [];
+
+        this.fixtureService.obtenerPartidos(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
+            data => {
+                this.partidos = data;
+            }, error => {
+
+            }
+        );
     }
 
     public equiposPorZona(zona: Zona) {
-        this.cantidadPartidos = null;
-        this.partidos = [];
+
         this.equipoService.getAllPorZona(zona.id_zona).subscribe(
             data => {
                 this.equipos = [];
@@ -120,8 +141,6 @@ export class FixtureComponent implements OnInit {
 
     }
 
-    local = new Array<IEquipo>();
-    visitante = new Array<IEquipo>();
 
     droppableItemClass = (item: any) => `${item.class} ${item.inputType}`;
 
@@ -137,61 +156,13 @@ export class FixtureComponent implements OnInit {
         return e.indexOf('Disabled') === -1;
     }
 
-    public dibujarPartidos() {
-        this.partidos = [];
-        for (var i = 0; i < this.cantidadPartidos; i++) {
-            this.partidos.push(new IPartido());
-        }
-    }
-
-    enfrentamiento(obj: any) {
-    }
-
-    registrarFecha() {
-        var lsPartidos = new Array<Partido>();
-        lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
-        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
-            data => {
-                if (data) {
-                    this.toastr.success('Se creo correctamente la fecha.', "Exito!");
-                    this.limpiarCampos();
-                }
-            }, error => {
-                this.toastr.error("La fecha seleccionada ya esta creada, dirijase a modificación.", "Error!");
-            }
-        );
-
-    }
-
-    verificacionComponentes() {
-        for (var i = 0; i < this.partidos.length; i++) {
-            if (this.partidos[i].local.length == 0 || this.partidos[i].visitante.length == 0) {
-                this.check = false;
-            } else {
-                this.check = true;
-            }
-        }
-        return this.check;
-    }
-
-    limpiarCampos() {
-
-        this.ngOnInit();
-        this.partidos = [];
-        this.cantidadPartidos = null;
-        this.fecha.fecha = new Date();
-    }
-
-    limpiarComp() {
-    }
-
     public compararHorariosBack(partido: IPartido) {
         this.fixtureService.obtenerPartidosClub(partido).subscribe(
             data => {
                 var partido = new IPartido();
                 partido = data;
                 if (partido.id_partido > 0) {
-                    this.openConfirmationDialog(partido);
+
                 }
             },
             error => {
@@ -200,35 +171,33 @@ export class FixtureComponent implements OnInit {
         )
     }
 
-    openConfirmationDialog(newValue) {
-        this.dialogRef = this.dialog.open(FixtureDialog, {
-            data: newValue,
-            height: '60%',
-            width: '65%',
-            disableClose: false,
-
-        });
-
-        this.dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-            }
-            this.dialogRef = null;
-        });
-    }
-
     public compararHorarios(partido: IPartido) {
 
         if (partido.cancha.nombre != null && partido.cancha.nombre != undefined) {
             partido.cancha.id_cancha = this.lsCanchas.find(x => x.nombre == partido.cancha.nombre).id_cancha;
         }
 
-        let contador = 0;
         var fecha = new Date(this.fecha.fecha);
         var fechaToString = new Date(fecha.getTime() + (1000 * 60 * 60 * 24)).toDateString();
 
-        var nuevoPartidoMomentoInicio = moment(fechaToString + " " + partido.horario.inicio);
-        var nuevoPartidoMomentoFin = moment(fechaToString + " " + partido.horario.fin);
+        if (partido.horario.inicio != null && partido.horario.inicio != undefined &&
+            partido.horario.fin != null && partido.horario.fin != undefined) {
+            var nuevoPartidoMomentoInicio = moment(fechaToString + " " + partido.horario.inicio);
+            var nuevoPartidoMomentoFin = moment(fechaToString + " " + partido.horario.fin);
 
+            if (nuevoPartidoMomentoFin.isBefore(nuevoPartidoMomentoInicio) || nuevoPartidoMomentoInicio.isAfter(nuevoPartidoMomentoFin)) {
+                this.toastr.error("El horario de inicio debe ser anterior al de fin.", "Error!");
+            }
+            var duration = moment.duration(nuevoPartidoMomentoFin.diff(nuevoPartidoMomentoInicio));
+            var minutes = duration.asMinutes();
+            if (minutes != 90) {
+                this.toastr.error("El horario de inicio y fin deben estar a 90 minutos.", "Error!");
+            }
+            partido.horario.id_horario = this.horarios.find(x => x.inicio == partido.horario.inicio && x.fin == partido.horario.fin
+            ).id_horario;
+        }
+
+        var contador = 0;
         for (var i = 0; i < this.partidos.length; i++) {
             if (this.partidos[i].horario != null && this.partidos[i].horario.inicio != null
                 && this.partidos[i].horario.fin != null) {
@@ -245,7 +214,7 @@ export class FixtureComponent implements OnInit {
 
         if (contador > 1) {
             //Dialogo
-            this.toastr.error('Verifique, tiene horarios y/o canchas repetidos.', "Error!");
+            this.toastr.error('Verifique los datos, tiene horarios y canchas repetidos.', "Error!");
         } else {
             if (partido.cancha.id_cancha > 0 && partido.horario.inicio != null && partido.horario.fin != null) {
                 partido.fecha = this.fecha.fecha;
@@ -254,26 +223,90 @@ export class FixtureComponent implements OnInit {
         }
     }
 
-    routeAlta() {
-        this.router.navigate(['home/fixture-armado']);
-    }
+    public dibujarPartidos() {
+        try {
+            for (var j = this.partidos.length - 1; j >= 0; j--) {
 
-    routeModificacion() {
-        this.router.navigate(['home/fixture-update']);
-    }
-
-    routeCambioFecha() {
-        this.router.navigate(['home/fixture-update-fecha']);
-    }
-
-    verificarFecha() {
-        if (this.fecha.fecha != null && this.zona.id_zona != null) {
-            this.fixtureService.verificarFecha(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
-                data => {
-                }, error => {
-                    this.toastr.error('La fecha elegida ya fue creada, seleccione otra opción', 'Error!');
+                if (this.partidos[j].local.length == 0 && this.partidos[j].visitante.length == 0) {
+                    this.partidos.splice(j, 1);
                 }
-            );
+            }
+        } catch (Exception) {
+            console.error('ENTRO A LA EXCEPCION: ' + Exception)
         }
+        for (var i = 0; i < this.cantidadPartidos; i++) {
+            this.partidos.push(new IPartido());
+        }
+    }
+
+    enfrentamiento(obj: any) {
+    }
+
+    actualizarFecha() {
+        var lsPartidos = new Array<Partido>();
+        lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
+        this.fixtureService.update(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
+            data => {
+                this.toastr.success('Se actualizo correctamente la fecha.', "Exito!");
+                this.limpiarCampos();
+            }, error => {
+                this.toastr.error('Intente nuevamente más tarde.', "Error!");
+
+            }
+        );
+    }
+
+    verificacionComponentes() {
+        for (var i = 0; i < this.partidos.length; i++) {
+            if (this.partidos[i].local.length == 0 || this.partidos[i].visitante.length == 0 ||
+                this.partidos[i].cancha.id_cancha == null || this.partidos[i].horario.id_horario == null) {
+                this.check = false;
+            } else {
+                this.check = true;
+            }
+        }
+        return this.check;
+    }
+
+    limpiarCampos() {
+
+        this.ngOnInit();
+        this.partidos = [];
+        this.cantidadPartidos = null;
+        this.equipos = [];
+    }
+
+    limpiarComp() {
+    }
+
+
+    routeAlta() {
+        this.router.navigate(['home/resultado-carga']);
+    }
+
+
+    eliminarPartido(partido: IPartido) {
+        this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
+            height: '200px',
+            width: '350px',
+            disableClose: false
+        });
+        this.dialogRefBorrado.componentInstance.confirmMessage = "Se eliminara el partido de la fecha."
+
+        this.dialogRefBorrado.afterClosed().subscribe(result => {
+            if (result) {
+                this.fixtureService.eliminarPartido(partido).subscribe(
+                    data => {
+                        this.toastr.success('El partido se elimino correctamente', 'Exito!');
+                        this.obtenerPartidos(this.zona);
+
+                    },
+                    error => {
+                        this.toastr.error('El partido ya no puede ser eliminado', 'Error!');
+                    });
+
+            }
+            this.dialogRefBorrado = null;
+        });
     }
 }
