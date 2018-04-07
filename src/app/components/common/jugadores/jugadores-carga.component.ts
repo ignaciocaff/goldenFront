@@ -46,7 +46,7 @@ import { stringify } from '@angular/compiler/src/util';
         UsuarioService
     ]
 })
-export class JugadoresCargaComponent {
+export class JugadoresCargaComponent implements OnInit {
     @ViewChild('jugadorForm') jugadorForm: FormGroup;
     @BlockUI() blockUI: NgBlockUI;
 
@@ -86,15 +86,18 @@ export class JugadoresCargaComponent {
         private router: Router
 
     ) {
+
+    }
+
+    // METODOS-----------------------------------------------------------------------
+    ngOnInit() {
         this.jugador.contacto = this.contacto;
         this.jugador.rol = 'jugador';
         this.cargarTiposDocumento();
         this.cargarProvincias();
         this.cargarEquipos();
-        this.verificarUsuario();
-    }
 
-    // METODOS-----------------------------------------------------------------------
+    }
 
     verificarUsuario() {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -188,8 +191,11 @@ export class JugadoresCargaComponent {
                 for (let i = 0; i < data.length; i++) {
                     let equipo = new Equipo();
                     equipo = data[i];
-                    this.lsEquipos.push(equipo);
+                    if (equipo.torneo.id_torneo != null && equipo.torneo.id_torneo == JSON.parse(sessionStorage.getItem('id_torneo'))) {
+                        this.lsEquipos.push(equipo);
+                    }
                 }
+                this.verificarUsuario();
             },
             error => {
                 this.lsEquipos = new Array<Equipo>();

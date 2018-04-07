@@ -46,7 +46,7 @@ import { ResultadoComponent } from "./common/resultado/index";
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
-
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -82,7 +82,7 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
     FixtureUpdateComponent,
     FixtureDialog,
     FixtureUpdateFechaComponent,
-    ResultadoComponent
+    ResultadoComponent,
     PlanillaJugadoresComponent,
     FixtureComponent,
     EquiposTorneoComponent,
@@ -107,11 +107,13 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
     MatInputModule,
     MatPaginatorModule,
     NgxDnDModule,
+    HttpClientModule,
+    HttpClientJsonpModule,
     ShareButtonsModule.forRoot()
   ],
   entryComponents: [ConfirmationDialog, FixtureDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
-    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, 
+    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
