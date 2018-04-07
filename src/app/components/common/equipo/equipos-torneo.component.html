@@ -1,0 +1,17 @@
+<div class="container-fluid flex-item pagina">
+
+  <div class="row">
+    <hr class="hr-text titulo" data-content="Equipos">
+  </div>
+
+  <div class="row equipos">
+    <div class="col-md-12 col-sm-12">
+      <div class="col-md-4 col-sm-4 equipo" *ngFor="let equipo of lsEquipos">
+        <div class="imagebox" (click)="verEquipo(equipo.id_equipo)">
+          <img [src]="'http://localhost:50042/' + equipo.imagePath">
+          <span class="imagebox-desc">{{equipo.nombre}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

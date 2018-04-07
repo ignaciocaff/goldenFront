@@ -15,25 +15,31 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-12 col-md-12">
-      <div class="noticia" [innerHTML]="noticia.descripcion">
+    <div class="col-md-12 col-sm-12">
+      <share-buttons theme="material-dark" [include]="['facebook','twitter']"  size="4" show="2"></share-buttons>
+      
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-12">
+        <div class="noticia" [innerHTML]="noticia.descripcion">
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12 col-sm-12">
-      <label>Temas</label>
-      <div class="tags">
-        <a class="tags"> {{noticia.tags}}</a>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <label>Temas</label>
+        <div class="tags">
+          <a class="tags"> {{noticia.tags}}</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12 col-sm-12">
-        <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin" >Editar</button>
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin">Editar</button>
+      </div>
     </div>
-  </div>
 
-</div>
+  </div>

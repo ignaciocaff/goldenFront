@@ -20,6 +20,8 @@ import { Ng2CarouselamosModule } from 'ng2-carouselamos';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 @NgModule({
   declarations: [

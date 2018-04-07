@@ -85,6 +85,16 @@ export class NavComponent implements OnInit {
     resultadoCarga_Click() {
         this.router.navigate(['home/resultado-carga']);
     }
+    reglasCarga_click() {
+        this.router.navigate(['home/reglas']);
+    }
+    equipos_Click() {
+        this.router.navigate(['home/equipos']);
+    }
+
+    reglamento_Click() {
+        this.router.navigate(['home/reglamento']);
+    }
 
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(

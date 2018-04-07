@@ -1,0 +1,90 @@
+<div class="row boton">
+  <div class="col-md-12 col-sm-12">
+    <div class="col-md-2 col-sm-2 col-md-offset-4 col-sm-offset-4">
+      <button (click)="imprimirPDF()" class="btn btn-primary btn-lg">Imprimir planilla</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="flex-item" id="planilla">
+  <div class="planilla" *ngFor="let equipo of lsEquipos">
+
+    <div class="row declaracion">
+      <div class="col-md-12 col-sm-12">
+        <div class="row">
+          <h3 class="titulo">Organiza LUMA SRL</h3>
+          <p class="texto-declaracion">Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo,
+            manifiestan estar en perfectas condiciones físicas para la realización de los partidos
+            <br> programados en el Torneo Golden. Así mismo declaran que dicha participación es libre, basada en los principios
+            de autodeterminación tanto personal como de sus propios cuerpos adhiriéndose al
+            <br> reglamento establecido por la Organización del Torneo Golden. Dicha conformidad comprende, además, la asunción
+            de todos los riesgos y responsabilidades que pudieran emerger del torneo
+            <br> exonerándose de responder a los organizadores del mismo en caso de daños, tanto a las personas como a los bienes
+            introducidos al predio. Queda establecido que la única obligación de los organizadores es la creación del fixture
+            de los partidos, los horarios y fechas respectivas.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <p class="datos">VEEDOR:_______________ CANCHA Nº:_______ HORA:___:___ FECHA Nº:___ ARBITRO:_____________,____________</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="jugadores row">
+
+      <div class="col-md-12 col-sm-12">
+        <div class="jugador col-md-4 col-sm-4" *ngFor="let jugador of equipo.lsJugadores">
+          <div class="foto col-md-6 col-sm-6">
+            <img [src]="'http://localhost:50042/' + jugador.imagePath" *ngIf="jugador.nombre != null">
+            <img src="/assets/logos/anonimo.jpg" *ngIf="jugador.nombre == null">
+            <div class="texto-imagen" *ngIf="jugador.nombre != null">
+              {{jugador.apellido}}, {{jugador.nombre}}
+              <br> DNI: {{jugador.nro_doc}}
+            </div>
+          </div>
+          <div class="llenado col-md-4 col-sm-4" *ngIf="jugador.rol =='jugador' || jugador.rol == null">
+            <div class="num row">Nº:___________</div>
+            <div class="row enblanco">
+            </div>
+            <div class="firma row">
+              FIRMA
+            </div>
+          </div>
+          <div class="llenado-dt col-md-4 col-sm-4" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'">
+            <div class="dt row" *ngIf="jugador.rol == 'director_tecnico'">Director Técnico</div>
+            <div class="rep row" *ngIf="jugador.rol == 'representante'">Representante</div>
+            <div class="row enblanco">
+            </div>
+            <div class="firma row">
+              FIRMA
+            </div>
+          </div>
+          <div class="resultado col-md-2 col-sm-2">
+            <div [ngClass]="{'sancion row': jugador.rol == 'jugador' || jugador.rol == null, 'sancion-dt row': jugador.rol == 'director_tecnico' || jugador.rol == 'representante'}"></div>
+            <div class="amarilla row" *ngIf="jugador.rol =='jugador' || jugador.rol == null"></div>
+            <div class="amarilla-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
+            <div class="roja row"></div>
+            <div class="gol row" *ngIf="jugador.rol =='jugador' || jugador.rol == null"></div>
+            <div class="gol-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row footer">
+      <div class="col-md-12 col-sm-12">
+        <p class="datos" style="padding-top: 10px;">
+          JUEZ DE LINEA 1:_____________,____________ JUEZ DE LINEA 2:_____________,____________ RESULTADO (DE ESTE EQUIPO):__A__(RIVAL)</p>
+        <p class="datos">
+          PREDIO:_____________________ RESULTADO:__ A __ MEJOR JUGADOR:_____________,_____________ INDUMENTARIA COMPLETA: SI / NO </p>
+      </div>
+    </div>
+
+  </div>
+</div>

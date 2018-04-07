@@ -28,6 +28,10 @@ export class JugadorService {
      }
 
      getByDoc(doc: number) {
-        return this.http.get(this.config.apiUrl + 'jugador/' + doc).map((response: Response) => response.json());
+        return this.http.get(this.config.apiUrl + 'persona/' + doc).map((response: Response) => response.json());
+     }
+
+     obtenerJugador(obj:any) {
+        return this.http.post(this.config.apiUrl + 'jugador/obtenerJugador', obj).map((response: Response) => response.json());
      }
 }

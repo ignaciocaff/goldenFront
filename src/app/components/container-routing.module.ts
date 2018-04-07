@@ -4,12 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContainerComponent } from './index';
 
 import {
-    JugadoresCargaComponent
+    JugadoresCargaComponent, JugadoresUpdateComponent
 } from './common/jugadores/index';
 import {
     TorneoComponent, TorneoUpdateComponent
 } from './common/torneo/index';
-import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
+import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
@@ -20,6 +20,10 @@ import { NoticiaCargaComponent } from './common/noticia/index';
 import { CanchaComponent, CanchaUpdateComponent } from "./common/canchas/index";
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
+import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
+import { PlanillaJugadoresComponent } from './common/planilla-jugadores/index';
+import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
+
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
@@ -31,6 +35,9 @@ const homeRoutes: Routes = [
         children: [
             {
                 path: 'jugadores-carga', component: JugadoresCargaComponent,
+            },
+            {
+                path: 'jugadores-update', component: JugadoresUpdateComponent,
             },
             {
                 path: 'torneo-carga', component: TorneoComponent,
@@ -51,9 +58,10 @@ const homeRoutes: Routes = [
                     { path: 'horarios-update', component: HorariosUpdateComponent },
                     { path: 'canchas', component: HorariosComponent },
                     { path: 'sponsors', component: HorariosComponent },
-                    { path: 'reglas', component: HorariosComponent },
-                    { path: 'reglamento', component: HorariosComponent },
-                    { path: 'planilla', component: HorariosComponent },
+                    { path: 'reglas', component: ReglasComponent },
+                    { path: 'reglas-update', component: ReglasUpdateComponent },
+                    { path: 'reglamento', component: ReglamentoCargaComponent },
+                    { path: 'planilla', component: PlanillaJugadoresComponent },
                     { path: 'visualizacion', component: HorariosComponent }
                 ]
             },
@@ -92,6 +100,15 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'resultado-carga', component: ResultadoComponent,
+            },
+            {
+                path: 'equipos', component: EquiposTorneoComponent,
+            },
+            {
+                path: 'equipo/:id', component: EquipoVisualizacionComponent,
+            },
+            {
+                path: 'reglamento', component: ReglamentoVisualizacionComponent,
             }
 
 

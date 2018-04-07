@@ -1,3 +1,11 @@
+<ul class="nav nav-tabs" *ngIf="!esRepresentante">
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
 <div class="flex-item">
   <form #jugadorForm="ngForm" name="jugadorForm">
     <div class="row">
@@ -13,7 +21,7 @@
                   </span>
                   <select [(ngModel)]="jugador.equipo.nombre" name="equipo" required class="form-control" [disabled]="esRepresentante" (ngModelChange)="onEquipoChange($event)">
                     <option value="null">Elija su opción</option>
-                    <option *ngFor="let equipo of lsEquipos" >{{equipo.nombre}}</option>
+                    <option *ngFor="let equipo of lsEquipos">{{equipo.nombre}}</option>
                   </select>
                 </div>
               </div>
@@ -36,7 +44,7 @@
           <div class="col-md-3 col-sm-3">
             <div class="form-group has-feedback">
               <label class="control-label"></label>
-              <img *ngFor="let img of images" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+              <img *ngFor="let img of images" [src]="'http://localhost:50042' + img.ThumbPath" class="img-thumbnail" alt="">
             </div>
           </div>
         </div>

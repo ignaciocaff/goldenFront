@@ -1,0 +1,71 @@
+<div class="container-fluid flex-item">
+
+  <div class="row">
+    <div class="titulo">{{equipo.nombre}}</div>
+    <hr class="hr-text titulo">
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+
+      <div class="col-md-2 col-sm-2">
+        <div class="row escudo">
+          <img [src]="'http://localhost:50042/' + escudo">
+        </div>
+        <div class="row encabezado">DATOS DEL EQUIPO</div>
+        <div class="row datos">
+          <p> Entrenador:</p>
+          <p class="nombre">{{dt.apellido}}, {{dt.nombre}}</p>
+          <p> Delegado:</p>
+          <p class="nombre">{{representante.apellido}}, {{representante.nombre}}</p>
+          <p> Categoría actual:</p>
+          <p class="nombre">{{nombre_torneo}}</p>
+        </div>
+        <div class="row encabezado">GOLEADOR</div>
+        <div class="row foto-goleador">
+          <img src="/assets/logos/anonimo.jpg">
+        </div>
+        <div class="row" style="margin-top: 10px;">
+          <p class="datos-goleador">X GOLES</p>
+          <p class="datos-goleador">X PARTIDOS JUGADOS</p>
+        </div>
+      </div>
+
+      <div class="col-md-8 col-sm-8 jugadores">
+        <div class="col-md-12 col-sm-12">
+          <hr class="hr-text titulo-jugadores" data-content="Jugadores">
+
+          <li *ngFor="let jugador of lsJugadores">
+            <div class="row jugador">
+              <div class="foto col-md-4 col-sm-4">
+                <img [src]="'http://localhost:50042/' + jugador.imagePath">
+              </div>
+              <div class="col-md-8 col-sm-8">
+                <div class="info-jugador">
+                  <div class="nombre-jugador"> {{jugador.apellido}}, {{jugador.nombre}} </div>
+                  <div class="edad">
+                    <span class="dato-jugador">Edad: </span>
+                    <span class="atrib-jugador"> {{jugador.edad}} </span>
+                  </div>
+                  <div>
+                    <br>
+                    <span class="dato-jugador">Goles: </span>
+                    <span class="atrib-jugador"> X </span>
+                    <span class="dato-jugador par">Partidos: </span>
+                    <span class="atrib-jugador">X </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+        </div>
+      </div>
+
+
+      <div class="col-md-2 col-sm-2 conjunto">
+        <img [src]="'http://localhost:50042/' + equipacion">
+      </div>
+    </div>
+  </div>
+</div>

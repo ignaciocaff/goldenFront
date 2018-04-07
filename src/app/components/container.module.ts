@@ -7,13 +7,13 @@ import { SectionComponent } from './section/index';
 import { FooterComponent } from './footer/index';
 import { MatMenuModule, MatInputModule, MatPaginatorModule, MatPaginatorIntl, MatSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JugadoresCargaComponent } from './common/jugadores/index';
+import { JugadoresCargaComponent, JugadoresUpdateComponent } from './common/jugadores/index';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
-import { EquipoComponent, EquipoUpdateComponent } from './common/equipo/index';
+import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
 import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 
@@ -25,10 +25,10 @@ import { ConfiguracionesContainerComponent } from './common/configuraciones/inde
 import { FileUploadComponent } from './common/configuraciones/file-upload/index';
 import { FileService } from '../services/entity-services/file.service';
 import { TorneoEmitter, TorneoLSEmitter, ParserService } from '../services/common-services/index'
-import { CategoriaService, TorneoService, ClubService, EquipoService } from '../services/index';
+import { CategoriaService, TorneoService, ClubService, EquipoService, ReglasService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -37,9 +37,15 @@ import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import { getCustomPaginator } from './common/paginator/index';
 import { CanchaComponent, CanchaUpdateComponent } from './common/canchas/index';
+import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
+import { Ng2DragDropModule } from 'ng2-drag-drop';
+import { LocalidadesCargaComponent } from './common/localidades';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
+import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
+import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 @NgModule({
   declarations: [
@@ -49,6 +55,7 @@ import { ResultadoComponent } from "./common/resultado/index";
     SectionComponent,
     FooterComponent,
     JugadoresCargaComponent,
+    JugadoresUpdateComponent,
     TorneoComponent,
     TorneoUpdateComponent,
     LoginComponent,
@@ -64,16 +71,24 @@ import { ResultadoComponent } from "./common/resultado/index";
     NoticiaVisualizacionComponent,
     CanchaComponent,
     CanchaUpdateComponent,
+    ReglasComponent,
+    ReglasUpdateComponent,
+    LocalidadesCargaComponent,
     ZonaComponent,
     ZonaUpdateComponent,
     ZonaDeleteComponent,
     HorariosComponent,
     HorariosUpdateComponent,
-    FixtureComponent,
     FixtureUpdateComponent,
     FixtureDialog,
     FixtureUpdateFechaComponent,
     ResultadoComponent
+    PlanillaJugadoresComponent,
+    FixtureComponent,
+    EquiposTorneoComponent,
+    EquipoVisualizacionComponent,
+    ReglamentoCargaComponent,
+    ReglamentoVisualizacionComponent
   ],
   imports: [
     BrowserModule,
@@ -91,11 +106,13 @@ import { ResultadoComponent } from "./common/resultado/index";
     CdkTableModule,
     MatInputModule,
     MatPaginatorModule,
-    NgxDnDModule
+    NgxDnDModule,
+    ShareButtonsModule.forRoot()
   ],
   entryComponents: [ConfirmationDialog, FixtureDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
-    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, CanchaService, HorarioService, ParserService, FixtureService],
+    TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() }, 
+    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

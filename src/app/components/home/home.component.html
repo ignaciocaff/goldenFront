@@ -1,26 +1,145 @@
-<div class="principal">
-  <div class="row">
-    <div class="col-sm-6 col-md-6" *ngFor="let noticia of lsNotPrincipLink">
-      <div class="imagebox" onclick="verNoticia()">
-        <a (click)="verNoticia(noticia.id_noticia)">
-          <img [src]="url + noticia.ruta" class="category-banner img-responsive">
-          <span class="imagebox-desc">{{noticia.titulo}}</span>
-        </a>
+<div class="container-fluid">
+
+  <div class="principal">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="col-sm-6 col-md-6" *ngFor="let noticia of lsNotPrincipLink">
+          <div class="imagebox" onclick="verNoticia()">
+            <a (click)="verNoticia(noticia.id_noticia)">
+              <img [src]="url + noticia.ruta" class="category-banner img-responsive">
+              <span class="imagebox-desc">{{noticia.titulo}}</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="col-md-12 col-sm-12">
-  <div class="secundaria">
-    <div class="row">
-      <div class="col-sm-4 col-md-4" *ngFor="let noticia of lsNotSecundLink">
-        <div class="imageboxSecundaria" onclick="verNoticia()">
-          <a (click)="verNoticia(noticia.id_noticia)">
-            <img [src]="url + noticia.ruta" class="category-banner img-responsive">
-            <span class="imagebox-desc">{{noticia.titulo}}</span>
-          </a>
+  <div class="col-md-12 col-sm-12">
+    <div class="secundaria">
+      <div class="row">
+        <div class="col-sm-4 col-md-4" *ngFor="let noticia of lsNotSecundLink">
+          <div class="imageboxSecundaria" onclick="verNoticia()">
+            <a (click)="verNoticia(noticia.id_noticia)">
+              <img [src]="url + noticia.ruta" class="category-banner img-responsive">
+              <span class="imagebox-desc">{{noticia.titulo}}</span>
+            </a>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+
+      <div class="col-md-4 col-sm-4 historico-noticias">
+        <div class="row">
+          <h2>Otras noticias</h2>
+        </div>
+
+        <li>
+          <div class="row noticia-historica">
+            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
+              <img src="/assets/logos/anonimo.jpg">
+            </div>
+            <div class="col-md-8 col-sm-8 noticia-historica-texto">
+              <div class="titulo">
+                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+              </div>
+              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="row noticia-historica">
+            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
+              <img src="/assets/logos/anonimo.jpg">
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <div class="titulo">
+                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+              </div>
+              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="row noticia-historica">
+            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
+              <img src="/assets/logos/anonimo.jpg">
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <div class="titulo">
+                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+              </div>
+              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="row noticia-historica">
+            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
+              <img src="/assets/logos/anonimo.jpg">
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <div class="titulo">
+                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+              </div>
+              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="row noticia-historica">
+            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
+              <img src="/assets/logos/anonimo.jpg">
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <div class="titulo">
+                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+              </div>
+              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <div class="row noticia-historica">
+            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
+              <img src="/assets/logos/anonimo.jpg">
+            </div>
+            <div class="col-md-8 col-sm-8">
+              <div class="titulo">
+                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+              </div>
+              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+            </div>
+          </div>
+        </li>
+
+      </div>
+
+      <div class="col-md-4 col-sm-4">
+        <div class="row">
+          <a class="twitter-timeline" data-width="350" data-height="545" href="https://twitter.com/TorneoGolden?ref_src=twsrc%5Etfw">Tweets by TorneoGolden</a>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-4 sponsors">
+        <div class="row">
+          <img src="http://placehold.it/340x250">
+        </div>
+        <div class="row">
+          <img src="http://placehold.it/340x250">
+        </div>
+
       </div>
     </div>
   </div>

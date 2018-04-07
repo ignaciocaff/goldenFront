@@ -52,10 +52,10 @@ export class JugadoresCargaComponent {
 
     user: Usuario;
 
-    public existeJugador: Boolean;
-    public visualizable: Boolean;
-    public esRepresentante: Boolean;
-    public esJugadorBD: Boolean;
+    public existeJugador: Boolean = false;
+    public visualizable: Boolean = false;
+    public esRepresentante: Boolean = false;
+    public esJugadorBD: Boolean = false;
     public jugador = new Jugador();
     public tipoDocumento: TipoDocumento;
     public provincia: Provincia;
@@ -83,14 +83,11 @@ export class JugadoresCargaComponent {
         private fileService: FileService,
         private usuarioService: UsuarioService,
         private userService: SharedService,
+        private router: Router
 
     ) {
         this.jugador.contacto = this.contacto;
         this.jugador.rol = 'jugador';
-        this.existeJugador = false;
-        this.visualizable = false;
-        this.esRepresentante = false;
-        this.esJugadorBD = false;
         this.cargarTiposDocumento();
         this.cargarProvincias();
         this.cargarEquipos();
@@ -101,16 +98,16 @@ export class JugadoresCargaComponent {
 
     verificarUsuario() {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-
+        this.blockUI.start();
         if (this.user.perfil.id_perfil != 1) {
             this.usuarioService.getEquipoRepresentante(this.user.id_usuario).subscribe(
                 data => {
                     this.jugador.equipo = data;
                     this.esRepresentante = true;
-
+                    this.blockUI.stop();
                 }
             );
-        }
+        } else { this.blockUI.stop(); }
     }
 
     cargarTiposDocumento() {
@@ -201,12 +198,13 @@ export class JugadoresCargaComponent {
     }
 
     consultarDatosjugador() {
+        this.blockUI.start();
         this.jugadorService.getByDoc(this.jugador.nro_documento).subscribe(
             data => {
-                this.lsLocalidades = [];
-                for (let i = 0; i < data.length; i++) {
+                if (data['id_persona'] != null) {
+                    this.lsLocalidades = [];
                     let jugador = new Jugador();
-                    jugador = data[i];
+                    jugador = data;
                     jugador.equipo = this.jugador.equipo;
                     jugador.rol = this.jugador.rol;
                     this.esJugadorBD = true;
@@ -218,10 +216,12 @@ export class JugadoresCargaComponent {
                     this.cargarFoto();
                     this.jugador.domicilio.localidad = jugador.domicilio.localidad.provincia.lsLocalidades.find(x => x.id_localidad != 0);
                     this.lsLocalidades.push(this.jugador.domicilio.localidad);
+                    this.blockUI.stop();
                 }
             },
             error => {
                 error.json()['Message'];
+                this.blockUI.stop();
             });
     }
 
@@ -240,10 +240,10 @@ export class JugadoresCargaComponent {
     }
 
     agregarLocalidad() {
-        if (this.provincia.id_provincia != null) {
-            this.dialogService.agregarLocalidad(this.provincia).subscribe(
+        if (this.jugador.domicilio.localidad.provincia.id_provincia != null) {
+            this.dialogService.agregarLocalidad(this.jugador.domicilio.localidad.provincia).subscribe(
                 result => {
-                    this.provincia_onChanged(this.provincia);
+                    this.provincia_onChanged(this.jugador.domicilio.localidad.provincia);
                 });
         }
     }
@@ -260,6 +260,14 @@ export class JugadoresCargaComponent {
                 this.toastr.error('El jugador no se ha registrado.", "Error!');
                 this.blockUI.stop();
             });
+    }
+
+    routeAlta() {
+        this.router.navigate(['home/jugadores-carga']);
+    }
+
+    routeModificacion() {
+        this.router.navigate(['home/jugadores-update']);
     }
 
     // EVENTOS-----------------------------------------------------------------------

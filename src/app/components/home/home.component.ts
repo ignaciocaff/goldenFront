@@ -4,7 +4,7 @@ import { NoticiaService } from '../../services/entity-services/index';
 import { FileService } from '../../services/entity-services/file.service';
 import { Noticia } from '../../entities/index';
 import { AppConfig } from '../../app.config';
-import { DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
+import { DoCheck, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
     selector: 'home',
@@ -13,7 +13,7 @@ import { DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
     styleUrls: ['./home.component.css'],
     providers: []
 })
-export class HomeComponent implements DoCheck {
+export class HomeComponent implements DoCheck, AfterViewInit {
     public lsNoticiasPrincipales = new Array<Noticia>();
     public lsNoticiasSecundarias = new Array<Noticia>();
 
@@ -43,6 +43,21 @@ export class HomeComponent implements DoCheck {
         }
 
     }
+
+    ngAfterViewInit () {
+        !function(d,s,id){
+            var js: any,
+                fjs=d.getElementsByTagName(s)[0],
+                p='https';
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src=p+"://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js,fjs);
+            }
+        }
+        (document,"script","twitter-wjs");
+}
 
     verNoticia(id_noticia) {
         this.router.navigate(['home/noticia/' + id_noticia]);
@@ -96,6 +111,7 @@ export class HomeComponent implements DoCheck {
                 }
             }
         }
+        this.lsNotPrincipLink.sort((a,b) => b.id_noticia - a.id_noticia);
     }
 
 
@@ -145,6 +161,7 @@ export class HomeComponent implements DoCheck {
                 }
             }
         }
+        this.lsNotSecundLink.sort((a,b) => b.id_noticia - a.id_noticia);
     }
 
 }

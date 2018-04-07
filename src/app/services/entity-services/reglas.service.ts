@@ -17,14 +17,26 @@ export class ReglasService {
     }
 
     create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'register', obj);
+        return this.http.post(this.config.apiUrl + 'reglas/registrar', obj);
     }
 
     update(obj: any) {
-        return this.http.put(this.config.apiUrl + 'reglas/' + obj.id, obj);
+        return this.http.post(this.config.apiUrl + 'reglas/update', obj);
     }
 
     delete(id: number) {
         return this.http.delete(this.config.apiUrl + 'reglas/' + id);
+    }
+    
+    registrarReglamento(obj: any) {
+        return this.http.post(this.config.apiUrl + 'reglamento/registrar', obj);
+    }
+
+    getReglamento(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'reglamento/' + id_torneo).map((response: Response) => response.json());
+    }
+
+    actualizarReglamento(obj: any) {
+        return this.http.post(this.config.apiUrl + 'reglamento/update', obj);
     }
 }
