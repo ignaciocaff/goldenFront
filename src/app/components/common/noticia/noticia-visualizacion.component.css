@@ -52,8 +52,3 @@ div.imagen {
   width: 100%;
   display: inline-block;
 }
-
-.noti p img {
-  max-width: 980px;
-  max-height: auto;
-}
