@@ -1,3 +1,8 @@
 .descripcion {
+  margin: 1em;
   margin-bottom: 1em;
+}
+
+.tamaño {
+  visibility: hidden;
 }

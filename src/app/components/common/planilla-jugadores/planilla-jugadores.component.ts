@@ -249,6 +249,14 @@ export class PlanillaJugadoresComponent {
                 height: 34px;
               }
 
+              .gol img {
+                max-height: 30px;
+                max-width: auto;  
+                margin-left: 10px;
+                opacity: 0.3;
+                filter: alpha(opacity=30);
+              }
+
               .gol-dt {
                 height: 30px;
                 background-color: rgb(224, 200, 138);

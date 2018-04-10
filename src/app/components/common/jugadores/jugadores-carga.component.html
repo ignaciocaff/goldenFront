@@ -38,7 +38,7 @@
           <div class="col-md-2 text-center col-sm-2">
             <div class="form-group has-feedback">
               <label class="control-label" for="logo">Seleccione su foto</label>
-              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG, JPEG" (uploadStatus)="refreshImages($event)"></app-file-upload>
             </div>
           </div>
           <div class="col-md-3 col-sm-3">
@@ -141,7 +141,15 @@
                 <label class="control-label">Fecha de Nacimiento (*)</label>
                 <div class="inputGroupContainer">
                   <div class="form-group">
-                    <div class='input-group date' id='datetimepicker'>
+                    <div class='input-group date' id='datetimepicker' *ngIf="!esJugadorBD">
+                      <input [ngModel]="jugador.fecha_nacimiento" (ngModelChange)="jugador.fecha_nacimiento = $event" min="1950-01-01"
+                        name="fecha" required type='date' class="form-control" *ngIf="!existejugador" [disabled]="existejugador"
+                        (blur)="calcularEdad()" />
+                      <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                    </div>
+                    <div class='input-group date' id='datetimepicker' *ngIf="esJugadorBD">
                       <input [ngModel]="jugador.fecha_nacimiento | date:'yyyy-MM-dd'" (ngModelChange)="jugador.fecha_nacimiento = $event" min="1950-01-01"
                         name="fecha" required type='date' class="form-control" *ngIf="!existejugador" [disabled]="existejugador"
                         (blur)="calcularEdad()" />

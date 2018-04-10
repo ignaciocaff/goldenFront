@@ -37,13 +37,13 @@ export class EquipoUpdateComponent implements OnInit {
     public lsClub = new Array<Club>();
     dataSource = new MatTableDataSource<Jugador>();
 
-    errorMessage: string;
+    errorMessage: String;
     imagesEscudos: Array<any> = [];
     imagesCamisetas: Array<any> = [];
     imagesCE: Array<any> = [];
     arraySubidas: Array<any> = [];
-    params: string;
-    eligioEquipo: Boolean;
+    params: String;
+    eligioEquipo: boolean;
 
     constructor(
         private categoriasService: CategoriaService,
@@ -237,7 +237,7 @@ export class EquipoUpdateComponent implements OnInit {
             width: '350px',
             disableClose: false
         });
-        this.dialogRef.componentInstance.confirmMessage = "Se eliminara al jugador de este equipo."
+        this.dialogRef.componentInstance.confirmMessage = "Se eliminará el jugador de este equipo."
 
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
@@ -261,7 +261,7 @@ export class EquipoUpdateComponent implements OnInit {
                                 error => {
                                     error.json()['Message'];
                                 });
-                            this.toastr.success('El jugador se elimino correctamente', 'Exito!');
+                            this.toastr.success('El jugador se eliminó correctamente.', 'Exito!');
                         }
                     },
                     error => {

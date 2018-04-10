@@ -65,10 +65,10 @@ export class JugadoresCargaComponent implements OnInit {
     public lsTiposDocumento = new Array<TipoDocumento>();
     public lsEquipos = new Array<Equipo>();
 
-    errorMessage: string;
+    errorMessage: String;
     images: Array<any> = [];
     arraySubidas: Array<any> = [];
-    params: string;
+    params: String;
 
     constructor(
         private tipoDocumentoService: TipoDocumentoService,
@@ -136,7 +136,7 @@ export class JugadoresCargaComponent implements OnInit {
             },
             error => {
                 this.lsProvincias = new Array<Provincia>();
-                error.json()["Message"];
+                error.json()['Message'];
             });
     }
 
@@ -151,7 +151,7 @@ export class JugadoresCargaComponent implements OnInit {
             },
             error => {
                 this.lsLocalidades = new Array<Localidad>();
-                error.json()["Message"];
+                error.json()['Message'];
             });
     }
 
@@ -175,10 +175,6 @@ export class JugadoresCargaComponent implements OnInit {
         if (fechaActual.getMonth() + 1 < fechaJugador.getMonth() + 1 ||
             (fechaActual.getMonth() + 1 === fechaJugador.getMonth() + 1 && fechaActual.getDate() < fechaJugador.getDate())) {
             this.jugador.edad--;
-        }
-
-        if (!this.esJugadorBD || this.jugador.edad > 1900) {
-            this.jugador.edad = this.jugador.edad - 1900;
         }
     }
 

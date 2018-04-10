@@ -6,6 +6,14 @@
   </div>
 </div>
 
+<!-- Esta row "tamaño" se usa para que no se deforme la visualizacion (el navBar de config). Es necesario debido al funcionamiento heredado del container-fluid-->
+<div class="row tamaño">
+  <div class="col-md-12 col-sm-12">
+    <p>Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo, manifiestan
+      estar en perfectas condiciones físicas      
+    </p>
+  </div>
+</div>
 
 <div class="flex-item" id="planilla">
   <div class="planilla" *ngFor="let equipo of lsEquipos">
@@ -68,7 +76,9 @@
             <div class="amarilla row" *ngIf="jugador.rol =='jugador' || jugador.rol == null"></div>
             <div class="amarilla-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
             <div class="roja row"></div>
-            <div class="gol row" *ngIf="jugador.rol =='jugador' || jugador.rol == null"></div>
+            <div class="gol row" *ngIf="jugador.rol =='jugador' || jugador.rol == null">
+              <img src="../../../../assets/logos/pelota-futbol.png" alt="">
+            </div>
             <div class="gol-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
           </div>
         </div>
