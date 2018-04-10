@@ -1,6 +1,5 @@
-import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Component, OnInit, Inject, ViewContainerRef } from '@angular/core';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {
     Localidad,
@@ -22,7 +21,6 @@ import {
     ]
 })
 export class LocalidadesCargaComponent implements OnInit {
-    @BlockUI() blockUI: NgBlockUI;
     lsProvincias = new Array<Provincia>();
     localidad: Localidad;
 
@@ -42,16 +40,13 @@ export class LocalidadesCargaComponent implements OnInit {
     }
 
     registrarLocalidad() {
-        this.blockUI.start();
         this.localidadService.create(this.localidad).subscribe(
             data => {
-                this.blockUI.stop();
                 this.dialogRef.close(true)
                 this.toastr.success("La localidad fue creada correctamente", "Exito!");
             },
             error => {
-                this.blockUI.stop();
-                 this.toastr.error("El nombre de esa localidad ya existe", "Error!");
+                this.toastr.error("El nombre de esa localidad ya existe", "Error!");
             });
     }
 }

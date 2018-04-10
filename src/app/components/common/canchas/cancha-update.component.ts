@@ -16,11 +16,11 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 })
 export class CanchaUpdateComponent {
     @ViewChild('canchaForm') canchaForm: FormGroup;
-
     public cancha = new Cancha();
     public lsCanchas = new Array<Cancha>();
 
-    constructor(private canchaService: CanchaService, public toastr: ToastsManager, private router: Router) {
+    constructor(private canchaService: CanchaService, public toastr: ToastsManager, private router: Router
+    ) {
 
         this.canchaService.getAll().subscribe(
             data => {

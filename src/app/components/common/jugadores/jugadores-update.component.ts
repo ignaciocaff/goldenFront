@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DialogService } from '../../../services/common-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
@@ -48,7 +47,6 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class JugadoresUpdateComponent {
     @ViewChild('jugadorForm') jugadorForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
 
     user: Usuario;
 
@@ -237,16 +235,13 @@ export class JugadoresUpdateComponent {
     }
 
     registrarJugador() {
-        this.blockUI.start();
         this.jugadorService.create(this.jugador).subscribe(
             data => {
                 this.toastr.success('El jugador se ha modificado correctamente.', 'Exito!');
-                this.blockUI.stop();
                 this.limpiar();
             },
             error => {
                 this.toastr.error('El jugador no se ha modificado.", "Error!');
-                this.blockUI.stop();
             });
     }
 

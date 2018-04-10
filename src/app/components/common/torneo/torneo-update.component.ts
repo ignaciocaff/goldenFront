@@ -3,7 +3,6 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo } from '../../../entities/index';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService } from '../../../services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { EquipoService } from '../../../services/entity-services/index';
@@ -22,7 +21,6 @@ import { ConfirmationDialog } from '../../common/dialog/index';
 
 export class TorneoUpdateComponent implements OnInit {
     @ViewChild('torneoForm') torneoForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
     dialogRef: MatDialogRef<ConfirmationDialog>;
 
     itemList = [];

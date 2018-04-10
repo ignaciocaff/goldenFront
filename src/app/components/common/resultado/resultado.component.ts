@@ -284,6 +284,9 @@ export class ResultadoComponent implements OnInit {
         this.router.navigate(['home/resultado-carga']);
     }
 
+    routeModificacion() {
+
+    }
 
     eliminarPartido(partido: IPartido) {
         this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {

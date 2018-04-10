@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DialogService } from '../../../services/common-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
@@ -31,7 +30,6 @@ import {
 
 export class NoticiaCargaComponent implements OnInit {
     @ViewChild('noticiaForm') noticiaForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
 
     public noticia = new Noticia();
     public club: Club;
@@ -72,21 +70,21 @@ export class NoticiaCargaComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams
-          .filter(params => params.id)
-          .subscribe(params => {    
-            this.id_noti = params.id;
-            this.cargarNoticia(this.id_noti);
-          });
-      }
+            .filter(params => params.id)
+            .subscribe(params => {
+                this.id_noti = params.id;
+                this.cargarNoticia(this.id_noti);
+            });
+    }
 
-      cargarNoticia(id) {
+    cargarNoticia(id) {
         this.noticiaService.getById(id).subscribe(
             data => {
                 this.noticia = data;
                 this.getThumbnails();
                 this.esUpdate = true;
 
-                if (this.noticia.torneo.id_torneo == null){
+                if (this.noticia.torneo.id_torneo == null) {
                     this.esGeneral = true;
                 }
             },
@@ -118,31 +116,25 @@ export class NoticiaCargaComponent implements OnInit {
     }
 
     registrarNoticia() {
-        this.blockUI.start();
         this.noticiaService.create(this.noticia).subscribe(
             data => {
                 this.toastr.success('La noticia se ha enviado correctamente.', 'Exito!');
-                this.blockUI.stop();
                 this.limpiar();
             },
             error => {
                 this.toastr.error('La noticia no se ha enviado.", "Error!');
-                this.blockUI.stop();
             });
     }
 
     actualizarNoticia() {
-        this.blockUI.start();
         this.noticiaService.update(this.noticia).subscribe(
             data => {
                 this.toastr.success('La noticia se ha guardado correctamente.', 'Exito!');
-                this.blockUI.stop();                
                 this.router.navigate(['home/noticia/' + this.noticia.id_noticia]);
                 this.limpiar();
             },
             error => {
                 this.toastr.error('La noticia no se ha guardado.", "Error!');
-                this.blockUI.stop();
             });
     }
 
@@ -239,7 +231,7 @@ export class NoticiaCargaComponent implements OnInit {
 
     onCategoriaNoticiaChange(newValue) {
         if (newValue != null) {
-            this.noticia.categoriaNoticia.id_categoria_noticia = this.lsCategoriasNoticias.find(x  => x.descripcion == newValue).id_categoria_noticia;
+            this.noticia.categoriaNoticia.id_categoria_noticia = this.lsCategoriasNoticias.find(x => x.descripcion == newValue).id_categoria_noticia;
             this.noticia.categoriaNoticia.descripcion = newValue;
         }
     }

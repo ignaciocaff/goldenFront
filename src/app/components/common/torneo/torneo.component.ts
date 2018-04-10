@@ -3,7 +3,6 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo } from '../../../entities/index';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { TipoTorneoService, ModalidadService, ReglasService, CategoriaService, TorneoService } from '../../../services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { EquipoService } from '../../../services/entity-services/index';
@@ -19,7 +18,6 @@ import { TorneoLSEmitter } from '../../../services/common-services/index';
 
 export class TorneoComponent implements OnInit {
     @ViewChild('torneoForm') torneoForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
 
     itemList = [];
     selectedItems = [];
@@ -186,18 +184,15 @@ export class TorneoComponent implements OnInit {
     }
 
     registrarTorneo() {
-        this.blockUI.start(); // Start blocking
         this.torneo.lsEquipos = this.lsEquiposToPost;
         this.torneoService.create(this.torneo).subscribe(
             data => {
                 this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');
                 this.torneoLsEmitter.trigger(this.torneo);
                 this.limpiar();
-                this.blockUI.stop();
             },
             error => {
                 this.toastr.error('El torneo no se ha creado, el nombre ya existe', 'Error!');
-                this.blockUI.stop();
             });
     }
 

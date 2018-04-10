@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Torneo, Categoria, Club, Equipo } from '../../../entities/index';
 import { CategoriaService, ClubService, EquipoService } from '../../../services/index';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
 
@@ -18,7 +17,6 @@ import { FileService } from '../../../services/entity-services/file.service';
 })
 export class EquipoComponent {
     @ViewChild('equipoForm') equipoForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
 
     public equipo = new Equipo();
     public club: Club;
@@ -105,16 +103,13 @@ export class EquipoComponent {
     }
 
     registrarEquipo() {
-        this.blockUI.start();
         this.equipoService.create(this.equipo).subscribe(
             data => {
                 this.toastr.success('El equipo se ha registrado correctamente', 'Exito!');
-                this.blockUI.stop();
                 this.limpiarCampos();
             },
             error => {
                 this.toastr.error('El equipo no se ha registrado, el nombre ya existe para este torneo", "Error!');
-                this.blockUI.stop();
             });
     }
 

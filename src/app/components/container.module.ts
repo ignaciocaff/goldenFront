@@ -16,7 +16,7 @@ import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
 import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
 import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
-
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { MultiSelectModule } from 'primeng/primeng';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -30,7 +30,7 @@ import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
 import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
-import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/ck-editor.component';
+import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
 import { HomeComponent } from './home/index';
 import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualizacion.component';
 import { MatTableModule } from '@angular/material/table';
@@ -109,7 +109,8 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
     NgxDnDModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    ShareButtonsModule.forRoot()
+    ShareButtonsModule.forRoot(),
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   entryComponents: [ConfirmationDialog, FixtureDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,

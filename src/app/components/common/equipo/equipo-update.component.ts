@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Torneo, Categoria, Club, Equipo, Jugador } from '../../../entities/index';
 import { CategoriaService, ClubService, EquipoService } from '../../../services/index';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
@@ -22,8 +21,6 @@ export class EquipoUpdateComponent implements OnInit {
     @ViewChild('equipoForm') equipoForm: FormGroup;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-
-    @BlockUI() blockUI: NgBlockUI;
 
     dialogRef: MatDialogRef<ConfirmationDialog>;
     displayedColumns = ['apellido', 'nombre', 'nro_documento', 'id_jugador'];
@@ -134,17 +131,14 @@ export class EquipoUpdateComponent implements OnInit {
     }
 
     modificarEquipo() {
-        this.blockUI.start();
         this.equipoService.update(this.equipo).subscribe(
             data => {
                 console.log(this.equipo);
                 this.toastr.success('El equipo se ha modificado correctamente', 'Exito!');
-                this.blockUI.stop();
                 this.limpiarCampos();
             },
             error => {
                 this.toastr.error('El equipo no se ha modificado", "Error!');
-                this.blockUI.stop();
             });
     }
 

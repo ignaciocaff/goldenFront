@@ -7,7 +7,6 @@ import { ImageUploadModule } from 'angular2-image-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LoginComponent, LoginCargaComponent } from './components/common/login/index';
-import { BlockUIModule } from 'ng-block-ui';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { AuthenticationService } from './services/index';
 import { AppConfig } from './app.config';
@@ -22,6 +21,7 @@ import { MatTableModule } from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { ShareButtonsModule } from '@ngx-share/buttons';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    BlockUIModule,
     MultiSelectModule,
     AngularMultiSelectModule,
     AngularFontAwesomeModule,
@@ -45,7 +44,8 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
     ImageUploadModule.forRoot(),
     AppRoutingModule,
     MatTableModule,
-    CdkTableModule
+    CdkTableModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [AuthenticationService, AppConfig, SharedService,
     {

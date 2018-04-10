@@ -4,7 +4,6 @@ import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { Reglamento } from '../../../entities/index';
 import { ReglasService } from "../../../services/index";
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 
 @Component({
@@ -16,7 +15,6 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 })
 export class ReglamentoCargaComponent {
     @ViewChild('reglamentoForm') reglamentoForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
 
     public reglamento = new Reglamento();
     public esUpdate: boolean = false;
@@ -33,15 +31,12 @@ export class ReglamentoCargaComponent {
     }
 
     registrarReglamento() {
-        this.blockUI.start();
         this.reglasService.registrarReglamento(this.reglamento).subscribe(data => {
             this.toastr.success('El reglamento se ha registrado con éxito.', 'Exito!');
-            this.blockUI.stop();
             this.limpiar();
         },
             error => {
                 this.toastr.error('El reglamento no se ha registrado.", "Error!');
-                this.blockUI.stop();
             });
     }
 
@@ -59,17 +54,14 @@ export class ReglamentoCargaComponent {
     }
 
     actualizarReglamento() {
-        this.blockUI.start();
         this.reglasService.actualizarReglamento(this.reglamento).subscribe(
             data => {
                 this.toastr.success('El reglamento se ha guardado correctamente.', 'Éxito!');
-                this.blockUI.stop();
                 this.router.navigate(['home/reglamento']);
                 this.limpiar();
             },
             error => {
                 this.toastr.error('El reglamento no se ha guardado.", "Error!');
-                this.blockUI.stop();
             });
     }
 

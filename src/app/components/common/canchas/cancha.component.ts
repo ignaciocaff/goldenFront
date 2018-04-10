@@ -6,6 +6,7 @@ import {
 } from '../../../entities/index';
 import { CanchaService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
     selector: 'cancha',
@@ -16,24 +17,27 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 })
 export class CanchaComponent {
     @ViewChild('canchaForm') canchaForm: FormGroup;
-
     public cancha = new Cancha();
 
-    constructor(private canchaService: CanchaService, public toastr: ToastsManager, private router: Router) { }
+    constructor(private canchaService: CanchaService, public toastr: ToastsManager, private router: Router
+        , private spinnerService: Ng4LoadingSpinnerService) { }
 
     registrarCancha() {
         console.error(this.cancha)
         this.cancha.club.id_club = 1;
 
+        this.spinnerService.show();
         this.canchaService.create(this.cancha).subscribe(
             data => {
                 if (data) {
                     this.toastr.success('La cancha se ha creado', 'Exito!');
                     this.limpiarCampos();
+                    this.spinnerService.hide();
                 }
             },
             error => {
                 this.toastr.error('La cancha no se ha creado, el nombre ya existe', 'Error!');
+                this.spinnerService.hide();
             });
     }
 

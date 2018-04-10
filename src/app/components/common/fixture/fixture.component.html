@@ -16,8 +16,8 @@
       <div class="inputGroupContainer">
         <div class="input-group date">
           <span class="input-group-addon">
-                <i class="glyphicon glyphicon-calendar"></i>
-              </span>
+            <i class="glyphicon glyphicon-calendar"></i>
+          </span>
           <input [(ngModel)]="fecha.fecha" name="fecha" class="form-control" (ngModelChange)="fecha.fecha = $event" type="date" />
         </div>
       </div>
@@ -29,13 +29,13 @@
       <div class="inputGroupContainer">
         <div class="input-group">
           <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
+            <i class="glyphicon glyphicon-list"></i>
+          </span>
           <select [(ngModel)]="zona" name="zona" [disabled]="fecha.fecha == null" required class="form-control selectpicker" (blur)="verificarFecha();"
             (ngModelChange)="equiposPorZona(zona)">
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
-              </select>
+            <option value="null">Elija su opcion</option>
+            <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
+          </select>
         </div>
       </div>
     </div>
@@ -46,10 +46,10 @@
       <div class="inputGroupContainer">
         <div class="input-group">
           <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-home"></i>
-                      </span>
-          <input [(ngModel)]="cantidadPartidos" [disabled]="!zona.id_zona != 0" name="cantidadPartidos" required class="form-control"
-            type="number" (blur)="dibujarPartidos()">
+            <i class="glyphicon glyphicon-home"></i>
+          </span>
+          <input [(ngModel)]="cantidadPartidos" [disabled]="!zona.id_zona" name="cantidadPartidos" required class="form-control" type="number"
+            (blur)="dibujarPartidos()">
         </div>
       </div>
     </div>
@@ -107,13 +107,13 @@
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
+                        <i class="glyphicon glyphicon-list"></i>
+                      </span>
                       <select [(ngModel)]="partido.horario" name="horario" required class="form-control selectpicker" (change)="compararHorarios(partido)"
                         required=''>
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}}</option>
-              </select>
+                        <option value="null">Elija su opcion</option>
+                        <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}}</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -126,12 +126,12 @@
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
+                        <i class="glyphicon glyphicon-list"></i>
+                      </span>
                       <select [(ngModel)]="partido.cancha" name="cancha" required (change)="compararHorarios(partido)" class="form-control">
-                <option value=" ">Elija su opcion</option>
-                <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
-              </select>
+                        <option value=" ">Elija su opcion</option>
+                        <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
+                      </select>
                     </div>
                   </div>
                 </div>

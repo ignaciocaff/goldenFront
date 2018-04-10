@@ -34,6 +34,7 @@ export class FixtureUpdateFechaComponent implements OnInit {
     lsZonas = new Array<Zona>();
     fixture = new Fixture();
     id_torneo: number;
+    fecha = new Fecha();
     nuevaFecha = new Fecha();
     id_fecha_cambiar: number;
     habilitarBoton: Boolean = false;

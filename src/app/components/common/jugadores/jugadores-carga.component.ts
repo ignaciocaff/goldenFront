@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { DialogService } from '../../../services/common-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
@@ -48,14 +47,14 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class JugadoresCargaComponent implements OnInit {
     @ViewChild('jugadorForm') jugadorForm: FormGroup;
-    @BlockUI() blockUI: NgBlockUI;
 
     user: Usuario;
 
-    public existeJugador: Boolean = false;
-    public visualizable: Boolean = false;
-    public esRepresentante: Boolean = false;
-    public esJugadorBD: Boolean = false;
+    public existeJugador: boolean = false;
+    public existejugador: boolean = false;
+    public visualizable: boolean = false;
+    public esRepresentante: boolean = false;
+    public esJugadorBD: boolean = false;
     public jugador = new Jugador();
     public tipoDocumento: TipoDocumento;
     public provincia: Provincia;
@@ -101,16 +100,14 @@ export class JugadoresCargaComponent implements OnInit {
 
     verificarUsuario() {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-        this.blockUI.start();
         if (this.user.perfil.id_perfil != 1) {
             this.usuarioService.getEquipoRepresentante(this.user.id_usuario).subscribe(
                 data => {
                     this.jugador.equipo = data;
                     this.esRepresentante = true;
-                    this.blockUI.stop();
                 }
             );
-        } else { this.blockUI.stop(); }
+        } else { }
     }
 
     cargarTiposDocumento() {
@@ -204,7 +201,6 @@ export class JugadoresCargaComponent implements OnInit {
     }
 
     consultarDatosjugador() {
-        this.blockUI.start();
         this.jugadorService.getByDoc(this.jugador.nro_documento).subscribe(
             data => {
                 if (data['id_persona'] != null) {
@@ -222,12 +218,10 @@ export class JugadoresCargaComponent implements OnInit {
                     this.cargarFoto();
                     this.jugador.domicilio.localidad = jugador.domicilio.localidad.provincia.lsLocalidades.find(x => x.id_localidad != 0);
                     this.lsLocalidades.push(this.jugador.domicilio.localidad);
-                    this.blockUI.stop();
                 }
             },
             error => {
                 error.json()['Message'];
-                this.blockUI.stop();
             });
     }
 
@@ -255,16 +249,13 @@ export class JugadoresCargaComponent implements OnInit {
     }
 
     registrarJugador() {
-        this.blockUI.start();
         this.jugadorService.create(this.jugador).subscribe(
             data => {
                 this.toastr.success('El jugador se ha registrado correctamente.', 'Exito!');
-                this.blockUI.stop();
                 this.limpiar();
             },
             error => {
                 this.toastr.error('El jugador no se ha registrado.", "Error!');
-                this.blockUI.stop();
             });
     }
 
