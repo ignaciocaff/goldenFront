@@ -16,8 +16,8 @@ export class LocalidadService {
         return this.http.get(this.config.apiUrl + 'domicilio/localidades/' + id).map((response: Response) => response.json());
     }
 
-    create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'domicilio/provincias/rlocalidad', obj);
+    create(id_provincia: number, obj: any) {
+        return this.http.post(this.config.apiUrl + 'provincia/localidad/' + id_provincia, obj);
     }
 
     update(obj: any) {

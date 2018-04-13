@@ -281,7 +281,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [ngModel]="jugador.domicilio.localidad.provincia.n_provincia" name="provincia" required class="form-control selectpicker"
+                      <select [ngModel]="jugador.domicilio.provincia.n_provincia" name="provincia" required class="form-control selectpicker"
                         required (ngModelChange)="provincia_onChanged($event)" [disabled]="!existeJugador">
                         <option value="null">Elija su opción</option>
                         <option *ngFor="let prov of lsProvincias">{{prov.n_provincia}}</option>
@@ -298,10 +298,10 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [ngModel]="jugador.domicilio.localidad.n_localidad" (nModelChange)="onLocalidadChange($event)" name="localidad" required
-                        class="form-control selectpicker" [disabled]="!existeJugador">
+                      <select [(ngModel)]="localidadSeleccionada" (change)="onLocalidadChange(localidadSeleccionada)"  #localidad='ngModel' name="localidad" required
+                        class="form-control selectpicker" *ngIf="!existejugador">
                         <option value="null">Elija su opción</option>
-                        <option *ngFor="let loc of lsLocalidades">{{loc.n_localidad}}</option>
+                        <option *ngFor="let localidad of lsLocalidades">{{localidad.n_localidad}}</option>
                       </select>
                       <div class="input-group-btn">
                         <button type="button" class="btn btn-primary" (click)="agregarLocalidad()">+</button>

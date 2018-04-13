@@ -22,6 +22,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { LocalidadesCargaComponent } from './components/common/localidades/index';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
       useClass: CustomToastOption
     }],
   entryComponents: [
-    LoginCargaComponent
+    LoginCargaComponent,
+    LocalidadesCargaComponent
   ],
   bootstrap: [AppComponent]
 })

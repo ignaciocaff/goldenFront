@@ -27,3 +27,9 @@
 .inline-display {
   display: inline-block;
 }
+
+.images img:hover {
+  transform: scale(1.25);
+  transition: transform .25s ease;
+
+}

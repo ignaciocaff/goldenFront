@@ -1,5 +1,5 @@
 import {
-    Localidad
+    Provincia
 } from './index';
 
 export class Domicilio {
@@ -10,7 +10,7 @@ export class Domicilio {
     public piso: string;
     public dpto: string;
     public torre: string;
-    public localidad: Localidad;
+    public provincia: Provincia;
     public barrio: string;
     public observaciones: string;
 
@@ -21,7 +21,7 @@ export class Domicilio {
         piso?: string,
         dpto?: string,
         torre?: string,
-        localidad?: Localidad,
+        provincia?: Provincia,
         barrio?: string,
         observaciones?: string,
     ) {
@@ -42,9 +42,9 @@ export class Domicilio {
 
         if (torre) this.torre = torre;
         else this.torre = null;
-
-        if (localidad) this.localidad = localidad;
-        else this.localidad = new Localidad();
+        
+        if (provincia) this.provincia = provincia;
+        else this.provincia = new Provincia();
 
         if (barrio) this.barrio = barrio;
         else this.barrio = null;
