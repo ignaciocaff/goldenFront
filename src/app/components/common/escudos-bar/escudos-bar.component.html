@@ -4,9 +4,9 @@
   </div>
   <div id="header" class="col-sm-8 col-md-8">
     <div id="container">
-      <div *ngFor="let img of images" class="inline-display">
-        <div class="images">
-          <img [src]="'http://localhost:50042' + img.ThumbPath" class="img-thumbnail" title="{{img.FileName}}">
+      <div *ngFor="let equipo of lsEquipos" class="inline-display">
+        <div class="images" (click)="verEquipo(equipo.id_equipo)">
+          <img [src]="'http://localhost:50042' + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
         </div>
       </div>
     </div>

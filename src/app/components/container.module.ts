@@ -47,6 +47,8 @@ import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/posiciones/index';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -88,7 +90,9 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
     EquiposTorneoComponent,
     EquipoVisualizacionComponent,
     ReglamentoCargaComponent,
-    ReglamentoVisualizacionComponent
+    ReglamentoVisualizacionComponent,
+    PosicionesGeneralComponent,
+    PosicionesZonaComponent
   ],
   imports: [
     BrowserModule,

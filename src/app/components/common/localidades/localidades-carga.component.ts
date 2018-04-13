@@ -5,6 +5,8 @@ import {
     Localidad,
     Provincia
 } from '../../../entities/index';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 
 import {
     ProvinciaService,
@@ -21,32 +23,36 @@ import {
     ]
 })
 export class LocalidadesCargaComponent implements OnInit {
-    lsProvincias = new Array<Provincia>();
-    localidad: Localidad;
+
+    public provincia: Provincia;
+    public localidad: Localidad = new Localidad();
 
     constructor(
         public dialogRef: MatDialogRef<LocalidadesCargaComponent>,
         private provinciaService: ProvinciaService,
         private localidadService: LocalidadService,
         public toastr: ToastsManager,
+        private spinnerService: Ng4LoadingSpinnerService,
         @Inject(MAT_DIALOG_DATA) public data: Provincia
     ) {
 
     }
 
     ngOnInit() {
-        this.localidad = new Localidad();
-        this.localidad.provincia = this.data;
+        this.provincia = this.data;
     }
 
     registrarLocalidad() {
-        this.localidadService.create(this.localidad).subscribe(
+        this.spinnerService.show();
+        this.localidadService.create(this.provincia.id_provincia, this.localidad).subscribe(
             data => {
+                this.spinnerService.hide();
                 this.dialogRef.close(true)
-                this.toastr.success("La localidad fue creada correctamente", "Exito!");
+                this.toastr.success("La localidad fue creada correctamente.", "Exito!");
             },
             error => {
-                this.toastr.error("El nombre de esa localidad ya existe", "Error!");
+                this.spinnerService.hide();
+                this.toastr.error("El nombre de esa localidad ya existe.", "Error!");
             });
     }
 }

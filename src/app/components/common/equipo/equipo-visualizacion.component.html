@@ -40,7 +40,7 @@
               <div class="foto col-md-4 col-sm-4">
                 <img [src]="'http://localhost:50042/' + jugador.imagePath">
               </div>
-              <div class="col-md-8 col-sm-8">
+              <div class="col-md-6 col-sm-6">
                 <div class="info-jugador">
                   <div class="nombre-jugador"> {{jugador.apellido}}, {{jugador.nombre}} </div>
                   <div class="edad">
@@ -55,6 +55,9 @@
                     <span class="atrib-jugador">X </span>
                   </div>
                 </div>
+              </div>
+              <div class="col-md-2 col-sm-2">
+                <button type="submit" (click)="desvincularJugador(jugador.id_jugador)" class="btn btn-primary desvincular" *ngIf="esAdmin">Desvincular</button>
               </div>
             </div>
           </li>

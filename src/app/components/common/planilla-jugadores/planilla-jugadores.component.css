@@ -1,13 +1,18 @@
 .boton {
-  margin: 15px;
+  margin: 45px 15px 15px 15px;
   padding: 15px;
 }
 
 .planilla {
   margin-bottom: 30px;
-   visibility: hidden;
+  visibility: hidden;
   display: none;
 }
+
+.tamaño {
+  visibility: hidden;
+}
+
 .declaracion {
   border: 3px solid black;
   margin: 15px;
@@ -44,7 +49,7 @@
 } */
 
 .jugador {
-  width : 100%;
+  width: 100%;
   height: 132px;
 }
 
@@ -79,7 +84,7 @@
 }
 
 .llenado-dt {
-  background-color: rgb(224,200,138);
+  background-color: rgb(224, 200, 138);
   height: 100px;
 }
 
@@ -110,7 +115,7 @@
 
 .sancion-dt {
   height: 22px;
-  background-color: rgb(224,200,138);
+  background-color: rgb(224, 200, 138);
 }
 
 .amarilla {
@@ -123,7 +128,7 @@
 .amarilla-dt {
   border-bottom: 2px solid rgb(170, 145, 93);
   border-top: 2px solid rgb(170, 145, 93);
-  background-color: rgb(224,200,138);
+  background-color: rgb(224, 200, 138);
   height: 22px;
 }
 
@@ -135,6 +140,14 @@
 
 .gol {
   height: 34px;
+}
+
+.gol img {
+  max-height: 30px;
+  max-width: auto;
+  margin-left: 10px;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
 }
 
 .gol-dt {

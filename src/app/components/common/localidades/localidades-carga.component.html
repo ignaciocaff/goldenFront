@@ -1,31 +1,35 @@
 <form #localidadesForm="ngForm">
-    <h3>Carga de Localidades</h3>
-    <p>Ingrese los datos para la carga de una localidad</p>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group has-feedback">
-                <label class="control-label">Provincia</label>
-                <div class="inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <input [(ngModel)]="localidad.provincia.n_provincia" name="n_provincia" required #n_provincia='ngModel' disabled type="text"
-                            class="form-control">
-                    </div>
-                </div>
-            </div>
+  <h3>Carga de Localidades</h3>
+  <p>Ingrese los datos para la carga de una localidad</p>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group has-feedback">
+        <label class="control-label">Provincia</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <input [(ngModel)]="provincia.n_provincia" name="n_provincia" required #n_provincia='ngModel' disabled type="text"
+              class="form-control">
+          </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group has-feedback">
-                <label class="control-label">Localidad</label>
-                <div class="inputGroupContainer">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                        <input [(ngModel)]="localidad.n_localidad" name="n_localidad" required #n_localidad='ngModel' type="text" class="form-control">
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-    <button type="submit" [disabled]="!localidadesForm.valid" class="btn btn-primary" (click)="registrarLocalidad()">Guardar</button>
-    <button type="button" md-button (click)="dialogRef.close()" class="btn">Cancelar</button>
+    <div class="col-md-6">
+      <div class="form-group has-feedback">
+        <label class="control-label">Localidad</label>
+        <div class="inputGroupContainer">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
+            <input [(ngModel)]="localidad.n_localidad" name="n_localidad" required #n_localidad='ngModel' type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="!localidadesForm.valid" class="btn btn-primary" (click)="registrarLocalidad()">Guardar</button>
+  <button type="button" md-button (click)="dialogRef.close()" class="btn">Cancelar</button>
 </form>

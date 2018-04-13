@@ -27,6 +27,7 @@ import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './co
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
+import { PosicionesGeneralComponent } from "./common/posiciones/index";
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -109,8 +110,10 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'reglamento', component: ReglamentoVisualizacionComponent,
+            },
+            {
+                path: 'posiciones', component: PosicionesGeneralComponent,
             }
-
 
         ]
     },
