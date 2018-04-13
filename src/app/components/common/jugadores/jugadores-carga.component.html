@@ -29,7 +29,7 @@
           </div>
           <div class="col-md-2 col-sm-2">
             <h5>Rol</h5>
-            <input type="radio" name="rol" [(ngModel)]="jugador.rol" value="jugador"> Jugador
+            <input type="radio" name="rol" [checked]="reinicioForm" [(ngModel)]="jugador.rol" value="jugador"> Jugador
             <br>
             <input type="radio" name="rol" [(ngModel)]="jugador.rol" value="director_tecnico"> Director técnico
             <br>
@@ -38,7 +38,7 @@
           <div class="col-md-2 text-center col-sm-2">
             <div class="form-group has-feedback">
               <label class="control-label" for="logo">Seleccione su foto</label>
-              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG, JPEG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG, JPEG" (uploadStatus)="refreshImages($event)" [disabled]=esJugadorBD></app-file-upload>
             </div>
           </div>
           <div class="col-md-3 col-sm-3">
@@ -92,7 +92,7 @@
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
                       <select [ngModel]="jugador.tipoDocumento.descripcion" name="tipoDoc" required class="form-control selectpicker" (ngModelChange)="onTipoDocumentoChange($event)"
-                        [disabled]="existejugador" *ngIf="!existejugador">
+                        [disabled]="esJugadorBD" *ngIf="!existejugador">
                         <option value="null">Elija su opción</option>
                         <option *ngFor="let tipoDocumento of lsTiposDocumento">{{tipoDocumento.descripcion}}</option>
                       </select>
@@ -109,7 +109,7 @@
                         <i class="glyphicon glyphicon-user"></i>
                       </span>
                       <input [(ngModel)]="jugador.nombre" name="nombre" required #nombre='ngModel' class="form-control" type="text" required=""
-                        [disabled]="existejugador">
+                        [disabled]="esJugadorBD">
                     </div>
                     <div *ngIf="nombre.errors && (nombre.dirty || nombre.touched)" class="error">
                       <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -125,7 +125,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-user"></i>
                       </span>
-                      <input [(ngModel)]="jugador.apellido" name="apellido" required #apellido='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.apellido" name="apellido" required #apellido='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                     <div *ngIf="apellido.errors && (apellido.dirty || apellido.touched)" class="error">
                       <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -141,18 +141,9 @@
                 <label class="control-label">Fecha de Nacimiento (*)</label>
                 <div class="inputGroupContainer">
                   <div class="form-group">
-                    <div class='input-group date' id='datetimepicker' *ngIf="!esJugadorBD">
+                    <div class='input-group date' id='datetimepicker'>
                       <input [ngModel]="jugador.fecha_nacimiento" (ngModelChange)="jugador.fecha_nacimiento = $event" min="1950-01-01" name="fecha"
-                        required type='date' class="form-control" *ngIf="!existejugador" [disabled]="existejugador" (blur)="calcularEdad()"
-                      />
-                      <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                    </div>
-                    <div class='input-group date' id='datetimepicker' *ngIf="esJugadorBD">
-                      <input [ngModel]="jugador.fecha_nacimiento | date:'yyyy-MM-dd'" (ngModelChange)="jugador.fecha_nacimiento = $event" min="1950-01-01"
-                        name="fecha" required type='date' class="form-control" *ngIf="!existejugador" [disabled]="existejugador"
-                        (blur)="calcularEdad()" />
+                        required type='date' class="form-control" *ngIf="!existejugador" [disabled]="esJugadorBD" (blur)="calcularEdad()"/>
                       <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                       </span>
@@ -184,7 +175,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-briefcase"></i>
                       </span>
-                      <input [(ngModel)]="jugador.ocupacion" name="ocupacion" #ocupacion='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.ocupacion" name="ocupacion" #ocupacion='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                   </div>
                 </div>
@@ -216,7 +207,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                       </span>
-                      <input [(ngModel)]="jugador.domicilio.calle" name="calle" required #calle='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.domicilio.calle" name="calle" required #calle='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                     <div *ngIf="calle.errors && (calle.dirty || calle.touched)" class="error">
                       <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -233,7 +224,7 @@
                         <i class="glyphicon glyphicon-home"></i>
                       </span>
                       <input [(ngModel)]="jugador.domicilio.numeracion" name="numeracion" required #numeracion='ngModel' class="form-control" type="number"
-                        [disabled]="existejugador">
+                        [disabled]="esJugadorBD">
                     </div>
                     <div *ngIf="numeracion.errors && (numeracion.dirty || numeracion.touched)" class="error">
                       <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -247,7 +238,7 @@
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <!--<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>-->
-                      <input [(ngModel)]="jugador.domicilio.piso" name="piso" #piso='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.domicilio.piso" name="piso" #piso='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                   </div>
                 </div>
@@ -258,7 +249,7 @@
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <!--<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>-->
-                      <input [(ngModel)]="jugador.domicilio.dpto" name="dpto" #dpto='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.domicilio.dpto" name="dpto" #dpto='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                   </div>
                 </div>
@@ -269,7 +260,7 @@
                   <div class="inputGroupContainer">
                     <div class="input-group">
                       <!--<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>-->
-                      <input [(ngModel)]="jugador.domicilio.torre" name="torre" #torre='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.domicilio.torre" name="torre" #torre='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                   </div>
                 </div>
@@ -282,12 +273,12 @@
                 <div class="form-group has-feedback">
                   <label class="control-label">Provincia (*)</label>
                   <div class="inputGroupContainer">
-                    <div class="input-group" >
+                    <div class="input-group">
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [ngModel]="jugador.domicilio.provincia.n_provincia" name="provincia" required class="form-control selectpicker" required
-                        (ngModelChange)="provincia_onChanged($event)" [disabled]="esJugadorBD" *ngIf="!existejugador">
+                      <select [(ngModel)]="jugador.domicilio.provincia.n_provincia" name="provincia" required class="form-control selectpicker"
+                        required (ngModelChange)="provincia_onChanged($event)" [disabled]="esJugadorBD" *ngIf="!existejugador">
                         <option value="null">Elija su opción</option>
                         <option *ngFor="let prov of lsProvincias">{{prov.n_provincia}}</option>
                       </select>
@@ -297,14 +288,14 @@
               </div>
               <div class="col-md-3 col-sm-3">
                 <div class="form-group has-feedback">
-                  <label class="control-label">Localidad (*)</label>
+                  <label class="control-label">Departamento (*)</label>
                   <div class="inputGroupContainer">
                     <div class="input-group" *ngIf="!esJugadorBD">
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
-                      <select [(ngModel)]="localidadSeleccionada" (change)="onLocalidadChange(localidadSeleccionada)"  #localidad='ngModel' name="localidad" required
-                        class="form-control selectpicker" *ngIf="!existejugador">
+                      <select [(ngModel)]="localidadSeleccionada" (change)="onLocalidadChange(localidadSeleccionada)" #localidad='ngModel' name="localidad"
+                        required class="form-control selectpicker" *ngIf="!existejugador">
                         <option value="null">Elija su opción</option>
                         <option *ngFor="let localidad of lsLocalidades">{{localidad.n_localidad}}</option>
                       </select>
@@ -316,7 +307,8 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                       </span>
-                      <input [(ngModel)]="jugador.domicilio.provincia.lsLocalidades[0].n_localidad" name="localidad" #localidad='ngModel' class="form-control" type="text" [disabled]="esJugadorBD" >
+                      <input [(ngModel)]="jugador.domicilio.provincia.lsLocalidades[0].n_localidad" name="localidad" #localidad='ngModel' class="form-control"
+                        type="text" [disabled]="esJugadorBD">
                     </div>
                   </div>
                 </div>
@@ -329,7 +321,7 @@
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                       </span>
-                      <input [(ngModel)]="jugador.domicilio.barrio" name="barrio" #barrio='ngModel' class="form-control" type="text" [disabled]="existejugador">
+                      <input [(ngModel)]="jugador.domicilio.barrio" name="barrio" #barrio='ngModel' class="form-control" type="text" [disabled]="esJugadorBD">
                     </div>
                   </div>
                 </div>
@@ -344,7 +336,7 @@
                 <div class="form-group has-feedback">
                   <label class="control-label">Observaciones</label>
                   <textarea [(ngModel)]="jugador.domicilio.observaciones" name="observaciones" class="form-control" rows="3" placeholder="Utilice este campo para agregar informacion referida al domicilio"
-                    maxlength="1000" [disabled]="existejugador"></textarea>
+                    maxlength="1000" [disabled]="esJugadorBD"></textarea>
                 </div>
               </div>
               <div class="col-md-7 col-sm-7">
@@ -375,7 +367,7 @@
                   <span class="input-group-addon">
                     <i class="glyphicon glyphicon-envelope"></i>
                   </span>
-                  <input [(ngModel)]="jugador.contacto.email" name="email" required #email='ngModel' class="form-control" type="email" [disabled]="existejugador">
+                  <input [(ngModel)]="jugador.contacto.email" name="email" required #email='ngModel' class="form-control" type="email" [disabled]="esJugadorBD">
                 </div>
                 <div *ngIf="email.errors && (email.dirty || email.touched)" class="error">
                   <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -393,7 +385,7 @@
                     <i class="glyphicon-earphone"></i>
                   </span>
                   <input [(ngModel)]="jugador.contacto.telefono_movil" name="telefono_movil" required #telefono_movil='ngModel' class="form-control"
-                    type="text" [disabled]="existejugador">
+                    type="text" [disabled]="esJugadorBD">
                 </div>
                 <div *ngIf="telefono_movil.errors && (telefono_movil.dirty || telefono_movil.touched)" class="error">
                   <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -410,7 +402,7 @@
                     <i class="glyphicon-earphone"></i>
                   </span>
                   <input [(ngModel)]="jugador.contacto.telefono_fijo" name="telefono_fijo" #telefono_fijo='ngModel' class="form-control" type="text"
-                    [disabled]="existejugador">
+                    [disabled]="esJugadorBD">
                 </div>
               </div>
             </div>
@@ -422,7 +414,7 @@
     </div>
     <div class="row">
       <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1">
-        <button type="submit" [disabled]="!jugadorForm.valid || existeJugador" (click)="registrarJugador()" class="btn btn-primary">Registrar</button>
+        <button type="submit" [disabled]="!jugadorForm.valid" (click)="registrarJugador()" class="btn btn-primary">Registrar</button>
         <button class="btn btn-default" (click)="limpiar()">Limpiar</button>
       </div>
     </div>

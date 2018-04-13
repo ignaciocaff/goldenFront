@@ -71,6 +71,9 @@ export class JugadoresCargaComponent implements OnInit {
     arraySubidas: Array<any> = [];
     params: String;
 
+    public reinicioForm: boolean = false;
+
+
     constructor(
         private tipoDocumentoService: TipoDocumentoService,
         private provinciaService: ProvinciaService,
@@ -92,11 +95,10 @@ export class JugadoresCargaComponent implements OnInit {
     // METODOS-----------------------------------------------------------------------
     ngOnInit() {
         this.jugador.contacto = this.contacto;
-        this.jugador.rol = 'jugador';
         this.cargarTiposDocumento();
         this.cargarProvincias();
         this.cargarEquipos();
-
+        this.jugador.rol = 'jugador';
     }
 
     verificarUsuario() {
@@ -158,12 +160,13 @@ export class JugadoresCargaComponent implements OnInit {
 
     limpiar() {
         this.jugadorForm.reset();
+        this.jugador = new Jugador();
         this.existeJugador = false;
         this.visualizable = false;
         this.esJugadorBD = false;
-        this.jugador = new Jugador();
         this.localidadSeleccionada = new Localidad();
         this.jugador.rol = 'jugador';
+        this.reinicioForm = true;
         this.verificarUsuario();
         this.images = [];
         this.lsLocalidades = [];
@@ -217,8 +220,8 @@ export class JugadoresCargaComponent implements OnInit {
                     this.jugador.domicilio.provincia.lsLocalidades[0] = jugador.domicilio.provincia.lsLocalidades.find(x => x.id_localidad != 0);
                     this.localidadSeleccionada.id_localidad = this.jugador.domicilio.provincia.lsLocalidades[0].id_localidad;
                     this.localidadSeleccionada.n_localidad = this.jugador.domicilio.provincia.lsLocalidades[0].n_localidad;
-                    this.spinnerService.hide();
                 }
+                this.spinnerService.hide();
             },
             error => {
                 error.json()['Message'];
@@ -244,19 +247,22 @@ export class JugadoresCargaComponent implements OnInit {
         if (this.jugador.domicilio.provincia.id_provincia != null) {
             this.dialogService.agregarLocalidad(this.jugador.domicilio.provincia).subscribe(
                 result => {
-                    this.lsProvincias = [];
-                    this.provinciaService.getAll().subscribe(
-                        data => {
-                            for (let i = 0; i < data.length; i++) {
-                                let provincia = new Provincia();
-                                provincia = data[i];
-                                this.lsProvincias.push(provincia);
-                            }
-                        },
-                        error => {
-                            this.lsProvincias = new Array<Provincia>();
-                            error.json()['Message'];
-                        });
+                    if (result) {
+                        this.lsProvincias = [];
+                        this.lsLocalidades = [];
+                        this.provinciaService.getAll().subscribe(
+                            data => {
+                                for (let i = 0; i < data.length; i++) {
+                                    let provincia = new Provincia();
+                                    provincia = data[i];
+                                    this.lsProvincias.push(provincia);
+                                }
+                            },
+                            error => {
+                                this.lsProvincias = new Array<Provincia>();
+                                error.json()['Message'];
+                            });
+                    }
                 });
         }
     }
@@ -266,11 +272,12 @@ export class JugadoresCargaComponent implements OnInit {
             data => {
                 this.spinnerService.hide();
                 this.toastr.success('El jugador se ha registrado correctamente.', 'Exito!');
+                this.reinicioForm = false;
                 this.limpiar();
             },
             error => {
                 this.spinnerService.hide();
-                this.toastr.error('El jugador no se ha registrado.", "Error!');                
+                this.toastr.error('El jugador no se ha registrado.", "Error!');
             });
     }
 
@@ -326,8 +333,12 @@ export class JugadoresCargaComponent implements OnInit {
     }
 
     onProvinciaChange(newValue) {
+        console.log("newV: " + newValue);
+        console.log("prov jug" + JSON.stringify(this.jugador.domicilio.provincia));
+        this.lsLocalidades = [];
         if (newValue != null) {
             this.jugador.domicilio.provincia.id_provincia = this.lsProvincias.find(x => x.n_provincia == newValue).id_provincia;
+            console.log("id_prov;" + this.jugador.domicilio.provincia.id_provincia);
             this.jugador.domicilio.provincia.n_provincia = newValue;
             this.lsLocalidades = this.lsProvincias.find(x => x.n_provincia == newValue).lsLocalidades;
         }
@@ -335,7 +346,11 @@ export class JugadoresCargaComponent implements OnInit {
 
     onEquipoChange(newValue) {
         if (newValue != null) {
-            this.jugador.equipo = this.lsEquipos.find(x => x.nombre == newValue);
+            var eq = new Equipo();
+            eq = this.lsEquipos.find(x => x.nombre == newValue);
+            this.jugador.equipo.id_equipo = eq.id_equipo;
+            this.jugador.equipo.nombre = eq.nombre;
+            this.jugador.equipo.categoria = eq.categoria;
         }
     }
 }
