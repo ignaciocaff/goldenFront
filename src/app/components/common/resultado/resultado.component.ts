@@ -5,7 +5,7 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { ParserService } from '../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
-    Turno, IEquipo, IPartido, Partido
+    Turno, IEquipo, IPartido, Partido, Jugador, Gol, Resultado
 } from '../../../entities/index';
 import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
@@ -32,6 +32,8 @@ export class ResultadoComponent implements OnInit {
     partidos = new Array<IPartido>();
     lsCanchas = new Array<Cancha>();
     horarios = new Array<HorarioFijo>();
+    jugadorVisitante = new Jugador();
+    jugadorLocal = new Jugador();
 
     equipos = new Array<IEquipo>();
     lsZonas = new Array<Zona>();
@@ -42,6 +44,11 @@ export class ResultadoComponent implements OnInit {
     cantidadZonas: number;
     id_torneo: number;
     check: Boolean = false;
+    lsJugadoresLocal = new Array<Jugador>();
+    lsJugadoresVisitante = new Array<Jugador>();
+
+    lsGolesLocal = new Array<Gol>();
+    lsGolesVisitante = new Array<Gol>();
 
     constructor(private fileService: FileService, public equipoService: EquipoService,
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
@@ -97,50 +104,178 @@ export class ResultadoComponent implements OnInit {
 
     public obtenerPartidos(zona: Zona) {
 
-        this.equiposPorZona(zona);
-        this.cantidadPartidos = null;
         this.partidos = [];
-
         this.fixtureService.obtenerPartidos(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
             data => {
                 this.partidos = data;
+
+                for (var i = 0; i < this.partidos.length; i++) {
+
+                    if (this.partidos[i].local) {
+                        this.obtenerJugadoresLocal(this.partidos[i]);
+                    }
+                    if (this.partidos[i].visitante) {
+                        this.obtenerJugadoresVisitante(this.partidos[i]);
+                    }
+                }
             }, error => {
 
             }
         );
     }
 
-    public equiposPorZona(zona: Zona) {
 
-        this.equipoService.getAllPorZona(zona.id_zona).subscribe(
+    obtenerJugadoresLocal(partido: IPartido) {
+        console.log('Dentro de obtener jugadores por equipo local' + partido.local[0].id_equipo);
+
+        this.equipoService.getJugadoresByIdEquipo(partido.local[0].id_equipo).subscribe(
             data => {
-                this.equipos = [];
-                for (var j = 0; j < data.length; j++) {
-                    var equipo = new IEquipo();
-                    if (this.id_torneo == data[j]['torneo']['id_torneo']) {
-                        equipo.id_equipo = data[j]['id_equipo'];
-                        equipo.nombre = data[j]['nombre'];
-                        equipo.logo = data[j]['logo'];
-                        this.equipos.push(equipo);
-                    }
+                this.lsJugadoresLocal = [];
+                for (let i = 0; i < data.length; i++) {
+                    var jugador = new Jugador();
+                    jugador = data[i];
+                    this.lsJugadoresLocal.push(jugador);
                 }
-                for (let i = 0; i < this.equipos.length; i++) {
-                    this.fileService.getImagesByEquipo(this.equipos[i].logo).subscribe(
-                        data => {
-                            if (data['ImagePath'] != null) {
-                                this.equipos[i].imagePath = data['ImagePath'];
-                            }
-                        },
-                        error => {
-                        });
-                }
+                partido.local[0].lsJugadores = this.lsJugadoresLocal;
             },
             error => {
                 error.json()['Message'];
             });
+    }
+
+    obtenerJugadoresVisitante(partido: IPartido) {
+
+        console.log('Dentro de obtener jugadores por equipo visitante' + partido.visitante[0].id_equipo);
+        this.equipoService.getJugadoresByIdEquipo(partido.visitante[0].id_equipo).subscribe(
+            data => {
+                this.lsJugadoresVisitante = [];
+                for (let i = 0; i < data.length; i++) {
+                    var jugador = new Jugador();
+                    jugador = data[i];
+                    this.lsJugadoresVisitante.push(jugador);
+                }
+                partido.visitante[0].lsJugadores = this.lsJugadoresVisitante;
+            },
+            error => {
+                error.json()['Message'];
+            });
+    }
+
+    onChangeLocal(obj: any) {
+
+    }
+    onChangeVisitante(obj: any) {
 
     }
 
+
+    golLocal(partido: IPartido) {
+        let gol = new Gol();
+        gol.equipo.id_equipo = partido.local[0].id_equipo;
+        gol.jugador = this.jugadorLocal;
+        gol.partido.id_partido = partido.id_partido;
+        this.lsGolesLocal.push(gol);
+    }
+
+    golVisitante(partido: IPartido) {
+        let gol = new Gol();
+        gol.equipo.id_equipo = partido.visitante[0].id_equipo;
+        gol.jugador = this.jugadorVisitante;
+        gol.partido.id_partido = partido.id_partido;
+        this.lsGolesVisitante.push(gol);
+    }
+
+    registrarResultado() {
+
+        var lsPartidos = new Array<Partido>();
+        lsPartidos = this.parserService.parseResultados(this.partidos);
+        var localContador = 0;
+        var visitanteContador = 0;
+
+        for (let i = 0; i < lsPartidos.length; i++) {
+
+            if (this.lsGolesLocal.find(x => x.partido.id_partido ==
+                lsPartidos[i].id_partido) == undefined
+                && this.lsGolesVisitante.find(x => x.partido.id_partido ==
+                    lsPartidos[i].id_partido) == undefined) {
+                /*Si no encuentra ningun jugador dentro de ambas listas para ese id
+                partido, significa q empataron*/
+                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
+                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
+                lsPartidos[i].resultado.empate = 1;
+            } else if (this.lsGolesLocal.find(x => x.partido.id_partido ==
+                lsPartidos[i].id_partido) == undefined
+                && this.lsGolesVisitante.find(x => x.partido.id_partido ==
+                    lsPartidos[i].id_partido) != undefined) {
+                /*Esto significa que local no esta definido por lo tanto no hizo goles
+                con lo cual gano si o si el visitante*/
+                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].visitante.id_equipo;
+                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].local.id_equipo;
+
+                for (let u = 0; u < this.lsGolesVisitante.length; u++) {
+                    if (this.lsGolesVisitante[u].partido.id_partido == lsPartidos[i].id_partido) {
+                        lsPartidos[i].lsGoleadoresVisitantes.push(this.lsGolesVisitante[u]);
+                    }
+                }
+
+            } else if (this.lsGolesLocal.find(x => x.partido.id_partido ==
+                lsPartidos[i].id_partido) != undefined
+                && this.lsGolesVisitante.find(x => x.partido.id_partido ==
+                    lsPartidos[i].id_partido) == undefined) {
+                /*Esto significa que visitante no esta definido por lo tanto no hizo goles
+               con lo cual gano si o si el local*/
+                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
+                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
+                for (let k = 0; k < this.lsGolesLocal.length; k++) {
+                    if (this.lsGolesLocal[k].partido.id_partido == lsPartidos[i].id_partido) {
+                        lsPartidos[i].lsGoleadoresLocales.push(this.lsGolesLocal[k]);
+                    }
+                }
+
+            } else {
+                /* Esta es la logica si ambas listas estan definidas para ese partido
+                lo que significa que hay que empezar a acumular goles y ver quien gano*/
+
+                for (let j = 0; j < this.lsGolesLocal.length; j++) {
+                    if (lsPartidos[i].id_partido == this.lsGolesLocal[j].partido.id_partido) {
+                        localContador = localContador + 1;
+                        lsPartidos[i].lsGoleadoresLocales.push(this.lsGolesLocal[j]);
+                    }
+                }
+                for (let h = 0; h < this.lsGolesVisitante.length; h++) {
+                    if (lsPartidos[i].visitante.id_equipo == this.lsGolesVisitante[h].jugador.equipo.id_equipo) {
+                        visitanteContador = visitanteContador + 1;
+                        lsPartidos[i].lsGoleadoresVisitantes.push(this.lsGolesVisitante[h]);
+                    }
+
+                }
+            }
+            if (localContador != visitanteContador) {
+                if (localContador > visitanteContador) {
+                    lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
+                    lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
+                } else {
+                    lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].visitante.id_equipo;
+                    lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].local.id_equipo;
+                }
+            } else {
+                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
+                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
+                lsPartidos[i].resultado.empate = 1;
+            }
+
+
+            localContador = 0;
+            visitanteContador = 0;
+        }
+
+
+        console.log(lsPartidos);
+        this.lsGolesLocal = [];
+        this.lsGolesVisitante = [];
+        lsPartidos = [];
+
+    }
 
     droppableItemClass = (item: any) => `${item.class} ${item.inputType}`;
 

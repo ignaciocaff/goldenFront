@@ -8,8 +8,6 @@ export class IPartido {
     horario: HorarioFijo;
     fecha: Date;
     id_fixture: number;
-    lsGoleadoresVisitantes: Array<Gol>;
-    lsGoleadoresLocales: Array<Gol>;
 
     constructor(
         id_partido?: number,

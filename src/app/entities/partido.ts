@@ -1,4 +1,7 @@
-import { Equipo, Arbitro, Veedor, Resultado, ResultadoZona, HorarioFijo, Fecha, EstadoPartido, Cancha } from './index';
+import {
+    Equipo, Arbitro, Veedor, Resultado, ResultadoZona, HorarioFijo, Fecha, EstadoPartido,
+    Cancha, Gol
+} from './index';
 
 export class Partido {
     public id_partido: number;
@@ -15,6 +18,8 @@ export class Partido {
     public horario_fijo: HorarioFijo;
     public resultado: Resultado;
     public resultado_zona: ResultadoZona;
+    public lsGoleadoresVisitantes: Array<Gol>;
+    public lsGoleadoresLocales: Array<Gol>;
     constructor(
         id_partido?: number,
         duracion?: string,
@@ -29,7 +34,9 @@ export class Partido {
         veedor?: Veedor,
         horario_fijo?: HorarioFijo,
         resultado?: Resultado,
-        resultado_zona?: ResultadoZona
+        resultado_zona?: ResultadoZona,
+        lsGoleadoresVisitantes?: Array<Gol>,
+        lsGoleadoresLocales?: Array<Gol>
     ) {
         if (id_partido) this.id_partido = id_partido;
         else this.id_partido = null;
@@ -75,5 +82,11 @@ export class Partido {
 
         if (resultado_zona) this.resultado_zona = resultado_zona;
         else this.resultado_zona = new ResultadoZona();
+
+        if (lsGoleadoresVisitantes) this.lsGoleadoresVisitantes = lsGoleadoresVisitantes;
+        else this.lsGoleadoresVisitantes = new Array<Gol>();
+
+        if (lsGoleadoresLocales) this.lsGoleadoresLocales = lsGoleadoresLocales;
+        else this.lsGoleadoresLocales = new Array<Gol>();
     }
 }

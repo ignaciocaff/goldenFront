@@ -14,8 +14,8 @@
         <div class="inputGroupContainer">
           <div class="input-group date">
             <span class="input-group-addon">
-                <i class="glyphicon glyphicon-calendar"></i>
-              </span>
+              <i class="glyphicon glyphicon-calendar"></i>
+            </span>
             <input [(ngModel)]="fecha.fecha" name="fecha" (ngModelChange)="obtenerPartidos(zona)" class="form-control" type="date" />
           </div>
         </div>
@@ -27,12 +27,12 @@
         <div class="inputGroupContainer">
           <div class="input-group">
             <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
+              <i class="glyphicon glyphicon-list"></i>
+            </span>
             <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker" (ngModelChange)="obtenerPartidos(zona)">
-                <option value="null">Elija su opcion</option>
-                <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
-              </select>
+              <option value="null">Elija su opcion</option>
+              <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -42,7 +42,7 @@
   <div class="row">
     <ngx-section class="shadow">
       <div>
-        <div class="row" *ngFor="let partido of partidos">
+        <div class="row" *ngFor="let partido of partidos;let partidoIndex = index;">
           <div>
             <hr class="hr-text textTitle" data-content="Partido">
           </div>
@@ -85,14 +85,14 @@
                     <div class="inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
-                        <select [(ngModel)]="partido.cancha.nombre" name="cancha" (change)="compararHorarios(partido)" required class="form-control">
-                <option value=" ">Elija su opcion</option>
-                <option *ngFor="let cancha of lsCanchas">{{cancha.nombre}}</option>
-              </select>
+                          <i class="glyphicon glyphicon-list"></i>
+                        </span>
+                        <select [(ngModel)]="jugadorLocal" name="jugadoresLocal" required class="form-control" (change)="onChangeLocal(jugadorLocal)">
+                          <option value=" ">Elija su opcion</option>
+                          <option *ngFor="let jugador of partido.local[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
+                        </select>
                         <div class="input-group-btn margen">
-                          <img id="logo" src="/assets/pelota.png" height="34" width="34">
+                          <img (click)="golLocal(partido)" src="/assets/pelota.png" height="34" width="34">
                           <img id="logo" src="/assets/amarilla.png">
                           <img id="logo" src="/assets/roja.png">
                         </div>
@@ -105,14 +105,14 @@
                     <div class="inputGroupContainer">
                       <div class="input-group">
                         <span class="input-group-addon">
-                <i class="glyphicon glyphicon-list"></i>
-              </span>
-                        <select [(ngModel)]="partido.cancha.nombre" name="cancha" (change)="compararHorarios(partido)" required class="form-control">
-                <option value=" ">Elija su opcion</option>
-                <option *ngFor="let cancha of lsCanchas">{{cancha.nombre}}</option>
-              </select>
+                          <i class="glyphicon glyphicon-list"></i>
+                        </span>
+                        <select [(ngModel)]="jugadorVisitante" name="jugadoresVisitante" required class="form-control" (change)="onChangeVisitante(jugadorVisitante)">
+                          <option value=" ">Elija su opcion</option>
+                          <option *ngFor="let jugador of partido.visitante[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
+                        </select>
                         <div class="input-group-btn margen">
-                          <img id="logo" src="/assets/pelota.png" height="34" width="34">
+                          <img (click)="golVisitante(partido)" src="/assets/pelota.png" height="34" width="34">
                           <img id="logo" src="/assets/amarilla.png">
                           <img id="logo" src="/assets/roja.png">
                         </div>
@@ -129,7 +129,7 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-sm-6">
-      <button (click)="actualizarFecha()" [disabled]="!check" type="button" class="btn btn-primary">Actualizar</button>
+      <button (click)="registrarResultado()" type="button" class="btn btn-primary">Actualizar</button>
     </div>
   </div>
 </div>
