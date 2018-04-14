@@ -86,7 +86,6 @@ export class ZonaDeleteComponent implements OnInit {
     }
 
     borrarZona() {
-        console.error(this.zona);
         this.openConfirmationDialog(this.zona);
 
     }

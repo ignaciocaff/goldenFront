@@ -96,7 +96,6 @@ export class TorneoUpdateComponent implements OnInit {
                 });
             }
         }
-        console.error('En Item Select' + JSON.stringify(this.lsEquiposToPost));
     }
 
     OnItemDeSelect(item: any) {
@@ -112,7 +111,6 @@ export class TorneoUpdateComponent implements OnInit {
 
             }
         }
-        console.error('En Item DeSelect' + JSON.stringify(this.lsEquiposToPost));
     }
     onSelectAll(items: any) {
         this.lsEquiposToPost = [];
@@ -123,7 +121,6 @@ export class TorneoUpdateComponent implements OnInit {
                 }
             }
         }
-        console.error('On select all' + JSON.stringify(this.lsEquiposToPost));
     }
     onDeSelectAll(items: any) {
         this.equiposPDesvincular = this.lsEquiposToPost;
@@ -201,8 +198,6 @@ export class TorneoUpdateComponent implements OnInit {
     actualizarTorneo() {
 
         this.torneo.lsEquipos = this.lsEquiposToPost;
-        console.log(this.torneo);
-        console.log(JSON.stringify(this.equiposPDesvincular));
 
         this.torneoService.update(this.torneo).subscribe(
             data => {
@@ -290,9 +285,6 @@ export class TorneoUpdateComponent implements OnInit {
                     error => {
                         error.json()['Message'];
                     });
-
-                console.log("Equipos a desvincular:" + JSON.stringify(this.equiposPDesvincular));
-
             }
             this.dialogRef = null;
         });

@@ -46,7 +46,6 @@ export class HorariosComponent implements OnInit {
     }
 
     registrarHorario() {
-        console.error(this.horarioFijo);
         this.horarioService.create(this.horarioFijo).subscribe(
             data => {
                 if (data)

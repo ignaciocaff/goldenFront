@@ -57,23 +57,18 @@ const homeRoutes: Routes = [
                 children: [
                     { path: 'horarios-carga', component: HorariosComponent },
                     { path: 'horarios-update', component: HorariosUpdateComponent },
-                    { path: 'canchas', component: HorariosComponent },
                     { path: 'sponsors', component: HorariosComponent },
                     { path: 'reglas', component: ReglasComponent },
                     { path: 'reglas-update', component: ReglasUpdateComponent },
                     { path: 'reglamento', component: ReglamentoCargaComponent },
                     { path: 'planilla', component: PlanillaJugadoresComponent },
-                    { path: 'visualizacion', component: HorariosComponent }
+                    { path: 'visualizacion', component: HorariosComponent },
+                    { path: 'canchas', component: CanchaComponent },
+                    { path: 'canchas-update', component: CanchaUpdateComponent },
                 ]
             },
             {
                 path: 'noticia-carga', component: NoticiaCargaComponent,
-            },
-            {
-                path: 'canchas', component: CanchaComponent,
-            },
-            {
-                path: 'canchas-update', component: CanchaUpdateComponent,
             },
             {
                 path: 'noticias', component: HomeComponent,

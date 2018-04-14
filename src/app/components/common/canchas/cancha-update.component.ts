@@ -52,11 +52,11 @@ export class CanchaUpdateComponent {
     }
 
     routeAlta() {
-        this.router.navigate(['home/canchas']);
+        this.router.navigate(['home/configuraciones/canchas']);
     }
 
     routeModificacion() {
-        this.router.navigate(['home/canchas-update']);
+        this.router.navigate(['home/configuraciones/canchas-update']);
     }
 
 

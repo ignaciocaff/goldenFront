@@ -249,7 +249,6 @@ export class FixtureUpdateComponent implements OnInit {
                 }
             }
         } catch (Exception) {
-            console.error('ENTRO A LA EXCEPCION: ' + Exception)
         }
         for (var i = 0; i < this.cantidadPartidos; i++) {
             this.partidos.push(new IPartido());

@@ -345,7 +345,6 @@ export class ZonaUpdateComponent implements OnInit {
                     } this.lsZonas[j].lsEquipos = this.lsEquiposH;
                     break;
             }
-            console.error(this.lsZonas);
         }
         this.zonaService.update(this.lsZonas).subscribe(
             data => {

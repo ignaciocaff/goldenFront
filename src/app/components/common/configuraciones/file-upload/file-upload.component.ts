@@ -79,8 +79,6 @@ export class FileUploadComponent implements OnInit {
                     var jsonData = success.subidas;
                     localStorage.setItem(this.sectionId.toString(), JSON.stringify(jsonData));
                     this.uploadStatus.emit(true);
-
-                    console.log(success);
                 },
                 error => {
                     this.uploadStatus.emit(true);

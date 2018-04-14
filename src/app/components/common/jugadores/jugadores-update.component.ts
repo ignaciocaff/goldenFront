@@ -297,7 +297,6 @@ export class JugadoresUpdateComponent {
 
     refreshImages(status) {
         if (status == true) {
-            console.log('Uploaded successfully!');
             this.images = [];
             this.getImageData();
         }

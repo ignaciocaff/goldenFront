@@ -312,7 +312,6 @@ export class JugadoresCargaComponent implements OnInit {
 
     refreshImages(status) {
         if (status == true) {
-            console.log('Uploaded successfully!');
             this.images = [];
             this.getImageData();
         }
@@ -333,12 +332,9 @@ export class JugadoresCargaComponent implements OnInit {
     }
 
     onProvinciaChange(newValue) {
-        console.log("newV: " + newValue);
-        console.log("prov jug" + JSON.stringify(this.jugador.domicilio.provincia));
         this.lsLocalidades = [];
         if (newValue != null) {
             this.jugador.domicilio.provincia.id_provincia = this.lsProvincias.find(x => x.n_provincia == newValue).id_provincia;
-            console.log("id_prov;" + this.jugador.domicilio.provincia.id_provincia);
             this.jugador.domicilio.provincia.n_provincia = newValue;
             this.lsLocalidades = this.lsProvincias.find(x => x.n_provincia == newValue).lsLocalidades;
         }

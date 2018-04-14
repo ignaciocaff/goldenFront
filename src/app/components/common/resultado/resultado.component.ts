@@ -126,8 +126,6 @@ export class ResultadoComponent implements OnInit {
 
 
     obtenerJugadoresLocal(partido: IPartido) {
-        console.log('Dentro de obtener jugadores por equipo local' + partido.local[0].id_equipo);
-
         this.equipoService.getJugadoresByIdEquipo(partido.local[0].id_equipo).subscribe(
             data => {
                 this.lsJugadoresLocal = [];
@@ -144,8 +142,6 @@ export class ResultadoComponent implements OnInit {
     }
 
     obtenerJugadoresVisitante(partido: IPartido) {
-
-        console.log('Dentro de obtener jugadores por equipo visitante' + partido.visitante[0].id_equipo);
         this.equipoService.getJugadoresByIdEquipo(partido.visitante[0].id_equipo).subscribe(
             data => {
                 this.lsJugadoresVisitante = [];
@@ -269,8 +265,6 @@ export class ResultadoComponent implements OnInit {
             visitanteContador = 0;
         }
 
-
-        console.log(lsPartidos);
         this.lsGolesLocal = [];
         this.lsGolesVisitante = [];
         lsPartidos = [];
@@ -367,7 +361,6 @@ export class ResultadoComponent implements OnInit {
                 }
             }
         } catch (Exception) {
-            console.error('ENTRO A LA EXCEPCION: ' + Exception)
         }
         for (var i = 0; i < this.cantidadPartidos; i++) {
             this.partidos.push(new IPartido());

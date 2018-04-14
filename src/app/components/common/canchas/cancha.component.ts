@@ -23,7 +23,6 @@ export class CanchaComponent {
         , private spinnerService: Ng4LoadingSpinnerService) { }
 
     registrarCancha() {
-        console.error(this.cancha)
         this.cancha.club.id_club = 1;
 
         this.spinnerService.show();
@@ -42,11 +41,11 @@ export class CanchaComponent {
     }
 
     routeAlta() {
-        this.router.navigate(['home/canchas']);
+        this.router.navigate(['home/configuraciones/canchas']);
     }
 
     routeModificacion() {
-        this.router.navigate(['home/canchas-update']);
+        this.router.navigate(['home/configuraciones/canchas-update']);
     }
 
     limpiarCampos() {

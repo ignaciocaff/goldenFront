@@ -12,7 +12,6 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 })
 export class ConfiguracionesContainerComponent implements OnInit {
 
-
     constructor(public toastr: ToastsManager,
         private router: Router) {
 

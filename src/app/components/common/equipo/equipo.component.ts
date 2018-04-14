@@ -59,7 +59,6 @@ export class EquipoComponent {
                         data[i]['nombre']
                     );
                     this.lsCategoriasTorneo.push(torneo);
-                    console.error(this.lsCategoriasTorneo);
                 }
             },
             error => {
@@ -159,7 +158,6 @@ export class EquipoComponent {
     }
 
     refreshImages(temp) {
-        console.log('Uploaded successfully!');
         this.getImageData(temp);
     }
 }

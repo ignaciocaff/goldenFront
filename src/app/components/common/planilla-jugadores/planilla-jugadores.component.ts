@@ -81,7 +81,6 @@ export class PlanillaJugadoresComponent {
         }
       }
     } catch (exception) {
-      console.log("Excepción.");
     }
   }
 

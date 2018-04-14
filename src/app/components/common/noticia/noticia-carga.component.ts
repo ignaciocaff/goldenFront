@@ -210,7 +210,6 @@ export class NoticiaCargaComponent implements OnInit {
 
     refreshImages(status) {
         if (status == true) {
-            console.log('Uploaded successfully!');
             this.images = [];
             this.getImageData();
         }

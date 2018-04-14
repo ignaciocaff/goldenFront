@@ -26,7 +26,6 @@ export class ReglamentoCargaComponent {
         private reglasService: ReglasService
     ) {
         this.reglamento.id_torneo = Number(sessionStorage.getItem('id_torneo'));
-        console.log(this.reglamento.id_torneo);
         this.cargarReglamento();
     }
 

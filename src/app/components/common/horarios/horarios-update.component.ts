@@ -62,7 +62,6 @@ export class HorariosUpdateComponent implements OnInit {
     }
 
     modificarHorario() {
-        console.error(this.horarioFijo);
         this.horarioService.update(this.horarioFijo).subscribe(
             data => {
                 if (data)

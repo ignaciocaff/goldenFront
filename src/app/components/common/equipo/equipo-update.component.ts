@@ -87,7 +87,6 @@ export class EquipoUpdateComponent implements OnInit {
                         data[i]['nombre']
                     );
                     this.lsCategoriasTorneo.push(torneo);
-                    console.error(this.lsCategoriasTorneo);
                 }
             },
             error => {
@@ -133,7 +132,6 @@ export class EquipoUpdateComponent implements OnInit {
     modificarEquipo() {
         this.equipoService.update(this.equipo).subscribe(
             data => {
-                console.log(this.equipo);
                 this.toastr.success('El equipo se ha modificado correctamente', 'Exito!');
                 this.limpiarCampos();
             },
@@ -157,7 +155,6 @@ export class EquipoUpdateComponent implements OnInit {
         let equipo: Equipo = newValue;
         this.equipo = equipo;
         this.eligioEquipo = true;
-        console.log(this.equipo);
         this.equipoService.getJugadoresByIdEquipo(this.equipo.id_equipo).subscribe(
             data => {
                 this.dataSource = null;
@@ -304,7 +301,6 @@ export class EquipoUpdateComponent implements OnInit {
     }
 
     refreshImages(temp) {
-        console.log('Uploaded successfully!');
         this.getImageData(temp);
     }
 
