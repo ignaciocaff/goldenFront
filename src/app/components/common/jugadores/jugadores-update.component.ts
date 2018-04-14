@@ -209,9 +209,9 @@ export class JugadoresUpdateComponent {
                     this.toastr.error('No existe un jugador con ese número de documento en ese equipo.", "Error!');
                     this.spinnerService.hide();
                 }
-
             },
             error => {
+                this.spinnerService.hide();
                 error.json()['Message'];
             });
     }
@@ -235,6 +235,7 @@ export class JugadoresUpdateComponent {
             this.dialogService.agregarLocalidad(this.jugador.domicilio.provincia).subscribe(
                 result => {
                     this.lsProvincias = [];
+                    this.lsLocalidades =[];
                     this.provinciaService.getAll().subscribe(
                         data => {
                             for (let i = 0; i < data.length; i++) {
@@ -317,6 +318,7 @@ export class JugadoresUpdateComponent {
     }
 
     onProvinciaChange(newValue) {
+        this.lsLocalidades =[];
         if (newValue != null) {
             this.jugador.domicilio.provincia.id_provincia = this.lsProvincias.find(x => x.n_provincia == newValue).id_provincia;
             this.jugador.domicilio.provincia.n_provincia = newValue;
