@@ -44,6 +44,7 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
+import { UsuarioComponent, UsuariosDialog, UsuarioBajaComponent } from './common/usuarios/index';
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
@@ -92,7 +93,10 @@ import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/po
     ReglamentoCargaComponent,
     ReglamentoVisualizacionComponent,
     PosicionesGeneralComponent,
-    PosicionesZonaComponent
+    PosicionesZonaComponent,
+    UsuarioComponent,
+    UsuariosDialog,
+    UsuarioBajaComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +120,7 @@ import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/po
     ShareButtonsModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot()
   ],
-  entryComponents: [ConfirmationDialog, FixtureDialog],
+  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService],

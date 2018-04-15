@@ -13,7 +13,7 @@ import { ReglasService } from "../../../services/index";
     styleUrls: ['./reglamento-carga.component.css'],
     providers: []
 })
-export class ReglamentoCargaComponent {
+export class ReglamentoCargaComponent implements OnInit {
     @ViewChild('reglamentoForm') reglamentoForm: FormGroup;
 
     public reglamento = new Reglamento();
@@ -25,11 +25,16 @@ export class ReglamentoCargaComponent {
         private router: Router,
         private reglasService: ReglasService
     ) {
-        this.reglamento.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+    }
+
+    ngOnInit() {
+        var id_torneo = Number(sessionStorage.getItem('id_torneo'));
+        this.reglamento.id_torneo = id_torneo;
         this.cargarReglamento();
     }
 
     registrarReglamento() {
+        console.error(this.reglamento);
         this.reglasService.registrarReglamento(this.reglamento).subscribe(data => {
             this.toastr.success('El reglamento se ha registrado con éxito.', 'Exito!');
             this.limpiar();
@@ -46,7 +51,6 @@ export class ReglamentoCargaComponent {
                 this.esUpdate = true;
             },
             error => {
-                this.reglamento = new Reglamento();
                 error.json()['Message'];
             }
         );

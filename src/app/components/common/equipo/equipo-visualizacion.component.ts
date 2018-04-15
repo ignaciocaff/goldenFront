@@ -6,7 +6,7 @@ import { IEquipo } from '../../../entities/index';
 import { FileService } from '../../../services/entity-services/file.service';
 import { IJugador } from '../../../entities/interfaces/index';
 import { Equipo, Usuario } from '../../../entities/index';
-import {  MatDialogRef, MatDialog } from '@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { ConfirmationDialog } from '../../common/dialog/index';
 
 @Component({
@@ -40,6 +40,8 @@ export class EquipoVisualizacionComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+
+
         this.id_equipo = this.route.snapshot.params['id'];
         this.nombre_torneo = (sessionStorage.getItem('torneo'));
 

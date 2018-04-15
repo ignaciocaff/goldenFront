@@ -100,6 +100,10 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/posiciones']);
     }
 
+    usuariosCarga_Click() {
+        this.router.navigate(['home/usuarios']);
+    }
+
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {

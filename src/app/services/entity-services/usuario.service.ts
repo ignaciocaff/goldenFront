@@ -28,7 +28,15 @@ export class UsuarioService {
         return this.http.delete(this.config.apiUrl + '/users/' + id);
     }
 
-    getEquipoRepresentante(id: number){
+    getEquipoRepresentante(id: number) {
         return this.http.get(this.config.apiUrl + 'user/representante/' + id).map((response: Response) => response.json());
+    }
+
+    registrarRepresentante(usuario: Usuario, id_equipo: number) {
+        return this.http.post(this.config.apiUrl + 'user/registrar/representante/' + id_equipo, usuario);
+    }
+
+    eliminarRepresentante(id_equipo: number) {
+        return this.http.get(this.config.apiUrl + 'user/eliminar/representante/' + id_equipo);
     }
 }

@@ -28,6 +28,7 @@ import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/in
 import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
 import { PosicionesGeneralComponent } from "./common/posiciones/index";
+import { UsuarioComponent, UsuarioBajaComponent } from './common/usuarios/index';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -108,6 +109,12 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'posiciones', component: PosicionesGeneralComponent,
+            },
+            {
+                path: 'usuarios', component: UsuarioComponent,
+            },
+            {
+                path: 'usuarios-baja', component: UsuarioBajaComponent,
             }
 
         ]

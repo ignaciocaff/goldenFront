@@ -1,0 +1,58 @@
+<div class="montserrat-font">
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <h4>
+                Datos de sesión
+            </h4>
+        </div>
+        <div class="col-md-8 col-sm-8">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group has-feedback">
+                <label class="control-label">Usuario</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input [(ngModel)]="usuario.n_usuario" name="nombre" class="form-control" [disabled]="true" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group has-feedback">
+                <label class="control-label">Contraseña</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input [(ngModel)]="usuario.password" name="nombre" class="form-control" [disabled]="true" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group has-feedback">
+                <label class="control-label">Equipo</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input [(ngModel)]="equipo.nombre" name="nombre" class="form-control" [disabled]="true" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" (click)="dialogRef.close(false)" class="btn btn-primary">Salir</button>
+        </div>
+    </div>
+
+</div>

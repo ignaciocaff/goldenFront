@@ -25,8 +25,8 @@ export class EscudosComponent implements OnInit, DoCheck {
     lsEquipos = new Array<IEquipo>();
 
     constructor(
-        private torneoEmiiter: TorneoEmitter, 
-        private fileService: FileService, 
+        private torneoEmiiter: TorneoEmitter,
+        private fileService: FileService,
         public equipoService: EquipoService,
         private router: Router
     ) {
@@ -67,8 +67,7 @@ export class EscudosComponent implements OnInit, DoCheck {
     }
 
     verEquipo(id_equipo: number) {
-/*         this.router.navigate(['home/equipo/' + id_equipo]);
-        window.location.reload(); */
+        this.router.navigate(['home/equipo/' + id_equipo]);
     }
 
     ngDoCheck() {
