@@ -73,20 +73,7 @@ export class EscudosComponent implements OnInit, DoCheck {
     ngDoCheck() {
         if (this.id_torneo !== Number(sessionStorage.getItem('id_torneo'))) {
             this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
-            this.getEscudos();
+            this.ngOnInit();
         }
-    }
-    getEscudos() {
-        this.fileService.getImagesByTorneo(this.id_torneo).subscribe(
-            data => {
-                this.images = [];
-                if (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        this.images.push(data[i]);
-                    }
-                }
-            },
-            error => { }
-        );
     }
 }
