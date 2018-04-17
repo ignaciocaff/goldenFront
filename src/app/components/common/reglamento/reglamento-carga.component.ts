@@ -34,7 +34,6 @@ export class ReglamentoCargaComponent implements OnInit {
     }
 
     registrarReglamento() {
-        console.error(this.reglamento);
         this.reglasService.registrarReglamento(this.reglamento).subscribe(data => {
             this.toastr.success('El reglamento se ha registrado con éxito.', 'Exito!');
             this.limpiar();

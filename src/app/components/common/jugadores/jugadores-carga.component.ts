@@ -270,6 +270,7 @@ export class JugadoresCargaComponent implements OnInit {
     }
 
     registrarJugador() {
+        this.spinnerService.show();
         this.jugadorService.create(this.jugador).subscribe(
             data => {
                 this.spinnerService.hide();

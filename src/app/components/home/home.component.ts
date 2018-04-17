@@ -171,7 +171,6 @@ export class HomeComponent implements DoCheck, AfterViewInit {
     cargarNoticiasHistoricas() {
         this.noticiaService.getHistoricas(this.id_torneo).subscribe(
             data => {
-                console.log("data " + JSON.stringify(data));
                 this.lsNoticiasHistoricas = [];
                 this.lsNotUltimasLink = [];
                 for (let i = 0; i < data.length; i++) {
@@ -229,7 +228,6 @@ export class HomeComponent implements DoCheck, AfterViewInit {
         for (let i = 0; i < this.lsNoticiasHistoricas.length; i++) {
             for (let j = 0; j < this.imagesUltimas.length; j++) {
                 if (this.lsNoticiasHistoricas[i].id_thumbnail == this.imagesUltimas[j].Id) {
-                    console.log("fecha: " + this.lsNoticiasHistoricas[i].fecha);
                     this.lsNotUltimasLink.push({
                         titulo: this.lsNoticiasHistoricas[i].titulo,
                         ruta: this.imagesUltimas[j].ThumbPath,

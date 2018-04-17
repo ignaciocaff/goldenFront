@@ -160,7 +160,7 @@ export class PlanillaJugadoresComponent {
                 text-align: center;
                 font-weight: bold;
                 color: white;
-                background-color: rgba(222, 222, 222, 0.2);
+                background-color: rgba(0 , 0, 0 , 0.2);
                 width: 140px;
               }
               
