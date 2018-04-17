@@ -39,90 +39,19 @@
           <h2>Otras noticias</h2>
         </div>
 
-        <li>
+        <li *ngFor="let noticia of lsNotUltimasLink">
           <div class="row noticia-historica">
             <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-              <img src="/assets/logos/anonimo.jpg">
-            </div>
+                <img [src]="url + noticia.ruta" class="category-banner img-responsive" (click)="verNoticia(noticia.id_noticia)">
+              </div>
             <div class="col-md-8 col-sm-8 noticia-historica-texto">
               <div class="titulo">
-                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
+                <a (click)="verNoticia(noticia.id_noticia)">{{noticia.titulo}}</a>
               </div>
-              <div class="datos-noticia">April 3, 2018 (1 min)</div>
+              <div class="datos-noticia">{{noticia.fecha_noticia | date:'dd MMM yyyy'}}</div>
             </div>
           </div>
         </li>
-
-        <li>
-          <div class="row noticia-historica">
-            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-              <img src="/assets/logos/anonimo.jpg">
-            </div>
-            <div class="col-md-8 col-sm-8">
-              <div class="titulo">
-                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
-              </div>
-              <div class="datos-noticia">April 3, 2018 (1 min)</div>
-            </div>
-          </div>
-        </li>
-
-        <li>
-          <div class="row noticia-historica">
-            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-              <img src="/assets/logos/anonimo.jpg">
-            </div>
-            <div class="col-md-8 col-sm-8">
-              <div class="titulo">
-                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
-              </div>
-              <div class="datos-noticia">April 3, 2018 (1 min)</div>
-            </div>
-          </div>
-        </li>
-
-        <li>
-          <div class="row noticia-historica">
-            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-              <img src="/assets/logos/anonimo.jpg">
-            </div>
-            <div class="col-md-8 col-sm-8">
-              <div class="titulo">
-                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
-              </div>
-              <div class="datos-noticia">April 3, 2018 (1 min)</div>
-            </div>
-          </div>
-        </li>
-
-        <li>
-          <div class="row noticia-historica">
-            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-              <img src="/assets/logos/anonimo.jpg">
-            </div>
-            <div class="col-md-8 col-sm-8">
-              <div class="titulo">
-                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
-              </div>
-              <div class="datos-noticia">April 3, 2018 (1 min)</div>
-            </div>
-          </div>
-        </li>
-
-        <li>
-          <div class="row noticia-historica">
-            <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-              <img src="/assets/logos/anonimo.jpg">
-            </div>
-            <div class="col-md-8 col-sm-8">
-              <div class="titulo">
-                <a href="">Borussia Dortmund ofreció US$ 40M, brutos y de contado</a>
-              </div>
-              <div class="datos-noticia">April 3, 2018 (1 min)</div>
-            </div>
-          </div>
-        </li>
-
       </div>
 
       <div class="col-md-4 col-sm-4">

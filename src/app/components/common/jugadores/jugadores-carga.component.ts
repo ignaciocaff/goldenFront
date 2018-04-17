@@ -108,9 +108,11 @@ export class JugadoresCargaComponent implements OnInit {
                 data => {
                     this.jugador.equipo = data;
                     this.esRepresentante = true;
-                }
-            );
-        } else { }
+                },
+                error => {
+                    error.json()['Message'];
+                });
+        }
     }
 
     cargarTiposDocumento() {
