@@ -88,6 +88,12 @@ resultado .row .enfrentamiento .ngx-dnd-container {
   font-size: x-large;
 }
 
+resultado .row .enfrentamiento .imgEffect img:hover {
+  transform: scale(1.25);
+  transition: transform .25s ease;
+
+}
+
 span {
   display: inline-block;
   vertical-align: middle;

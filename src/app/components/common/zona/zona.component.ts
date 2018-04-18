@@ -30,12 +30,14 @@ export class ZonaComponent implements OnInit {
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
     id_torneo: number;
+    id_fase: number;
 
     sourceItems = [
     ];
     constructor(private fileService: FileService, public equipoService: EquipoService,
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+        this.id_fase = Number(sessionStorage.getItem('fase'));
     }
 
     ngOnInit() {
@@ -100,6 +102,7 @@ export class ZonaComponent implements OnInit {
             var zona = new Zona();
             zona.descripcion = this.intercambioLetraPorNumero((i + 1).toString());
             zona.torneo.id_torneo = this.id_torneo;
+            zona.torneo.fase.id_fase = this.id_fase;
             this.zonas.push(zona);
         }
     }

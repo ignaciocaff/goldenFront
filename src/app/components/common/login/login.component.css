@@ -56,4 +56,6 @@ h3{
   color:white;
   display: block;
   float: right;
+  padding:0;
+  margin-right:30px;
 }

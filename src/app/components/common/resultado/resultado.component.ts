@@ -5,14 +5,14 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { ParserService } from '../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
-    Turno, IEquipo, IPartido, Partido, Jugador, Gol, Resultado
+    Turno, IEquipo, IPartido, Partido, Jugador, Gol, Resultado, Sancion, TipoSancion
 } from '../../../entities/index';
-import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../services/entity-services/index';
+import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService, SancionService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { ConfirmationDialog } from '../../common/dialog/index';
-
+import { SancionDialog, SancionDialogV } from './index';
 
 
 @Component({
@@ -24,7 +24,8 @@ import { ConfirmationDialog } from '../../common/dialog/index';
     providers: [EquipoService, ZonaService]
 })
 export class ResultadoComponent implements OnInit {
-
+    dialogRef: MatDialogRef<SancionDialog>;
+    dialogRefV: MatDialogRef<SancionDialogV>;
     dialogRefBorrado: MatDialogRef<ConfirmationDialog>;
 
     fecha = new Fecha();
@@ -46,14 +47,15 @@ export class ResultadoComponent implements OnInit {
     check: Boolean = false;
     lsJugadoresLocal = new Array<Jugador>();
     lsJugadoresVisitante = new Array<Jugador>();
-
-    lsGolesLocal = new Array<Gol>();
-    lsGolesVisitante = new Array<Gol>();
+    fixture = new Fixture();
+    lsFechasInicio = new Array<Fecha>();
+    lsFechasFin = new Array<Fecha>();
+    lsTiposSanciones = new Array<TipoSancion>();
 
     constructor(private fileService: FileService, public equipoService: EquipoService,
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
-        public fixtureService: FixtureService, public dialog: MatDialog) {
+        public fixtureService: FixtureService, public dialog: MatDialog, public sancionService: SancionService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
 
     }
@@ -72,6 +74,20 @@ export class ResultadoComponent implements OnInit {
 
             }
         );
+
+        this.sancionService.getAll().subscribe(
+            data => {
+                this.lsTiposSanciones = [];
+                for (var i = 0; i < data.length; i++) {
+                    let tipoSancion: TipoSancion;
+                    tipoSancion = data[i];
+                    this.lsTiposSanciones.push(tipoSancion);
+                }
+            }, error => {
+
+            }
+        );
+
 
         this.horarioService.getAll().subscribe(
             data => {
@@ -113,9 +129,13 @@ export class ResultadoComponent implements OnInit {
 
                     if (this.partidos[i].local) {
                         this.obtenerJugadoresLocal(this.partidos[i]);
+                        this.partidos[i].lsGolesLocal = new Array<Gol>();
+                        this.partidos[i].lsSancionesLocal = new Array<Sancion>();
                     }
                     if (this.partidos[i].visitante) {
                         this.obtenerJugadoresVisitante(this.partidos[i]);
+                        this.partidos[i].lsGolesVisitante = new Array<Gol>();
+                        this.partidos[i].lsSancionesVisitante = new Array<Sancion>();
                     }
                 }
             }, error => {
@@ -170,7 +190,8 @@ export class ResultadoComponent implements OnInit {
         gol.equipo.id_equipo = partido.local[0].id_equipo;
         gol.jugador = this.jugadorLocal;
         gol.partido.id_partido = partido.id_partido;
-        this.lsGolesLocal.push(gol);
+        //this.lsGolesLocal.push(gol);
+        partido.lsGolesLocal.push(gol);
     }
 
     golVisitante(partido: IPartido) {
@@ -178,97 +199,137 @@ export class ResultadoComponent implements OnInit {
         gol.equipo.id_equipo = partido.visitante[0].id_equipo;
         gol.jugador = this.jugadorVisitante;
         gol.partido.id_partido = partido.id_partido;
-        this.lsGolesVisitante.push(gol);
+        // this.lsGolesVisitante.push(gol);
+        partido.lsGolesVisitante.push(gol);
     }
 
     registrarResultado() {
 
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parseResultados(this.partidos);
-        var localContador = 0;
-        var visitanteContador = 0;
+
 
         for (let i = 0; i < lsPartidos.length; i++) {
 
-            if (this.lsGolesLocal.find(x => x.partido.id_partido ==
-                lsPartidos[i].id_partido) == undefined
-                && this.lsGolesVisitante.find(x => x.partido.id_partido ==
-                    lsPartidos[i].id_partido) == undefined) {
-                /*Si no encuentra ningun jugador dentro de ambas listas para ese id
-                partido, significa q empataron*/
+            if (lsPartidos[i].lsGoleadoresLocales.length ==
+                lsPartidos[i].lsGoleadoresVisitantes.length) {
                 lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
                 lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
                 lsPartidos[i].resultado.empate = 1;
-            } else if (this.lsGolesLocal.find(x => x.partido.id_partido ==
-                lsPartidos[i].id_partido) == undefined
-                && this.lsGolesVisitante.find(x => x.partido.id_partido ==
-                    lsPartidos[i].id_partido) != undefined) {
-                /*Esto significa que local no esta definido por lo tanto no hizo goles
-                con lo cual gano si o si el visitante*/
+            } else if (lsPartidos[i].lsGoleadoresLocales.length
+                > lsPartidos[i].lsGoleadoresVisitantes.length) {
+                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
+                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
+            } else {
                 lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].visitante.id_equipo;
                 lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].local.id_equipo;
-
-                for (let u = 0; u < this.lsGolesVisitante.length; u++) {
-                    if (this.lsGolesVisitante[u].partido.id_partido == lsPartidos[i].id_partido) {
-                        lsPartidos[i].lsGoleadoresVisitantes.push(this.lsGolesVisitante[u]);
-                    }
-                }
-
-            } else if (this.lsGolesLocal.find(x => x.partido.id_partido ==
-                lsPartidos[i].id_partido) != undefined
-                && this.lsGolesVisitante.find(x => x.partido.id_partido ==
-                    lsPartidos[i].id_partido) == undefined) {
-                /*Esto significa que visitante no esta definido por lo tanto no hizo goles
-               con lo cual gano si o si el local*/
-                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
-                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
-                for (let k = 0; k < this.lsGolesLocal.length; k++) {
-                    if (this.lsGolesLocal[k].partido.id_partido == lsPartidos[i].id_partido) {
-                        lsPartidos[i].lsGoleadoresLocales.push(this.lsGolesLocal[k]);
-                    }
-                }
-
-            } else {
-                /* Esta es la logica si ambas listas estan definidas para ese partido
-                lo que significa que hay que empezar a acumular goles y ver quien gano*/
-
-                for (let j = 0; j < this.lsGolesLocal.length; j++) {
-                    if (lsPartidos[i].id_partido == this.lsGolesLocal[j].partido.id_partido) {
-                        localContador = localContador + 1;
-                        lsPartidos[i].lsGoleadoresLocales.push(this.lsGolesLocal[j]);
-                    }
-                }
-                for (let h = 0; h < this.lsGolesVisitante.length; h++) {
-                    if (lsPartidos[i].visitante.id_equipo == this.lsGolesVisitante[h].jugador.equipo.id_equipo) {
-                        visitanteContador = visitanteContador + 1;
-                        lsPartidos[i].lsGoleadoresVisitantes.push(this.lsGolesVisitante[h]);
-                    }
-
-                }
             }
-            if (localContador != visitanteContador) {
-                if (localContador > visitanteContador) {
-                    lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
-                    lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
-                } else {
-                    lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].visitante.id_equipo;
-                    lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].local.id_equipo;
-                }
-            } else {
-                lsPartidos[i].resultado.ganador.id_equipo = lsPartidos[i].local.id_equipo;
-                lsPartidos[i].resultado.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
-                lsPartidos[i].resultado.empate = 1;
-            }
-
-
-            localContador = 0;
-            visitanteContador = 0;
         }
 
-        this.lsGolesLocal = [];
-        this.lsGolesVisitante = [];
+        console.error(lsPartidos);
         lsPartidos = [];
 
+    }
+
+    rojaLocal(partido: IPartido) {
+    }
+
+    rojaVisistante(partido: IPartido) {
+
+    }
+
+    openConfirmationDialogLocal(sancion, lsFechasInicio, lsFechasFin, lsTiposSancion, partido) {
+        var conjunto = Array<any>();
+        conjunto.push(sancion);
+        conjunto.push(lsFechasInicio);
+        conjunto.push(lsFechasFin);
+        conjunto.push(lsTiposSancion);
+        conjunto.push(partido);
+        this.dialogRef = this.dialog.open(SancionDialog, {
+            data: conjunto,
+            height: '45%',
+            width: '65%',
+            disableClose: false,
+
+        });
+
+        this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.rojaLocal(result.data);
+            }
+            this.dialogRef = null;
+        });
+    }
+
+    openConfirmationDialogVisitante(sancion, lsFechasInicio, lsFechasFin, lsTiposSancion, partido) {
+        var conjunto = Array<any>();
+        conjunto.push(sancion);
+        conjunto.push(lsFechasInicio);
+        conjunto.push(lsFechasFin);
+        conjunto.push(lsTiposSancion);
+        conjunto.push(partido);
+        this.dialogRefV = this.dialog.open(SancionDialogV, {
+            data: conjunto,
+            height: '45%',
+            width: '65%',
+            disableClose: false,
+
+        });
+
+        this.dialogRefV.afterClosed().subscribe(result => {
+            if (result) {
+                this.rojaVisistante(result.data);
+            }
+            this.dialogRefV = null;
+        });
+    }
+
+    fechasPorZonaLocal(partido: IPartido) {
+        this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
+            data => {
+                let sancion = new Sancion();
+                this.lsFechasFin = [];
+                this.lsFechasInicio = [];
+                this.fixture = data;
+                this.lsFechasInicio = this.fixture.fechas;
+                this.lsFechasFin = this.fixture.fechas;
+                sancion.equipo.id_equipo = partido.local[0].id_equipo;
+                sancion.jugador = this.jugadorLocal;
+                sancion.partido.id_partido = partido.id_partido;
+
+                this.openConfirmationDialogLocal(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
+
+            }, error => {
+                this.lsFechasFin = [];
+                this.lsFechasInicio = [];
+
+            }
+
+        );
+    }
+
+    fechasPorZonaVisitante(partido: IPartido) {
+        this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
+            data => {
+                let sancion = new Sancion();
+                this.lsFechasFin = [];
+                this.lsFechasInicio = [];
+                this.fixture = data;
+                this.lsFechasInicio = this.fixture.fechas;
+                this.lsFechasFin = this.fixture.fechas;
+                sancion.equipo.id_equipo = partido.local[0].id_equipo;
+                sancion.jugador = this.jugadorLocal;
+                sancion.partido.id_partido = partido.id_partido;
+
+                this.openConfirmationDialogVisitante(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
+
+            }, error => {
+                this.lsFechasFin = [];
+                this.lsFechasInicio = [];
+
+            }
+
+        );
     }
 
     droppableItemClass = (item: any) => `${item.class} ${item.inputType}`;
@@ -300,57 +361,6 @@ export class ResultadoComponent implements OnInit {
         )
     }
 
-    public compararHorarios(partido: IPartido) {
-
-        if (partido.cancha.nombre != null && partido.cancha.nombre != undefined) {
-            partido.cancha.id_cancha = this.lsCanchas.find(x => x.nombre == partido.cancha.nombre).id_cancha;
-        }
-
-        var fecha = new Date(this.fecha.fecha);
-        var fechaToString = new Date(fecha.getTime() + (1000 * 60 * 60 * 24)).toDateString();
-
-        if (partido.horario.inicio != null && partido.horario.inicio != undefined &&
-            partido.horario.fin != null && partido.horario.fin != undefined) {
-            var nuevoPartidoMomentoInicio = moment(fechaToString + " " + partido.horario.inicio);
-            var nuevoPartidoMomentoFin = moment(fechaToString + " " + partido.horario.fin);
-
-            if (nuevoPartidoMomentoFin.isBefore(nuevoPartidoMomentoInicio) || nuevoPartidoMomentoInicio.isAfter(nuevoPartidoMomentoFin)) {
-                this.toastr.error("El horario de inicio debe ser anterior al de fin.", "Error!");
-            }
-            var duration = moment.duration(nuevoPartidoMomentoFin.diff(nuevoPartidoMomentoInicio));
-            var minutes = duration.asMinutes();
-            if (minutes != 90) {
-                this.toastr.error("El horario de inicio y fin deben estar a 90 minutos.", "Error!");
-            }
-            partido.horario.id_horario = this.horarios.find(x => x.inicio == partido.horario.inicio && x.fin == partido.horario.fin
-            ).id_horario;
-        }
-
-        var contador = 0;
-        for (var i = 0; i < this.partidos.length; i++) {
-            if (this.partidos[i].horario != null && this.partidos[i].horario.inicio != null
-                && this.partidos[i].horario.fin != null) {
-                var partidoMomentoInicio = moment(fechaToString + " " + this.partidos[i].horario.inicio);
-                var partidoMomentoFin = moment(fechaToString + " " + this.partidos[i].horario.fin);
-                if (partidoMomentoInicio.isBetween(nuevoPartidoMomentoInicio, nuevoPartidoMomentoFin, null, "[]") &&
-                    partidoMomentoFin.isBetween(nuevoPartidoMomentoInicio, nuevoPartidoMomentoFin, null, "[]") &&
-                    partido.cancha.id_cancha == this.partidos[i].cancha.id_cancha
-                ) {
-                    contador = contador + 1;
-                }
-            }
-        }
-
-        if (contador > 1) {
-            //Dialogo
-            this.toastr.error('Verifique los datos, tiene horarios y canchas repetidos.', "Error!");
-        } else {
-            if (partido.cancha.id_cancha > 0 && partido.horario.inicio != null && partido.horario.fin != null) {
-                partido.fecha = this.fecha.fecha;
-                this.compararHorariosBack(partido);
-            }
-        }
-    }
 
     public dibujarPartidos() {
         try {
@@ -368,20 +378,6 @@ export class ResultadoComponent implements OnInit {
     }
 
     enfrentamiento(obj: any) {
-    }
-
-    actualizarFecha() {
-        var lsPartidos = new Array<Partido>();
-        lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
-        this.fixtureService.update(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
-            data => {
-                this.toastr.success('Se actualizo correctamente la fecha.', "Exito!");
-                this.limpiarCampos();
-            }, error => {
-                this.toastr.error('Intente nuevamente más tarde.', "Error!");
-
-            }
-        );
     }
 
     verificacionComponentes() {
@@ -414,30 +410,5 @@ export class ResultadoComponent implements OnInit {
 
     routeModificacion() {
 
-    }
-
-    eliminarPartido(partido: IPartido) {
-        this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
-            height: '200px',
-            width: '350px',
-            disableClose: false
-        });
-        this.dialogRefBorrado.componentInstance.confirmMessage = "Se eliminara el partido de la fecha."
-
-        this.dialogRefBorrado.afterClosed().subscribe(result => {
-            if (result) {
-                this.fixtureService.eliminarPartido(partido).subscribe(
-                    data => {
-                        this.toastr.success('El partido se elimino correctamente', 'Exito!');
-                        this.obtenerPartidos(this.zona);
-
-                    },
-                    error => {
-                        this.toastr.error('El partido ya no puede ser eliminado', 'Error!');
-                    });
-
-            }
-            this.dialogRefBorrado = null;
-        });
     }
 }

@@ -185,6 +185,7 @@ export class TorneoComponent implements OnInit {
 
     registrarTorneo() {
         this.torneo.lsEquipos = this.lsEquiposToPost;
+        this.torneo.fase.id_fase = 1;
         this.torneoService.create(this.torneo).subscribe(
             data => {
                 this.toastr.success('El torneo ha sido dado de alta correctamente', 'Exito!');

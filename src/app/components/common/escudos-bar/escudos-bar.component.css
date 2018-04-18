@@ -13,8 +13,17 @@
   height: auto
 }
 
-.margin-class {
+.margin-name {
   margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 0px;
+}
+
+.margin-login {
+  margin-top: 10px;
+  margin-right: 0px;
+  padding: 0px;
+  float:right;
 }
 
 .img-thumbnail {
@@ -32,4 +41,8 @@
   transform: scale(1.25);
   transition: transform .25s ease;
 
+}
+
+.slick-arrow {
+  display: none;
 }

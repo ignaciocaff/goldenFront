@@ -1,4 +1,4 @@
-import { Component, Directive, ViewChild, OnInit } from '@angular/core';
+import { Component, Directive, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { LoginComponent } from '../../common/login/index';
 import { Subscription } from 'rxjs/Subscription';
@@ -14,7 +14,8 @@ import { IEquipo } from '../../../entities/index';
     moduleId: module.id,
     templateUrl: './escudos-bar.component.html',
     styleUrls: ['./escudos-bar.component.css'],
-    providers: []
+    providers: [],
+    encapsulation: ViewEncapsulation.None
 })
 export class EscudosComponent implements OnInit, DoCheck {
     @ViewChild(LoginComponent) login: LoginComponent;
@@ -23,7 +24,7 @@ export class EscudosComponent implements OnInit, DoCheck {
     id_torneo: Number;
 
     lsEquipos = new Array<IEquipo>();
-
+    slideConfig = { "slidesToShow": 20, "slidesToScroll": 4 };
     constructor(
         private torneoEmiiter: TorneoEmitter,
         private fileService: FileService,

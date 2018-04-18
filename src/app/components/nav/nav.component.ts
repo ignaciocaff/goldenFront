@@ -110,6 +110,7 @@ export class NavComponent implements OnInit {
                 this.torneo = data;
                 sessionStorage.setItem('torneo', String(this.torneo.nombre));
                 sessionStorage.setItem('id_torneo', String(this.torneo.id_torneo));
+                sessionStorage.setItem('fase', String(this.torneo.fase.id_fase));
                 this.router.navigate(['home/noticias']);
                 this.torneoEmitter.trigger(this.torneo.nombre);
             },

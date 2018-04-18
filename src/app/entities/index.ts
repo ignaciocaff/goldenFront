@@ -37,3 +37,6 @@ export * from './iEquipo';
 export * from './iPartido';
 export * from './gol';
 export * from './reglamento';
+export * from './tipo_sancion';
+export * from './sancion';
+export * from './fase';

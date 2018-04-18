@@ -48,6 +48,7 @@ export class ContainerComponent implements OnInit {
                 this.torneo = this.lsTorneos.find(x => x.id_torneo == 1);
                 sessionStorage.setItem('torneo', this.torneo.nombre);
                 sessionStorage.setItem('id_torneo', String(this.torneo.id_torneo));
+                sessionStorage.setItem('fase', String(this.torneo.fase.id_fase));
                 this.torneoEmitter.trigger(this.torneo.nombre);
             }, error => {
 

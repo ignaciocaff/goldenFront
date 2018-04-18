@@ -1,0 +1,79 @@
+<div class="montserrat-font">
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <h4>
+                Datos de sanción
+            </h4>
+        </div>
+        <div class="col-md-8 col-sm-8">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <div class="form-group has-feedback">
+                <label class="control-label">Tipo Sanción (*)</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-list"></i>
+                        </span>
+                        <select [(ngModel)]="sancion.tipo" name="inicio" required (change)="onChange(sancion.tipo)" class="form-control selectpicker">
+                            <option value="null">Elija su opcion</option>
+                            <option *ngFor="let tipo of lsTiposSancion" [ngValue]="tipo">{{tipo.descripcion}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="form-group has-feedback">
+                <label class="control-label">Fecha Inicio (*)</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-list"></i>
+                        </span>
+                        <select [(ngModel)]="sancion.fecha_inicio" name="inicio" required class="form-control selectpicker">
+                            <option value="null">Elija su opcion</option>
+                            <option *ngFor="let inicio of lsFechasInicio" [ngValue]="inicio">{{inicio.fecha | date:'dd-MM-yyyy'}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            <div class="form-group has-feedback">
+                <label class="control-label">Fecha Fin (*)</label>
+                <div class="inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-list"></i>
+                        </span>
+                        <select [(ngModel)]="sancion.fecha_fin" name="fin" required class="form-control selectpicker">
+                            <option value="null">Elija su opcion</option>
+                            <option *ngFor="let fin of lsFechasFin" [ngValue]="fin">{{fin.fecha | date:'dd-MM-yyyy'}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="esOtras" class="row">
+        <div class="col-md-3">
+            <div class="form-group has-feedback">
+                <label class="control-label">Detalle</label>
+                <textarea [(ngModel)]="sancion.detalle" name="descripcion" class="form-control" rows="3" placeholder="Detalle sanción (Otras)"
+                    maxlength="300"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="posicion row">
+        <div class="col-md-6">
+            <button type="button" (click)="registrarSancion()" class="boton btn btn-primary">Registrar</button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" (click)="dialogRef.close(false)" class="boton btn btn-primary">Salir</button>
+        </div>
+    </div>
+
+</div>

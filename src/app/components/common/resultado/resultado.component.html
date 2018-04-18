@@ -48,8 +48,8 @@
           </div>
           <div class="enfrentamiento">
             <div class="col-md-12 col-sm-12">
-              <div class="row" style="margin-left:25%;">
-                <div class="col-md-3 col-sm-3">
+              <div class="row" style="margin-left:20%;">
+                <div class="col-md-4 col-sm-4">
                   <div class="textEquipo"> Local</div>
                   <ngx-dnd-container [model]="partido.local" dropZone="multiple-target-a" [moves]="false" [copy]="false" [dropZones]="['multiple-target-b','multiple-equipos', 'multiple-target-a']"
                     [removeOnSpill]="true" (drop)="verificacionComponentes()">
@@ -60,15 +60,15 @@
                   </ngx-dnd-container>
                 </div>
                 <div class="col-md-1 col-sm-1 randomResult">
-                  <span>2</span>
+                  <span>{{partido.lsGolesLocal.length}}</span>
                 </div>
                 <div class="col-md-1 col-sm-1 random">
                   <span>VS</span>
                 </div>
                 <div class="col-md-1 col-sm-1 randomResult">
-                  <span>5</span>
+                  <span>{{partido.lsGolesVisitante.length}}</span>
                 </div>
-                <div class="col-md-3 offset-md-1 col-sm-3 offset-sm-3">
+                <div class="col-md-4 col-sm-4">
                   <div class="textEquipo">Visitante</div>
                   <ngx-dnd-container [model]="partido.visitante" dropZone="multiple-target-b" [moves]="false" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-equipos']"
                     [removeOnSpill]="true" (drop)="verificacionComponentes()">
@@ -91,10 +91,10 @@
                           <option value=" ">Elija su opcion</option>
                           <option *ngFor="let jugador of partido.local[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
                         </select>
-                        <div class="input-group-btn margen">
+                        <div class="input-group-btn margen imgEffect">
                           <img (click)="golLocal(partido)" src="/assets/pelota.png" height="34" width="34">
-                          <img id="logo" src="/assets/amarilla.png">
-                          <img id="logo" src="/assets/roja.png">
+                          <img id="amarilla" src="/assets/amarilla.png">
+                          <img (click)="fechasPorZonaLocal(partido)" id="roja" src="/assets/roja.png">
                         </div>
                       </div>
                     </div>
@@ -111,13 +111,53 @@
                           <option value=" ">Elija su opcion</option>
                           <option *ngFor="let jugador of partido.visitante[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
                         </select>
-                        <div class="input-group-btn margen">
+                        <div class="input-group-btn margen imgEffect">
                           <img (click)="golVisitante(partido)" src="/assets/pelota.png" height="34" width="34">
-                          <img id="logo" src="/assets/amarilla.png">
-                          <img id="logo" src="/assets/roja.png">
+                          <img id="amarillaV" src="/assets/amarilla.png">
+                          <img (click)="fechasPorZonaVisitante(partido)" id="rojaV" src="/assets/roja.png">
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-offset-2 col-md-3 col-sm-offset-2 col-sm-3">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Apellido</th>
+                          <th>Gol</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let gol of partido.lsGolesLocal">
+                          <td>{{gol.jugador.apellido}}</td>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-md-offset-2 col-md-3 col-sm-offset-2 col-sm-3">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Apellido</th>
+                          <th>Nombre</th>
+                          <th>Goles</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Caffaratti</td>
+                          <td>Ignacio</td>
+                          <td>1</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
