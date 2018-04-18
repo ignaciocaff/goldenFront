@@ -29,6 +29,7 @@ import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent }
 import { ResultadoComponent } from "./common/resultado/index";
 import { PosicionesGeneralComponent } from "./common/posiciones/index";
 import { UsuarioComponent, UsuarioBajaComponent } from './common/usuarios/index';
+import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
@@ -66,6 +67,9 @@ const homeRoutes: Routes = [
                     { path: 'visualizacion', component: HorariosComponent },
                     { path: 'canchas', component: CanchaComponent },
                     { path: 'canchas-update', component: CanchaUpdateComponent },
+                    { path: 'sanciones-equipo-carga', component: SancionEquipoCargaComponent },
+                    { path: 'sanciones-equipo-baja', component: SancionEquipoBajaComponent },
+
                 ]
             },
             {

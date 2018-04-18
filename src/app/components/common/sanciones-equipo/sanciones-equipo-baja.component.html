@@ -1,0 +1,84 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+
+<div class="flex-item">
+  <form #sancionesEquipoForm="ngForm" name="sancionesEquipoForm">
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <h4>
+          Equipo(*)
+        </h4>
+        <p class="text-muted">
+          Seleccione el equipo al que le quiere quitar la sanción
+        </p>
+        <div class="form-group has-feedback">
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="sancion.equipo" name="equipo" required class="form-control" (change)="onChange(sancion.equipo.id_equipo)">
+                <option value="null">Elija su opción</option>
+                <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-8">
+      </div>
+    </div>
+
+    <div *ngIf="!tieneSanciones">
+      <p class="text-muted">
+        El equipo seleccionado no tiene sanciones.
+      </p>
+    </div>
+
+    <div *ngIf="tieneSanciones">
+      <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        </mat-form-field>
+      </div>
+
+      <div class="example-container mat-elevation-z8">
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="descripcion_sancion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.descripcion}} </mat-cell>
+          </ng-container>
+
+          <!-- Progress Column -->
+          <ng-container matColumnDef="puntos_restados">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Puntos restados </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.puntos_restados}} </mat-cell>
+          </ng-container>
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="id_jugador">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;">
+          </mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="lsSanciones.length" [pageSize]="30" [pageSizeOptions]="[5, 10, 30]"></mat-paginator>
+      </div>
+    </div>
+  </form>
+</div>

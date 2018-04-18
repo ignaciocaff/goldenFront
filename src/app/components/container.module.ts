@@ -28,7 +28,7 @@ import { TorneoEmitter, TorneoLSEmitter, ParserService } from '../services/commo
 import { CategoriaService, TorneoService, ClubService, EquipoService, ReglasService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -49,6 +49,8 @@ import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './co
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/posiciones/index';
+import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
+
 
 @NgModule({
   declarations: [
@@ -96,7 +98,9 @@ import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/po
     PosicionesZonaComponent,
     UsuarioComponent,
     UsuariosDialog,
-    UsuarioBajaComponent
+    UsuarioBajaComponent,
+    SancionEquipoCargaComponent,
+    SancionEquipoBajaComponent
   ],
   imports: [
     BrowserModule,
@@ -123,7 +127,7 @@ import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/po
   entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
-    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService],
+    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionEquipoService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
