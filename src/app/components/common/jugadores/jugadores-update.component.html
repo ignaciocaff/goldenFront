@@ -78,7 +78,7 @@
                         <i class="glyphicon glyphicon-user"></i>
                       </span>
                       <input [(ngModel)]="jugador.nro_documento" name="nroDoc" required #nroDoc='ngModel' class="form-control" type="number" (blur)="consultarDatosjugador()"
-                        [disabled]="!equipoSeleccionado">
+                        [disabled]="!equipoSeleccionado && !esRepresentante">
                     </div>
                     <div *ngIf="nroDoc.errors && (nroDoc.dirty || nroDoc.touched)" class="error">
                       <span class="label label-danger" id="error_Requerido">Campo requerido</span>
@@ -299,7 +299,7 @@
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
                       <select [(ngModel)]="localidadSeleccionada" (change)="onLocalidadChange(localidadSeleccionada)"  #localidad='ngModel' name="localidad" required
-                        class="form-control selectpicker" *ngIf="!existejugador">
+                        class="form-control selectpicker" [disabled]="!existeJugador">
                         <option value="null">Elija su opción</option>
                         <option *ngFor="let localidad of lsLocalidades">{{localidad.n_localidad}}</option>
                       </select>

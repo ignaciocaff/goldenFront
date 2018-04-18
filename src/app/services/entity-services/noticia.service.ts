@@ -34,4 +34,8 @@ export class NoticiaService {
      getSecundarias(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'noticia/secundarias/' + id_torneo).map((response: Response) => response.json());
      }
+
+     getHistoricas(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'noticia/historicas/' + id_torneo).map((response: Response) => response.json());
+     }
 }

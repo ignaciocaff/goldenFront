@@ -44,7 +44,7 @@ import { stringify } from '@angular/compiler/src/util';
         UsuarioService
     ]
 })
-export class JugadoresUpdateComponent {
+export class JugadoresUpdateComponent implements OnInit {
     @ViewChild('jugadorForm') jugadorForm: FormGroup;
 
     user: Usuario;
@@ -84,7 +84,11 @@ export class JugadoresUpdateComponent {
         private userService: SharedService,
         private router: Router,
         private spinnerService: Ng4LoadingSpinnerService,
-    ) {
+    ) {    }
+
+    // METODOS-----------------------------------------------------------------------
+
+    ngOnInit() {
         this.jugador.contacto = this.contacto;
         this.jugador.rol = 'jugador';
         this.visualizable = false;
@@ -95,8 +99,19 @@ export class JugadoresUpdateComponent {
         this.cargarEquipos();
     }
 
-    // METODOS-----------------------------------------------------------------------
-
+    verificarUsuario() {
+        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (this.user.perfil.id_perfil != 1) {
+            this.usuarioService.getEquipoRepresentante(this.user.id_usuario).subscribe(
+                data => {
+                    this.jugador.equipo = data;
+                    this.esRepresentante = true;
+                },
+                error => {
+                    error.json()['Message'];
+                });
+        }
+    }
 
     cargarTiposDocumento() {
         this.tipoDocumentoService.getAll().subscribe(
@@ -176,8 +191,11 @@ export class JugadoresUpdateComponent {
                 for (let i = 0; i < data.length; i++) {
                     let equipo = new Equipo();
                     equipo = data[i];
-                    this.lsEquipos.push(equipo);
+                    if (equipo.torneo.id_torneo != null && equipo.torneo.id_torneo == JSON.parse(sessionStorage.getItem('id_torneo'))) {
+                        this.lsEquipos.push(equipo);
+                    }
                 }
+                this.verificarUsuario();
             },
             error => {
                 this.lsEquipos = new Array<Equipo>();
@@ -235,7 +253,7 @@ export class JugadoresUpdateComponent {
             this.dialogService.agregarLocalidad(this.jugador.domicilio.provincia).subscribe(
                 result => {
                     this.lsProvincias = [];
-                    this.lsLocalidades =[];
+                    this.lsLocalidades = [];
                     this.provinciaService.getAll().subscribe(
                         data => {
                             for (let i = 0; i < data.length; i++) {
@@ -317,7 +335,7 @@ export class JugadoresUpdateComponent {
     }
 
     onProvinciaChange(newValue) {
-        this.lsLocalidades =[];
+        this.lsLocalidades = [];
         if (newValue != null) {
             this.jugador.domicilio.provincia.id_provincia = this.lsProvincias.find(x => x.n_provincia == newValue).id_provincia;
             this.jugador.domicilio.provincia.n_provincia = newValue;

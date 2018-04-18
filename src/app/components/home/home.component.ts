@@ -16,12 +16,16 @@ import { DoCheck, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hoo
 export class HomeComponent implements DoCheck, AfterViewInit {
     public lsNoticiasPrincipales = new Array<Noticia>();
     public lsNoticiasSecundarias = new Array<Noticia>();
+    public lsNoticiasHistoricas = new Array<Noticia>();
+    public lsUltimasNoticias = new Array<Noticia>();
 
     public lsNotPrincipLink = new Array<any>();
     public lsNotSecundLink = new Array<any>();
+    public lsNotUltimasLink = new Array<any>();
 
     imagesPPal: Array<any> = [];
     imagesSec: Array<any> = [];
+    imagesUltimas: Array<any> = [];
     url: string;
     id_torneo: number;
     constructor(
@@ -39,25 +43,23 @@ export class HomeComponent implements DoCheck, AfterViewInit {
         if (this.id_torneo !== Number(sessionStorage.getItem('id_torneo'))) {
             this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
             this.cargarNoticiasPrincipales();
-            this.cargarNoticiasSecundarias();
         }
-
     }
 
-    ngAfterViewInit () {
-        !function(d,s,id){
+    ngAfterViewInit() {
+        !function (d, s, id) {
             var js: any,
-                fjs=d.getElementsByTagName(s)[0],
-                p='https';
-            if(!d.getElementById(id)){
-                js=d.createElement(s);
-                js.id=id;
-                js.src=p+"://platform.twitter.com/widgets.js";
-                fjs.parentNode.insertBefore(js,fjs);
+                fjs = d.getElementsByTagName(s)[0],
+                p = 'https';
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = p + "://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
             }
         }
-        (document,"script","twitter-wjs");
-}
+            (document, "script", "twitter-wjs");
+    }
 
     verNoticia(id_noticia) {
         this.router.navigate(['home/noticia/' + id_noticia]);
@@ -74,6 +76,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
                     noticia = data[i];
                     this.lsNoticiasPrincipales.push(noticia);
                 }
+                this.cargarNoticiasSecundarias();
                 this.getThumbnailsPrincipales();
             },
             error => {
@@ -111,7 +114,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
                 }
             }
         }
-        this.lsNotPrincipLink.sort((a,b) => b.id_noticia - a.id_noticia);
+        this.lsNotPrincipLink.sort((a, b) => b.id_noticia - a.id_noticia);
     }
 
 
@@ -124,6 +127,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
                     noticia = data[i];
                     this.lsNoticiasSecundarias.push(noticia);
                 }
+                this.cargarNoticiasHistoricas();
                 this.getThumbnailsSecundarias();
             },
             error => {
@@ -161,7 +165,79 @@ export class HomeComponent implements DoCheck, AfterViewInit {
                 }
             }
         }
-        this.lsNotSecundLink.sort((a,b) => b.id_noticia - a.id_noticia);
+        this.lsNotSecundLink.sort((a, b) => b.id_noticia - a.id_noticia);
+    }
+
+    cargarNoticiasHistoricas() {
+        this.noticiaService.getHistoricas(this.id_torneo).subscribe(
+            data => {
+                this.lsNoticiasHistoricas = [];
+                this.lsNotUltimasLink = [];
+                for (let i = 0; i < data.length; i++) {
+                    let noticia = new Noticia();
+                    noticia = data[i];
+                    this.lsNoticiasHistoricas.push(noticia);
+                }
+                this.generarListaUltimasNoticias();
+            },
+            error => {
+                this.lsNoticiasHistoricas = new Array<Noticia>();
+                error.json()['Message'];
+            });
+    }
+
+    generarListaUltimasNoticias() {
+        var lsID = new Array<number>();
+
+        for (let i = 0; i < this.lsNoticiasPrincipales.length; i++) {
+            lsID.push(this.lsNoticiasPrincipales[i].id_noticia);
+        }
+
+        for (let i = 0; i < this.lsNoticiasSecundarias.length; i++) {
+            lsID.push(this.lsNoticiasSecundarias[i].id_noticia);
+        }
+
+        for (let i = this.lsNoticiasHistoricas.length -1; i >= 0; i--) {
+            for (let j = 0; j < lsID.length; j++) {
+                if (this.lsNoticiasHistoricas[i].id_noticia == lsID[j]) {
+                    this.lsNoticiasHistoricas.splice(i, 1);
+                }
+            }
+        }
+        this.getThumbnailsUltimas();
+    }
+
+    getThumbnailsUltimas() {
+        for (let i = 0; i < this.lsNoticiasHistoricas.length; i++) {
+            this.fileService.getImagesByNoticia(this.lsNoticiasHistoricas[i].id_noticia).subscribe(
+                data => {
+                    this.imagesUltimas = [];
+                    if (data) {
+                        for (var j = 0; j < data.length; j++) {
+                            this.imagesUltimas.push(data[j]);
+                        }
+                        this.relacionarImagenesUltimas();
+                    }
+                },
+                error => { }
+            );
+        }
+    }
+
+    relacionarImagenesUltimas() {
+        for (let i = 0; i < this.lsNoticiasHistoricas.length; i++) {
+            for (let j = 0; j < this.imagesUltimas.length; j++) {
+                if (this.lsNoticiasHistoricas[i].id_thumbnail == this.imagesUltimas[j].Id) {
+                    this.lsNotUltimasLink.push({
+                        titulo: this.lsNoticiasHistoricas[i].titulo,
+                        ruta: this.imagesUltimas[j].ThumbPath,
+                        id_noticia: this.lsNoticiasHistoricas[i].id_noticia,
+                        fecha_noticia : this.lsNoticiasHistoricas[i].fecha
+                    });
+                }
+            }
+        }
+        this.lsNotUltimasLink.sort((a, b) => b.id_noticia - a.id_noticia);
     }
 
 }

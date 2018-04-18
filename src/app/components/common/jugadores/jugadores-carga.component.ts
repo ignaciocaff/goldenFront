@@ -108,9 +108,11 @@ export class JugadoresCargaComponent implements OnInit {
                 data => {
                     this.jugador.equipo = data;
                     this.esRepresentante = true;
-                }
-            );
-        } else { }
+                },
+                error => {
+                    error.json()['Message'];
+                });
+        }
     }
 
     cargarTiposDocumento() {
@@ -268,6 +270,7 @@ export class JugadoresCargaComponent implements OnInit {
     }
 
     registrarJugador() {
+        this.spinnerService.show();
         this.jugadorService.create(this.jugador).subscribe(
             data => {
                 this.spinnerService.hide();
