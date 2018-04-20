@@ -26,6 +26,6 @@ export class SancionEquipoService {
 
     delete(id: number) {
 /*         return this.http.delete(this.config.apiUrl + 'sancion_equipo/delete');*/
-        return this.http.get(this.config.apiUrl + 'sancion_equipo/delete/' + id);
+        return this.http.get(this.config.apiUrl + 'sancion_equipo/borrar/' + id);
     }
 }

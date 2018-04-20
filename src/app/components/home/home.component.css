@@ -11,6 +11,8 @@
   transition: 0.5s opacity;
   height: 21.1em;
   width: 100%;
+  object-fit: cover;
+
 }
 
 .imageboxSecundaria {
@@ -26,6 +28,7 @@
   transition: 0.5s opacity;
   height: 13.4em;
   width: 100%;
+  object-fit: cover;
 }
 
 .imagebox .imagebox-desc {
@@ -103,6 +106,7 @@ h2 {
   height: 70px;
   margin-bottom: 14px;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .noticia-historica-texto {

@@ -7,8 +7,8 @@
 
 .images {
   display: block;
-  max-width:50px;
-  max-height:50px;
+  max-width: 50px;
+  max-height: 50px;
   width: auto;
   height: auto;
   cursor: pointer;
@@ -32,5 +32,14 @@
 .images img:hover {
   transform: scale(1.25);
   transition: transform .25s ease;
+}
 
+.images img {
+  -webkit-backface-visibility: hidden;
+  -ms-transform: translateZ(0);
+  /* IE 9 */
+  -webkit-transform: translateZ(0);
+  /* Chrome, Safari, Opera */
+  transform: translateZ(0);
+  object-fit: scale-down;
 }

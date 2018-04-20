@@ -64,6 +64,7 @@
 .foto img {
   width: 140px;
   height: 100px;
+  object-fit: scale-down;
 }
 
 .texto-imagen {
