@@ -342,11 +342,11 @@ export class ResultadoComponent implements OnInit {
         this.partidoService.create(lsPartidos, this.id_fase, this.id_torneo, this.esInterzonal).subscribe(
             data => {
                 if (data) {
-                    console.error('SE CREO CORRECTAMENTE EL PARTIDO');
+                    this.toastr.success("Se registraron correctamente los resultados.", "Éxito!");
                     this.limpiarCampos();
                 }
             }, error => {
-
+                this.toastr.error("Intente nuevamente más tarde.", "Error!");
             }
 
         );
