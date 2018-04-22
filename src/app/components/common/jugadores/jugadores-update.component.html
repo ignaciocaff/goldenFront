@@ -411,7 +411,7 @@
     </div>
     <div class="row">
       <div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1">
-        <button type="submit" [disabled]="!jugadorForm.valid || !existeJugador" (click)="registrarJugador()" class="btn btn-primary">Guardar</button>
+        <button type="submit" [disabled]="!jugadorForm.valid || !existeJugador || jugador.id_foto == null" (click)="registrarJugador()" class="btn btn-primary">Guardar</button>
         <button class="btn btn-default" (click)="limpiar()">Limpiar</button>
       </div>
     </div>
