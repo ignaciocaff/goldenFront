@@ -7,13 +7,17 @@ export class Jugador extends Persona {
     public rol: string;
     public fecha_alta: Date;
     public equipo: Equipo;
+    public acumAmarillas: number;
+    public acumRojas: number;
 
     constructor(
         id_jugador?: number,
         numero?: number,
         rol?: string,
         fecha_alta?: Date,
-        equipo?: Equipo
+        equipo?: Equipo,
+        acumAmarillas?: number,
+        acumRojas?: number
     ) {
         super();
 
@@ -21,6 +25,18 @@ export class Jugador extends Persona {
             this.id_jugador = id_jugador;
         } else {
             this.id_jugador = null;
+        }
+
+        if (acumAmarillas) {
+            this.acumAmarillas = acumAmarillas;
+        } else {
+            this.acumAmarillas = null;
+        }
+
+        if (acumRojas) {
+            this.acumRojas = acumRojas;
+        } else {
+            this.acumRojas = null;
         }
 
         if (numero) {

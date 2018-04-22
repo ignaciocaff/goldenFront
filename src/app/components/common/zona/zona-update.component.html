@@ -32,7 +32,8 @@
           </div>
           <div *ngIf="zonaA.length >0" fxFlex="25%">
             <div>
-              <hr class="hr-text textTitle" data-content="Zona A">
+              <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="PlayOff">
+              <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona A">
             </div>
             <ngx-dnd-container [model]="zonaA" dropZone="multiple-target-a" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaA)">

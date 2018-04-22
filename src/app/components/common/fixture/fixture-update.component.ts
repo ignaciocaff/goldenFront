@@ -102,7 +102,7 @@ export class FixtureUpdateComponent implements OnInit {
         this.cantidadPartidos = null;
         this.partidos = [];
 
-        this.fixtureService.obtenerPartidos(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
+        this.fixtureService.obtenerPartidos(this.fecha, this.id_torneo, this.zona.id_zona, ).subscribe(
             data => {
                 this.partidos = data;
             }, error => {
@@ -234,7 +234,7 @@ export class FixtureUpdateComponent implements OnInit {
             this.toastr.error('Verifique los datos, tiene horarios y canchas repetidos.', "Error!");
         } else {
             if (partido.cancha.id_cancha > 0 && partido.horario.inicio != null && partido.horario.fin != null) {
-                partido.fecha = this.fecha.fecha;
+                partido.fecha.fecha = this.fecha.fecha;
                 this.compararHorariosBack(partido);
             }
         }

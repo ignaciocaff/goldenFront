@@ -40,7 +40,7 @@ export class ParserService {
         return lsPartidos;
     }
 
-    parseResultados(partidos: Array<IPartido>) {
+    parseResultados(partidos: Array<IPartido>, id_torneo: number) {
         let lsPartidos = new Array<Partido>();
         for (let i = 0; i < partidos.length; i++) {
             var partido = new Partido();
@@ -82,14 +82,18 @@ export class ParserService {
                 local.id_equipo = partidos[i].local[j].id_equipo;
                 local.nombre = partidos[i].local[j].nombre;
                 partido.local = local;
+                partido.local.torneo.id_torneo = id_torneo;
             }
 
             for (let f = 0; f < partidos[i].visitante.length; f++) {
                 visitante.id_equipo = partidos[i].visitante[f].id_equipo;
                 visitante.nombre = partidos[i].visitante[f].nombre;
                 partido.visitante = visitante;
+                partido.visitante.torneo.id_torneo = id_torneo;
             }
-
+            partido.llave = partidos[i].llave;
+            partido.fecha.id_fecha = partidos[i].fecha.id_fecha;
+            partido.fecha.fecha = partidos[i].fecha.fecha;
             lsPartidos.push(partido);
         }
         return lsPartidos;

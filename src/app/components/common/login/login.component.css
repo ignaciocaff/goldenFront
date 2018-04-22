@@ -55,7 +55,6 @@ h3{
 .loginButton{
   color:white;
   display: block;
-  float: right;
   padding:0;
-  margin-right:30px;
+  float:right;
 }

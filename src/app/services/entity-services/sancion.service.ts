@@ -11,4 +11,10 @@ export class SancionService {
     getAll() {
         return this.http.get(this.config.apiUrl + 'sanciones/tipos').map((response: Response) => response.json());
     }
+
+    getAcumuladoTarjetas(id_torneo: number, id_jugador: number) {
+        return this.http.get(
+            this.config.apiUrl + 'sanciones/acumuladoJugador/' + id_torneo + '/' + id_jugador)
+            .map((response: Response) => response.json());
+    }
 }

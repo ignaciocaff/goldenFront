@@ -91,6 +91,7 @@ resultado .row .enfrentamiento .ngx-dnd-container {
 resultado .row .enfrentamiento .imgEffect img:hover {
   transform: scale(1.25);
   transition: transform .25s ease;
+  cursor: pointer;
 
 }
 
@@ -132,4 +133,15 @@ span {
 
 .margen img {
   margin-left: 3px;
+}
+
+.btn {
+  margin: 0 0.4em 0.4em 0;
+  padding: 0.4em 1em;
+}
+
+.avoid-clicks img {
+  pointer-events: none;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }

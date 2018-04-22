@@ -1,5 +1,5 @@
 import {
-    Partido, Jugador, TipoSancion, Equipo, Fecha
+    Partido, Jugador, TipoSancion, Equipo, Fecha, Zona, Fase
 } from './index';
 
 export class Sancion {
@@ -10,7 +10,9 @@ export class Sancion {
     public partido: Partido;
     public equipo: Equipo;
     public detalle: string;
-    public tipo: TipoSancion;
+    public tipo_sancion: TipoSancion;
+    public zona: Zona
+    public fase: Fase
 
     constructor(
         id_sancion?: number,
@@ -20,7 +22,9 @@ export class Sancion {
         partido?: Partido,
         detalle?: string,
         equipo?: Equipo,
-        tipo?: TipoSancion,
+        tipo_sancion?: TipoSancion,
+        zona?: Zona,
+        fase?: Fase
     ) {
         if (id_sancion) this.id_sancion = id_sancion;
         else this.id_sancion = null;
@@ -40,10 +44,16 @@ export class Sancion {
         if (detalle) this.detalle = detalle;
         else this.detalle = null;
 
-        if (tipo) this.tipo = tipo;
-        else this.tipo = new TipoSancion();
+        if (tipo_sancion) this.tipo_sancion = tipo_sancion;
+        else this.tipo_sancion = new TipoSancion();
 
         if (equipo) this.equipo = equipo;
         else this.equipo = new Equipo();
+
+        if (zona) this.zona = zona;
+        else this.zona = new Zona();
+
+        if (fase) this.fase = fase;
+        else this.fase = new Fase();
     }
 }

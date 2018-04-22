@@ -24,7 +24,7 @@ export class EscudosComponent implements OnInit, DoCheck {
     id_torneo: Number;
 
     lsEquipos = new Array<IEquipo>();
-    slideConfig = { "slidesToShow": 20, "slidesToScroll": 4 };
+    slideConfig = { "slidesToShow": 15, "slidesToScroll": 4 };
     constructor(
         private torneoEmiiter: TorneoEmitter,
         private fileService: FileService,

@@ -27,4 +27,8 @@ export class ZonaService {
     delete(obj: any) {
         return this.http.post(this.config.apiUrl + 'zona/eliminar', obj);
     }
+
+    tienePlayOff(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'zona/tienePlayoff/' + id_torneo).map((response: Response) => response.json());
+    }
 }

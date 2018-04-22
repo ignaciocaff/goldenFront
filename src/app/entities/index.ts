@@ -40,3 +40,4 @@ export * from './reglamento';
 export * from './tipo_sancion';
 export * from './sancion';
 export * from './fase';
+export * from './llave';

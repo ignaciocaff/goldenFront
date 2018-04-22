@@ -22,9 +22,9 @@
 
 .margin-login {
   margin-top: 10px;
-  margin-right: 0px;
-  padding: 0px;
-  float:right;
+  padding: 0;
+  float:left;
+  width: 180px;
 }
 
 .img-thumbnail {
@@ -40,10 +40,14 @@
 
 .images img:hover {
   transform: scale(1.25);
-  transition: transform .25s ease;
-
 }
 
 .slick-arrow {
   display: none;
+}
+
+.slick-track{
+  margin-top: 1px;
+  width:48px;
+  height:48px;
 }

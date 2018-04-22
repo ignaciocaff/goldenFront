@@ -1,8 +1,9 @@
 
-import { Component, Input, Inject, OnInit } from '@angular/core';
+import { Component, Input, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Equipo, Fecha, Sancion, TipoSancion, IPartido } from '../../../entities/index';
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 
 @Component({
     selector: 'sancion-dialog-v',
@@ -10,12 +11,12 @@ import { Equipo, Fecha, Sancion, TipoSancion, IPartido } from '../../../entities
     styleUrls: ['./sancion-dialog-v.css']
 })
 export class SancionDialogV implements OnInit {
-
+    @ViewChild('sancionForm') sancionForm: FormGroup;
     lsFechasInicio = new Array<Fecha>();
     lsFechasFin = new Array<Fecha>();
     conjunto = new Array<any>();
     sancion = new Sancion();
-    lsTiposSancion = new TipoSancion();
+    lsTiposSancion = new Array<TipoSancion>();
     esOtras: boolean;
     partido = new IPartido();
 
@@ -39,8 +40,8 @@ export class SancionDialogV implements OnInit {
         this.dialogRef.close({ data: this.partido });
     }
 
-    onChange(tipo: TipoSancion) {
-        if (tipo.descripcion == 'Otras' || tipo.id_tipo == 7) {
+    onChange(tipo_sancion: TipoSancion) {
+        if (tipo_sancion.descripcion == 'Otras' || tipo_sancion.id_tipo == 7) {
             this.esOtras = true;
         } else {
             this.esOtras = false;
