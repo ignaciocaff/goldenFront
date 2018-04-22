@@ -1,0 +1,83 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item active">
+    <a class="nav-link active" (click)="routeAlta()">Alta</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" (click)="routeModificacion()">Modificación</a>
+  </li>
+</ul>
+
+<div class="flex-item">
+  <form #sancionesEquipoForm="ngForm" name="sancionesEquipoForm">
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <h4>
+          Equipo(*)
+        </h4>
+        <div class="form-group has-feedback">
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="sancion.equipo" name="equipo" required class="form-control">
+                <option value="null">Elija su opción</option>
+                <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-8">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4">
+        <h4>
+          Sanción
+        </h4>
+        <p class="text-muted">
+          Ingrese los datos de la sanción
+        </p>
+      </div>
+      <div class="col-md-8 col-sm-8">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Descripción(*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-pencil"></i>
+              </span>
+              <input [(ngModel)]="sancion.descripcion" name="descripcion" required class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label for="nombre" class="control-label">Puntos a restar(*)</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-circle-arrow-down"></i>
+              </span>
+              <input [(ngModel)]="sancion.puntos_restados" name="puntos_restados" required #puntos_restados='ngModel' class="form-control" type="number" required min="0">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <button (click)="registrarSancion()" type="button" class="btn btn-primary" [disabled]="!reglaForm.valid">Registrar</button>
+      </div>
+    </div>
+  </form>
+</div>

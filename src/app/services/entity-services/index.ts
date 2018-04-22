@@ -18,4 +18,4 @@ export * from './horario.service';
 export * from './fixture.service';
 export * from './sancion.service';
 export * from './partido.service';
-
+export * from './sancionEquipo.service';

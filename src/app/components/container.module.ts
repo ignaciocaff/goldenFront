@@ -29,8 +29,8 @@ import { CategoriaService, TorneoService, ClubService, EquipoService, ReglasServ
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
 import {
-  CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService
-  , FixtureService, ReglaTorneoService, SancionService, PartidoService
+  CategoriaNoticiaService, NoticiaService, CanchaService,
+  HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, SancionService, PartidoService
 } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
@@ -53,6 +53,8 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/posiciones/index';
 import { SlickModule } from 'ngx-slick';
+import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -101,7 +103,9 @@ import { SlickModule } from 'ngx-slick';
     UsuariosDialog,
     UsuarioBajaComponent,
     SancionDialog,
-    SancionDialogV
+    SancionDialogV,
+    SancionEquipoCargaComponent,
+    SancionEquipoBajaComponent
   ],
   imports: [
     BrowserModule,
@@ -130,7 +134,7 @@ import { SlickModule } from 'ngx-slick';
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionService
-    , PartidoService],
+    , PartidoService, SancionEquipoService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
