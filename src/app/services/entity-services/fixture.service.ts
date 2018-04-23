@@ -20,8 +20,12 @@ export class FixtureService {
         return this.http.post(this.config.apiUrl + 'fecha/verificar/' + id_zona + '/' + id_torneo, obj);
     }
 
-    obtenerPartidos(obj: any, id_zona: number, id_torneo: number) {
-        return this.http.post(this.config.apiUrl + 'fecha/obtener/' + id_zona + '/' + id_torneo, obj).map((response: Response) => response.json())
+    obtenerPartidos(obj: any, id_torneo: number, id_zona?: number, esInterzonal?: number) {
+        if (!esInterzonal) {
+            return this.http.post(this.config.apiUrl + 'fecha/obtener/' + id_torneo + '/' + id_zona, obj).map((response: Response) => response.json())
+        } else {
+            return this.http.post(this.config.apiUrl + 'fecha/obtener/' + id_torneo + '/' + id_zona + '/' + esInterzonal, obj).map((response: Response) => response.json())
+        }
     }
     obtenerPartidosClub(obj: any) {
         return this.http.post(this.config.apiUrl + 'fecha/obtenerPartidos', obj).map((response: Response) => response.json())

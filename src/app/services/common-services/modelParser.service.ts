@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { IEquipo, IPartido, Equipo, Partido, Fecha } from '../../entities/index';
+import { IEquipo, IPartido, Equipo, Partido, Fecha, Gol, Sancion } from '../../entities/index';
 
 @Injectable()
 export class ParserService {
@@ -40,7 +40,7 @@ export class ParserService {
         return lsPartidos;
     }
 
-    parseResultados(partidos: Array<IPartido>) {
+    parseResultados(partidos: Array<IPartido>, id_torneo: number) {
         let lsPartidos = new Array<Partido>();
         for (let i = 0; i < partidos.length; i++) {
             var partido = new Partido();
@@ -52,17 +52,48 @@ export class ParserService {
                 partido.id_partido = partidos[i].id_partido;
             }
 
+            if (partidos[i].lsGolesLocal) {
+                partido.lsGoleadoresLocales = partidos[i].lsGolesLocal;
+            } else {
+                partido.lsGoleadoresLocales = new Array<Gol>();
+            }
+
+            if (partidos[i].lsGolesVisitante) {
+                partido.lsGoleadoresVisitantes = partidos[i].lsGolesVisitante;
+            } else {
+                partido.lsGoleadoresVisitantes = new Array<Gol>();
+            }
+
+            //Sanciones
+
+            if (partidos[i].lsSancionesLocal) {
+                partido.lsSancionesLocal = partidos[i].lsSancionesLocal;
+            } else {
+                partido.lsSancionesLocal = new Array<Sancion>();
+            }
+
+            if (partidos[i].lsSancionesVisitante) {
+                partido.lsSancionesVisitante = partidos[i].lsSancionesVisitante;
+            } else {
+                partido.lsSancionesVisitante = new Array<Sancion>();
+            }
+
             for (let j = 0; j < partidos[i].local.length; j++) {
                 local.id_equipo = partidos[i].local[j].id_equipo;
                 local.nombre = partidos[i].local[j].nombre;
                 partido.local = local;
+                partido.local.torneo.id_torneo = id_torneo;
             }
 
             for (let f = 0; f < partidos[i].visitante.length; f++) {
                 visitante.id_equipo = partidos[i].visitante[f].id_equipo;
                 visitante.nombre = partidos[i].visitante[f].nombre;
                 partido.visitante = visitante;
+                partido.visitante.torneo.id_torneo = id_torneo;
             }
+            partido.llave = partidos[i].llave;
+            partido.fecha.id_fecha = partidos[i].fecha.id_fecha;
+            partido.fecha.fecha = partidos[i].fecha.fecha;
             lsPartidos.push(partido);
         }
         return lsPartidos;

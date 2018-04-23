@@ -1,17 +1,19 @@
 <div class="row" class="montserrat-font">
-  <div *ngIf="nombre != null" class="col-sm-2 col-md-2 margin-class">
+  <div *ngIf="nombre != null" class="col-sm-2 col-md-2 margin-name">
     {{nombre.toUpperCase()}}
   </div>
-  <div id="header" class="col-sm-8 col-md-8">
+  <div id="header" style="padding:0" class="col-sm-8 col-md-8">
     <div id="container">
-      <div *ngFor="let equipo of lsEquipos" class="inline-display">
-        <div class="images" (click)="verEquipo(equipo.id_equipo)">
-          <img [src]="'http://localhost:50042' + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
+      <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let equipo of lsEquipos" class="slide">
+          <div class="images" (click)="verEquipo(equipo.id_equipo)">
+            <img [src]="'http://localhost:50042' + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
+          </div>
         </div>
-      </div>
+      </ngx-slick>
     </div>
   </div>
-  <div class="col-sm-2 col-md-2 margin-class">
+  <div class="col-sm-2 col-md-2 margin-login">
     <login></login>
   </div>
 </div>

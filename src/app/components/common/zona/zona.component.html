@@ -9,15 +9,18 @@
     <a class="nav-link" (click)="routeEliminar()">Eliminación</a>
   </li>
 </ul>
-<div class="row">
+<div *ngIf="id_fase == 3" class="row anchoComponente">
+  <div class="col-md-3 col-sm-3"></div>
+</div>
+<div *ngIf="id_fase != 3" class="row">
   <div class="col-md-3 col-sm-3">
     <div class="form-group has-feedback">
       <label class="control-label">Cantidad Zonas (*)</label>
       <div class="inputGroupContainer">
         <div class="input-group">
           <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-home"></i>
-                      </span>
+            <i class="glyphicon glyphicon-home"></i>
+          </span>
           <input [(ngModel)]="cantidadZonas" name="cantidadZonas" required class="form-control" type="number" (blur)="armarZonas()">
         </div>
       </div>
@@ -42,7 +45,8 @@
       </div>
       <div *ngIf="cantidadZonas >= 1" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona A">
+          <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="PlayOff">
+          <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona A">
         </div>
         <ngx-dnd-container [model]="zonaA" dropZone="multiple-target-a" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" (drop)="zona(zonaA)">
@@ -142,6 +146,6 @@
 </div>
 <div class="row">
   <div class="col-md-6">
-    <button (click)="comprobacionZonasVacias()" type="button" class="btn btn-primary">Registrar</button>
+    <button (click)="comprobacionZonasVacias()" *ngIf="!btnHide" type="button" class="btn btn-primary">Registrar</button>
   </div>
 </div>

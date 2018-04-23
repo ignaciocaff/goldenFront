@@ -1,15 +1,17 @@
-import { Equipo } from './index';
+import { Equipo, Zona } from './index';
 
 export class ResultadoZona {
     public id_resultado: number;
     public ganador: Equipo;
     public perdedor: Equipo;
     public empate: number;
+    public zona: Zona;
     constructor(
         id_resultado?: number,
         ganador?: Equipo,
         perdedor?: Equipo,
         empate?: number,
+        zona?: Zona
     ) {
         if (id_resultado) this.id_resultado = id_resultado;
         else this.id_resultado = null;
@@ -22,5 +24,8 @@ export class ResultadoZona {
 
         if (empate) this.empate = empate;
         else this.empate = null;
+
+        if (zona) this.zona = zona;
+        else this.zona = new Zona();
     }
 }

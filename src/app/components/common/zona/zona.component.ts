@@ -30,12 +30,15 @@ export class ZonaComponent implements OnInit {
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
     id_torneo: number;
+    id_fase: number;
+    btnHide: boolean = false;
 
     sourceItems = [
     ];
     constructor(private fileService: FileService, public equipoService: EquipoService,
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+        this.id_fase = Number(sessionStorage.getItem('fase'));
     }
 
     ngOnInit() {
@@ -65,6 +68,10 @@ export class ZonaComponent implements OnInit {
             error => {
                 error.json()['Message'];
             });
+        if (this.id_fase == 3) {
+            this.cantidadZonas = 1;
+            this.armarZonas();
+        }
 
     }
 
@@ -98,8 +105,13 @@ export class ZonaComponent implements OnInit {
         this.zonas = [];
         for (var i = 0; i < this.cantidadZonas; i++) {
             var zona = new Zona();
-            zona.descripcion = this.intercambioLetraPorNumero((i + 1).toString());
+            if (this.id_fase == 3) {
+                zona.descripcion = 'PlayOff';
+            } else {
+                zona.descripcion = this.intercambioLetraPorNumero((i + 1).toString());
+            }
             zona.torneo.id_torneo = this.id_torneo;
+            zona.torneo.fase.id_fase = this.id_fase;
             this.zonas.push(zona);
         }
     }
@@ -188,6 +200,11 @@ export class ZonaComponent implements OnInit {
                     for (var i = 0; i < this.zonaH.length; i++) {
                         this.lsEquiposH.push(new Equipo(this.zonaH[i].id_equipo, this.zonaH[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposH;
+                    break;
+                case 'PlayOff':
+                    for (var i = 0; i < this.zonaA.length; i++) {
+                        this.lsEquiposA.push(new Equipo(this.zonaA[i].id_equipo, this.zonaA[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposA;
                     break;
             }
         }

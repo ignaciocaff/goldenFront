@@ -40,7 +40,7 @@ export class ZonaUpdateComponent implements OnInit {
     zonaH: any[] = [];
     listaZonas: any[] = [this.zonaA, this.zonaB, this.zonaC, this.zonaD, this.zonaE, this.zonaF, this.zonaG, this.zonaH];
 
-
+    id_fase: number;
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
     id_torneo: number;
@@ -50,6 +50,7 @@ export class ZonaUpdateComponent implements OnInit {
     constructor(private fileService: FileService,
         private router: Router, public equipoService: EquipoService, public zonaService: ZonaService, public toastr: ToastsManager) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+        this.id_fase = Number(sessionStorage.getItem('fase'));
     }
 
     ngOnInit() {
@@ -123,6 +124,9 @@ export class ZonaUpdateComponent implements OnInit {
                     break;
                 case 'H':
                     this.servicioZonasH(i);
+                    break;
+                case 'PlayOff':
+                    this.servicioZonasA(i);
                     break;
             }
         }
@@ -343,6 +347,11 @@ export class ZonaUpdateComponent implements OnInit {
                     for (var i = 0; i < this.zonaH.length; i++) {
                         this.lsEquiposH.push(new Equipo(this.zonaH[i].id_equipo, this.zonaH[i].nombre))
                     } this.lsZonas[j].lsEquipos = this.lsEquiposH;
+                    break;
+                case 'PlayOff':
+                    for (var i = 0; i < this.zonaA.length; i++) {
+                        this.lsEquiposA.push(new Equipo(this.zonaA[i].id_equipo, this.zonaA[i].nombre))
+                    } this.lsZonas[j].lsEquipos = this.lsEquiposA;
                     break;
             }
         }

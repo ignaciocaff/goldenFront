@@ -28,7 +28,10 @@ import { TorneoEmitter, TorneoLSEmitter, ParserService } from '../services/commo
 import { CategoriaService, TorneoService, ClubService, EquipoService, ReglasService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, PosicionesService } from '../services/entity-services/index';
+import {
+  CategoriaNoticiaService, NoticiaService, CanchaService,
+  HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, SancionService, PartidoService, PosicionesService
+} from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -42,15 +45,15 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
 import { LocalidadesCargaComponent } from './common/localidades';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
-import { ResultadoComponent } from "./common/resultado/index";
+import { ResultadoComponent, SancionDialog, SancionDialogV } from "./common/resultado/index";
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 import { UsuarioComponent, UsuariosDialog, UsuarioBajaComponent } from './common/usuarios/index';
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { PosicionesGeneralComponent } from './common/posiciones/index';
+import { SlickModule } from 'ngx-slick';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
-
 
 @NgModule({
   declarations: [
@@ -98,6 +101,8 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
     UsuarioComponent,
     UsuariosDialog,
     UsuarioBajaComponent,
+    SancionDialog,
+    SancionDialogV,
     SancionEquipoCargaComponent,
     SancionEquipoBajaComponent
   ],
@@ -121,12 +126,14 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
     HttpClientModule,
     HttpClientJsonpModule,
     ShareButtonsModule.forRoot(),
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    SlickModule.forRoot()
   ],
-  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog],
+  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog, SancionDialog, SancionDialogV],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
-    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionEquipoService, PosicionesService],
+    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionService
+    , PartidoService, SancionEquipoService, PosicionesService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

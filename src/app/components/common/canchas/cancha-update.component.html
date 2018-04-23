@@ -105,7 +105,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <button (click)="modificarCancha()" type="button" class="btn btn-primary">Modificar</button>
+        <button (click)="modificarCancha()" [disabled]="!canchaForm.valid" type="button" class="btn btn-primary">Modificar</button>
       </div>
     </div>
   </form>

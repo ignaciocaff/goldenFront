@@ -248,7 +248,7 @@ export class FixtureComponent implements OnInit {
             this.toastr.error('Verifique, tiene horarios y/o canchas repetidos.', "Error!");
         } else {
             if (partido.cancha.id_cancha > 0 && partido.horario.inicio != null && partido.horario.fin != null) {
-                partido.fecha = this.fecha.fecha;
+                partido.fecha.fecha = this.fecha.fecha;
                 this.compararHorariosBack(partido);
             }
         }
