@@ -17,7 +17,6 @@ export class HomeComponent implements DoCheck, AfterViewInit {
     public lsNoticiasPrincipales = new Array<Noticia>();
     public lsNoticiasSecundarias = new Array<Noticia>();
     public lsNoticiasHistoricas = new Array<Noticia>();
-    public lsUltimasNoticias = new Array<Noticia>();
 
     public lsNotPrincipLink = new Array<any>();
     public lsNotSecundLink = new Array<any>();
@@ -197,14 +196,17 @@ export class HomeComponent implements DoCheck, AfterViewInit {
             lsID.push(this.lsNoticiasSecundarias[i].id_noticia);
         }
 
-        for (let i = this.lsNoticiasHistoricas.length -1; i >= 0; i--) {
+        for (let i = this.lsNoticiasHistoricas.length - 1; i >= 0; i--) {
             for (let j = 0; j < lsID.length; j++) {
                 if (this.lsNoticiasHistoricas[i].id_noticia == lsID[j]) {
                     this.lsNoticiasHistoricas.splice(i, 1);
+                    break;
                 }
             }
         }
-        this.getThumbnailsUltimas();
+        if (this.lsNoticiasHistoricas.length) {
+            this.getThumbnailsUltimas();
+        }
     }
 
     getThumbnailsUltimas() {
@@ -232,7 +234,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
                         titulo: this.lsNoticiasHistoricas[i].titulo,
                         ruta: this.imagesUltimas[j].ThumbPath,
                         id_noticia: this.lsNoticiasHistoricas[i].id_noticia,
-                        fecha_noticia : this.lsNoticiasHistoricas[i].fecha
+                        fecha_noticia: this.lsNoticiasHistoricas[i].fecha
                     });
                 }
             }

@@ -47,7 +47,7 @@
       <div class="col-md-12 col-sm-12">
         <div class="jugador col-md-4 col-sm-4" *ngFor="let jugador of equipo.lsJugadores">
           <div class="foto col-md-6 col-sm-6">
-            <img [src]="'http://localhost:50042/' + jugador.imagePath" *ngIf="jugador.nombre != null">
+            <img [src]="'http://localhost:50042' + jugador.imagePath" *ngIf="jugador.nombre != null">
             <img src="/assets/logos/anonimo.jpg" *ngIf="jugador.nombre == null">
             <div class="texto-imagen" *ngIf="jugador.nombre != null">
               {{jugador.apellido}}, {{jugador.nombre}}
@@ -64,7 +64,7 @@
           </div>
           <div class="llenado-dt col-md-4 col-sm-4" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'">
             <div class="dt row" *ngIf="jugador.rol == 'director_tecnico'">Director Técnico</div>
-            <div class="rep row" *ngIf="jugador.rol == 'representante'">Representante</div>
+            <div class="rep row" *ngIf="jugador.rol == 'representante'">Delegado</div>
             <div class="row enblanco">
             </div>
             <div class="firma row">

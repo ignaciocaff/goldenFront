@@ -38,3 +38,5 @@ export * from './iPartido';
 export * from './gol';
 export * from './reglamento';
 export * from './sancion_equipo';
+export * from './posiciones';
+export * from './posiciones_zona';

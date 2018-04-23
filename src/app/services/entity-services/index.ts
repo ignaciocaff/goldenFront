@@ -17,3 +17,4 @@ export * from './zona.service';
 export * from './horario.service';
 export * from './fixture.service';
 export * from './sancionEquipo.service';
+export * from './posiciones.service';

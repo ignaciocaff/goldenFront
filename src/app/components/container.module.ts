@@ -28,7 +28,7 @@ import { TorneoEmitter, TorneoLSEmitter, ParserService } from '../services/commo
 import { CategoriaService, TorneoService, ClubService, EquipoService, ReglasService } from '../services/index';
 import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
-import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService } from '../services/entity-services/index';
+import { CategoriaNoticiaService, NoticiaService, CanchaService, HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, PosicionesService } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
 import { HomeComponent } from './home/index';
@@ -48,7 +48,7 @@ import { UsuarioComponent, UsuariosDialog, UsuarioBajaComponent } from './common
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/posiciones/index';
+import { PosicionesGeneralComponent } from './common/posiciones/index';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 
 
@@ -95,7 +95,6 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
     ReglamentoCargaComponent,
     ReglamentoVisualizacionComponent,
     PosicionesGeneralComponent,
-    PosicionesZonaComponent,
     UsuarioComponent,
     UsuariosDialog,
     UsuarioBajaComponent,
@@ -127,7 +126,7 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
   entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
-    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionEquipoService],
+    CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionEquipoService, PosicionesService],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

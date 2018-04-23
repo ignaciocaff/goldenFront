@@ -38,3 +38,18 @@
   text-align: center;
   font-size: x-large;
 }
+
+h4 {
+  font-weight: bolder;
+}
+
+th img {
+  width: 32px;
+  height: 32px;
+  -webkit-backface-visibility: hidden;
+  -ms-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  object-fit: scale-down;
+  margin: 0px;
+}

@@ -18,7 +18,7 @@ import { DataSource } from '@angular/cdk/table';
     providers: []
 })
 export class SancionEquipoBajaComponent implements OnInit {
-    @ViewChild('sancionesEquipoForm') reglaForm: FormGroup;
+    @ViewChild('sancionesEquipoForm') sancionesEquipoForm: FormGroup;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
@@ -29,7 +29,7 @@ export class SancionEquipoBajaComponent implements OnInit {
     public tieneSanciones: boolean = false;
 
     dialogRef: MatDialogRef<ConfirmationDialog>;
-    displayedColumns = ['descripcion_sancion', 'puntos_restados'];
+    displayedColumns = ['descripcion_sancion', 'puntos_restados', 'id_sancion_equipo'];
 
     constructor(
         public toastr: ToastsManager,
@@ -63,12 +63,8 @@ export class SancionEquipoBajaComponent implements OnInit {
     }
 
     onChange(id_equipo: number) {
-        /*         let equipo: Equipo = newValue;
-                this.sancion.equipo = equipo; */
-        console.log(id_equipo);
         this.sancionEquipoService.getSancionesByEquipo(id_equipo).subscribe(
             data => {
-                console.log("entro a data");
                 if (data) {
                     this.dataSource = null;
                     this.lsSanciones = [];
@@ -82,7 +78,6 @@ export class SancionEquipoBajaComponent implements OnInit {
                 }
             },
             error => {
-                console.log("errorertetere");
                 error.json()['Message'];
             });
     }
@@ -98,7 +93,8 @@ export class SancionEquipoBajaComponent implements OnInit {
         this.dialogRef.afterClosed().subscribe(result => {
             if (result) {
                 this.spinnerService.show();
-                this.sancionEquipoService.delete(id_sancion).subscribe(
+                this.sancion = this.lsSanciones.find(x => x.id_sancion_equipo == id_sancion);
+                this.sancionEquipoService.delete(this.sancion).subscribe(
                     data => {
                         this.spinnerService.hide();
                         this.toastr.success('La sanción se ha eliminado con éxito.', 'Exito!');

@@ -15,7 +15,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
     providers: []
 })
 export class SancionEquipoCargaComponent implements OnInit {
-    @ViewChild('sancionesEquipoForm') reglaForm: FormGroup;
+    @ViewChild('sancionesEquipoForm') sancionesEquipoForm: FormGroup;
     public sancion = new SancionEquipo();
     public lsEquipos = new Array<Equipo>();
 
