@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row" *ngIf="id_fase == 1">
     <hr class="hr-text general" data-content="Tabla general">
     <div class="table-responsive">
@@ -37,8 +37,15 @@
         </tbody>
       </table>
     </div>
+    <div *ngFor="let sancion of lsSanciones">
+      <p class="text-muted">
+        (*)Se quitó {{ sancion.puntos_restados }} punto/s al equipo {{sancion.equipo.nombre}}. Motivo: {{ sancion.descripcion }}
+      </p>
+    </div>
   </div>
+</div>
 
+<div class="container">
   <div class="row" *ngIf="id_fase != 1">
     <div class="col-md-12 col-sm-12">
       <hr class="hr-text general" data-content="Posiciones por zona">
@@ -81,6 +88,14 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12">
+        <div *ngFor="let sancion of lsSanciones">
+          <p class="text-muted">
+            (*)Se quitó {{ sancion.puntos_restados }} punto/s al equipo {{sancion.equipo.nombre}} de la zona {{sancion.zona.descripcion}}:
+            {{ sancion.descripcion }}.
+          </p>
         </div>
       </div>
     </div>

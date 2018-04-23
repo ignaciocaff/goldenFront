@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
-import { Posiciones, PosicionesZona } from '../../../entities/index';
-import { PosicionesService } from '../../../services/entity-services/index';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Posiciones, PosicionesZona, SancionEquipo } from '../../../entities/index';
+import { PosicionesService, SancionEquipoService } from '../../../services/entity-services/index';
 import { AppConfig } from '../../../app.config';
 
 @Component({
@@ -20,12 +18,12 @@ export class PosicionesGeneralComponent implements OnInit {
   public id_fase: number;
   public lsPosicionesZona = new Array<Array<PosicionesZona>>();
   public lsNombreZonas: string[] = ["A", "B", "C", "D", "E", "F", "G", "H"];
+  public lsSanciones = new Array<SancionEquipo>();
 
 
   constructor(
     private posicionesService: PosicionesService,
-    public toastr: ToastsManager,
-    private spinnerService: Ng4LoadingSpinnerService,
+    private sancionEquipoService: SancionEquipoService,
     public config: AppConfig
   ) {
   }
@@ -34,7 +32,6 @@ export class PosicionesGeneralComponent implements OnInit {
     var id_torneo = Number(sessionStorage.getItem('id_torneo'));
     this.id_fase = Number(sessionStorage.getItem('fase'));
 
-    console.log(this.id_fase);
 
     this.posicionesService.getPosicionesPorTorneo(id_torneo).subscribe(
       data => {
@@ -49,11 +46,50 @@ export class PosicionesGeneralComponent implements OnInit {
             var lsPosicionZona = new Array<PosicionesZona>();
             lsPosicionZona = data[i];
             this.lsPosicionesZona.push(lsPosicionZona);
+            this.buscarSancionesEquiposZona(lsPosicionZona);
           }
         }
       },
       error => {
         error.json()['Message'];
       });
+  }
+
+  buscarSancionesGeneral() {
+    for (let i = 0; i < this.lsPosiciones.length; i++) {
+      this.sancionEquipoService.getSancionesByEquipo(this.lsPosiciones[i].equipo.id_equipo).subscribe(
+        data => {
+          if (data) {
+            for (let j = 0; j < data.length; j++) {
+              var sancion = new SancionEquipo();
+              sancion = data[j];
+              this.lsSanciones.push(sancion);
+            }
+          }
+        },
+        error => {
+          error.json()['Message'];
+        }
+      );
+    }
+  }
+
+  buscarSancionesEquiposZona(lista: Array<PosicionesZona>) {
+    for (let i = 0; i < lista.length; i++) {
+      this.sancionEquipoService.getSancionesByEquipo(lista[i].equipo.id_equipo).subscribe(
+        data => {
+          if (data) {
+            for (let j = 0; j < data.length; j++) {
+              var sancion = new SancionEquipo();
+              sancion = data[j];
+              this.lsSanciones.push(sancion);
+            }
+          }
+        },
+        error => {
+          error.json()['Message'];
+        }
+      );
+    }
   }
 }
