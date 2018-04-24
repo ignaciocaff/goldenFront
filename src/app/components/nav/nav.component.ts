@@ -100,6 +100,10 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/posiciones']);
     }
 
+    goleadores_Click() {
+        this.router.navigate(['home/goleadores']);
+    }
+
     usuariosCarga_Click() {
         this.router.navigate(['home/usuarios']);
     }

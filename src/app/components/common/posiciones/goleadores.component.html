@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+
+      <hr class="hr-text general" data-content="Goleadores">
+      <div class="table-responsive" style="width: 150%; margin-left: 12.5%;">
+        <div class="col-md-6 col-sm-6">
+          <table class="table table-striped table-hover general">
+            <thead>
+              <tr>
+                <th>POS</th>
+                <th></th>
+                <th>EQUIPO</th>
+                <th>JUGADOR</th>
+                <th>GOLES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let goleador of lsGoleadores; let i = index">
+                <th>
+                  {{i + 1}}
+                </th>
+                <th>
+                  <img [src]="config.imgUrl + goleador.equipo.imagePath">
+                </th>
+                <th>{{ goleador.equipo.nombre }}</th>
+                <th>
+                  <p> {{ goleador.jugador.apellido }}, {{goleador.jugador.nombre}} </p>
+                </th>
+                <th>{{ goleador.cantidad_goles }}</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

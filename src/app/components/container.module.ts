@@ -51,7 +51,7 @@ import { UsuarioComponent, UsuariosDialog, UsuarioBajaComponent } from './common
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { PosicionesGeneralComponent } from './common/posiciones/index';
+import { PosicionesGeneralComponent, GoleadoresComponent } from './common/posiciones/index';
 import { SlickModule } from 'ngx-slick';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 
@@ -104,7 +104,8 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
     SancionDialog,
     SancionDialogV,
     SancionEquipoCargaComponent,
-    SancionEquipoBajaComponent
+    SancionEquipoBajaComponent,
+    GoleadoresComponent
   ],
   imports: [
     BrowserModule,

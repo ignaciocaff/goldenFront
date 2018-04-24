@@ -15,6 +15,10 @@ export class PosicionesService {
         return this.http.get(this.config.apiUrl + 'posiciones/' + id).map((response: Response) => response.json());
     }
 
+    getGoleadoresPorTorneo(id: number) {
+        return this.http.get(this.config.apiUrl + 'goleadores/' + id).map((response: Response) => response.json());
+    }
+
     create(obj: any) {
         /* return this.http.post(this.config.apiUrl + 'sancion_equipo/registrar', obj); */
     }

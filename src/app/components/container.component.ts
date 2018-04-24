@@ -31,11 +31,10 @@ export class ContainerComponent implements OnInit {
         private torneoService: TorneoService,
         private torneoEmitter: TorneoEmitter
     ) {
-        this.setTorneo();
     }
 
     ngOnInit() {
-
+        this.setTorneo();
     }
 
     setTorneo() {
@@ -50,6 +49,7 @@ export class ContainerComponent implements OnInit {
                 sessionStorage.setItem('id_torneo', String(this.torneo.id_torneo));
                 sessionStorage.setItem('fase', String(this.torneo.fase.id_fase));
                 this.torneoEmitter.trigger(this.torneo.nombre);
+                //this.torneoIDEmitter.trigger(this.torneo.id_torneo);
             }, error => {
 
             }

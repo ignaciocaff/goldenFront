@@ -10,7 +10,7 @@
 
       <div class="col-md-2 col-sm-2">
         <div class="row escudo">
-          <img [src]="'http://localhost:50042/' + escudo">
+          <img [src]="config.imgUrl + escudo">
         </div>
         <div class="row encabezado">DATOS DEL EQUIPO</div>
         <div class="row datos">
@@ -23,11 +23,11 @@
         </div>
         <div class="row encabezado">GOLEADOR</div>
         <div class="row foto-goleador">
-          <img src="/assets/logos/anonimo.jpg">
+          <img [src]="config.imgUrl + goleador.imagePath">
         </div>
         <div class="row" style="margin-top: 10px;">
-          <p class="datos-goleador">X GOLES</p>
-          <p class="datos-goleador">X PARTIDOS JUGADOS</p>
+          <p class="datos-goleador"> {{goleador.goles}} GOLES</p>
+          <p class="datos-goleador"> {{goleador.partidos_jugados}} PARTIDOS JUGADOS</p>
         </div>
       </div>
 
@@ -38,7 +38,7 @@
           <li *ngFor="let jugador of lsJugadores">
             <div class="row jugador">
               <div class="foto col-md-4 col-sm-4">
-                <img [src]="'http://localhost:50042/' + jugador.imagePath">
+                <img [src]="config.imgUrl + jugador.imagePath">
               </div>
               <div class="col-md-6 col-sm-6">
                 <div class="info-jugador">
@@ -47,12 +47,18 @@
                     <span class="dato-jugador">Edad: </span>
                     <span class="atrib-jugador"> {{jugador.edad}} </span>
                   </div>
+                  <div class="tarjetas" *ngIf="esAdmin">
+                    <img src="/assets/amarilla.png">
+                    <span class="atrib-jugador">: {{jugador.tarjetas_amarillas}} </span>
+                    <img src="/assets/roja.png">
+                    <span class="atrib-jugador">: {{jugador.tarjetas_rojas}} </span>
+                  </div>
+                  <div *ngIf="!esAdmin"><br></div>
                   <div>
-                    <br>
                     <span class="dato-jugador">Goles: </span>
-                    <span class="atrib-jugador"> X </span>
+                    <span class="atrib-jugador"> {{jugador.goles}} </span>
                     <span class="dato-jugador par">Partidos: </span>
-                    <span class="atrib-jugador">X </span>
+                    <span class="atrib-jugador"> {{jugador.partidos_jugados}} </span>
                   </div>
                 </div>
               </div>
@@ -65,9 +71,8 @@
         </div>
       </div>
 
-
       <div class="col-md-2 col-sm-2 conjunto">
-        <img [src]="'http://localhost:50042/' + equipacion">
+        <img [src]="config.imgUrl + equipacion">
       </div>
     </div>
   </div>
