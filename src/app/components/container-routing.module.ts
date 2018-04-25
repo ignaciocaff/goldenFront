@@ -27,7 +27,7 @@ import { ResultadoUpdateComponent } from "./common/resultado/update/index";
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
-import { PosicionesGeneralComponent } from "./common/posiciones/index";
+import { PosicionesGeneralComponent, GoleadoresComponent } from "./common/posiciones/index";
 import { UsuarioComponent, UsuarioBajaComponent } from './common/usuarios/index';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
@@ -133,6 +133,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'posiciones', component: PosicionesGeneralComponent,
+            },
+            {
+                path: 'goleadores', component: GoleadoresComponent,
             },
             {
                 path: 'usuarios', component: UsuarioComponent,

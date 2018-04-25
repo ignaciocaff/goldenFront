@@ -1,7 +1,3 @@
-.table.general {
-    padding: 15px;
-}
-
 .hr-text {
   line-height: 1em;
   position: relative;
@@ -39,10 +35,6 @@
   font-size: x-large;
 }
 
-h4 {
-  font-weight: bolder;
-}
-
 th img {
   width: 32px;
   height: 32px;
@@ -54,7 +46,8 @@ th img {
   margin: 0px;
 }
 
-p {
-  font-size: 12px;
-  margin-left: 5px;
+.table.general {
+  padding: 15px;
+  max-width: 100%;
+  white-space: nowrap;
 }

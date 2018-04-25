@@ -8,6 +8,10 @@ export class IJugador {
     nro_doc: number;
     edad: number;
     id_jugador: number;
+    goles: number;
+    partidos_jugados: number;
+    tarjetas_amarillas: number;
+    tarjetas_rojas: number;
   
     constructor(
       nombre?: string,
@@ -18,7 +22,11 @@ export class IJugador {
       rol?: String,
       nro_doc?: number,
       edad?: number,
-      id_jugador?: number
+      id_jugador?: number,
+      goles?: number,
+      partidos_jugados?: number,
+      tarjetas_amarillas?: number,
+      tarjetas_rojas?: number
     ) {
       if (nombre) this.nombre = nombre;
       else this.nombre = null;
@@ -46,5 +54,17 @@ export class IJugador {
 
       if(id_jugador) this.id_jugador = id_jugador;
       else id_jugador = null;
+
+      if(goles) this.goles = goles;
+      else goles = null;
+
+      if(partidos_jugados) this.partidos_jugados = partidos_jugados;
+      else partidos_jugados = null;
+
+      if(tarjetas_amarillas) this.tarjetas_amarillas = tarjetas_amarillas;
+      else tarjetas_amarillas = null;
+
+      if(tarjetas_rojas) this.tarjetas_rojas = tarjetas_rojas;
+      else tarjetas_rojas = null;
     }
   }

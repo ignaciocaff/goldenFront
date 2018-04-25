@@ -68,6 +68,7 @@ p {
   width: 160px;
   height: 160px;
   border: 2px solid rgb(170, 145, 93);
+  object-fit: cover;
 }
 
 .datos-goleador {
@@ -109,65 +110,6 @@ p {
   height: 100px;
 }
 
-.texto-imagen {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  font-size: 10px;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-  background-color: rgba(222, 222, 222, 0.2);
-  width: 140px;
-}
-
-.llenado {
-  background-color: rgb(222, 222, 222);
-  height: 100px;
-}
-
-.resultado {
-  border: 2px solid rgb(170, 145, 93);
-  height: 100px;
-  background-color: rgb(222, 222, 222);
-}
-
-.num {
-  font-weight: bold;
-  text-align: left;
-  font-size: 12px;
-  height: 22px;
-}
-
-.firma {
-  font-weight: bold;
-  text-align: left;
-  font-size: 12px;
-  text-align: center;
-  height: 34px;
-}
-
-.sancion {
-  height: 22px;
-}
-
-.amarilla {
-  border-bottom: 2px solid rgb(170, 145, 93);
-  border-top: 2px solid rgb(170, 145, 93);
-  background-color: rgb(220, 200, 44);
-  height: 22px;
-}
-
-.roja {
-  border-bottom: 2px solid rgb(170, 145, 93);
-  background-color: rgb(190, 5, 24);
-  height: 22px;
-}
-
-.gol {
-  height: 34px;
-}
-
 .hr-text {
   line-height: 1em;
   position: relative;
@@ -200,4 +142,9 @@ p {
 
 .desvincular {
   margin: 25px;
+}
+
+.tarjetas img {
+  height: 20px;
+  font-weight: 14.81px;
 }

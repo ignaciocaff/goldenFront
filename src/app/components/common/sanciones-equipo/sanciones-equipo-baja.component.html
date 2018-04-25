@@ -44,7 +44,7 @@
     <div *ngIf="tieneSanciones">
       <div class="example-header">
         <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+          <input matInput placeholder="Filtro">
         </mat-form-field>
       </div>
 
@@ -65,10 +65,10 @@
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="id_jugador">
+          <ng-container matColumnDef="id_sancion_equipo">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
             <mat-cell *matCellDef="let row">
-              <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
+              <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion_equipo)"></i>
             </mat-cell>
           </ng-container>
 

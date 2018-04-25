@@ -30,7 +30,7 @@ import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
 import {
   CategoriaNoticiaService, NoticiaService, CanchaService,
-  HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, SancionService, PartidoService
+  HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, SancionService, PartidoService, PosicionesService
 } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
@@ -52,7 +52,7 @@ import { UsuarioComponent, UsuariosDialog, UsuarioBajaComponent } from './common
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { PosicionesGeneralComponent, PosicionesZonaComponent } from './common/posiciones/index';
+import { PosicionesGeneralComponent, GoleadoresComponent } from './common/posiciones/index';
 import { SlickModule } from 'ngx-slick';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 import { CanActivateRouteGuard } from './can-activate-route.guard'
@@ -100,7 +100,6 @@ import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
     ReglamentoCargaComponent,
     ReglamentoVisualizacionComponent,
     PosicionesGeneralComponent,
-    PosicionesZonaComponent,
     UsuarioComponent,
     UsuariosDialog,
     UsuarioBajaComponent,
@@ -108,7 +107,8 @@ import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
     SancionDialogV,
     SancionEquipoCargaComponent,
     SancionEquipoBajaComponent,
-    ResultadoUpdateComponent
+    ResultadoUpdateComponent,
+    GoleadoresComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +137,7 @@ import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionService
-    , PartidoService, SancionEquipoService, CanActivateRouteGuard, CanActivateRouteGuardRepre],
+    , PartidoService, SancionEquipoService, PosicionesService, CanActivateRouteGuard, CanActivateRouteGuardRepre],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

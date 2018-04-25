@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, NavigationEnd } from '@angular/router';
 import { NoticiaService } from '../../services/entity-services/index';
 import { FileService } from '../../services/entity-services/file.service';
 import { Noticia } from '../../entities/index';
 import { AppConfig } from '../../app.config';
 import { DoCheck, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
     selector: 'home',
@@ -17,7 +18,6 @@ export class HomeComponent implements DoCheck, AfterViewInit {
     public lsNoticiasPrincipales = new Array<Noticia>();
     public lsNoticiasSecundarias = new Array<Noticia>();
     public lsNoticiasHistoricas = new Array<Noticia>();
-    public lsUltimasNoticias = new Array<Noticia>();
 
     public lsNotPrincipLink = new Array<any>();
     public lsNotSecundLink = new Array<any>();
@@ -28,37 +28,73 @@ export class HomeComponent implements DoCheck, AfterViewInit {
     imagesUltimas: Array<any> = [];
     url: string;
     id_torneo: number;
+    private subscription: Subscription;
+    private esPrimera: boolean = true;
+    
     constructor(
         private noticiaService: NoticiaService,
         private fileService: FileService,
         private router: Router,
-        private config: AppConfig
+        public config: AppConfig
     ) {
         this.url = this.config.imgUrl;
+        this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
     }
 
     // METODOS-----------------------------------------------------------------------
 
     ngDoCheck() {
-        if (this.id_torneo !== Number(sessionStorage.getItem('id_torneo'))) {
+        if ((this.id_torneo !== Number(sessionStorage.getItem('id_torneo'))) || this.esPrimera) {
             this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
             this.cargarNoticiasPrincipales();
+            this.esPrimera = false;
         }
     }
 
     ngAfterViewInit() {
-        !function (d, s, id) {
-            var js: any,
-                fjs = d.getElementsByTagName(s)[0],
-                p = 'https';
-            if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = p + "://platform.twitter.com/widgets.js";
-                fjs.parentNode.insertBefore(js, fjs);
+        (<any>window).twttr = (function (d, s, id) {
+            let js: any, fjs = d.getElementsByTagName(s)[0],
+                t = (<any>window).twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+
+            t.e = [];
+            t.ready = function (f: any) {
+                t.e.push(f);
+            };
+
+            return t;
+        }(document, 'script', 'twitter-wjs'));
+
+        if ((<any>window).twttr.ready())
+            (<any>window).twttr.widgets.load();
+
+        this.subscription = this.router.events.subscribe(val => {
+            if (val instanceof NavigationEnd) {
+                (<any>window).twttr = (function (d, s, id) {
+                    let js: any, fjs = d.getElementsByTagName(s)[0],
+                        t = (<any>window).twttr || {};
+                    if (d.getElementById(id)) return t;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = 'https://platform.twitter.com/widgets.js';
+                    fjs.parentNode.insertBefore(js, fjs);
+
+                    t.e = [];
+                    t.ready = function (f: any) {
+                        t.e.push(f);
+                    };
+
+                    return t;
+                }(document, 'script', 'twitter-wjs'));
+
+                if ((<any>window).twttr.ready())
+                    (<any>window).twttr.widgets.load();
             }
-        }
-            (document, "script", "twitter-wjs");
+        });
     }
 
     verNoticia(id_noticia) {
@@ -197,14 +233,17 @@ export class HomeComponent implements DoCheck, AfterViewInit {
             lsID.push(this.lsNoticiasSecundarias[i].id_noticia);
         }
 
-        for (let i = this.lsNoticiasHistoricas.length -1; i >= 0; i--) {
+        for (let i = this.lsNoticiasHistoricas.length - 1; i >= 0; i--) {
             for (let j = 0; j < lsID.length; j++) {
                 if (this.lsNoticiasHistoricas[i].id_noticia == lsID[j]) {
                     this.lsNoticiasHistoricas.splice(i, 1);
+                    break;
                 }
             }
         }
-        this.getThumbnailsUltimas();
+        if (this.lsNoticiasHistoricas.length) {
+            this.getThumbnailsUltimas();
+        }
     }
 
     getThumbnailsUltimas() {
@@ -232,7 +271,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
                         titulo: this.lsNoticiasHistoricas[i].titulo,
                         ruta: this.imagesUltimas[j].ThumbPath,
                         id_noticia: this.lsNoticiasHistoricas[i].id_noticia,
-                        fecha_noticia : this.lsNoticiasHistoricas[i].fecha
+                        fecha_noticia: this.lsNoticiasHistoricas[i].fecha
                     });
                 }
             }

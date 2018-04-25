@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-
 import { AppConfig } from '../../app.config';
 import { SancionEquipo } from '../../entities/index';
 
 @Injectable()
-export class SancionEquipoService {
+export class PosicionesService {
     constructor(private http: Http, private config: AppConfig) { }
 
     getAll() {
 /*         return this.http.get(this.config.apiUrl + 'personas/tiposdoc').map((response: Response) => response.json());
  */    }
 
-    getSancionesByEquipo(id: number) {
-        return this.http.get(this.config.apiUrl + 'sancion_equipo/sanciones/' + id).map((response: Response) => response.json());
+    getPosicionesPorTorneo(id: number) {
+        return this.http.get(this.config.apiUrl + 'posiciones/' + id).map((response: Response) => response.json());
+    }
+
+    getGoleadoresPorTorneo(id: number) {
+        return this.http.get(this.config.apiUrl + 'goleadores/' + id).map((response: Response) => response.json());
     }
 
     create(obj: any) {
-        return this.http.post(this.config.apiUrl + 'sancion_equipo/registrar', obj);
+        /* return this.http.post(this.config.apiUrl + 'sancion_equipo/registrar', obj); */
     }
 
     update(obj: any) {
@@ -25,6 +28,6 @@ export class SancionEquipoService {
     }
 
     delete(obj: any) {
-        return this.http.post(this.config.apiUrl + 'sancion_equipo/borrar/', obj);
+        /* return this.http.post(this.config.apiUrl + 'sancion_equipo/borrar/', obj); */
     }
 }
