@@ -33,6 +33,7 @@ export class EquipoVisualizacionComponent implements OnInit {
     esAdmin: boolean = false;
     dialogRef: MatDialogRef<ConfirmationDialog>;
     private sub: any;
+    id_torneo: number;
 
 
     constructor(
@@ -41,7 +42,9 @@ export class EquipoVisualizacionComponent implements OnInit {
         public route: ActivatedRoute,
         public dialog: MatDialog,
         public config: AppConfig
-    ) { }
+    ) {
+        this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+    }
 
     ngOnInit() {
 
@@ -50,7 +53,7 @@ export class EquipoVisualizacionComponent implements OnInit {
 
             this.nombre_torneo = (sessionStorage.getItem('torneo'));
 
-            this.equipoService.getiJugadoresByIdEquipo(this.id_equipo).subscribe(
+            this.equipoService.getiJugadoresByIdEquipo(this.id_equipo, this.id_torneo).subscribe(
                 data => {
                     this.lsJugadores = [];
                     for (let i = 0; i < data.length; i++) {

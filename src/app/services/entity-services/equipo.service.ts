@@ -50,8 +50,13 @@ export class EquipoService {
         return this.http.delete(this.config.apiUrl + 'torneo/' + id);
     }
 
-    getiJugadoresByIdEquipo(id: number) {
-        return this.http.get(this.config.apiUrl + 'equipo/ijugadores/' + id).map((response: Response) => response.json());
+    getiJugadoresByIdEquipo(id?: number, id_torneo?: number) {
+
+        if (id_torneo) {
+            return this.http.get(this.config.apiUrl + 'equipo/ijugadores/' + id + '/' + id_torneo).map((response: Response) => response.json());
+        } else {
+            return this.http.get(this.config.apiUrl + 'equipo/ijugadores/' + id).map((response: Response) => response.json());
+        }
     }
 
     getAllPorTorneo(id_torneo: number) {
