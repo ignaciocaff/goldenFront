@@ -1,7 +1,8 @@
 <div class="row boton">
   <div class="col-md-12 col-sm-12">
+    <p class="text-muted" *ngIf="!imprimir"> Aguarde un momento por favor mientras se genera la planilla. </p>
     <div class="col-md-2 col-sm-2 col-md-offset-4 col-sm-offset-4">
-      <button (click)="imprimirPDF()" class="btn btn-primary btn-lg">Imprimir planilla</button>
+      <button (click)="imprimirPDF()" class="btn btn-primary btn-lg" [disabled]="!imprimir">Imprimir planilla</button>
     </div>
   </div>
 </div>
@@ -10,7 +11,7 @@
 <div class="row tamaño">
   <div class="col-md-12 col-sm-12">
     <p>Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo, manifiestan
-      estar en perfectas condiciones físicas      
+      estar en perfectas condiciones físicas
     </p>
   </div>
 </div>

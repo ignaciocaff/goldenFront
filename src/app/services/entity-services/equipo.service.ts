@@ -62,4 +62,8 @@ export class EquipoService {
     getAllPorTorneo(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'torneo/equipos/todos/' + id_torneo).map((response: Response) => response.json());
     }
+
+    getiJugadoresPlanilla(id_torneo: number){
+        return this.http.get(this.config.apiUrl + 'equipo/planilla/' +  id_torneo).map((response: Response) => response.json());
+    }
 }
