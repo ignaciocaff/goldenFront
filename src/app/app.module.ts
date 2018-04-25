@@ -23,6 +23,7 @@ import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { LocalidadesCargaComponent } from './components/common/localidades/index';
+import { CanActivateRouteGuard } from './components/can-activate-route.guard'
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { LocalidadesCargaComponent } from './components/common/localidades/index
     CdkTableModule,
     Ng4LoadingSpinnerModule.forRoot()
   ],
-  providers: [AuthenticationService, AppConfig, SharedService,
+  providers: [AuthenticationService, AppConfig, SharedService, CanActivateRouteGuard,
     {
       provide: ToastOptions,
       useClass: CustomToastOption

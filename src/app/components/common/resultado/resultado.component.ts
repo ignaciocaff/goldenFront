@@ -408,29 +408,53 @@ export class ResultadoComponent implements OnInit {
     }
 
     fechasPorZonaLocal(partido: IPartido) {
-        this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
-            data => {
-                let sancion = new Sancion();
-                this.lsFechasFin = [];
-                this.lsFechasInicio = [];
-                this.fixture = data;
-                this.lsFechasInicio = this.fixture.fechas;
-                this.lsFechasFin = this.fixture.fechas;
-                sancion.equipo.id_equipo = partido.local[0].id_equipo;
-                sancion.jugador = this.jugadorLocal;
-                sancion.partido.id_partido = partido.id_partido;
-                sancion.zona.id_zona = this.zona.id_zona;
-                sancion.fase.id_fase = this.id_fase;
+        if (this.esInterzonal == 0) {
+            this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
+                data => {
+                    let sancion = new Sancion();
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
+                    this.fixture = data;
+                    this.lsFechasInicio = this.fixture.fechas;
+                    this.lsFechasFin = this.fixture.fechas;
+                    sancion.equipo.id_equipo = partido.local[0].id_equipo;
+                    sancion.jugador = this.jugadorLocal;
+                    sancion.partido.id_partido = partido.id_partido;
+                    sancion.zona.id_zona = this.zona != null ? this.zona.id_zona : null;
+                    sancion.fase.id_fase = this.id_fase;
 
-                this.openConfirmationDialogLocal(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
+                    this.openConfirmationDialogLocal(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
 
-            }, error => {
-                this.lsFechasFin = [];
-                this.lsFechasInicio = [];
+                }, error => {
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
 
-            }
+                }
 
-        );
+            );
+        } else {
+            this.fixtureService.obtenerFechasInterzonales(this.id_torneo).subscribe(
+                data => {
+                    let sancion = new Sancion();
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
+                    this.lsFechasInicio = data;
+                    this.lsFechasFin = data;
+                    sancion.equipo.id_equipo = partido.local[0].id_equipo;
+                    sancion.jugador = this.jugadorLocal;
+                    sancion.partido.id_partido = partido.id_partido;
+                    sancion.zona.id_zona = this.zona != null ? this.zona.id_zona : null;
+                    sancion.fase.id_fase = this.id_fase;
+
+                    this.openConfirmationDialogLocal(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
+
+                }, error => {
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
+                }
+            );
+
+        }
     }
 
     amarillaLocal(partido: IPartido) {
@@ -438,7 +462,7 @@ export class ResultadoComponent implements OnInit {
         sancion.equipo.id_equipo = partido.local[0].id_equipo;
         sancion.jugador = this.jugadorLocal;
         sancion.partido.id_partido = partido.id_partido;
-        sancion.zona.id_zona = this.zona.id_zona;
+        sancion.zona.id_zona = this.zona != null ? this.zona.id_zona : null;
         sancion.tipo_sancion.id_tipo = 1;
         sancion.fecha_inicio.fecha = this.fecha.fecha;
         sancion.fecha_fin.fecha = this.fecha.fecha;
@@ -452,7 +476,7 @@ export class ResultadoComponent implements OnInit {
         sancion.equipo.id_equipo = partido.visitante[0].id_equipo;
         sancion.jugador = this.jugadorVisitante;
         sancion.partido.id_partido = partido.id_partido;
-        sancion.zona.id_zona = this.zona.id_zona;
+        sancion.zona.id_zona = this.zona != null ? this.zona.id_zona : null;
         sancion.tipo_sancion.id_tipo = 1;
         sancion.tipo_sancion.descripcion = 'Amarilla';
         sancion.fecha_inicio.fecha = this.fecha.fecha;
@@ -463,30 +487,56 @@ export class ResultadoComponent implements OnInit {
     }
 
     fechasPorZonaVisitante(partido: IPartido) {
-        this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
-            data => {
-                let sancion = new Sancion();
-                this.lsFechasFin = [];
-                this.lsFechasInicio = [];
-                this.fixture = data;
-                this.lsFechasInicio = this.fixture.fechas;
-                this.lsFechasFin = this.fixture.fechas;
-                sancion.equipo.id_equipo = partido.visitante[0].id_equipo;
-                sancion.jugador = this.jugadorVisitante;
-                sancion.partido.id_partido = partido.id_partido;
-                sancion.zona.id_zona = this.zona.id_zona;
-                sancion.fase.id_fase = this.id_fase;
+        if (this.esInterzonal == 0) {
+            this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
+                data => {
+                    let sancion = new Sancion();
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
+                    this.fixture = data;
+                    this.lsFechasInicio = this.fixture.fechas;
+                    this.lsFechasFin = this.fixture.fechas;
+                    sancion.equipo.id_equipo = partido.visitante[0].id_equipo;
+                    sancion.jugador = this.jugadorVisitante;
+                    sancion.partido.id_partido = partido.id_partido;
+                    sancion.zona.id_zona = this.zona != null ? this.zona.id_zona : null;
+                    sancion.fase.id_fase = this.id_fase;
 
 
-                this.openConfirmationDialogVisitante(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
+                    this.openConfirmationDialogVisitante(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
 
-            }, error => {
-                this.lsFechasFin = [];
-                this.lsFechasInicio = [];
+                }, error => {
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
 
-            }
+                }
 
-        );
+            );
+        } else {
+            this.fixtureService.obtenerFechasInterzonales(this.id_torneo).subscribe(
+                data => {
+                    let sancion = new Sancion();
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
+                    this.lsFechasInicio = data;
+                    this.lsFechasFin = data;
+                    sancion.equipo.id_equipo = partido.visitante[0].id_equipo;
+                    sancion.jugador = this.jugadorVisitante;
+                    sancion.partido.id_partido = partido.id_partido;
+                    sancion.zona.id_zona = this.zona != null ? this.zona.id_zona : null;
+                    sancion.fase.id_fase = this.id_fase;
+
+
+                    this.openConfirmationDialogVisitante(sancion, this.lsFechasInicio, this.lsFechasFin, this.lsTiposSanciones, partido);
+
+                }, error => {
+                    this.lsFechasFin = [];
+                    this.lsFechasInicio = [];
+
+                }
+
+            );
+        }
     }
 
     droppableItemClass = (item: any) => `${item.class} ${item.inputType}`;
@@ -566,6 +616,6 @@ export class ResultadoComponent implements OnInit {
     }
 
     routeModificacion() {
-
+        this.router.navigate(['home/resultado-update']);
     }
 }

@@ -13,4 +13,8 @@ export class PartidoService {
         return this.http.post(this.config.apiUrl + 'partidos/registrar/' + id_fase + '/'
             + id_torneo + '/' + esInterzonal, partidos);
     }
+
+    update(partido: Partido) {
+        return this.http.post(this.config.apiUrl + 'partidos/modificar/', partido);
+    }
 }

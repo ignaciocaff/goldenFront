@@ -23,14 +23,15 @@ import { NoticiaVisualizacionComponent } from './common/noticia/noticia-visualiz
 import { ReglasComponent, ReglasUpdateComponent } from './common/reglas/index';
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores/index';
 import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './common/reglamento/index';
-
+import { ResultadoUpdateComponent } from "./common/resultado/update/index";
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { ResultadoComponent } from "./common/resultado/index";
 import { PosicionesGeneralComponent } from "./common/posiciones/index";
 import { UsuarioComponent, UsuarioBajaComponent } from './common/usuarios/index';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
-
+import { CanActivateRouteGuard } from './can-activate-route.guard';
+import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep';
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
     {
@@ -38,24 +39,31 @@ const homeRoutes: Routes = [
         children: [
             {
                 path: 'jugadores-carga', component: JugadoresCargaComponent,
+                canActivate: [CanActivateRouteGuardRepre]
             },
             {
                 path: 'jugadores-update', component: JugadoresUpdateComponent,
+                canActivate: [CanActivateRouteGuardRepre]
             },
             {
                 path: 'torneo-carga', component: TorneoComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'torneo-update', component: TorneoUpdateComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'equipo-carga', component: EquipoComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'equipo-update', component: EquipoUpdateComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'configuraciones', component: ConfiguracionesContainerComponent,
+                canActivate: [CanActivateRouteGuard],
                 children: [
                     { path: 'horarios-carga', component: HorariosComponent },
                     { path: 'horarios-update', component: HorariosUpdateComponent },
@@ -74,6 +82,7 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'noticia-carga', component: NoticiaCargaComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'noticias', component: HomeComponent,
@@ -83,24 +92,35 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'zona-carga', component: ZonaComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'zona-update', component: ZonaUpdateComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'zona-delete', component: ZonaDeleteComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'fixture-armado', component: FixtureComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'fixture-update', component: FixtureUpdateComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'fixture-update-fecha', component: FixtureUpdateFechaComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'resultado-carga', component: ResultadoComponent,
+                canActivate: [CanActivateRouteGuard]
+            },
+            {
+                path: 'resultado-update', component: ResultadoUpdateComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'equipos', component: EquiposTorneoComponent,
@@ -116,9 +136,11 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'usuarios', component: UsuarioComponent,
+                canActivate: [CanActivateRouteGuard]
             },
             {
                 path: 'usuarios-baja', component: UsuarioBajaComponent,
+                canActivate: [CanActivateRouteGuard]
             }
 
         ]

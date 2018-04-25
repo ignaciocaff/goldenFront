@@ -22,9 +22,10 @@ export class EscudosComponent implements OnInit, DoCheck {
     nombre: String;
     images: Array<any> = [];
     id_torneo: Number;
+    public innerWidth: any;
 
     lsEquipos = new Array<IEquipo>();
-    slideConfig = { "slidesToShow": 15, "slidesToScroll": 4 };
+    slideConfig = { "slidesToShow": 10, "slidesToScroll": 4 };
     constructor(
         private torneoEmiiter: TorneoEmitter,
         private fileService: FileService,
@@ -33,12 +34,17 @@ export class EscudosComponent implements OnInit, DoCheck {
     ) {
 
     }
-
     ngOnInit() {
         this.nombre = sessionStorage.getItem('torneo');
         this.torneoEmiiter.onMyEvent.subscribe((value: string) => this.nombre = value
         );
+        this.innerWidth = window.innerWidth;
 
+        if (this.innerWidth > 1600) {
+            this.slideConfig = { "slidesToShow": 25, "slidesToScroll": 3 };
+        } else if (this.innerWidth > 1200) {
+            this.slideConfig = { "slidesToShow": 20, "slidesToScroll": 4 };
+        }
         var id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.equipoService.getAllPorTorneo(id_torneo).subscribe(
             data => {

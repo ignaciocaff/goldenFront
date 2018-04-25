@@ -98,4 +98,59 @@ export class ParserService {
         }
         return lsPartidos;
     }
+
+    parseResultado(partidoI: IPartido, id_torneo: number) {
+        let partido = new Partido();
+
+        var local = new Equipo();
+        var visitante = new Equipo();
+
+        partido.estado.id_estado = 1;
+        if (partidoI.id_partido > 0) {
+            partido.id_partido = partidoI.id_partido;
+        }
+
+        if (partidoI.lsGolesLocal) {
+            partido.lsGoleadoresLocales = partidoI.lsGolesLocal;
+        } else {
+            partido.lsGoleadoresLocales = new Array<Gol>();
+        }
+
+        if (partidoI.lsGolesVisitante) {
+            partido.lsGoleadoresVisitantes = partidoI.lsGolesVisitante;
+        } else {
+            partido.lsGoleadoresVisitantes = new Array<Gol>();
+        }
+
+        //Sanciones
+
+        if (partidoI.lsSancionesLocal) {
+            partido.lsSancionesLocal = partidoI.lsSancionesLocal;
+        } else {
+            partido.lsSancionesLocal = new Array<Sancion>();
+        }
+
+        if (partidoI.lsSancionesVisitante) {
+            partido.lsSancionesVisitante = partidoI.lsSancionesVisitante;
+        } else {
+            partido.lsSancionesVisitante = new Array<Sancion>();
+        }
+
+        for (let j = 0; j < partidoI.local.length; j++) {
+            local.id_equipo = partidoI.local[j].id_equipo;
+            local.nombre = partidoI.local[j].nombre;
+            partido.local = local;
+            partido.local.torneo.id_torneo = id_torneo;
+        }
+
+        for (let f = 0; f < partidoI.visitante.length; f++) {
+            visitante.id_equipo = partidoI.visitante[f].id_equipo;
+            visitante.nombre = partidoI.visitante[f].nombre;
+            partido.visitante = visitante;
+            partido.visitante.torneo.id_torneo = id_torneo;
+        }
+        partido.llave = partidoI.llave;
+
+        return partido;
+    }
 }
