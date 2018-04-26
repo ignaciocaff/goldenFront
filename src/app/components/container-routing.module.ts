@@ -32,6 +32,8 @@ import { UsuarioComponent, UsuarioBajaComponent } from './common/usuarios/index'
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep';
+import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
+
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
     {
@@ -136,6 +138,9 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'goleadores', component: GoleadoresComponent,
+            },
+            {
+                path: 'fixture', component: FixtureVisualizacionComponent,
             },
             {
                 path: 'usuarios', component: UsuarioComponent,

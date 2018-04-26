@@ -101,7 +101,7 @@ export class FixtureUpdateComponent implements OnInit {
         this.equiposPorZona(zona);
         this.cantidadPartidos = null;
         this.partidos = [];
-
+        console.log(this.fecha);
         this.fixtureService.obtenerPartidos(this.fecha, this.id_torneo, this.zona.id_zona, ).subscribe(
             data => {
                 this.partidos = data;
