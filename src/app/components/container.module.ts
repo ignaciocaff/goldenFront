@@ -45,6 +45,8 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
 import { LocalidadesCargaComponent } from './common/localidades';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
+import { FixtureInterzonalComponent } from "./common/fixture/interzonal/index";
+
 import { ResultadoComponent, SancionDialog, SancionDialogV } from "./common/resultado/index";
 import { ResultadoUpdateComponent } from "./common/resultado/update/index";
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
@@ -111,7 +113,8 @@ import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/in
     SancionEquipoBajaComponent,
     ResultadoUpdateComponent,
     GoleadoresComponent,
-    FixtureVisualizacionComponent
+    FixtureVisualizacionComponent,
+    FixtureInterzonalComponent
   ],
   imports: [
     BrowserModule,

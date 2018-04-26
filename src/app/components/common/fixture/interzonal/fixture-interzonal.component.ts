@@ -1,28 +1,28 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmitter, HostListener, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { FileService } from '../../../services/entity-services/file.service';
-import { ParserService } from '../../../services/common-services/index';
+import { FileService } from '../../../../services/entity-services/file.service';
+import { ParserService } from '../../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
     Turno, IEquipo, IPartido, Partido
-} from '../../../entities/index';
-import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../services/entity-services/index';
+} from '../../../../entities/index';
+import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { FixtureDialog } from './index';
+import { FixtureDialog } from '.././index';
 
 
 @Component({
-    selector: 'fixture',
+    selector: 'fixture-interzonal',
     moduleId: module.id,
-    templateUrl: './fixture.component.html',
-    styleUrls: ['./fixture.component.scss'],
+    templateUrl: './fixture-interzonal.component.html',
+    styleUrls: ['./fixture-interzonal.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [EquipoService, ZonaService]
 })
-export class FixtureComponent implements OnInit {
+export class FixtureInterzonalComponent implements OnInit {
     dialogRef: MatDialogRef<FixtureDialog>;
     fecha = new Fecha();
     zona = new Zona();
@@ -37,6 +37,7 @@ export class FixtureComponent implements OnInit {
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
     id_torneo: number;
+    id_fase: number;
     check: Boolean = false;
 
     constructor(private fileService: FileService, public equipoService: EquipoService,
@@ -44,23 +45,9 @@ export class FixtureComponent implements OnInit {
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+        this.id_fase = Number(sessionStorage.getItem('fase'));
     }
     ngOnInit() {
-        this.zonaService.getAll(this.id_torneo).subscribe(
-            data => {
-                this.lsZonas = [];
-                for (var i = 0; i < data.length; i++) {
-                    let zona: Zona;
-                    zona = data[i];
-                    if (zona.torneo.id_torneo != null) {
-                        this.lsZonas.push(zona);
-                    }
-                }
-            }, error => {
-
-            }
-        );
-
         this.horarioService.getAll().subscribe(
             data => {
                 this.horarios = [];
@@ -88,20 +75,18 @@ export class FixtureComponent implements OnInit {
             });
     }
 
-    public equiposPorZona(zona: Zona) {
+    public obtenerEquipos() {
         this.cantidadPartidos = null;
         this.partidos = [];
-        this.equipoService.getAllPorZona(zona.id_zona).subscribe(
+        this.equipoService.getAllPorTorneo(this.id_torneo).subscribe(
             data => {
                 this.equipos = [];
                 for (var j = 0; j < data.length; j++) {
                     var equipo = new IEquipo();
-                    if (this.id_torneo == data[j]['torneo']['id_torneo']) {
-                        equipo.id_equipo = data[j]['id_equipo'];
-                        equipo.nombre = data[j]['nombre'];
-                        equipo.logo = data[j]['logo'];
-                        this.equipos.push(equipo);
-                    }
+                    equipo.id_equipo = data[j]['id_equipo'];
+                    equipo.nombre = data[j]['nombre'];
+                    equipo.logo = data[j]['logo'];
+                    this.equipos.push(equipo);
                 }
                 for (let i = 0; i < this.equipos.length; i++) {
                     this.fileService.getImagesByEquipo(this.equipos[i].logo).subscribe(
@@ -149,8 +134,9 @@ export class FixtureComponent implements OnInit {
 
     registrarFecha() {
         var lsPartidos = new Array<Partido>();
-        lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
-        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
+        console.error(this.id_fase);
+        lsPartidos = this.parserService.parseInterezonales(this.partidos, this.fecha);
+        this.fixtureService.createInterzonal(lsPartidos, this.id_torneo, this.id_fase).subscribe(
             data => {
                 if (data) {
                     this.toastr.success('Se creo correctamente la fecha.', "Exito!");
