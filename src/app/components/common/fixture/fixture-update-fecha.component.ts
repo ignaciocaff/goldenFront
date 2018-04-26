@@ -185,4 +185,8 @@ export class FixtureUpdateFechaComponent implements OnInit {
     routeCambioFecha() {
         this.router.navigate(['home/fixture-update-fecha']);
     }
+
+    routeInterzonal() {
+        this.router.navigate(['home/fixture-interzonal']);
+    }
 }

@@ -12,6 +12,10 @@ export class FixtureService {
         return this.http.post(this.config.apiUrl + 'fecha/registrar/' + id_zona + '/' + id_torneo, obj);
     }
 
+    createInterzonal(obj: any, id_torneo: number, id_fase: number) {
+        return this.http.post(this.config.apiUrl + 'fecha/registrarInterzonal/' + id_torneo + '/' + id_fase, obj);
+    }
+
     update(obj: any, id_zona: number, id_torneo: number) {
         return this.http.post(this.config.apiUrl + 'fecha/modificar/' + id_zona + '/' + id_torneo, obj);
     }

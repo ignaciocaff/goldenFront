@@ -19,6 +19,7 @@ export class SancionDialog implements OnInit {
     lsTiposSancion = new Array<TipoSancion>();
     esOtras: boolean;
     partido = new IPartido();
+    lsFechasInicioDistintas = new Array<Fecha>();
 
     constructor(public dialogRef: MatDialogRef<SancionDialog>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -33,6 +34,26 @@ export class SancionDialog implements OnInit {
         this.lsFechasFin = this.conjunto[2];
         this.lsTiposSancion = this.conjunto[3];
         this.partido = this.conjunto[4];
+
+        for (let i = this.lsFechasInicio.length - 1; i >= 0; i--) {
+            for (let j = 0; j < this.lsFechasInicio.length; j++) {
+                if (this.lsFechasInicio[i].fecha == this.lsFechasInicio[j].fecha
+                    && this.lsFechasInicio[i].id_fecha != this.lsFechasInicio[j].id_fecha) {
+                    this.lsFechasInicio.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        for (let i = this.lsFechasFin.length - 1; i >= 0; i--) {
+            for (let j = 0; j < this.lsFechasFin.length; j++) {
+                if (this.lsFechasFin[i].fecha == this.lsFechasFin[j].fecha
+                    && this.lsFechasFin[i].id_fecha != this.lsFechasFin[j].id_fecha) {
+                    this.lsFechasFin.splice(i, 1);
+                    break;
+                }
+            }
+        }
     }
 
     registrarSancion() {

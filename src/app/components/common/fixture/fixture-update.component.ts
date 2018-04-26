@@ -308,6 +308,10 @@ export class FixtureUpdateComponent implements OnInit {
         this.router.navigate(['home/fixture-update-fecha']);
     }
 
+    routeInterzonal() {
+        this.router.navigate(['home/fixture-interzonal']);
+    }
+
     eliminarPartido(partido: IPartido) {
         this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
             height: '200px',
