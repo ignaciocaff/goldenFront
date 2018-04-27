@@ -134,20 +134,20 @@
           <div class="col-md-4 text-center">
             <div class="form-group has-feedback">
               <label class="control-label"></label>
-              <img *ngFor="let img of imagesEscudos" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+              <img *ngFor="let img of imagesEscudos" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
             </div>
           </div>
           <div class="col-md-4 text-center">
             <div class="form-group has-feedback">
               <label class="control-label"></label>
-              <img *ngFor="let img of imagesCamisetas" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+              <img *ngFor="let img of imagesCamisetas" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
             </div>
           </div>
 
           <div class="col-md-4 text-center">
             <div class="form-group has-feedback">
               <label class="control-label"></label>
-              <img *ngFor="let img of imagesCE" [src]="'http://localhost:50042/' + img.ThumbPath" class="img-thumbnail" alt="">
+              <img *ngFor="let img of imagesCE" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
             </div>
           </div>
         </div>

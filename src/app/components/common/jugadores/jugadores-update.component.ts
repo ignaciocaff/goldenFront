@@ -7,6 +7,7 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { Usuario } from '../../../entities/index';
 import { SharedService } from '../../../services/index';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { AppConfig } from '../../../app.config';
 
 import {
     Jugador,
@@ -84,7 +85,8 @@ export class JugadoresUpdateComponent implements OnInit {
         private userService: SharedService,
         private router: Router,
         private spinnerService: Ng4LoadingSpinnerService,
-    ) {    }
+        public config: AppConfig
+    ) { }
 
     // METODOS-----------------------------------------------------------------------
 

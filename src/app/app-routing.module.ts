@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContainerComponent } from './components/index';
 import { CanActivateRouteGuard } from './components/can-activate-route.guard';
 const appRoutes: Routes = [
-    { path: 'home/noticias', component: ContainerComponent, canActivate: [CanActivateRouteGuard] },
+    { path: '', component: ContainerComponent, canActivate: [CanActivateRouteGuard] },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: '/home/noticias' }
+    { path: '**', redirectTo: 'home/noticias' }
 ];
 
 @NgModule({

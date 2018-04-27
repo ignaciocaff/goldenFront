@@ -9,7 +9,7 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ConfirmationDialog } from '../../common/dialog/index';
-
+import { AppConfig } from '../../../app.config';
 @Component({
     selector: 'equipo-update',
     moduleId: module.id,
@@ -52,7 +52,8 @@ export class EquipoUpdateComponent implements OnInit {
         public toastr: ToastsManager,
         private fileService: FileService,
         private router: Router,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        public config: AppConfig
     ) {
         this.cargarCategorias();
         this.cargarClubes();

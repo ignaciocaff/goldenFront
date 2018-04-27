@@ -5,6 +5,7 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, IEquipo } from '../../../entities/index';
 import { EquipoService, ZonaService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { AppConfig } from '../../../app.config';
 
 @Component({
     selector: 'zona-update',
@@ -48,7 +49,10 @@ export class ZonaUpdateComponent implements OnInit {
     sourceItems = [
     ];
     constructor(private fileService: FileService,
-        private router: Router, public equipoService: EquipoService, public zonaService: ZonaService, public toastr: ToastsManager) {
+        private router: Router, public equipoService: EquipoService,
+        public zonaService: ZonaService,
+        public toastr: ToastsManager,
+        public config: AppConfig) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.id_fase = Number(sessionStorage.getItem('fase'));
     }
@@ -85,8 +89,8 @@ export class ZonaUpdateComponent implements OnInit {
                 for (let i = 0; i < this.equiposSinZona.length; i++) {
                     this.fileService.getImagesByEquipo(this.equiposSinZona[i].logo).subscribe(
                         data => {
-                            if (data['ImagePath'] != null) {
-                                this.equiposSinZona[i].imagePath = data['ImagePath'];
+                            if (data['ThumbPath'] != null) {
+                                this.equiposSinZona[i].imagePath = data['ThumbPath'];
                             }
                         },
                         error => {

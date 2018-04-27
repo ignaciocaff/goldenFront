@@ -13,8 +13,7 @@ import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { FixtureDialog } from './index';
 import { ConfirmationDialog } from '../../common/dialog/index';
-
-
+import { AppConfig } from '../../../app.config';
 
 @Component({
     selector: 'fixture-update',
@@ -47,7 +46,8 @@ export class FixtureUpdateComponent implements OnInit {
     constructor(private fileService: FileService, public equipoService: EquipoService,
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
-        public fixtureService: FixtureService, public dialog: MatDialog) {
+        public fixtureService: FixtureService, public dialog: MatDialog,
+        public config: AppConfig) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
 
     }

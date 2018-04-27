@@ -7,7 +7,7 @@
       <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig">
         <div ngxSlickItem *ngFor="let equipo of lsEquipos" class="slide">
           <div class="images" (click)="verEquipo(equipo.id_equipo)">
-            <img [src]="'http://localhost:50042' + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
+            <img [src]="config.imgUrl + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
           </div>
         </div>
       </ngx-slick>

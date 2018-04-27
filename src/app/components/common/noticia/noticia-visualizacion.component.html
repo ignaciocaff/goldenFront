@@ -1,45 +1,45 @@
 <div class="container">
-<div class="col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1">
+  <div class="col-sm-10 col-md-10 col-md-offset-1 col-sm-offset-1">
 
-  <div class="row foto">
-    <div class="col-sm-12 col-md-12">
-      <div class="imagebox">
-        <img [src]="'http://localhost:50042' + thumbnail" class="category-banner img-responsive">
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-      <h1>{{noticia.titulo}}</h1>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12 col-sm-12">
-      <share-buttons theme="material-dark" [include]="['facebook','twitter']" size="4" show="2"></share-buttons>
-
-    </div>
-
-    <div class="row">
+    <div class="row foto">
       <div class="col-sm-12 col-md-12">
-        <div class="noticia" [innerHTML]="noticia.descripcion">
+        <div class="imagebox">
+          <img [src]="config.imgUrl + thumbnail" class="category-banner img-responsive">
         </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <label>Temas</label>
-        <div class="tags">
-          <a class="tags"> {{noticia.tags}}</a>
-        </div>
-      </div>
+      <h1>{{noticia.titulo}}</h1>
     </div>
 
     <div class="row">
       <div class="col-md-12 col-sm-12">
-        <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin">Editar noticia</button>
-      </div>
-    </div>
+        <share-buttons theme="material-dark" [include]="['facebook','twitter']" size="4" show="2"></share-buttons>
 
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="noticia" [innerHTML]="noticia.descripcion">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <label>Temas</label>
+          <div class="tags">
+            <a class="tags"> {{noticia.tags}}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin">Editar noticia</button>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>

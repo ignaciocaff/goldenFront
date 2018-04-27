@@ -48,12 +48,14 @@
                     <span class="atrib-jugador"> {{jugador.edad}} </span>
                   </div>
                   <div class="tarjetas" *ngIf="esAdmin">
-                    <img src="/assets/amarilla.png">
+                    <img [src]="config.assetsUrl + '/amarilla.png'">
                     <span class="atrib-jugador">: {{jugador.tarjetas_amarillas}} </span>
-                    <img src="/assets/roja.png">
+                    <img [src]="config.assetsUrl + '/roja.png'">
                     <span class="atrib-jugador">: {{jugador.tarjetas_rojas}} </span>
                   </div>
-                  <div *ngIf="!esAdmin"><br></div>
+                  <div *ngIf="!esAdmin">
+                    <br>
+                  </div>
                   <div>
                     <span class="dato-jugador">Goles: </span>
                     <span class="atrib-jugador"> {{jugador.goles}} </span>

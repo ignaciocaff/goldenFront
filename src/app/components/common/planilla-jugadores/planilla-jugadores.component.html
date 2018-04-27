@@ -10,7 +10,7 @@
 <div class="row tamaño">
   <div class="col-md-12 col-sm-12">
     <p>Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo, manifiestan
-      estar en perfectas condiciones físicas      
+      estar en perfectas condiciones físicas
     </p>
   </div>
 </div>
@@ -47,8 +47,8 @@
       <div class="col-md-12 col-sm-12">
         <div class="jugador col-md-4 col-sm-4" *ngFor="let jugador of equipo.lsJugadores">
           <div class="foto col-md-6 col-sm-6">
-            <img [src]="'http://localhost:50042' + jugador.imagePath" *ngIf="jugador.nombre != null">
-            <img src="/assets/logos/anonimo.jpg" *ngIf="jugador.nombre == null">
+            <img [src]="config.imgUrl + jugador.imagePath" *ngIf="jugador.nombre != null">
+            <img [src]="config.assetsUrl + '/logos/anonimo.jpg'" *ngIf="jugador.nombre == null">
             <div class="texto-imagen" *ngIf="jugador.nombre != null">
               {{jugador.apellido}}, {{jugador.nombre}}
               <br> DNI: {{jugador.nro_doc}}
@@ -77,7 +77,7 @@
             <div class="amarilla-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
             <div class="roja row"></div>
             <div class="gol row" *ngIf="jugador.rol =='jugador' || jugador.rol == null">
-              <img src="../../../../assets/logos/pelota-futbol.png" alt="">
+              <img [src]="config.assetsUrl + '/logos/pelota-futbol.png'" alt="">
             </div>
             <div class="gol-dt row" *ngIf="jugador.rol == 'director_tecnico' || jugador.rol == 'representante'"></div>
           </div>

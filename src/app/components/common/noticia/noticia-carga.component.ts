@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '
 import { DialogService } from '../../../services/common-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
+import { AppConfig } from '../../../app.config';
 
 import {
     Noticia,
@@ -58,7 +59,8 @@ export class NoticiaCargaComponent implements OnInit {
         private fileService: FileService,
         private noticiaService: NoticiaService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        public config: AppConfig
 
     ) {
         this.cargarTorneos();

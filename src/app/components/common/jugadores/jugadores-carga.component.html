@@ -44,7 +44,7 @@
           <div class="col-md-3 col-sm-3">
             <div class="form-group has-feedback">
               <label class="control-label"></label>
-              <img *ngFor="let img of images" [src]="'http://localhost:50042' + img.ThumbPath" class="img-thumbnail" alt="">
+              <img *ngFor="let img of images" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
             </div>
           </div>
         </div>

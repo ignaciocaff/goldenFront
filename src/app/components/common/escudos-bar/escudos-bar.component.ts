@@ -7,7 +7,7 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
 import { EquipoService } from '../../../services/entity-services/index';
 import { IEquipo } from '../../../entities/index';
-
+import { AppConfig } from '../../../app.config';
 
 @Component({
     selector: 'escudos',
@@ -30,7 +30,8 @@ export class EscudosComponent implements OnInit, DoCheck {
         private torneoEmiiter: TorneoEmitter,
         private fileService: FileService,
         public equipoService: EquipoService,
-        private router: Router
+        private router: Router,
+        public config: AppConfig
     ) {
 
     }
@@ -60,8 +61,8 @@ export class EscudosComponent implements OnInit, DoCheck {
                 for (let i = 0; i < this.lsEquipos.length; i++) {
                     this.fileService.getImagesByEquipo(this.lsEquipos[i].logo).subscribe(
                         data => {
-                            if (data['ImagePath'] != null) {
-                                this.lsEquipos[i].imagePath = data['ImagePath'];
+                            if (data['ThumbPath'] != null) {
+                                this.lsEquipos[i].imagePath = data['ThumbPath'];
                             }
                         },
                         error => {

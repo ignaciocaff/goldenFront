@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { SancionDialog, SancionDialogV } from '.././index';
 import { ConfirmationDialog } from '../../../common/dialog/index';
+import { AppConfig } from '../../../../app.config';
 
 @Component({
     selector: 'resultado-update',
@@ -59,7 +60,8 @@ export class ResultadoUpdateComponent implements OnInit {
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog,
-        public sancionService: SancionService, public partidoService: PartidoService) {
+        public sancionService: SancionService, public partidoService: PartidoService,
+        public config: AppConfig) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.id_fase = Number(sessionStorage.getItem('fase'));
 

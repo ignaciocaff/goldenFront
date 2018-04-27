@@ -25,7 +25,7 @@
             <ngx-dnd-container [model]="equiposSinZona" dropZone="multiple-equipos" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               (drop)="zona(equiposSinZona)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -38,7 +38,7 @@
             <ngx-dnd-container [model]="zonaA" dropZone="multiple-target-a" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaA)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -50,7 +50,7 @@
             <ngx-dnd-container [model]="zonaB" dropZone="multiple-target-b" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaB)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -62,7 +62,7 @@
             <ngx-dnd-container [model]="zonaC" dropZone="multiple-target-c" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaC)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -74,7 +74,7 @@
             <ngx-dnd-container [model]="zonaD" dropZone="multiple-target-d" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaD)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -86,7 +86,7 @@
             <ngx-dnd-container [model]="zonaE" dropZone="multiple-target-e" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaE)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -98,7 +98,7 @@
             <ngx-dnd-container [model]="zonaF" dropZone="multiple-target-f" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaF)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -110,7 +110,7 @@
             <ngx-dnd-container [model]="zonaG" dropZone="multiple-target-g" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaG)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -122,7 +122,7 @@
             <ngx-dnd-container [model]="zonaH" dropZone="multiple-target-h" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
               [removeOnSpill]="true" [moves]="zona(zonaH)">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>

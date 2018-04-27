@@ -6,7 +6,7 @@ import { Torneo, Categoria, Club, Equipo } from '../../../entities/index';
 import { CategoriaService, ClubService, EquipoService } from '../../../services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
-
+import { AppConfig } from '../../../app.config';
 
 @Component({
     selector: 'equipo',
@@ -41,7 +41,8 @@ export class EquipoComponent {
         private equipoService: EquipoService,
         public toastr: ToastsManager,
         private fileService: FileService,
-        private router: Router
+        private router: Router,
+        public config: AppConfig
     ) {
         this.cargarCategorias();
         this.cargarClubes();

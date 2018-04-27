@@ -69,7 +69,7 @@
         <ngx-dnd-container [model]="equipos" dropZone="multiple-equipos" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-equipos']"
           (drop)="zona(equipos)">
           <ng-template let-item="model">
-            <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+            <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
             <div class="row">{{item.nombre}} </div>
           </ng-template>
         </ngx-dnd-container>
@@ -84,7 +84,7 @@
             <ngx-dnd-container [model]="partido.local" dropZone="multiple-target-a" [copy]="false" [dropZones]="['multiple-target-b','multiple-equipos', 'multiple-target-a']"
               [removeOnSpill]="true" (drop)="verificacionComponentes()">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>
@@ -97,7 +97,7 @@
             <ngx-dnd-container [model]="partido.visitante" dropZone="multiple-target-b" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-equipos']"
               [removeOnSpill]="true" (drop)="verificacionComponentes()">
               <ng-template let-item="model">
-                <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                 <div class="row">{{item.nombre}} </div>
               </ng-template>
             </ngx-dnd-container>

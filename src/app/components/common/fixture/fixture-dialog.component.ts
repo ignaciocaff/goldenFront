@@ -6,7 +6,7 @@ import {
   Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
   Turno, IEquipo, IPartido, Partido
 } from '../../../entities/index';
-
+import { AppConfig } from '../../../app.config';
 @Component({
   selector: 'fixture-dialog',
   templateUrl: './fixture-dialog.component.html',
@@ -17,7 +17,8 @@ export class FixtureDialog {
 
   public partidos = new Array<IPartido>();
 
-  constructor(public dialogRef: MatDialogRef<FixtureDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(public dialogRef: MatDialogRef<FixtureDialog>, @Inject(MAT_DIALOG_DATA) public data: any,
+    public config: AppConfig) {
 
     this.partidos.push(data);
   }

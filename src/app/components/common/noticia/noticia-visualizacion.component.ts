@@ -5,6 +5,7 @@ import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { FileService } from '../../../services/entity-services/file.service';
 import { Noticia, Usuario } from '../../../entities/index';
 import { NoticiaService } from '../../../services/entity-services/index';
+import { AppConfig } from '../../../app.config';
 
 @Component({
     selector: 'noticia-visualizacion',
@@ -27,7 +28,8 @@ export class NoticiaVisualizacionComponent {
         private noticiaService: NoticiaService,
         private fileService: FileService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        public config: AppConfig
     ) {
         this.id_noti = route.snapshot.params['id'];
         this.cargarNoticia();

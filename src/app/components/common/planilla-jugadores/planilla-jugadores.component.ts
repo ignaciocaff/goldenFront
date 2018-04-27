@@ -5,7 +5,7 @@ import { EquipoService } from '../../../services/index';
 import { Equipo } from '../../../entities/index';
 import { FileService } from '../../../services/entity-services/file.service';
 import { IEquipoPlanilla, IJugador } from '../../../entities/interfaces/index';
-
+import { AppConfig } from '../../../app.config';
 
 @Component({
   selector: 'planilla-jugadores',
@@ -23,6 +23,7 @@ export class PlanillaJugadoresComponent {
     public toastr: ToastsManager,
     private equipoService: EquipoService,
     private fileService: FileService,
+    public config: AppConfig
   ) {
     this.obtenerEquipos();
   }

@@ -60,7 +60,7 @@
                   <ngx-dnd-container [model]="partido.local" dropZone="multiple-target-a" [moves]="false" [copy]="false" [dropZones]="['multiple-target-b','multiple-equipos', 'multiple-target-a']"
                     [removeOnSpill]="true" (drop)="verificacionComponentes()">
                     <ng-template let-item="model">
-                      <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                      <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                       <div class="row">{{item.nombre}} </div>
                     </ng-template>
                   </ngx-dnd-container>
@@ -79,7 +79,7 @@
                   <ngx-dnd-container [model]="partido.visitante" dropZone="multiple-target-b" [moves]="false" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-equipos']"
                     [removeOnSpill]="true" (drop)="verificacionComponentes()">
                     <ng-template let-item="model">
-                      <img [src]="'http://localhost:50042/' + item.imagePath" class="img-thumbnail imgCustom" alt="">
+                      <img [src]="config.imgUrl + item.imagePath" class="img-thumbnail imgCustom" alt="">
                       <div class="row">{{item.nombre}} </div>
                     </ng-template>
                   </ngx-dnd-container>
@@ -98,9 +98,9 @@
                           <option *ngFor="let jugador of partido.local[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
                         </select>
                         <div [ngClass]="(partido.desImagenes)?'avoid-clicks':''" class="input-group-btn margen imgEffect">
-                          <img (click)="golLocal(partido)" src="/assets/pelota.png" height="34" width="34">
-                          <img (click)="amarillaLocal(partido)" id="amarilla" src="/assets/amarilla.png">
-                          <img (click)="fechasPorZonaLocal(partido)" id="roja" src="/assets/roja.png">
+                          <img (click)="golLocal(partido)" [src]="config.assetsUrl + '/pelota.png'" height="34" width="34">
+                          <img (click)="amarillaLocal(partido)" id="amarilla" [src]="config.assetsUrl + '/amarilla.png'">
+                          <img (click)="fechasPorZonaLocal(partido)" id="roja" [src]="config.assetsUrl +'/roja.png'">
                         </div>
                       </div>
                     </div>
@@ -118,9 +118,9 @@
                           <option *ngFor="let jugador of partido.visitante[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
                         </select>
                         <div [ngClass]="(partido.desImagenesV)?'avoid-clicks':''" class="input-group-btn margen imgEffect">
-                          <img (click)="golVisitante(partido)" src="/assets/pelota.png" height="34" width="34">
-                          <img (click)="amarillaVisitante(partido)" id="amarillaV" src="/assets/amarilla.png">
-                          <img (click)="fechasPorZonaVisitante(partido)" id="rojaV" src="/assets/roja.png">
+                          <img (click)="golVisitante(partido)" [src]="config.assetsUrl+'/pelota.png'" height="34" width="34">
+                          <img (click)="amarillaVisitante(partido)" id="amarillaV" [src]="config.assetsUrl+'/amarilla.png'">
+                          <img (click)="fechasPorZonaVisitante(partido)" id="rojaV" [src]="config.assetsUrl+'/roja.png'">
                         </div>
                       </div>
                     </div>
@@ -129,16 +129,16 @@
               </div>
               <div class="row">
                 <div [style.visibility]="partido.jugadorLocal.acumAmarillas > 0  ? 'visible' : 'hidden'" class="col-md-offset-2 col-md-1 col-sm-offset-2 col-sm-1">
-                  <img id="amarillaL" src="/assets/amarilla.png"> {{partido.jugadorLocal.acumAmarillas}}
+                  <img id="amarillaL" [src]="config.assetsUrl + '/amarilla.png'"> {{partido.jugadorLocal.acumAmarillas}}
                 </div>
                 <div [style.visibility]="partido.jugadorLocal.acumRojas > 0 ? 'visible' : 'hidden'" class="col-md-1 col-sm-1">
-                  <img id="rojaL" src="/assets/roja.png"> {{partido.jugadorLocal.acumRojas}}
+                  <img id="rojaL" [src]="config.assetsUrl + '/roja.png'"> {{partido.jugadorLocal.acumRojas}}
                 </div>
                 <div [style.visibility]="partido.jugadorVisitante.acumAmarillas > 0  ? 'visible' : 'hidden'" class="col-md-offset-3 col-md-1 col-sm-offset-3 col-sm-1">
-                  <img id="amarillaL" src="/assets/amarilla.png"> {{partido.jugadorVisitante.acumAmarillas}}
+                  <img id="amarillaL" [src]="config.assetsUrl + '/amarilla.png'"> {{partido.jugadorVisitante.acumAmarillas}}
                 </div>
                 <div [style.visibility]="partido.jugadorVisitante.acumRojas > 0 ? 'visible' : 'hidden'" class="col-md-1 col-sm-1">
-                  <img id="rojaL" src="/assets/roja.png"> {{partido.jugadorVisitante.acumRojas}}
+                  <img id="rojaL" [src]="config.assetsUrl + '/roja.png'"> {{partido.jugadorVisitante.acumRojas}}
                 </div>
               </div>
               <div class="row">

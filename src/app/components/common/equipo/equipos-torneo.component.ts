@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { EquipoService } from '../../../services/entity-services/index';
 import { IEquipo } from '../../../entities/index';
 import { FileService } from '../../../services/entity-services/file.service';
+import { AppConfig } from '../../../app.config';
 
 @Component({
     selector: 'equipos-torneo',
@@ -20,6 +21,7 @@ export class EquiposTorneoComponent {
         public equipoService: EquipoService,
         public fileService: FileService,
         private router: Router,
+        public config: AppConfig
     ) { }
 
     ngOnInit() {
@@ -39,8 +41,8 @@ export class EquiposTorneoComponent {
                 for (let i = 0; i < this.lsEquipos.length; i++) {
                     this.fileService.getImagesByEquipo(this.lsEquipos[i].logo).subscribe(
                         data => {
-                            if (data['ImagePath'] != null) {
-                                this.lsEquipos[i].imagePath = data['ImagePath'];
+                            if (data['ThumbPath'] != null) {
+                                this.lsEquipos[i].imagePath = data['ThumbPath'];
                             }
                         },
                         error => {
@@ -53,7 +55,7 @@ export class EquiposTorneoComponent {
     }
 
     // METODOS-----------------------------------------------------------------------------
-    
+
     verEquipo(id_equipo: number) {
         this.router.navigate(['home/equipo/' + id_equipo]);
     }
