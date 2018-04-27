@@ -14,6 +14,11 @@ export class HeaderComponent {
     @ViewChild(LoginComponent) login: LoginComponent;
 
     items: Array<any> = [];
-    constructor(public config: AppConfig) {
+    constructor(public config: AppConfig,
+        private router: Router) {
+    }
+
+    noticias_Click() {
+        this.router.navigate(['home/noticias']);
     }
 }

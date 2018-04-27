@@ -108,6 +108,10 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/usuarios']);
     }
 
+    fixture_Click() {
+        this.router.navigate(['home/fixture']);
+    }
+
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {

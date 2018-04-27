@@ -104,32 +104,7 @@ export class EquipoVisualizacionComponent implements OnInit {
             error => { }
         );
     }
-
-    desvincularJugador(id_jugador: number) {
-        this.dialogRef = this.dialog.open(ConfirmationDialog, {
-            height: '200px',
-            width: '350px',
-            disableClose: false
-        });
-        this.dialogRef.componentInstance.confirmMessage = "Se desvinculará el jugador de este equipo."
-
-        this.dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.equipoService.desvincularJugador(id_jugador).subscribe(
-                    data => {
-                        if (data) {
-                            window.location.reload();
-                        }
-                    },
-                    error => {
-                        error.json()['Message'];
-                    });
-
-            }
-            this.dialogRef = null;
-        });
-    }
-
+    
     buscarGoleador() {
         this.goleador = new IJugador();
         this.goleador.goles = 0;

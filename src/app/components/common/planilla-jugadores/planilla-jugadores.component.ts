@@ -14,10 +14,11 @@ import { AppConfig } from '../../../app.config';
   styleUrls: ['./planilla-jugadores.component.css'],
   providers: []
 })
-export class PlanillaJugadoresComponent {
+export class PlanillaJugadoresComponent implements OnInit {
 
   public lsJugadores = new Array<IJugador>();
   public lsEquipos = new Array<IEquipoPlanilla>();
+  imprimir: boolean = false;
 
   constructor(
     public toastr: ToastsManager,
@@ -25,62 +26,46 @@ export class PlanillaJugadoresComponent {
     private fileService: FileService,
     public config: AppConfig
   ) {
-    this.obtenerEquipos();
   }
 
-  obtenerEquipos() {
+
+  ngOnInit() {
     var id_torneo = Number(sessionStorage.getItem('id_torneo'));
 
-    this.equipoService.getiEquiposPorTorneo(id_torneo).subscribe(
+    this.equipoService.getiJugadoresPlanilla(id_torneo).subscribe(
       data => {
         for (let i = 0; i < data.length; i++) {
           var equipo = new IEquipoPlanilla();
           equipo = data[i];
           this.lsEquipos.push(equipo);
         }
-        this.buscarJugadores();
+        this.completarEquipo();
       },
       error => {
         error.json()['Message'];
       });
   }
 
-  buscarJugadores() {
-    for (let j = 0; j < this.lsEquipos.length; j++) {
-      this.equipoService.getiJugadoresByIdEquipo(this.lsEquipos[j].id_equipo).subscribe(
-        data => {
-          this.lsJugadores = [];
-          for (let i = 0; i < data.length; i++) {
-            var jugador = new IJugador();
-            jugador = data[i];
-            this.lsJugadores.push(jugador);
-          }
-          this.completarEquipo();
-          this.lsEquipos[j].lsJugadores = this.lsJugadores;
-        },
-        error => {
-          error.json()['Message'];
-        });
-    }
-  }
-
 
   completarEquipo() {
     try {
-      for (let i = this.lsJugadores.length; i < 27; i++) {
-        this.lsJugadores.push(new IJugador());
-      }
+      for (let j = 0; j < this.lsEquipos.length; j++) {
+        for (let i = this.lsEquipos[j].lsJugadores.length; i < 27; i++) {
+          this.lsEquipos[j].lsJugadores.push(new IJugador());
+        }
 
-      for (let j = 0; j < this.lsJugadores.length; j++) {
-        if (this.lsJugadores[j].rol == 'director_tecnico') {
-          this.lsJugadores.splice(24, 0, this.lsJugadores[j]);
-          this.lsJugadores.splice(j, 1);
-        }
-        if (this.lsJugadores[j].rol == 'representante') {
-          this.lsJugadores.splice(27, 0, this.lsJugadores[j]);
-          this.lsJugadores.splice(j, 1);
+        for (let i = 0; i < this.lsEquipos[j].lsJugadores.length; i++) {
+          if (this.lsEquipos[j].lsJugadores[i].rol == 'director_tecnico') {
+            this.lsEquipos[j].lsJugadores.splice(24, 0, this.lsEquipos[j].lsJugadores[i]);
+            this.lsEquipos[j].lsJugadores.splice(i, 1);
+          }
+          if (this.lsEquipos[j].lsJugadores[i].rol == 'representante') {
+            this.lsEquipos[j].lsJugadores.splice(27, 0, this.lsEquipos[j].lsJugadores[i]);
+            this.lsEquipos[j].lsJugadores.splice(i, 1);
+          }
         }
       }
+      this.imprimir = true;
     } catch (exception) {
     }
   }

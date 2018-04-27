@@ -59,6 +59,8 @@ import { SlickModule } from 'ngx-slick';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 import { CanActivateRouteGuard } from './can-activate-route.guard'
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
+import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -111,6 +113,7 @@ import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
     SancionEquipoBajaComponent,
     ResultadoUpdateComponent,
     GoleadoresComponent,
+    FixtureVisualizacionComponent,
     FixtureInterzonalComponent
   ],
   imports: [

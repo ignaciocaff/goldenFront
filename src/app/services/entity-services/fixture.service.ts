@@ -58,4 +58,9 @@ export class FixtureService {
         }
     }
 
+    obtenerFixtureFecha(obj: any, id_torneo: number){
+        return this.http.post(this.config.apiUrl + 'fecha/obtenerPartidosVisualizacionFixture/' + id_torneo, obj).map((response: Response) => response.json())
+
+    }
+
 }

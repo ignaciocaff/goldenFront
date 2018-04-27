@@ -19,3 +19,7 @@
   z-index: 8 !important;
   position: relative;
 }
+
+img{
+  cursor: pointer;
+}
