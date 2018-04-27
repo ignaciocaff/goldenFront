@@ -1,5 +1,5 @@
 li {
-  width: 650px;
+  width: 685px;
   height: 100px;
   background-color: #ebebeb;
   border-radius: 5px;
@@ -11,7 +11,7 @@ li:nth-child(odd) {
 }
 
 .nombre-jugador {
-  font-size: 1.75em;
+  font-size: 1.4em;
   font-weight: bold;
 }
 
@@ -147,4 +147,20 @@ p {
 .tarjetas img {
   height: 20px;
   font-weight: 14.81px;
+}
+
+.row.jugador {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.seccion-jugadores{
+  margin-right:0px;
+  padding-right: 0px;
+}
+
+.info-jugador span {
+  font-size: 13px;
 }

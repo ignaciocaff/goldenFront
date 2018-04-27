@@ -31,7 +31,7 @@
       </div>
 
       <div class="col-md-8 col-sm-8 jugadores">
-        <div class="col-md-12 col-sm-12">
+        <div class="col-md-12 col-sm-12 seccion-jugadores">
           <hr class="hr-text titulo-jugadores" data-content="Jugadores">
 
           <li *ngFor="let jugador of lsJugadores">
@@ -39,7 +39,7 @@
               <div class="foto col-md-4 col-sm-4">
                 <img [src]="config.imgUrl + jugador.imagePath">
               </div>
-              <div class="col-md-6 col-sm-6">
+              <div class="col-md-8 col-sm-8">
                 <div class="info-jugador">
                   <div class="nombre-jugador"> {{jugador.apellido}}, {{jugador.nombre}} </div>
                   <div class="edad">
@@ -60,9 +60,6 @@
                     <span class="atrib-jugador"> {{jugador.partidos_jugados}} </span>
                   </div>
                 </div>
-              </div>
-              <div class="col-md-2 col-sm-2">
-                <button type="submit" (click)="desvincularJugador(jugador.id_jugador)" class="btn btn-primary desvincular" *ngIf="esAdmin">Desvincular</button>
               </div>
             </div>
           </li>
