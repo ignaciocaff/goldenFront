@@ -97,7 +97,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
         });
     }
 
-    verNoticia(id_noticia) {
+    verNoticia(id_noticia: number) {
         this.router.navigate(['home/noticia/' + id_noticia]);
     }
 

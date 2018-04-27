@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="col-sm-6 col-md-6" *ngFor="let noticia of lsNotPrincipLink">
-          <div class="imagebox" onclick="verNoticia()">
+          <div class="imagebox">
             <a (click)="verNoticia(noticia.id_noticia)">
               <img [src]="url + noticia.ruta" class="category-banner img-responsive">
               <span class="imagebox-desc">{{noticia.titulo}}</span>
@@ -19,7 +19,7 @@
     <div class="secundaria">
       <div class="row">
         <div class="col-sm-4 col-md-4" *ngFor="let noticia of lsNotSecundLink">
-          <div class="imageboxSecundaria" onclick="verNoticia()">
+          <div class="imageboxSecundaria">
             <a (click)="verNoticia(noticia.id_noticia)">
               <img [src]="url + noticia.ruta" class="category-banner img-responsive">
               <span class="imagebox-desc">{{noticia.titulo}}</span>
