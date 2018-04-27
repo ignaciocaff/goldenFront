@@ -14,7 +14,9 @@ export class HeaderComponent {
     @ViewChild(LoginComponent) login: LoginComponent;
 
     items: Array<any> = [];
-    constructor() {
+    constructor(
+        private router: Router,
+    ) {
         this.items = [
             { name: 'assets/escudos/22 dormida.png' },
             { name: 'assets/escudos/alfiado.png' },
@@ -41,5 +43,9 @@ export class HeaderComponent {
             { name: 'assets/escudos/taladro2.png' },
             { name: 'assets/escudos/viejo algarrobo.png' },
             { name: 'assets/escudos/Zona Sur.png' }]
+    }
+
+    noticias_Click() {
+        this.router.navigate(['home/noticias']);
     }
 }

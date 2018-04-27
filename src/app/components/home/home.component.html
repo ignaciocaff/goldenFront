@@ -42,8 +42,8 @@
         <li *ngFor="let noticia of lsNotUltimasLink">
           <div class="row noticia-historica">
             <div class="col-md-4 col-sm-4 cont-imagen-noticia-historica">
-                <img [src]="url + noticia.ruta" class="category-banner img-responsive" (click)="verNoticia(noticia.id_noticia)">
-              </div>
+              <img [src]="url + noticia.ruta" class="category-banner img-responsive" (click)="verNoticia(noticia.id_noticia)">
+            </div>
             <div class="col-md-8 col-sm-8 noticia-historica-texto">
               <div class="titulo">
                 <a (click)="verNoticia(noticia.id_noticia)">{{noticia.titulo}}</a>
@@ -61,12 +61,41 @@
         </div>
       </div>
 
-      <div class="col-md-4 col-sm-4 sponsors">
+      <div class="col-md-4 col-sm-4 sponsors-primarios">
         <div class="row">
-          <img src="http://placehold.it/340x250">
+          <a href="http://www.cerveceriaymalteriaquilmes.com/" target="_blank">
+            <img src="/assets/quilmes.jpg" >
+          </a>
         </div>
         <div class="row">
-          <img src="http://placehold.it/340x250">
+          <a href="http://www.gatorade.com/" target="_blank">
+            <img src="/assets/gatorade.jpg">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-md-12 col-sm-12 sponsors-secundarios">
+        <div class="col-md-3 col-sm-3 sponsor-secundario">
+          <a href="https://www.ifksports.com/" target="_blank">
+            <img src="/assets/ifk.png">
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-3 sponsor-secundario">
+          <a href="https://www.ifksports.com/" target="_blank">
+            <img src="/assets/ifk.png">
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-3 sponsor-secundario" target="_blank">
+          <a href="https://www.ifksports.com/">
+            <img src="/assets/ifk.png">
+          </a>
+        </div>
+        <div class="col-md-3 col-sm-3 sponsor-secundario" target="_blank">
+          <a href="https://www.ifksports.com/">
+            <img src="/assets/ifk.png">
+          </a>
         </div>
 
       </div>
