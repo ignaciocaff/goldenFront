@@ -28,8 +28,8 @@ export class EquipoService {
         return this.http.get(this.config.apiUrl + 'equipo/equiposPorZona/' + id_zona).map((response: Response) => response.json());
     }
 
-    getAllSinZona() {
-        return this.http.get(this.config.apiUrl + 'equipo/equiposSinZona/').map((response: Response) => response.json());
+    getAllSinZona(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'equipo/equiposSinZona/' + id_torneo).map((response: Response) => response.json());
     }
 
     desvincular(obj: any) {

@@ -74,7 +74,7 @@ export class ZonaUpdateComponent implements OnInit {
             }
         );
 
-        this.equipoService.getAllSinZona().subscribe(
+        this.equipoService.getAllSinZona(this.id_torneo).subscribe(
             data => {
                 this.equiposSinZona = [];
                 for (var j = 0; j < data.length; j++) {

@@ -47,7 +47,7 @@ export class ZonaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.equipoService.getAllSinZona().subscribe(
+        this.equipoService.getAllSinZona(this.id_torneo).subscribe(
             data => {
                 this.equipos = [];
                 for (var j = 0; j < data.length; j++) {
