@@ -10,7 +10,10 @@
   </div>
 
   <div class="row" *ngIf="fechaSeleccionada">
-    <div class="row text-center"> <span class="fecha">FECHA {{numeroFecha}} </span> <span class="dia"> {{diaVisual}} </span></div>
+    <div class="row text-center">
+      <span class="fecha">FECHA {{numeroFecha}} </span>
+      <span class="dia"> {{diaVisual}} </span>
+    </div>
     <div class="col-md-12 col-sm-12 partido">
       <li *ngFor="let partido of lsPartidos">
         <div class="row">
@@ -21,7 +24,8 @@
 
             <div class="col-md-2 col-sm-2 text-center">
               <div class="row">
-                <br><br>
+                <br>
+                <br>
                 <span class="horario"> {{partido.horario.inicio}} hs</span>
               </div>
               <div class="row">
@@ -43,7 +47,7 @@
   </div>
 
   <!-- Esta row "tamaño" se usa para que no se deforme la visualizacion (el navBar de config). Es necesario debido al funcionamiento heredado del container-fluid-->
-  <div class="row" >
+  <div class="row">
     <div class="col-md-12 col-sm-12" style="visibility: hidden;">
       <p>Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo, manifiestan
         estar en perfectas condiciones físicas

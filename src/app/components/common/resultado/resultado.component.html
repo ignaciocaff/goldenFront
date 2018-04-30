@@ -31,7 +31,7 @@
               <i class="glyphicon glyphicon-list"></i>
             </span>
             <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker" (ngModelChange)="obtenerPartidosImplementacion()">
-              <option value="null">Elija su opcion</option>
+              <option value="null">Elija su opción</option>
               <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
             </select>
           </div>
@@ -94,7 +94,7 @@
                           <i class="glyphicon glyphicon-list"></i>
                         </span>
                         <select [(ngModel)]="jugadorLocal" name="jugadoresLocal" required class="form-control" (change)="onChangeLocal(jugadorLocal, partido)">
-                          <option value=" ">Elija su opcion</option>
+                          <option value=" ">Elija su opción</option>
                           <option *ngFor="let jugador of partido.local[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
                         </select>
                         <div [ngClass]="(partido.desImagenes)?'avoid-clicks':''" class="input-group-btn margen imgEffect">
@@ -114,7 +114,7 @@
                           <i class="glyphicon glyphicon-list"></i>
                         </span>
                         <select [(ngModel)]="jugadorVisitante" name="jugadoresVisitante" required class="form-control" (change)="onChangeVisitante(jugadorVisitante, partido)">
-                          <option value=" ">Elija su opcion</option>
+                          <option value=" ">Elija su opción</option>
                           <option *ngFor="let jugador of partido.visitante[0].lsJugadores;" [ngValue]="jugador">{{jugador.apellido}}, {{jugador.nombre}}</option>
                         </select>
                         <div [ngClass]="(partido.desImagenesV)?'avoid-clicks':''" class="input-group-btn margen imgEffect">

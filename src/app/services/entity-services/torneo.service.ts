@@ -27,4 +27,8 @@ export class TorneoService {
     delete(id: number) {
         return this.http.delete(this.config.apiUrl + 'torneo/' + id);
     }
+
+    cambioFase(obj: any, id_torneo: number) {
+        return this.http.post(this.config.apiUrl + 'torneo/cambioFase/' + id_torneo, obj);
+    }
 }

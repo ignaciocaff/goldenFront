@@ -48,7 +48,6 @@
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" routerLink="fixture-armado">Generar fixture</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="torneoCarga_Click()">Categoría</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="noticiaCarga_Click()">Noticias</a>
-        <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" href="#">Sponsors</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="zonaCarga_Click()">Zonas</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="resultadoCarga_Click()">Resultados</a>
         <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="usuariosCarga_Click()">Usuarios</a>

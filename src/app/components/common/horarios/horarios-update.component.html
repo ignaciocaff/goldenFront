@@ -19,7 +19,7 @@
               </span>
               <select [(ngModel)]="horarioFijo" name="horarioFijo" required class="form-control selectpicker" (ngModelChange)="onHorarioChange(horarioFijo)"
                 required=''>
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}} {{horario.turno.descripcion}}</option>
               </select>
             </div>
@@ -67,7 +67,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="horarioFijo.turno.descripcion" name="turno" required class="form-control selectpicker" required='' (ngModelChange)="onTurnoChange($event)">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let turno of turnos">{{turno.descripcion}}</option>
               </select>
             </div>

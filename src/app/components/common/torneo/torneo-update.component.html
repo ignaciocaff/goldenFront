@@ -18,7 +18,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="torneo" name="torneo" required (change)="onChange(torneo)" class="form-control">
-                <option value=" ">Elija su opcion</option>
+                <option value=" ">Elija su opción</option>
                 <option *ngFor="let torneo of lsTorneos" [ngValue]="torneo">{{torneo.nombre}}</option>
               </select>
             </div>
@@ -36,7 +36,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [ngModel]="torneo.tipoTorneo.descripcion" name="tipoTorneo" (ngModelChange)="onTtorneoChange($event)" required class="form-control selectpicker">
-                <option value=" ">Elija su opcion</option>
+                <option value=" ">Elija su opción</option>
                 <option *ngFor="let tipoTorneo of lsTipos">{{tipoTorneo.descripcion}}</option>
               </select>
             </div>
@@ -52,7 +52,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [ngModel]="torneo.regla.descripcion" name="regla" (ngModelChange)="onReglaChange($event)" required class="form-control">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let regla of lsReglas">{{regla.descripcion}}</option>
               </select>
             </div>
@@ -68,7 +68,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [ngModel]="torneo.modalidad.descripcion" name="modalidad" (ngModelChange)="onModalidadChange($event)" required class="form-control">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let modalidad of lsModalidades">{{modalidad.descripcion}}</option>
               </select>
             </div>
@@ -85,7 +85,7 @@
               </span>
               <select [ngModel]="torneo.categoria.descripcion" name="categoria" (ngModelChange)="onCategoriaChange($event)" required
                 class="form-control">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let categoria of lsCategorias">{{categoria.descripcion}}</option>
               </select>
             </div>

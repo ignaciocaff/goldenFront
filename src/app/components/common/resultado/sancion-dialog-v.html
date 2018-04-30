@@ -19,7 +19,7 @@
                                 <i class="glyphicon glyphicon-list"></i>
                             </span>
                             <select [(ngModel)]="sancion.tipo_sancion" name="inicio" required (change)="onChange(sancion.tipo_sancion)" class="form-control selectpicker">
-                                <option value="null">Elija su opcion</option>
+                                <option value="null">Elija su opción</option>
                                 <option *ngFor="let tipo_sancion of lsTiposSancion" [ngValue]="tipo_sancion">{{tipo_sancion.descripcion}}</option>
                             </select>
                         </div>
@@ -35,7 +35,7 @@
                                 <i class="glyphicon glyphicon-list"></i>
                             </span>
                             <select [(ngModel)]="sancion.fecha_inicio" name="inicio" required class="form-control selectpicker">
-                                <option value="null">Elija su opcion</option>
+                                <option value="null">Elija su opción</option>
                                 <option *ngFor="let inicio of lsFechasInicio" [ngValue]="inicio">{{inicio.fecha | date:'dd-MM-yyyy'}}</option>
                             </select>
                         </div>
@@ -51,7 +51,7 @@
                                 <i class="glyphicon glyphicon-list"></i>
                             </span>
                             <select [(ngModel)]="sancion.fecha_fin" name="fin" required class="form-control selectpicker">
-                                <option value="null">Elija su opcion</option>
+                                <option value="null">Elija su opción</option>
                                 <option *ngFor="let fin of lsFechasFin" [ngValue]="fin">{{fin.fecha | date:'dd-MM-yyyy'}}</option>
                             </select>
                         </div>

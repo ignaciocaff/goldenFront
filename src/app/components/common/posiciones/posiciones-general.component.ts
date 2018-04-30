@@ -17,7 +17,6 @@ export class PosicionesGeneralComponent implements OnInit {
   public posicion = new Posiciones();
   public id_fase: number;
   public lsPosicionesZona = new Array<Array<PosicionesZona>>();
-  public lsNombreZonas: string[] = ["A", "B", "C", "D", "E", "F", "G", "H"];
   public lsSanciones = new Array<SancionEquipo>();
 
 
@@ -40,6 +39,7 @@ export class PosicionesGeneralComponent implements OnInit {
             let posicion = new Posiciones();
             posicion = data[i];
             this.lsPosiciones.push(posicion);
+            this.buscarSancionesGeneral();
           }
         } else {
           for (let i = 0; i < data.length; i++) {

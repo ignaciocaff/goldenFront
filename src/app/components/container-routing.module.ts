@@ -34,9 +34,10 @@ import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep';
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
 import { FixtureInterzonalComponent } from "./common/fixture/interzonal/index";
+import { FaseComponent } from './common/fase/index';
 
 const homeRoutes: Routes = [
-    { path: '', pathMatch: 'full', redirectTo: '/home/noticias' },
+    { path: '', pathMatch: 'full', redirectTo: 'home/noticias' },
     {
         path: 'home', component: ContainerComponent,
         children: [
@@ -80,6 +81,7 @@ const homeRoutes: Routes = [
                     { path: 'canchas-update', component: CanchaUpdateComponent },
                     { path: 'sanciones-equipo-carga', component: SancionEquipoCargaComponent },
                     { path: 'sanciones-equipo-baja', component: SancionEquipoBajaComponent },
+                    { path: 'cambio-fase', component: FaseComponent },
 
                 ]
             },
@@ -91,7 +93,7 @@ const homeRoutes: Routes = [
                 path: 'noticias', component: HomeComponent,
             },
             {
-                path: 'noticia/:id', component: NoticiaVisualizacionComponent,
+                path: 'noticia/:id', pathMatch: 'full', component: NoticiaVisualizacionComponent,
             },
             {
                 path: 'zona-carga', component: ZonaComponent,

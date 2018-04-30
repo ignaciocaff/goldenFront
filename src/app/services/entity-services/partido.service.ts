@@ -14,7 +14,18 @@ export class PartidoService {
             + id_torneo + '/' + esInterzonal, partidos);
     }
 
-    update(partido: Partido) {
-        return this.http.post(this.config.apiUrl + 'partidos/modificar/', partido);
+    update(partido: Partido, id_fase: number, id_torneo: number
+        , esInterzonal: number) {
+        return this.http.post(this.config.apiUrl + 'partidos/modificar/' + id_fase + '/'
+            + id_torneo + '/' + esInterzonal, partido);
+    }
+
+    borrarSancion(id_sancion: number) {
+        return this.http.get(this.config.apiUrl + 'partido/eliminar/sancion/' + id_sancion).map((response: Response) => response.json());;
+    }
+
+    borrarGol(id_gol: number, id_fase: number, id_zona: number) {
+        return this.http.get(this.config.apiUrl + 'partido/eliminar/gol/' + id_gol
+            + '/' + id_fase + '/' + id_zona).map((response: Response) => response.json());;
     }
 }

@@ -135,7 +135,6 @@ export class FixtureInterzonalComponent implements OnInit {
 
     registrarFecha() {
         var lsPartidos = new Array<Partido>();
-        console.error(this.id_fase);
         lsPartidos = this.parserService.parseInterezonales(this.partidos, this.fecha);
         this.fixtureService.createInterzonal(lsPartidos, this.id_torneo, this.id_fase).subscribe(
             data => {

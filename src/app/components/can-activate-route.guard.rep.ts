@@ -17,6 +17,7 @@ export class CanActivateRouteGuardRepre implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (this.usuario && (this.usuario.perfil.id_perfil == 1) || this.usuario.perfil.id_perfil == 2) {
+            console.error('');
             return true;
         } else {
             this.router.navigate(['home/noticias']);

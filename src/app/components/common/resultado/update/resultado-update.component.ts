@@ -515,6 +515,14 @@ export class ResultadoUpdateComponent implements OnInit {
                         }
                     }
                 }
+
+                this.partidoService.borrarSancion(id_sancion).subscribe(
+                    data => {
+                        this.toastr.success("La sanción fue eliminada correctamente.", "Éxito!");
+                    }, error => {
+
+                    }
+                );
             }
             this.dialogRefBorrado = null;
         });
@@ -553,6 +561,14 @@ export class ResultadoUpdateComponent implements OnInit {
                         }
                     }
                 }
+
+                this.partidoService.borrarGol(id_gol,this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
+                    data => {
+                        this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
+                    }, error => {
+
+                    }
+                );
             }
             this.dialogRefBorrado = null;
         });
@@ -596,10 +612,23 @@ export class ResultadoUpdateComponent implements OnInit {
             }
         }
 
-        console.error(partido);
+        this.partidoService.update(partido, this.id_fase, this.id_torneo, this.esInterzonal).subscribe(
+            data => {
+                if (data) {
+                    this.toastr.success("Se modificaron correctamente los resultados.", "Éxito!");
+                    this.limpiarCampos();
+                }
+            }, error => {
+                this.toastr.error("Intente nuevamente más tarde.", "Error!");
+            }
+
+        );
     }
 
     limpiarCampos() {
+        this.partido = null;
+        this.zona = null;
+        this.equipo = null;
         this.ngOnInit();
     }
 

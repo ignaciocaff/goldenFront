@@ -52,7 +52,7 @@
       <div class="col-md-6 col-sm-6" *ngFor="let posicionesZona of lsPosicionesZona; let j = index">
         <div class="table-responsive">
           <div class="titulo_zona text-center">
-            <h4> ZONA {{lsNombreZonas[j]}}</h4>
+            <h4> ZONA {{posicionesZona[j].zona.descripcion}}</h4>
           </div>
           <table class="table table-striped table-hover general">
             <thead>

@@ -30,7 +30,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="torneo.tipoTorneo" name="tipoTorneo" required #tipo_torneo='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let tipo of lsTipos" [ngValue]="tipo">{{tipo.descripcion}}</option>
               </select>
             </div>
@@ -46,7 +46,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="torneo.regla" name="regla" required #regla_torneo='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let regla of lsReglas" [ngValue]="regla">{{regla.descripcion}}</option>
               </select>
             </div>
@@ -62,7 +62,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="torneo.modalidad" name="modalidad" required #modalidad='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let modalidad of lsModalidades" [ngValue]="modalidad">{{modalidad.descripcion}}</option>
               </select>
             </div>
@@ -78,7 +78,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="torneo.categoria" name="categoria" required #categoria='ngModel' class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let categoria of lsCategorias" [ngValue]="categoria">{{categoria.descripcion}}</option>
               </select>
             </div>

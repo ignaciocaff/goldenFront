@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <form #faseForm="ngForm" name="faseForm">
+        <div class="row-fluid">
+            <div class="row">
+                <div class="col-md-4 col-sm-4">
+                    <h4>
+                        Fase
+                    </h4>
+                    <p class="text-muted">
+                        Elija la fase del campeonato
+                    </p>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="form-group has-feedback">
+                        <label class="control-label">Fase(*)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-list"></i>
+                                </span>
+                                <select [(ngModel)]="fase" [disabled]="id_fase == 3" name="fase" required class="form-control selectpicker">
+                                    <option value="null">Elija su opción</option>
+                                    <option *ngFor="let fase of lsFases" [ngValue]="fase">{{fase.descripcion}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <p> {{mensaje}} {{faseNombre}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <button (click)="cambiarFase()" type="button" class="btn btn-primary" [disabled]="!faseForm.valid || id_fase == 3">Cambiar</button>
+    </form>
+</div>

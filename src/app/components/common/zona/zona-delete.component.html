@@ -19,7 +19,7 @@
             <i class="glyphicon glyphicon-list"></i>
           </span>
           <select [(ngModel)]="zona" name="zona" required class="form-control selectpicker">
-            <option value="null">Elija su opcion</option>
+            <option value="null">Elija su opción</option>
             <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
           </select>
         </div>

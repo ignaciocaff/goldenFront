@@ -101,7 +101,6 @@ export class FixtureUpdateComponent implements OnInit {
         this.equiposPorZona(zona);
         this.cantidadPartidos = null;
         this.partidos = [];
-        console.log(this.fecha);
         this.fixtureService.obtenerPartidos(this.fecha, this.id_torneo, this.zona.id_zona, ).subscribe(
             data => {
                 this.partidos = data;
@@ -342,7 +341,7 @@ export class FixtureUpdateComponent implements OnInit {
             this.fixtureService.verificarFecha(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
                 data => {
                 }, error => {
-                    this.toastr.error('La fecha elegida ya fue creada, seleccione otra opcion', 'Error');
+                    this.toastr.error('La fecha elegida ya fue creada, seleccione otra opción', 'Error');
                 }
             );
         }

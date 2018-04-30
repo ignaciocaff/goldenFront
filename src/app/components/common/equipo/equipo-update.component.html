@@ -18,7 +18,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="equipo" name="equipo" required (change)="onChange(equipo)" class="form-control">
-                <option value=" ">Elija su opcion</option>
+                <option value=" ">Elija su opción</option>
                 <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
               </select>
             </div>
@@ -53,7 +53,7 @@
               </span>
               <select [ngModel]="equipo.categoria.descripcion" name="categoria" (ngModelChange)="onTipoCategoriaChange($event)" required
                 class="form-control selectpicker">
-                <option value=" ">Elija su opcion</option>
+                <option value=" ">Elija su opción</option>
                 <option *ngFor="let categoria of lsCategorias">{{categoria.descripcion}}</option>
               </select>
             </div>
@@ -70,7 +70,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [ngModel]="equipo.torneo.nombre" name="torneo" (ngModelChange)="onCategoriaChange($event)" required class="form-control selectpicker">
-                <option value=" ">Elija su opcion</option>
+                <option value=" ">Elija su opción</option>
                 <option *ngFor="let torneo of lsCategoriasTorneo">{{torneo.nombre}}</option>
               </select>
             </div>
@@ -90,7 +90,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="equipo.club" name="club" required class="form-control selectpicker">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let club of lsClub" [ngValue]="club">{{club.nombre}}</option>
               </select>
             </div>

@@ -1,4 +1,7 @@
-import { IEquipo, Cancha, HorarioFijo, Gol, Sancion, Jugador, Llave, Fecha } from './index';
+import {
+    IEquipo, Cancha, HorarioFijo, Gol, Sancion, Jugador, Llave, Fecha
+    , Resultado, ResultadoZona
+} from './index';
 
 export class IPartido {
     id_partido: number;
@@ -12,6 +15,8 @@ export class IPartido {
     lsGolesVisitante: Array<Gol>;
     lsSancionesLocal: Array<Sancion>;
     lsSancionesVisitante: Array<Sancion>;
+    resultado: Resultado;
+    resultado_zona: ResultadoZona;
     jugadorLocal: Jugador;
     jugadorVisitante: Jugador;
     llave: Llave;
@@ -29,6 +34,8 @@ export class IPartido {
         lsGolesVisitante?: Array<Gol>,
         lsSancionesLocal?: Array<Sancion>,
         lsSancionesVisitante?: Array<Sancion>,
+        resultado?: Resultado,
+        resultado_zona?: ResultadoZona,
         jugadorLocal?: Jugador,
         jugadorVisitante?: Jugador,
         llave?: Llave,
@@ -82,6 +89,12 @@ export class IPartido {
 
         if (desImagenesV) this.desImagenesV = desImagenesV;
         else this.desImagenesV = null;
+
+        if (resultado) this.resultado = resultado;
+        else this.resultado = new Resultado();
+
+        if (resultado_zona) this.resultado_zona = resultado_zona;
+        else this.resultado_zona = new ResultadoZona();
     }
 
     public get golesVisitante(): Array<Gol> {

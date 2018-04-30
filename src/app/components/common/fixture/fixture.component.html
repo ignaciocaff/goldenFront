@@ -36,7 +36,7 @@
           </span>
           <select [(ngModel)]="zona" name="zona" [disabled]="fecha.fecha == null" required class="form-control selectpicker" (blur)="verificarFecha();"
             (ngModelChange)="equiposPorZona(zona)">
-            <option value="null">Elija su opcion</option>
+            <option value="null">Elija su opción</option>
             <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
           </select>
         </div>
@@ -114,7 +114,7 @@
                       </span>
                       <select [(ngModel)]="partido.horario" name="horario" required class="form-control selectpicker" (change)="compararHorarios(partido)"
                         required=''>
-                        <option value="null">Elija su opcion</option>
+                        <option value="null">Elija su opción</option>
                         <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}}</option>
                       </select>
                     </div>
@@ -132,7 +132,7 @@
                         <i class="glyphicon glyphicon-list"></i>
                       </span>
                       <select [(ngModel)]="partido.cancha" name="cancha" required (change)="compararHorarios(partido)" class="form-control">
-                        <option value=" ">Elija su opcion</option>
+                        <option value=" ">Elija su opción</option>
                         <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
                       </select>
                     </div>

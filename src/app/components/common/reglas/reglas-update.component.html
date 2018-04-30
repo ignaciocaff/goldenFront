@@ -20,7 +20,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="regla" name="regla" required (change)="onReglaChange(regla)" class="form-control">
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let regla of lsReglas" [ngValue]="regla">{{regla.descripcion}}</option>
               </select>
             </div>
@@ -53,7 +53,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="regla.torneo.nombre" name="torneo"  #torneo='ngModel' class="form-control selectpicker" (change)="onTorneoChange(regla.torneo.nombre)" required>
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let torneo of lsCategoriasTorneo" >{{torneo.nombre}}</option>
               </select>
             </div>

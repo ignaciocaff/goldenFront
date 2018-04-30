@@ -18,7 +18,7 @@
                 <i class="glyphicon glyphicon-list"></i>
               </span>
               <select [(ngModel)]="cancha" name="cancha" required (change)="onChange(cancha)" class="form-control">
-                <option value=" ">Elija su opcion</option>
+                <option value=" ">Elija su opción</option>
                 <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
               </select>
             </div>

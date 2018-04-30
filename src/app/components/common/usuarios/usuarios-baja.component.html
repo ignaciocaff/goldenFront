@@ -27,7 +27,7 @@
                                 <i class="glyphicon glyphicon-list"></i>
                             </span>
                             <select [(ngModel)]="equipo" name="equipo" required (change)="habilitar()" class="form-control">
-                                <option value=" ">Elija su opcion</option>
+                                <option value=" ">Elija su opción</option>
                                 <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
                             </select>
                         </div>

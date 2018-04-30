@@ -2,7 +2,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import { IEquipo, IPartido, Equipo, Partido, Fecha, Gol, Sancion } from '../../entities/index';
+import { IEquipo, IPartido, Equipo, Partido, Fecha, Gol, Sancion, Resultado, ResultadoZona } from '../../entities/index';
 
 @Injectable()
 export class ParserService {
@@ -140,6 +140,14 @@ export class ParserService {
         partido.estado.id_estado = 1;
         if (partidoI.id_partido > 0) {
             partido.id_partido = partidoI.id_partido;
+        }
+
+        if (partidoI.resultado != null && partidoI.resultado.id_resultado != null) {
+            partido.resultado.id_resultado = partidoI.resultado.id_resultado;
+        }
+
+        if (partidoI.resultado_zona != null && partidoI.resultado_zona.id_resultado != null) {
+            partido.resultado_zona.id_resultado = partidoI.resultado_zona.id_resultado;
         }
 
         if (partidoI.lsGolesLocal) {

@@ -58,7 +58,7 @@
               </span>
               <select [(ngModel)]="horarioFijo.turno.descripcion" name="turno" required class="form-control selectpicker" (ngModelChange)="onTurnoChange($event)"
                 required=''>
-                <option value="null">Elija su opcion</option>
+                <option value="null">Elija su opción</option>
                 <option *ngFor="let turno of turnos">{{turno.descripcion}}</option>
               </select>
             </div>

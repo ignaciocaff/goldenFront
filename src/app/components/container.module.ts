@@ -55,6 +55,7 @@ import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './co
 import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { PosicionesGeneralComponent, GoleadoresComponent } from './common/posiciones/index';
+import { FaseComponent } from './common/fase/index';
 import { SlickModule } from 'ngx-slick';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 import { CanActivateRouteGuard } from './can-activate-route.guard'
@@ -114,7 +115,8 @@ import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/in
     ResultadoUpdateComponent,
     GoleadoresComponent,
     FixtureVisualizacionComponent,
-    FixtureInterzonalComponent
+    FixtureInterzonalComponent,
+    FaseComponent
   ],
   imports: [
     BrowserModule,
