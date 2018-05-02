@@ -60,7 +60,14 @@ export class FixtureService {
 
     obtenerFixtureFecha(obj: any, id_torneo: number){
         return this.http.post(this.config.apiUrl + 'fecha/obtenerPartidosVisualizacionFixture/' + id_torneo, obj).map((response: Response) => response.json())
+    }
 
+    obtenerResultadosFecha(obj: any, id_torneo: number) {
+        return this.http.post(this.config.apiUrl + 'fecha/obtenerResultadosVisualizacionFecha/' + id_torneo, obj).map((response: Response) => response.json())
+    }
+
+    obtenerFechasJugadas(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'fecha/obtenerFechasJugadas/' + id_torneo).map((response: Response) => response.json())
     }
 
 }

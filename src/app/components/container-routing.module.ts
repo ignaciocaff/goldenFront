@@ -26,7 +26,7 @@ import { ReglamentoCargaComponent, ReglamentoVisualizacionComponent } from './co
 import { ResultadoUpdateComponent } from "./common/resultado/update/index";
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { FixtureComponent, FixtureUpdateComponent, FixtureUpdateFechaComponent } from "./common/fixture/index";
-import { ResultadoComponent } from "./common/resultado/index";
+import { ResultadoComponent, ResultadoisualizacionComponent } from "./common/resultado/index";
 import { PosicionesGeneralComponent, GoleadoresComponent } from "./common/posiciones/index";
 import { UsuarioComponent, UsuarioBajaComponent } from './common/usuarios/index';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
@@ -149,6 +149,9 @@ const homeRoutes: Routes = [
             {
                 path: 'fixture', component: FixtureVisualizacionComponent,
             },
+            {
+                path: 'resultados', component: ResultadoisualizacionComponent,
+            },            
             {
                 path: 'usuarios', component: UsuarioComponent,
                 canActivate: [CanActivateRouteGuard]

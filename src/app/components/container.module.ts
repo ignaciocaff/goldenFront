@@ -47,7 +47,7 @@ import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
 import { FixtureInterzonalComponent } from "./common/fixture/interzonal/index";
 
-import { ResultadoComponent, SancionDialog, SancionDialogV } from "./common/resultado/index";
+import { ResultadoComponent, SancionDialog, SancionDialogV, ResultadoisualizacionComponent } from "./common/resultado/index";
 import { ResultadoUpdateComponent } from "./common/resultado/update/index";
 import { PlanillaJugadoresComponent } from './common/planilla-jugadores';
 import { UsuarioComponent, UsuariosDialog, UsuarioBajaComponent } from './common/usuarios/index';
@@ -116,7 +116,8 @@ import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/in
     GoleadoresComponent,
     FixtureVisualizacionComponent,
     FixtureInterzonalComponent,
-    FaseComponent
+    FaseComponent,
+    ResultadoisualizacionComponent
   ],
   imports: [
     BrowserModule,

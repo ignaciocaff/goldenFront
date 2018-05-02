@@ -86,17 +86,28 @@ span.dia {
   font-size: x-large;
 }
 
-h3 {
+span.resultado {
   font-size: xx-large;
   font-weight: 900;
 }
 
-li {
+li.lista-partidos {
   background-color: white;
 }
 
-li:nth-child(odd) {
+li.lista-partidos:nth-child(odd) {
   background-color: lightgrey;
+}
+
+li.lista-goles img {
+  width: 17px;
+  height: 17px;
+}
+
+span.lista {
+  font-weight: 600;
+  font-size: small;
+
 }
 
 .partido {

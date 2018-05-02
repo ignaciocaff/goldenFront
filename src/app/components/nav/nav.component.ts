@@ -112,6 +112,10 @@ export class NavComponent implements OnInit {
         this.router.navigate(['home/fixture']);
     }
 
+    resultados_Click() {
+        this.router.navigate(['home/resultados']);
+    }
+    
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {
