@@ -46,11 +46,12 @@
                     <span class="dato-jugador">Edad: </span>
                     <span class="atrib-jugador"> {{jugador.edad}} </span>
                   </div>
-                  <div class="tarjetas" *ngIf="esAdmin">
+                  <div class="tarjetas">
                     <img [src]="config.assetsUrl + '/amarilla.png'">
                     <span class="atrib-jugador">: {{jugador.tarjetas_amarillas}} </span>
                     <img [src]="config.assetsUrl + '/roja.png'">
-                    <span class="atrib-jugador">: {{jugador.tarjetas_rojas}} </span>
+                    <span class="atrib-jugador" *ngIf="!jugador.ultima_roja">: No</span>
+                    <span class="atrib-jugador" *ngIf="jugador.ultima_roja">: {{jugador.ultima_roja}} </span>
                   </div>
                   <div *ngIf="!esAdmin">
                     <br>

@@ -12,6 +12,7 @@ export class IJugador {
     partidos_jugados: number;
     tarjetas_amarillas: number;
     tarjetas_rojas: number;
+    ultima_roja: string;
   
     constructor(
       nombre?: string,
@@ -26,7 +27,8 @@ export class IJugador {
       goles?: number,
       partidos_jugados?: number,
       tarjetas_amarillas?: number,
-      tarjetas_rojas?: number
+      tarjetas_rojas?: number,
+      ultima_roja?: string
     ) {
       if (nombre) this.nombre = nombre;
       else this.nombre = null;
@@ -66,5 +68,8 @@ export class IJugador {
 
       if(tarjetas_rojas) this.tarjetas_rojas = tarjetas_rojas;
       else tarjetas_rojas = null;
+
+      if (ultima_roja) this.ultima_roja = ultima_roja;
+      else this.ultima_roja = null;
     }
   }

@@ -19,6 +19,7 @@ export class PlanillaJugadoresComponent implements OnInit {
   public lsJugadores = new Array<IJugador>();
   public lsEquipos = new Array<IEquipoPlanilla>();
   imprimir: boolean = false;
+  nombre_torneo;
 
   constructor(
     public toastr: ToastsManager,
@@ -31,6 +32,7 @@ export class PlanillaJugadoresComponent implements OnInit {
 
   ngOnInit() {
     var id_torneo = Number(sessionStorage.getItem('id_torneo'));
+    this.nombre_torneo = (sessionStorage.getItem('torneo'));
 
     this.equipoService.getiJugadoresPlanilla(id_torneo).subscribe(
       data => {
@@ -250,6 +252,10 @@ export class PlanillaJugadoresComponent implements OnInit {
               .footer {
                 border: 3px solid black;
                 margin: 15px;
+              }
+
+              span {
+                font-weight: bold;
               }
 
               @media print {

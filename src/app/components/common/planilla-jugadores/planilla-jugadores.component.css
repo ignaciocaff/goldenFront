@@ -161,3 +161,7 @@
   border: 3px solid black;
   margin: 15px;
 }
+
+span {
+  font-weight: bold;
+}

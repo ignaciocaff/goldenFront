@@ -18,11 +18,20 @@
 
 <div class="flex-item" id="planilla">
   <div class="planilla" *ngFor="let equipo of lsEquipos">
-
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="col-md-10 col-sm-10 text-left">
+          <span>{{nombre_torneo}}</span>
+        </div>
+        <div class="col-md-2 col-sm-2 text-right">
+          <span>{{equipo.nombre}}</span>
+        </div>
+      </div>
+    </div>
     <div class="row declaracion">
       <div class="col-md-12 col-sm-12">
         <div class="row">
-          <h3 class="titulo">Organiza LUMA SRL</h3>
+          <h3 class="titulo">Organiza WOLFM SRL</h3>
           <p class="texto-declaracion">Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo,
             manifiestan estar en perfectas condiciones físicas para la realización de los partidos
             <br> programados en el Torneo Golden. Así mismo declaran que dicha participación es libre, basada en los principios

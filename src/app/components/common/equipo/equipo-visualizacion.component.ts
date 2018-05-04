@@ -65,6 +65,9 @@ export class EquipoVisualizacionComponent implements OnInit {
                         if (jugador.rol == 'representante') {
                             this.representante = jugador;
                         }
+                        while(jugador.tarjetas_amarillas > 4) {
+                            jugador.tarjetas_amarillas = jugador.tarjetas_amarillas - 5;
+                        }
                         this.lsJugadores.push(jugador);
                     }
                     this.buscarGoleador();
