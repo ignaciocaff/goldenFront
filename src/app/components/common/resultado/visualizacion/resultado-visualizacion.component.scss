@@ -107,7 +107,6 @@ li.lista-goles img {
 span.lista {
   font-weight: 600;
   font-size: small;
-
 }
 
 .partido {
@@ -127,4 +126,17 @@ span.lista {
 img {
   height: 180px;
   width: 180px;
+}
+.container-fluid {
+  min-height: 600px;
+}
+
+.goles {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.tarjetas {
+  margin-top: 1em;
+  margin-bottom: 2em;
 }

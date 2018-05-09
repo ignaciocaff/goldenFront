@@ -1,6 +1,6 @@
 import { Component, Directive, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { Fecha, IPartido, Sancion, Jugador, Gol, Zona } from '../../../../entities/index';
+import { Fecha, IPartido, Usuario } from '../../../../entities/index';
 import { EquipoService, FixtureService } from '../../../../services/entity-services/index';
 import { FileService } from '../../../../services/entity-services/file.service';
 import { AppConfig } from '../../../../app.config';
@@ -22,6 +22,8 @@ export class ResultadoisualizacionComponent implements OnInit {
     diaVisual: any;
     numeroFecha: number;
     fechaSeleccionada: boolean = false;
+    user: Usuario;
+    esAdmin: boolean = false;
 
     constructor(
         private equipoService: EquipoService,
@@ -33,6 +35,13 @@ export class ResultadoisualizacionComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.user = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (this.user != null) {
+            if (this.user.perfil.id_perfil == 1) {
+                this.esAdmin = true;
+            }
+        }
+
         this.fixtureService.obtenerFechasJugadas(this.id_torneo).subscribe(
             data => {
                 if (data) {
@@ -49,7 +58,7 @@ export class ResultadoisualizacionComponent implements OnInit {
                         }
                     }
                     if (this.lsFechas.length)
-                        this.mostrarResultadosFecha(this.lsFechas[this.lsFechas.length - 1], 0);
+                        this.mostrarResultadosFecha(this.lsFechas[this.lsFechas.length - 1], this.lsFechas.length - 1);
                 }
             },
             error => {
@@ -58,14 +67,14 @@ export class ResultadoisualizacionComponent implements OnInit {
     }
 
     mostrarResultadosFecha(fecha: Fecha, i: number) {
-        this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
-        this.numeroFecha = i + 1;
-        this.fechaSeleccionada = true;
+        this.lsPartidos = [];
         this.fixtureService.obtenerResultadosFecha(fecha, this.id_torneo).subscribe(
             data => {
                 if (data) {
-                    this.lsPartidos = [];
                     this.lsPartidos = data;
+                    this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
+                    this.numeroFecha = i + 1;
+                    this.fechaSeleccionada = true;
                 }
             }, error => {
                 error.json()['Message'];

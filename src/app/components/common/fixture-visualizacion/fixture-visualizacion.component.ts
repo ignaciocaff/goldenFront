@@ -60,13 +60,14 @@ export class FixtureVisualizacionComponent implements OnInit {
     }
 
     mostrarFixtureFecha(fecha: Fecha, i: number) {
-        this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
-        this.numeroFecha = i + 1;
-        this.fechaSeleccionada = true;
+        this.lsPartidos = [];
         this.fixtureService.obtenerFixtureFecha(fecha, this.id_torneo).subscribe(
             data => {
                 if (data) {
                     this.lsPartidos = data;
+                    this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
+                    this.numeroFecha = i + 1;
+                    this.fechaSeleccionada = true;
                 }
             },
             error => {
