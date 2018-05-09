@@ -56,6 +56,8 @@ export class EquipoVisualizacionComponent implements OnInit {
             this.equipoService.getiJugadoresByIdEquipo(this.id_equipo, this.id_torneo).subscribe(
                 data => {
                     this.lsJugadores = [];
+                    this.representante = new IJugador();
+                    this.dt = new IJugador();
                     for (let i = 0; i < data.length; i++) {
                         var jugador = new IJugador();
                         jugador = data[i];
