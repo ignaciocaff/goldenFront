@@ -2,16 +2,26 @@
   <div *ngIf="nombre != null" class="col-sm-2 col-md-2 margin-name">
     {{nombre.toUpperCase()}} LEAGUE
   </div>
-  <div id="header" style="padding:0" class="col-sm-8 col-md-8">
-    <div id="container">
-      <ngx-slick class="carousel" #slickModal="slick-modal" [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let equipo of lsEquipos" class="slide">
-          <div class="images" (click)="verEquipo(equipo.id_equipo)">
-            <img [src]="config.imgUrl + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
-          </div>
+  <div *ngIf="lsEquipos.length > 20" id="header" style="padding:0" class="col-sm-8 col-md-8">
+    <!-- You can use owl-carousel selector to include its component -->
+    <owl-carousel [options]="{items: 20, dots: false, navigation: false, autoplay:true, autoplayTimeout:2500, loop:true, autoplayHoverPause:true}"
+      [items]="lsEquipos" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+      <div class="item" *ngFor="let equipo of lsEquipos;let i = index">
+        <div *ngIf="equipo && equipo.imagePath" class="images" (click)="verEquipo(equipo.id_equipo)">
+          <img [src]="config.imgUrl + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
         </div>
-      </ngx-slick>
-    </div>
+      </div>
+    </owl-carousel>
+  </div>
+  <div *ngIf="lsEquipos.length < 20" id="header" style="padding:0" class="col-sm-8 col-md-8">
+    <!-- You can use owl-carousel selector to include its component -->
+    <owl-carousel [options]="{items: 20, dots: false, navigation: false}" [items]="lsEquipos" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+      <div class="item" *ngFor="let equipo of lsEquipos;let i = index">
+        <div *ngIf="equipo && equipo.imagePath" class="images" (click)="verEquipo(equipo.id_equipo)">
+          <img [src]="config.imgUrl + equipo.imagePath" class="img-thumbnail" title="{{equipo.nombre}}">
+        </div>
+      </div>
+    </owl-carousel>
   </div>
   <div class="col-sm-2 col-md-2 margin-login">
     <login></login>
