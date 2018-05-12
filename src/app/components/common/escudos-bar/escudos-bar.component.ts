@@ -4,7 +4,7 @@ import { LoginComponent } from '../../common/login/index';
 import { Subscription } from 'rxjs/Subscription';
 import { TorneoEmitter } from '../../../services/common-services/index';
 import { FileService } from '../../../services/entity-services/file.service';
-import { DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
+import { DoCheck, AfterViewChecked, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { EquipoService } from '../../../services/entity-services/index';
 import { IEquipo } from '../../../entities/index';
 import { AppConfig } from '../../../app.config';
@@ -17,15 +17,14 @@ import { AppConfig } from '../../../app.config';
     providers: [],
     encapsulation: ViewEncapsulation.None
 })
-export class EscudosComponent implements OnInit, DoCheck {
+export class EscudosComponent implements OnInit, AfterViewInit, DoCheck {
     @ViewChild(LoginComponent) login: LoginComponent;
     nombre: String;
     images: Array<any> = [];
-    id_torneo: Number;
-    public innerWidth: any;
+    id_torneo: number;
 
     lsEquipos = new Array<IEquipo>();
-    slideConfig = { "slidesToShow": 10, "slidesToScroll": 4 };
+    cantVisibles = 10;
     constructor(
         private torneoEmiiter: TorneoEmitter,
         private fileService: FileService,
@@ -39,15 +38,8 @@ export class EscudosComponent implements OnInit, DoCheck {
         this.nombre = sessionStorage.getItem('torneo');
         this.torneoEmiiter.onMyEvent.subscribe((value: string) => this.nombre = value
         );
-        this.innerWidth = window.innerWidth;
-
-        if (this.innerWidth > 1600) {
-            this.slideConfig = { "slidesToShow": 25, "slidesToScroll": 3 };
-        } else if (this.innerWidth > 1200) {
-            this.slideConfig = { "slidesToShow": 20, "slidesToScroll": 4 };
-        }
         var id_torneo = Number(sessionStorage.getItem('id_torneo'));
-        this.equipoService.getAllPorTorneo(id_torneo).subscribe(
+        this.equipoService.getAllIEquipoPorTorneo(id_torneo).subscribe(
             data => {
                 this.lsEquipos = [];
                 for (var j = 0; j < data.length; j++) {
@@ -55,27 +47,25 @@ export class EscudosComponent implements OnInit, DoCheck {
                     equipo.id_equipo = data[j]['id_equipo'];
                     equipo.nombre = data[j]['nombre'];
                     equipo.logo = data[j]['logo'];
-                    this.lsEquipos.push(equipo);
+                    equipo.imagePath = data[j]['imagePath'];
 
-                }
-                for (let i = 0; i < this.lsEquipos.length; i++) {
-                    this.fileService.getImagesByEquipo(this.lsEquipos[i].logo).subscribe(
-                        data => {
-                            if (data['ThumbPath'] != null) {
-                                this.lsEquipos[i].imagePath = data['ThumbPath'];
-                            }
-                        },
-                        error => {
-                        });
+                    if (equipo && equipo.imagePath) {
+                        this.lsEquipos.push(equipo);
+                    }
                 }
             },
             error => {
                 error.json()['Message'];
             });
+
     }
 
     verEquipo(id_equipo: number) {
         this.router.navigate(['home/equipo/' + id_equipo]);
+    }
+
+    ngAfterViewInit() {
+
     }
 
     ngDoCheck() {

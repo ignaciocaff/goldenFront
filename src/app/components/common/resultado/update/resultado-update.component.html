@@ -157,120 +157,130 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 col-sm 6">
-                                    <div [style.visibility]="partido.lsGolesLocal.length > 0 ? 'visible' : 'hidden'" class="col-md-6 col-sm-6">
-                                        <mat-table [dataSource]="dataSourceGLocal" matSort>
+                                <div class="col-md-5 col-sm 5 col-md-offset-1 col-sm-offset-1">
+                                    <div class="row">
+                                        <div [style.visibility]="partido.lsGolesLocal.length > 0 ? 'visible' : 'hidden'" class="col-md-9 col-sm-9">
+                                            <mat-table [dataSource]="dataSourceGLocal" matSort>
 
-                                            <!-- ID Column -->
-                                            <ng-container matColumnDef="apellido">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
-                                            </ng-container>
+                                                <!-- ID Column -->
+                                                <ng-container matColumnDef="apellido">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Progress Column -->
-                                            <ng-container matColumnDef="gol">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Gol </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> 1 </mat-cell>
-                                            </ng-container>
+                                                <!-- Progress Column -->
+                                                <ng-container matColumnDef="gol">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Gol </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> 1 </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Name Column -->
-                                            <ng-container matColumnDef="id_gol">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
-                                                <mat-cell *matCellDef="let row">
-                                                    <i class="glyphicon glyphicon-trash" (click)="eliminarGol(row.id_gol)"></i>
-                                                </mat-cell>
-                                            </ng-container>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="id_gol">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarGol(row.id_gol)"></i>
+                                                    </mat-cell>
+                                                </ng-container>
 
-                                            <mat-header-row *matHeaderRowDef="displayedColumnsG"></mat-header-row>
-                                            <mat-row *matRowDef="let row; columns: displayedColumnsG;">
-                                            </mat-row>
-                                        </mat-table>
+                                                <mat-header-row *matHeaderRowDef="displayedColumnsG"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumnsG;">
+                                                </mat-row>
+                                            </mat-table>
+                                        </div>
                                     </div>
-                                    <div [style.visibility]="partido.lsSancionesLocal.length > 0 ? 'visible' : 'hidden'" class="col-md-6 col-sm-6">
-                                        <mat-table [dataSource]="dataSourceSLocal" matSort>
+                                    <div class="row">
+                                        <br>
+                                        <div [style.visibility]="partido.lsSancionesLocal.length > 0 ? 'visible' : 'hidden'" class="col-md-9 col-sm-9">
+                                            <mat-table [dataSource]="dataSourceSLocal" matSort>
 
-                                            <!-- ID Column -->
-                                            <ng-container matColumnDef="apellido">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
-                                            </ng-container>
+                                                <!-- ID Column -->
+                                                <ng-container matColumnDef="apellido">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Progress Column -->
-                                            <ng-container matColumnDef="nombre">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Sanción </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> {{row.tipo_sancion.descripcion}} </mat-cell>
-                                            </ng-container>
+                                                <!-- Progress Column -->
+                                                <ng-container matColumnDef="nombre">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Sanción </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> {{row.tipo_sancion.descripcion}} </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Name Column -->
-                                            <ng-container matColumnDef="id_sancion">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
-                                                <mat-cell *matCellDef="let row">
-                                                    <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
-                                                </mat-cell>
-                                            </ng-container>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="id_sancion">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
+                                                    </mat-cell>
+                                                </ng-container>
 
-                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                            <mat-row *matRowDef="let row; columns: displayedColumns;">
-                                            </mat-row>
-                                        </mat-table>
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                                </mat-row>
+                                            </mat-table>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm 6">
-                                    <div [style.visibility]="partido.lsGolesVisitante.length > 0 ? 'visible' : 'hidden'" class="col-md-6 col-sm-6">
-                                        <mat-table [dataSource]="dataSourceGVisitante" matSort>
+                                <div class="col-md-5 col-sm 5">
+                                    <div class="row">
+                                        <div [style.visibility]="partido.lsGolesVisitante.length > 0 ? 'visible' : 'hidden'" class="col-md-9 col-sm-9">
+                                            <mat-table [dataSource]="dataSourceGVisitante" matSort>
 
-                                            <!-- ID Column -->
-                                            <ng-container matColumnDef="apellido">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
-                                            </ng-container>
+                                                <!-- ID Column -->
+                                                <ng-container matColumnDef="apellido">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Progress Column -->
-                                            <ng-container matColumnDef="gol">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Gol </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> 1 </mat-cell>
-                                            </ng-container>
+                                                <!-- Progress Column -->
+                                                <ng-container matColumnDef="gol">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Gol </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> 1 </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Name Column -->
-                                            <ng-container matColumnDef="id_gol">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
-                                                <mat-cell *matCellDef="let row">
-                                                    <i class="glyphicon glyphicon-trash" (click)="eliminarGol(row.id_gol)"></i>
-                                                </mat-cell>
-                                            </ng-container>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="id_gol">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarGol(row.id_gol)"></i>
+                                                    </mat-cell>
+                                                </ng-container>
 
-                                            <mat-header-row *matHeaderRowDef="displayedColumnsG"></mat-header-row>
-                                            <mat-row *matRowDef="let row; columns: displayedColumnsG;">
-                                            </mat-row>
-                                        </mat-table>
+                                                <mat-header-row *matHeaderRowDef="displayedColumnsG"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumnsG;">
+                                                </mat-row>
+                                            </mat-table>
+                                        </div>
                                     </div>
-                                    <div [style.visibility]="partido.lsSancionesVisitante.length > 0 ? 'visible' : 'hidden'" class="col-md-6 col-sm-6">
-                                        <mat-table [dataSource]="dataSourceSVisitante" matSort>
+                                    <div class="row">
+                                        <br>
+                                        <div [style.visibility]="partido.lsSancionesVisitante.length > 0 ? 'visible' : 'hidden'" class="col-md-9 col-sm-9">
+                                            <mat-table [dataSource]="dataSourceSVisitante" matSort>
 
-                                            <!-- ID Column -->
-                                            <ng-container matColumnDef="apellido">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
-                                            </ng-container>
+                                                <!-- ID Column -->
+                                                <ng-container matColumnDef="apellido">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> {{row.jugador.apellido}} </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Progress Column -->
-                                            <ng-container matColumnDef="nombre">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Sanción </mat-header-cell>
-                                                <mat-cell *matCellDef="let row"> {{row.tipo_sancion.descripcion}} </mat-cell>
-                                            </ng-container>
+                                                <!-- Progress Column -->
+                                                <ng-container matColumnDef="nombre">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Sanción </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row"> {{row.tipo_sancion.descripcion}} </mat-cell>
+                                                </ng-container>
 
-                                            <!-- Name Column -->
-                                            <ng-container matColumnDef="id_sancion">
-                                                <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
-                                                <mat-cell *matCellDef="let row">
-                                                    <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
-                                                </mat-cell>
-                                            </ng-container>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="id_sancion">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
+                                                    </mat-cell>
+                                                </ng-container>
 
-                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                            <mat-row *matRowDef="let row; columns: displayedColumns;">
-                                            </mat-row>
-                                        </mat-table>
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                                </mat-row>
+                                            </mat-table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -562,7 +562,7 @@ export class ResultadoUpdateComponent implements OnInit {
                     }
                 }
 
-                this.partidoService.borrarGol(id_gol,this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
+                this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
                     data => {
                         this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
                     }, error => {

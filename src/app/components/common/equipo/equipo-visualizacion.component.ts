@@ -81,6 +81,7 @@ export class EquipoVisualizacionComponent implements OnInit {
             this.equipoService.getById(this.id_equipo).subscribe(
                 data => {
                     this.equipo = data;
+                    this.equipo.nombre = this.equipo.nombre.toUpperCase();
                     this.cargarImagenesEquipo();
                 },
                 error => { error.json()['Message']; }

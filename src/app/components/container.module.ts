@@ -56,11 +56,11 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { PosicionesGeneralComponent, GoleadoresComponent } from './common/posiciones/index';
 import { FaseComponent } from './common/fase/index';
-import { SlickModule } from 'ngx-slick';
 import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './common/sanciones-equipo/index';
 import { CanActivateRouteGuard } from './can-activate-route.guard'
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
   declarations: [
@@ -140,7 +140,7 @@ import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/in
     HttpClientJsonpModule,
     ShareButtonsModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
-    SlickModule.forRoot()
+    OwlModule
   ],
   entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog, SancionDialog, SancionDialogV],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,

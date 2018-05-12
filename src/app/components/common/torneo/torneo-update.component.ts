@@ -204,15 +204,15 @@ export class TorneoUpdateComponent implements OnInit {
                 if (data) {
                     this.equipoService.desvincular(this.equiposPDesvincular).subscribe(
                         data => {
-                            this.toastr.success('El torneo ha sido acctualizado correctamente', 'Exito!');
+                            this.toastr.success('El torneo ha sido actualizado correctamente.', 'Exito!');
                             this.limpiar();
                         }, error => {
-                            this.toastr.error('No se pudieron desvincular los equipos', 'Error!');
+                            this.toastr.error('No se pudieron desvincular los equipos.', 'Error!');
                         }
                     )
                 }
             }, error => {
-                this.toastr.error('No se pudo actualizar el torneo', 'Error!');
+                this.toastr.error('No se pudo actualizar el torneo.', 'Error!');
             }
         );
     }

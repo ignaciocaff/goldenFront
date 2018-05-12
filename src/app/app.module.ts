@@ -24,6 +24,7 @@ import { ShareButtonsModule } from '@ngx-share/buttons';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { LocalidadesCargaComponent } from './components/common/localidades/index';
 import { CanActivateRouteGuard } from './components/can-activate-route.guard'
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CanActivateRouteGuard } from './components/can-activate-route.guard'
     AppRoutingModule,
     MatTableModule,
     CdkTableModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    OwlModule
   ],
   providers: [AuthenticationService, AppConfig, SharedService, CanActivateRouteGuard,
     {
