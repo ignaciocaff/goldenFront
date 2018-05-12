@@ -63,7 +63,7 @@ button:hover {
 }
 
 .titulo {
-  font-weight: bolder;
+  font-weight: 800;
   color: rgb(170, 145, 93);
   text-align: center;
   font-size: xx-large;
@@ -87,8 +87,8 @@ span.dia {
 }
 
 span.resultado {
-  font-size: xx-large;
   font-weight: 900;
+  font-size: 60px;
 }
 
 li.lista-partidos {
@@ -96,7 +96,7 @@ li.lista-partidos {
 }
 
 li.lista-partidos:nth-child(odd) {
-  background-color: lightgrey;
+  background-color: rgb(240, 240, 240);
 }
 
 li.lista-goles img {
@@ -105,8 +105,9 @@ li.lista-goles img {
 }
 
 span.lista {
-  font-weight: 600;
+  /* font-weight: 600; */
   font-size: small;
+  font-weight: 500;
 }
 
 .partido {
@@ -127,6 +128,7 @@ img {
   height: 180px;
   width: 180px;
 }
+
 .container-fluid {
   min-height: 600px;
 }

@@ -33,7 +33,7 @@
 }
 
 .hr-text.general {
-  font-weight: bold;
+  font-weight: 800;
   color: rgb(170, 145, 93);
   text-align: center;
   font-size: xx-large;
@@ -52,6 +52,14 @@ th img {
   transform: translateZ(0);
   object-fit: scale-down;
   margin: 0px;
+}
+
+th {
+  font-weight: 500;
+}
+
+thead th {
+  font-weight: bold;
 }
 
 p {

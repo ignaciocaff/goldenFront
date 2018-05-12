@@ -1,16 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,700,800');
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:700');
 @import '~@ngx-share/button/styles/share-buttons.css';
 @import '~@ngx-share/button/styles/themes/material/material-dark-theme.css';
 @import '~@ngx-share/button/styles/themes/modern/modern-light-theme.css';
-
 @import "~@fortawesome/fontawesome-free-webfonts/css/fa-brands.css";
 @import "~@fortawesome/fontawesome-free-webfonts/css/fa-solid.css";
 @import "~@fortawesome/fontawesome-free-webfonts/css/fontawesome.css";
-
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -88,8 +86,8 @@ a:hover {
   word-break: break-all;
 }
 
-.container-fluid{
-  max-width:80em;
+.container-fluid {
+  max-width: 80em;
 }
 
 .montserrat-font {
