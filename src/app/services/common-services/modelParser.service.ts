@@ -137,6 +137,7 @@ export class ParserService {
         var local = new Equipo();
         var visitante = new Equipo();
 
+        partido.fecha = partidoI.fecha;
         partido.estado.id_estado = 1;
         if (partidoI.id_partido > 0) {
             partido.id_partido = partidoI.id_partido;
