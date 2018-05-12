@@ -29,7 +29,7 @@
 }
 
 .hr-text.general {
-  font-weight: bold;
+  font-weight: 800;
   color: rgb(170, 145, 93);
   text-align: center;
   font-size: xx-large;
@@ -46,8 +46,16 @@ th img {
   margin: 0px;
 }
 
+th {
+  font-weight: 500;
+}
+
 .table.general {
   padding: 15px;
   max-width: 100%;
   white-space: nowrap;
+}
+
+thead th {
+  font-weight: bold;
 }

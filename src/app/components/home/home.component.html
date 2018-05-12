@@ -3,22 +3,20 @@
   <div class="principal">
     <div class="row">
       <div class="col-md-12 col-sm-12">
-        <div class="col-sm-6 col-md-6" *ngFor="let noticia of lsNotPrincipLink">
-          <div class="imagebox">
-            <a (click)="verNoticia(noticia.id_noticia)">
-              <img [src]="url + noticia.ruta" class="category-banner img-responsive">
-              <span class="imagebox-desc">{{noticia.titulo}}</span>
-            </a>
-          </div>
+        <div class="imagebox" *ngIf="lsNotPrincipLink.length">
+          <a (click)="verNoticia(lsNotPrincipLink[0].id_noticia)">
+            <img [src]="url + lsNotPrincipLink[0].ruta" class="category-banner img-responsive">
+            <span class="imagebox-desc">{{lsNotPrincipLink[0].titulo}}</span>
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="col-md-12 col-sm-12">
+  <div class="col-md-12 col-sm-12" style="margin: 0px; padding: 0px;">
     <div class="secundaria">
       <div class="row">
-        <div class="col-sm-4 col-md-4" *ngFor="let noticia of lsNotSecundLink">
+        <div class="col-sm-4 col-md-4" style="padding-right: 0px;" *ngFor="let noticia of lsNotSecundLink">
           <div class="imageboxSecundaria">
             <a (click)="verNoticia(noticia.id_noticia)">
               <img [src]="url + noticia.ruta" class="category-banner img-responsive">
@@ -64,37 +62,37 @@
       <div class="col-md-4 col-sm-4 sponsors-primarios">
         <div class="row">
           <a href="http://www.cerveceriaymalteriaquilmes.com/" target="_blank">
-            <img src="/assets/quilmes.jpg" >
+            <img src="/assets/quilmes.jpg" class="category-banner img-responsive">
           </a>
         </div>
         <div class="row">
           <a href="http://www.gatorade.com/" target="_blank">
-            <img src="/assets/gatorade.jpg">
+            <img src="/assets/gatorade.jpg" class="category-banner img-responsive">
           </a>
         </div>
       </div>
     </div>
 
     <div class="row" style="margin-bottom: 10px;">
-      <div class="col-md-12 col-sm-12 sponsors-secundarios">
+      <div class="col-md-12 col-sm-12">
         <div class="col-md-3 col-sm-3 sponsor-secundario">
           <a href="https://www.ifksports.com/" target="_blank">
-            <img src="/assets/ifk.png">
+            <img src="/assets/ifk.png" class="category-banner img-responsive">
           </a>
         </div>
         <div class="col-md-3 col-sm-3 sponsor-secundario">
           <a href="https://www.ifksports.com/" target="_blank">
-            <img src="/assets/ifk.png">
+            <img src="/assets/ifk.png" class="category-banner img-responsive">
           </a>
         </div>
         <div class="col-md-3 col-sm-3 sponsor-secundario" target="_blank">
           <a href="https://www.ifksports.com/">
-            <img src="/assets/ifk.png">
+            <img src="/assets/ifk.png" class="category-banner img-responsive">
           </a>
         </div>
         <div class="col-md-3 col-sm-3 sponsor-secundario" target="_blank">
           <a href="https://www.ifksports.com/">
-            <img src="/assets/ifk.png">
+            <img src="/assets/ifk.png" class="category-banner img-responsive">
           </a>
         </div>
 
