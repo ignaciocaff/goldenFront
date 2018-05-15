@@ -41,6 +41,11 @@
             <div class="form-group has-feedback">
               <label class="control-label" for="logo">Seleccione su foto</label>
               <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages($event)"></app-file-upload>
+              <p class="text-muted aclaracion">
+                Se recomiendan fotos en
+                <br> formato cuadrado para
+                <br> mejor visualización.
+              </p>
             </div>
           </div>
           <div class="col-md-3 col-sm-3">

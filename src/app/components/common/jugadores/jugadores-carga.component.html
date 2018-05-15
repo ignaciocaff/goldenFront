@@ -38,7 +38,13 @@
           <div class="col-md-2 text-center col-sm-2">
             <div class="form-group has-feedback">
               <label class="control-label" for="logo">Seleccione su foto</label>
-              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG, JPEG" (uploadStatus)="refreshImages($event)" [disabled]=esJugadorBD></app-file-upload>
+              <app-file-upload projectId="GOLDEN" sectionId="JUGADORES" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG, JPEG" (uploadStatus)="refreshImages($event)"
+                [disabled]=esJugadorBD></app-file-upload>
+              <p class="text-muted aclaracion">
+                Se recomiendan fotos en
+                <br> formato cuadrado para
+                <br> mejor visualización.
+              </p>
             </div>
           </div>
           <div class="col-md-3 col-sm-3">
@@ -143,7 +149,8 @@
                   <div class="form-group">
                     <div class='input-group date' id='datetimepicker'>
                       <input [ngModel]="jugador.fecha_nacimiento" (ngModelChange)="jugador.fecha_nacimiento = $event" min="1950-01-01" name="fecha"
-                        required type='date' class="form-control" *ngIf="!existejugador" [disabled]="esJugadorBD" (blur)="calcularEdad()"/>
+                        required type='date' class="form-control" *ngIf="!existejugador" [disabled]="esJugadorBD" (blur)="calcularEdad()"
+                      />
                       <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                       </span>

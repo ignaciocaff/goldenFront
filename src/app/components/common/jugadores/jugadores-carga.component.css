@@ -13,3 +13,14 @@ textarea{
   box-sizing: border-box;
   border: 2px solid #ccc; 
 }
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.aclaracion {
+  font-size: x-small;
+  margin-top: 3px;
+}

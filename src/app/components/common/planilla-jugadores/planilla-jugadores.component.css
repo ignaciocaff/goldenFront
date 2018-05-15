@@ -54,7 +54,7 @@
 }
 
 .foto {
-  width: 140px;
+  width: 100px;
   height: 100px;
   margin: 0px;
   padding: 0px;
@@ -62,9 +62,9 @@
 }
 
 .foto img {
-  width: 140px;
+  width: 100px;
   height: 100px;
-  object-fit: scale-down;
+  object-fit: cover;
 }
 
 .texto-imagen {
@@ -77,7 +77,7 @@
   color: white;
   /*   background-color: rgba(222, 222, 222, 0.2);*/
   background-color: rgba(0, 0, 0, 0.2);
-  width: 140px;
+  width: 100px;
 }
 
 .llenado {

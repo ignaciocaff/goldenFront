@@ -97,7 +97,7 @@ p {
 
 
 .foto {
-  width: 140px;
+  width: 100px;
   height: 100px;
   margin: 0px;
   padding: 0px;
@@ -105,8 +105,9 @@ p {
 }
 
 .foto img {
-  width: 140px;
+  width: 100px;
   height: 100px;
+  object-fit: cover;
 }
 
 .hr-text {
