@@ -6,7 +6,6 @@ import { Noticia } from '../../entities/index';
 import { AppConfig } from '../../app.config';
 import { DoCheck, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Subscription } from 'rxjs/Rx';
-
 @Component({
     selector: 'home',
     moduleId: module.id,
@@ -30,7 +29,7 @@ export class HomeComponent implements DoCheck, AfterViewInit {
     id_torneo: number;
     private subscription: Subscription;
     private esPrimera: boolean = true;
-    
+
     constructor(
         private noticiaService: NoticiaService,
         private fileService: FileService,
@@ -193,11 +192,13 @@ export class HomeComponent implements DoCheck, AfterViewInit {
         for (let i = 0; i < this.lsNoticiasSecundarias.length; i++) {
             for (let j = 0; j < this.imagesSec.length; j++) {
                 if (this.lsNoticiasSecundarias[i].id_thumbnail == this.imagesSec[j].Id) {
-                    this.lsNotSecundLink.push({
-                        titulo: this.lsNoticiasSecundarias[i].titulo,
-                        ruta: this.imagesSec[j].ImagePath,
-                        id_noticia: this.lsNoticiasSecundarias[i].id_noticia
-                    });
+                    if (this.lsNotSecundLink.length < 3) {
+                        this.lsNotSecundLink.push({
+                            titulo: this.lsNoticiasSecundarias[i].titulo,
+                            ruta: this.imagesSec[j].ImagePath,
+                            id_noticia: this.lsNoticiasSecundarias[i].id_noticia
+                        });
+                    }
                 }
             }
         }
