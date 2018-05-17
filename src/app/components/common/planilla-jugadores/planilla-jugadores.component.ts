@@ -128,7 +128,7 @@ export class PlanillaJugadoresComponent implements OnInit {
               }
               
               .foto {
-                width: 140px;
+                width: 100px;
                 height: 100px;
                 margin: 0px;
                 padding: 0px;
@@ -136,8 +136,9 @@ export class PlanillaJugadoresComponent implements OnInit {
               }
               
               .foto img {
-                width: 140px;
+                width: 100px;
                 height: 100px;
+                object-fit: cover;
               }
               
               .texto-imagen {
@@ -149,7 +150,7 @@ export class PlanillaJugadoresComponent implements OnInit {
                 font-weight: bold;
                 color: white;
                 background-color: rgba(0 , 0, 0 , 0.2);
-                width: 140px;
+                width: 100px;
               }
               
               .llenado {

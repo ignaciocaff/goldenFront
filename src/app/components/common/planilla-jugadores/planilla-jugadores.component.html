@@ -56,7 +56,7 @@
 
       <div class="col-md-12 col-sm-12">
         <div class="jugador col-md-4 col-sm-4" *ngFor="let jugador of equipo.lsJugadores">
-          <div class="foto col-md-6 col-sm-6">
+          <div class="foto col-md-4 col-sm-4">
             <img [src]="config.imgUrl + jugador.imagePath" *ngIf="jugador.nombre != null">
             <img [src]="config.assetsUrl + '/logos/anonimo.jpg'" *ngIf="jugador.nombre == null">
             <div class="texto-imagen" *ngIf="jugador.nombre != null">
@@ -64,7 +64,7 @@
               <br> DNI: {{jugador.nro_doc}}
             </div>
           </div>
-          <div class="llenado col-md-4 col-sm-4" *ngIf="jugador.rol =='jugador' || jugador.rol == null">
+          <div class="llenado col-md-6 col-sm-6" *ngIf="jugador.rol =='jugador' || jugador.rol == null">
             <div class="num row">Nº:___________</div>
             <div class="row enblanco">
             </div>

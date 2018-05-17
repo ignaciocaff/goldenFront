@@ -1,15 +1,26 @@
 .invisible {
-    visibility: hidden;
-  }
-  
-  input:disabled{
-    background-color: #d1d1d1;
-  }
-  
-  textarea{
-    resize: none;
-    height: 180px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc; 
-  }
+  visibility: hidden;
+}
+
+input:disabled {
+  background-color: #d1d1d1;
+}
+
+textarea {
+  resize: none;
+  height: 180px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.aclaracion {
+  font-size: x-small;
+  margin-top: 3px;
+}
