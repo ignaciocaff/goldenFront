@@ -7,7 +7,7 @@ import { OnChanges, AfterViewChecked } from '@angular/core/src/metadata/lifecycl
 import { SharedService, TorneoService } from '../../services/index';
 import { TorneoEmitter, TorneoLSEmitter } from '../../services/common-services/index';
 @Component({
-    selector: 'nav',
+    selector: 'menu',
     moduleId: module.id,
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
