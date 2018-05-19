@@ -141,7 +141,7 @@ export class NoticiaCargaComponent implements OnInit {
     }
 
     cargarTorneos() {
-        this.torneoService.getAll().subscribe(
+        this.torneoService.getVigentes().subscribe(
             data => {
                 for (let i = 0; i < data.length; i++) {
                     const torneo = new Torneo(

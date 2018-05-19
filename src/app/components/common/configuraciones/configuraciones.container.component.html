@@ -1,30 +1,32 @@
-<div class="row">
-  <ul class="nav nav-tabs">
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="horarios-carga">Horarios</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="canchas">Canchas</a>
-    </li>
-    <li class="nav-item disabled">
-      <a class="nav-link disabled">Sponsors</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="reglas">Reglas</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="reglamento">Reglamento</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="planilla">Planilla</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="sanciones-equipo-carga">Sanciones equipo</a>
-    </li>
-    <li class="nav-item" [routerLinkActive]="['active']">
-      <a class="nav-link" routerLink="cambio-fase">Cambio Fase</a>
-    </li>
-  </ul>
-  <router-outlet></router-outlet>
-  <br>
+<div class="container-fluid">
+  <div class="row">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="horarios-carga">Horarios</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="canchas">Canchas</a>
+      </li>
+      <li class="nav-item disabled">
+        <a class="nav-link disabled">Sponsors</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="reglas">Reglas</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="reglamento">Reglamento</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="planilla">Planilla</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="sanciones-equipo-carga">Sanciones equipo</a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']">
+        <a class="nav-link" routerLink="cambio-fase">Cambio Fase</a>
+      </li>
+    </ul>
+    <router-outlet></router-outlet>
+    <br>
+  </div>
 </div>

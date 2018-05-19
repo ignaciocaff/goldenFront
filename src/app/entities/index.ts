@@ -45,3 +45,4 @@ export * from './sancion_equipo';
 export * from './posiciones';
 export * from './posiciones_zona';
 export * from './goleador';
+export * from './estados_torneo';

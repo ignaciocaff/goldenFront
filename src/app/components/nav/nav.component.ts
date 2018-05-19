@@ -38,7 +38,7 @@ export class NavComponent implements OnInit {
             data => this.user = data
         );
 
-        this.torneoService.getAll().subscribe(
+        this.torneoService.getVigentes().subscribe(
             data => {
                 for (var i = 0; i < data.length; i++) {
                     let torneo = data[i];
