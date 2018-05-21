@@ -16,63 +16,60 @@
     </div>
     <div class="col-md-12 col-sm-12 partido">
 
-      <li class="lista-partidos" *ngFor="let partido of lsPartidos">
+      <div class="lista-partidos" *ngFor="let partido of lsPartidos">
         <div class="row">
           <div class="col-md-12 col-sm-12 partido">
 
             <div class="col-md-3 col-sm-3 text-center">
               <div class="goles">
-                <li class="lista-goles" *ngFor="let gol of partido.lsGolesLocal">
+                <div class="lista-goles" *ngFor="let gol of partido.lsGolesLocal">
                   <span class="lista">
                     <img [src]="config.assetsUrl + '/logos/pelota-futbol.png'"> {{gol.jugador.apellido}}, {{gol.jugador.nombre}} </span>
-                </li>
+                </div>
               </div>
 
               <div class="tarjetas" *ngIf="esAdmin">
-                <li class="lista-goles" *ngFor="let sancion of partido.lsSancionesLocal">
+                <div class="lista-goles" *ngFor="let sancion of partido.lsSancionesLocal">
                   <span class="lista">
                     <img [src]="config.assetsUrl + '/amarilla.png'" *ngIf="sancion.tipo_sancion.id_tipo == 1">
                     <img [src]="config.assetsUrl + '/roja.png'" *ngIf="sancion.tipo_sancion.id_tipo != 1"> {{sancion.jugador.apellido}}, {{sancion.jugador.nombre}} </span>
-                </li>
+                </div>
               </div>
             </div>
 
-            <div class="col-md-2 col-sm-2">
-              <img [src]="config.imgUrl + partido.local[0].imagePath">
+            <div class="col-md-2 col-sm-2 col-xs-5">
+              <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
             </div>
 
-            <div class="col-md-2 col-sm-2 text-center">
+            <div class="col-md-2 col-sm-2 col-xs-2 text-center">
               <div class="row">
-                <br>
-                <br>
-                <br>
                 <span class="resultado"> {{partido.lsGolesLocal.length}} - {{partido.lsGolesVisitante.length}} </span>
               </div>
             </div>
 
-            <div class="col-md-2 col-sm-2">
-              <img [src]="config.imgUrl + partido.visitante[0].imagePath">
+            <div class="col-md-2 col-sm-2 col-xs-5">
+              <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
             </div>
 
             <div class="col-md-3 col-sm-3 text-center">
               <div class="goles">
-                <li class="lista-goles" *ngFor="let gol of partido.lsGolesVisitante">
+                <div class="lista-goles" *ngFor="let gol of partido.lsGolesVisitante">
                   <span class="lista">
                     <img [src]="config.assetsUrl + '/logos/pelota-futbol.png'"> {{gol.jugador.apellido}}, {{gol.jugador.nombre}} </span>
-                </li>
+                </div>
               </div>
               <div class="tarjetas" *ngIf="esAdmin">
-                <li class="lista-goles" *ngFor="let sancion of partido.lsSancionesVisitante">
+                <div class="lista-goles" *ngFor="let sancion of partido.lsSancionesVisitante">
                   <span class="lista">
                     <img [src]="config.assetsUrl + '/amarilla.png'" *ngIf="sancion.tipo_sancion.id_tipo == 1">
                     <img [src]="config.assetsUrl + '/roja.png'" *ngIf="sancion.tipo_sancion.id_tipo != 1"> {{sancion.jugador.apellido}}, {{sancion.jugador.nombre}} </span>
-                </li>
+                </div>
               </div>
             </div>
 
           </div>
         </div>
-      </li>
+      </div>
     </div>
   </div>
 

@@ -91,15 +91,15 @@ span.resultado {
   font-size: 60px;
 }
 
-li.lista-partidos {
+div.lista-partidos {
   background-color: white;
 }
 
-li.lista-partidos:nth-child(odd) {
+div.lista-partidos:nth-child(odd) {
   background-color: rgb(240, 240, 240);
 }
 
-li.lista-goles img {
+div.lista-goles img {
   width: 17px;
   height: 17px;
 }

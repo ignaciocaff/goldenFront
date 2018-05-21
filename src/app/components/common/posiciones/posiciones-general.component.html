@@ -74,9 +74,9 @@
             </thead>
             <tbody>
               <tr *ngFor="let posicion of posicionesZona; let i = index">
-                <th>
+                <td>
                   <img [src]="config.imgUrl + posicion.equipo.imagePath">
-                </th>
+                </td>
                 <td>{{i + 1}}</td>
                 <td class="nombre-equipo">{{posicion.equipo.nombre}}</td>
                 <td>{{posicion.puntos}}</td>
