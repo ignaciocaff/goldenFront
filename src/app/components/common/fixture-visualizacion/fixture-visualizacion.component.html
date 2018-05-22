@@ -4,7 +4,7 @@
   </div>
   <div class="row fechas">
     <div class="col-md-12 col-sm-12">
-      <button type="submit" (click)="mostrarFixtureFecha(fecha, i)" class="btn btn-primary" *ngFor="let fecha of lsFechas; let i = index">
+      <button type="submit" (click)="mostrarFixtureFecha(fecha, i)" id="btnFecha{{i+1}}" class="btn btn-primary" *ngFor="let fecha of lsFechas; let i = index">
         {{i+1}} </button>
     </div>
   </div>
