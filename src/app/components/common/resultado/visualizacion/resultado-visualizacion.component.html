@@ -28,7 +28,7 @@
                 </div>
               </div>
 
-              <div class="tarjetas" *ngIf="esAdmin">
+              <div class="tarjetas">
                 <div class="lista-goles" *ngFor="let sancion of partido.lsSancionesLocal">
                   <span class="lista">
                     <img [src]="config.assetsUrl + '/amarilla.png'" *ngIf="sancion.tipo_sancion.id_tipo == 1">
@@ -58,7 +58,7 @@
                     <img [src]="config.assetsUrl + '/logos/pelota-futbol.png'"> {{gol.jugador.apellido}}, {{gol.jugador.nombre}} </span>
                 </div>
               </div>
-              <div class="tarjetas" *ngIf="esAdmin">
+              <div class="tarjetas">
                 <div class="lista-goles" *ngFor="let sancion of partido.lsSancionesVisitante">
                   <span class="lista">
                     <img [src]="config.assetsUrl + '/amarilla.png'" *ngIf="sancion.tipo_sancion.id_tipo == 1">
