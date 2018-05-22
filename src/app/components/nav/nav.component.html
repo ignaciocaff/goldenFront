@@ -1,9 +1,9 @@
 <div class="container-fluid montserrat-font hidden-sm hidden-xs">
-  <div class="row" style="background-color: rgb(41, 41, 41);">
-    <div class="col-sm-2 col-md-2">
+  <div class="row" style="background-color: rgb(41, 41, 41); text-align: right;">
+    <div class="col-sm-1 col-md-1">
     </div>
     <!-- Primer Boton -->
-    <div class="col-sm-10 col-md-10">
+    <div class="col-sm-11 col-md-11">
       <div class="dropdown">
         <span class="glyphicon glyphicon-home home" (click)="noticias_Click()"></span>
       </div>
@@ -44,6 +44,10 @@
 
       </div>
       <div class="dropdown">
+        <button class="dropbtn" (click)="zonasVisualizacion_Click()">ZONAS</button>
+
+      </div>
+      <div class="dropdown">
         <button *ngIf="user != null" class="dropbtn">ADMINISTRACIÓN</button>
         <div class="dropdown-content">
           <a *ngIf="user != null && user.perfil.n_perfil === 'Administrador'" (click)="configuraciones_Click()">Configuración</a>
@@ -67,10 +71,10 @@
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
         aria-expanded="false">
         <span class="navbar-toggler-icon">
-            <i class="fa fa-navicon"></i>
-          </span>
+          <i class="fa fa-navicon"></i>
+        </span>
       </button>
-      <a class="navbar-brand" (click)="noticias_Click()" style="cursor:pointer;" >INICIO</a>
+      <a class="navbar-brand" (click)="noticias_Click()" style="cursor:pointer;">INICIO</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -115,6 +119,11 @@
         </li>
         <li>
           <a (click)="equipos_Click()">EQUIPOS
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li>
+          <a (click)="zonasVisualizacion_Click()">ZONAS
             <span class="sr-only">(current)</span>
           </a>
         </li>
