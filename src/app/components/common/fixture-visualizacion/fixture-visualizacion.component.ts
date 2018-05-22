@@ -4,6 +4,7 @@ import { Fixture, Fecha, IPartido } from '../../../entities/index';
 import { EquipoService, FixtureService } from '../../../services/entity-services/index';
 import { FileService } from '../../../services/entity-services/file.service';
 import { AppConfig } from '../../../app.config';
+import * as moment from 'moment';
 
 
 @Component({
@@ -50,14 +51,31 @@ export class FixtureVisualizacionComponent implements OnInit {
                             }
                         }
                     }
-                    if(this.lsFechas.length)
-                        this.mostrarFixtureFecha(this.lsFechas[0], 0);
+                    if (this.lsFechas.length)
+                        this.mostrarProximaFecha();
                 }
             },
             error => {
                 this.lsFechas = [];
             });
     }
+
+    mostrarProximaFecha() {
+        let hoy = moment();
+        let fecha = this.lsFechas[0];
+        let posicion: number;
+
+        for (let i = this.lsFechas.length -1 ; i >= 0; i--) {
+            if (moment(this.lsFechas[i].fecha).isSameOrAfter(hoy, 'day')) {
+                fecha = this.lsFechas[i];
+                posicion = i;
+            } else {
+                break;
+            }
+        }
+        this.mostrarFixtureFecha(fecha, posicion);
+//         document.getElementById("btnFecha3").focus();
+     }
 
     mostrarFixtureFecha(fecha: Fecha, i: number) {
         this.lsPartidos = [];
