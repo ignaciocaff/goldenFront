@@ -15,9 +15,7 @@
   margin-right: 25px;
 }
 
-
-
-zona-visualizacion .row .ngx-dnd-container {
+zona-visualizacion .visualizar .row .ngx-dnd-container {
   background-color: white;
   border: 2px solid white;
   display: -webkit-flex;
@@ -27,7 +25,7 @@ zona-visualizacion .row .ngx-dnd-container {
   flex-wrap: wrap;
 }
 
-zona-visualizacion .row .ngx-dnd-container .ngx-dnd-item {
+zona-visualizacion .visualizar .row .ngx-dnd-container .ngx-dnd-item {
   background-color: white;
   border: 1px solid rgb(255, 255, 255) !important;
   width: 20%;
@@ -38,19 +36,15 @@ zona-visualizacion .row{
   min-height: 200px;
 }
 
-@media screen and ( max-width: 700px ) {
-  zona-visualizacion .row .ngx-dnd-container .ngx-dnd-item {
+@media screen and ( max-width: 900px ) {
+  zona-visualizacion .visualizar .row .ngx-dnd-container .ngx-dnd-item {
     background-color: white;
     border: 1px solid rgb(255, 255, 255) !important;
     width: 40%;
   }
-  zona-visualizacion font {
-    font-weight: bold;
-    font-size: small;
-  }
 }
 
-zona-visualizacion font {
+zona-visualizacion .visualizar font {
   font-weight: bold;
   font-size: large;
 }

@@ -13,7 +13,8 @@ import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoV
 import {
     ConfiguracionesContainerComponent
 } from './common/configuraciones/index';
-import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent, ZonaVisualizacionComponent } from './common/zona/index';
+import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
+import { ZonaVisualizacionComponent } from './common/zona/visualizacion/index';
 import { SectionComponent } from './section/index';
 import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { NoticiaCargaComponent } from './common/noticia/index';

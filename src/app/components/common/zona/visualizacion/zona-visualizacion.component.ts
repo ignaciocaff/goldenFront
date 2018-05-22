@@ -340,16 +340,4 @@ export class ZonaVisualizacionComponent implements OnInit {
 
         return descripLetra;
     }
-
-    routeAlta() {
-        this.router.navigate(['home/zona-carga']);
-    }
-
-    routeModificacion() {
-        this.router.navigate(['home/zona-update']);
-    }
-
-    routeEliminar() {
-        this.router.navigate(['home/zona-delete']);
-    }
 }
