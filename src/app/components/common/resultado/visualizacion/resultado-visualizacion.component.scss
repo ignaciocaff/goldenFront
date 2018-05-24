@@ -91,11 +91,11 @@ span.resultado {
   font-size: 60px;
 }
 
-div.lista-partidos {
+li.lista-partidos {
   background-color: white;
 }
 
-div.lista-partidos:nth-child(odd) {
+li.lista-partidos:nth-child(odd) {
   background-color: rgb(240, 240, 240);
 }
 
@@ -141,4 +141,27 @@ img {
 .tarjetas {
   margin-top: 1em;
   margin-bottom: 2em;
+}
+
+.centro {
+  margin-top: 45px;
+}
+
+@media screen and (max-width: 768px) {
+  span.cancha {font-size: 12px;}
+  span.horario {font-size: 12px; }
+  span.fecha { font-size: small; font-weight: bold; margin-bottom: 5px;}
+  span.dia { font-size: small; margin-bottom: 5px;}
+  h3 { font-size: x-large; font-weight: 900; margin-top: 0px;}
+  img { height: 100px; width: 100px;}
+  span.lista { font-size: 10px; font-weight: 500; }
+  div.lista-goles img { width: 12px; height: 12px;}
+  span.resultado { font-size: 23px;}
+  li.lista-partidos {
+    background-color: white;
+  }
+  
+  li.lista-partidos:nth-child(odd) {
+    background-color: rgb(240, 240, 240);
+  }
 }

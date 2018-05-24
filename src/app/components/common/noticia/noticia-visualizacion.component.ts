@@ -6,6 +6,9 @@ import { FileService } from '../../../services/entity-services/file.service';
 import { Noticia, Usuario } from '../../../entities/index';
 import { NoticiaService } from '../../../services/entity-services/index';
 import { AppConfig } from '../../../app.config';
+import { ConfirmationDialog } from '../../common/dialog/index';
+import { MatDialogRef, MatDialog } from '@angular/material';
+
 
 @Component({
     selector: 'noticia-visualizacion',
@@ -23,13 +26,15 @@ export class NoticiaVisualizacionComponent {
     public id_noti: number;
     esAdmin: boolean = false;
     user: Usuario;
+    dialogRef: MatDialogRef<ConfirmationDialog>;
 
     constructor(
         private noticiaService: NoticiaService,
         private fileService: FileService,
         private route: ActivatedRoute,
         private router: Router,
-        public config: AppConfig
+        public config: AppConfig,
+        public dialog: MatDialog,
     ) {
         this.id_noti = route.snapshot.params['id'];
         this.cargarNoticia();
@@ -78,5 +83,29 @@ export class NoticiaVisualizacionComponent {
                 this.esAdmin = true;
             }
         }
+    }
+
+    borrarNoticia() {
+        this.dialogRef = this.dialog.open(ConfirmationDialog, {
+            height: '200px',
+            width: '350px',
+            disableClose: false
+        });
+        this.dialogRef.componentInstance.confirmMessage = "Se eliminará la noticia."
+
+        this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+                this.noticiaService.borrarNoticia(this.noticia.id_noticia).subscribe(
+                    data => {
+                        console.log("ENTRO AL DATA");
+                        this.router.navigate(['home/noticias']);
+                    },
+                    error => {
+                        console.log("Entro al error");
+                        error.json()['Message'];
+                    });
+            }
+            this.dialogRef = null;
+        });
     }
 }

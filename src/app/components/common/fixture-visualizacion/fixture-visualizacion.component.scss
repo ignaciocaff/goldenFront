@@ -77,6 +77,10 @@ span.horario {
   font-size: 22px;
 }
 
+.centro {
+  margin-top: 25px;
+}
+
 span.fecha {
   font-size: x-large;
   font-weight: bold;
@@ -105,4 +109,14 @@ h3 {
 img {
   height: 180px;
   width: 180px;
+}
+
+@media screen and (max-width: 768px) {
+  span.cancha {font-size: 12px;}
+  span.horario {font-size: 12px; }
+  span.fecha { font-size: small; font-weight: bold; margin-bottom: 5px;}
+  span.dia { font-size: small; margin-bottom: 5px;}
+  h3 { font-size: x-large; font-weight: 900; margin-top: 0px;}
+  img { height: 100px; width: 100px;}
+  .centro { margin-top: 10px;}
 }

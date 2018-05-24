@@ -19,13 +19,11 @@
         <div class="row" [ngClass]="(i%2)?'estiloFixture':''">
           <div class="col-md-12 col-sm-12 col-xs-12 partido">
             <div class="col-md-2 col-sm-2 col-md-offset-3 col-sm-offset-3 col-xs-5">
-              <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+              <img [src]="config.imgUrl + partido.local[0].imagePath">
             </div>
 
-            <div class="col-md-2 col-sm-2 text-center col-xs-2">
+            <div class="col-md-2 col-sm-2 text-center col-xs-2 centro">
               <div class="row">
-                <br>
-                <br>
                 <span class="horario"> {{partido.horario.inicio}} hs</span>
               </div>
               <div class="row">
@@ -37,7 +35,7 @@
             </div>
 
             <div class="col-md-2 col-sm-2 col-xs-5">
-              <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+              <img [src]="config.imgUrl + partido.visitante[0].imagePath">
             </div>
 
           </div>
