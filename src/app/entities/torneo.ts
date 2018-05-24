@@ -4,7 +4,8 @@ import {
     Regla,
     Modalidad,
     Equipo,
-    Fase
+    Fase,
+    EstadoTorneo
 } from './index';
 
 export class Torneo {
@@ -19,6 +20,8 @@ export class Torneo {
     public modalidad: Modalidad;
     public lsEquipos: Array<Equipo>;
     public fase: Fase;
+    public estado: EstadoTorneo;
+
 
     constructor(
         id_torneo?: number,
@@ -31,7 +34,8 @@ export class Torneo {
         regla?: Regla,
         modalidad?: Modalidad,
         lsEquipos?: Array<Equipo>,
-        fase?: Fase
+        fase?: Fase,
+        estado?: EstadoTorneo
     ) {
         if (id_torneo) this.id_torneo = id_torneo;
         else this.id_torneo = null;
@@ -62,6 +66,9 @@ export class Torneo {
 
         if (modalidad) this.modalidad = modalidad;
         else this.modalidad = new Modalidad();
+
+        if (estado) this.estado = estado;
+        else this.estado = new EstadoTorneo();
 
         if (fase) this.fase = fase;
         else this.fase = new Fase();

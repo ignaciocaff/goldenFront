@@ -67,3 +67,93 @@
 .dropdown:hover .dropbtn {
   background-color: rgb(35, 35, 35);
 }
+
+.navbar a:active {
+  background-color: #333;
+}
+
+.nav li a:focus, .nav li a:hover {
+  background-color: #282828;
+}
+
+.navbar {
+  background-color: #333;
+}
+.navbar .navbar-brand {
+  color: #aa915d;
+}
+.navbar a {
+  color: #aa915d;
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+  color: #aa915d;
+}
+.navbar .navbar-text {
+  color: #aa915d;
+}
+.navbar .navbar-text a {
+  color: #aa915d;
+}
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+  color: #aa915d; 
+}
+.navbar .navbar-nav .nav-link {
+  color: #aa915d;
+  border-radius: .25rem;
+  margin: 0 0.25em;
+}
+.navbar .navbar-nav .nav-link:not(.disabled):hover,
+.navbar .navbar-nav .nav-link:not(.disabled):focus {
+  color: #aa915d;
+}
+.navbar .navbar-nav .dropdown-menu {
+  background-color: #333;
+  border-color: #333;
+}
+.navbar .navbar-nav .dropdown-menu .dropdown-item {
+  color: #aa915d;
+}
+.navbar .navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar .navbar-nav .dropdown-menu .dropdown-item:focus,
+.navbar .navbar-nav .dropdown-menu .dropdown-item.active {
+  color: #aa915d;
+  background-color: #333;
+}
+.navbar .navbar-nav .dropdown-menu .dropdown-divider {
+  border-top-color: #333;
+}
+.navbar .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-nav .nav-item.show .nav-link,
+.navbar .navbar-nav .nav-item.show .nav-link:hover,
+.navbar .navbar-nav .nav-item.show .nav-link:focus {
+  color: #aa915d;
+  background-color: #333;
+}
+.navbar .navbar-toggle {
+  border-color: #333;
+}
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+  background-color: #333;
+}
+.navbar .navbar-toggle .navbar-toggler-icon {
+  color: #aa915d;
+}
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+  border-color: #aa915d;
+}
+.navbar .navbar-link {
+  color: #aa915d;
+}
+.navbar .navbar-link:hover {
+  color: #aa915d;
+}
+.fa.fa-navicon {
+  color: #aa915d; 
+}

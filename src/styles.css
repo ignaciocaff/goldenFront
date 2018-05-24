@@ -65,7 +65,7 @@ a:hover {
   background: rgb(170, 145, 93) !important;
 }
 
-.section-style {
+.section-style {/*
   padding: 0;
   margin: 0;
   list-style: none;
@@ -76,20 +76,22 @@ a:hover {
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row;
-  justify-content: space-around;
-  background-color: white;
+   justify-content: space-around;
+ */  background-color: white;
 }
-
+li {
+  list-style-type: none;
+}
 .flex-item {
   padding: 5px;
   margin: 10px;
   word-break: break-all;
 }
 
-.container-fluid {
+/* .container-fluid {
   max-width: 80em;
 }
-
+ */
 .montserrat-font {
   font-family: 'Montserrat', sans-serif;
 }

@@ -12,6 +12,10 @@ export class TorneoService {
         return this.http.get(this.config.apiUrl + 'torneo/todos').map((response: Response) => response.json());
     }
 
+    getVigentes() {
+        return this.http.get(this.config.apiUrl + 'torneo/vigentes').map((response: Response) => response.json());
+    }
+
     getByName(nombre: String) {
         return this.http.get(this.config.apiUrl + 'torneo/' + nombre).map((response: Response) => response.json());
     }

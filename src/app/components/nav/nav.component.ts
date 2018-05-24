@@ -7,7 +7,7 @@ import { OnChanges, AfterViewChecked } from '@angular/core/src/metadata/lifecycl
 import { SharedService, TorneoService } from '../../services/index';
 import { TorneoEmitter, TorneoLSEmitter } from '../../services/common-services/index';
 @Component({
-    selector: 'nav',
+    selector: 'menu',
     moduleId: module.id,
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.css'],
@@ -38,7 +38,7 @@ export class NavComponent implements OnInit {
             data => this.user = data
         );
 
-        this.torneoService.getAll().subscribe(
+        this.torneoService.getVigentes().subscribe(
             data => {
                 for (var i = 0; i < data.length; i++) {
                     let torneo = data[i];

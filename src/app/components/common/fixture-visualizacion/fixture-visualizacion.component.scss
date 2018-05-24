@@ -91,11 +91,7 @@ h3 {
   font-weight: 900;
 }
 
-li {
-  background-color: white;
-}
-
-li:nth-child(odd) {
+.estiloFixture {
    background-color: rgb(240,240,240); 
 }
 
@@ -106,18 +102,7 @@ li:nth-child(odd) {
   padding-right: 0px;
 }
 
-.container-fluid {
-  margin-left: 0px;
-  margin-right: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 img {
   height: 180px;
   width: 180px;
-}
-
-.container-fluid {
-  min-height: 600px;
 }

@@ -7,7 +7,7 @@ import { EquipoComponent } from '../common/equipo/index';
 import { HomeComponent } from '../home/index';
 
 @Component({
-    selector: 'section',
+    selector: 'seccion',
     moduleId: module.id,
     templateUrl: './section.component.html',
     styleUrls: ['./section.component.css'],

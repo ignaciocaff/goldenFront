@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-12 col-sm-12">
 
-      <div class="col-md-2 col-sm-2">
+      <div class="col-md-2 col-sm-2 hidden-sm hidden-xs">
         <div class="row escudo">
           <img [src]="config.imgUrl + escudo">
         </div>
@@ -27,7 +27,6 @@
         <div class="row" style="margin-top: 10px;">
           <p class="datos-goleador"> {{goleador.apellido}}, {{goleador.nombre}}</p>
           <p class="datos-goleador"> {{goleador.goles}} GOLES</p>
-          <p class="datos-goleador"> {{goleador.partidos_jugados}} PARTIDOS JUGADOS</p>
         </div>
       </div>
 
@@ -35,7 +34,7 @@
         <div class="col-md-12 col-sm-12 seccion-jugadores">
           <hr class="hr-text titulo-jugadores" data-content="Jugadores">
 
-          <li *ngFor="let jugador of lsJugadores">
+          <div *ngFor="let jugador of lsJugadores">
             <div class="row jugador">
               <div class="foto col-md-4 col-sm-4">
                 <img [src]="config.imgUrl + jugador.imagePath">
@@ -50,6 +49,7 @@
                   <div class="tarjetas">
                     <img [src]="config.assetsUrl + '/amarilla.png'">
                     <span class="atrib-jugador">: {{jugador.tarjetas_amarillas}} </span>
+                    <span class="atrib-jugador"> | Sanción Vigente</span>
                     <img [src]="config.assetsUrl + '/roja.png'">
                     <span class="atrib-jugador" *ngIf="!jugador.ultima_roja">: No</span>
                     <span class="atrib-jugador" *ngIf="jugador.ultima_roja">: {{jugador.ultima_roja}} </span>
@@ -57,18 +57,16 @@
                   <div>
                     <span class="dato-jugador">Goles: </span>
                     <span class="atrib-jugador"> {{jugador.goles}} </span>
-                    <span class="dato-jugador par">Partidos: </span>
-                    <span class="atrib-jugador"> {{jugador.partidos_jugados}} </span>
                   </div>
                 </div>
               </div>
             </div>
-          </li>
+          </div>
 
         </div>
       </div>
 
-      <div class="col-md-2 col-sm-2 conjunto">
+      <div class="col-md-2 col-sm-2 conjunto hidden-sm hidden-xs">
         <img [src]="config.imgUrl + equipacion">
       </div>
     </div>

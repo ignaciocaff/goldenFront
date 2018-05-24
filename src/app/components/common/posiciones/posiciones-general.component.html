@@ -1,55 +1,57 @@
 <div class="container-fluid">
   <div class="row" *ngIf="id_fase == 1">
-    <hr class="hr-text general" data-content="TABLA GENERAL">
-    <div class="table-responsive">
-      <table class="table table-striped table-hover general">
-        <thead>
-          <tr>
-            <th>POS</th>
-            <th></th>
-            <th>EQUIPO</th>
-            <th>PTS</th>
-            <th>PJ</th>
-            <th>PG</th>
-            <th>PE</th>
-            <th>PP</th>
-            <th>GF</th>
-            <th>GC</th>
-            <th>DG</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let posicion of lsPosiciones; let i = index">
-            <th>{{i + 1}}</th>
-            <th>
-              <img [src]="config.imgUrl + posicion.equipo.imagePath">
-            </th>
-            <th>{{posicion.equipo.nombre}}</th>
-            <th>{{posicion.puntos}}</th>
-            <th>{{posicion.partidos_jugados}}</th>
-            <th>{{posicion.partidos_ganados}}</th>
-            <th>{{posicion.partidos_empatados}}</th>
-            <th>{{posicion.partidos_perdidos}}</th>
-            <th>{{posicion.goles_favor}}</th>
-            <th>{{posicion.goles_contra}}</th>
-            <th>{{posicion.dif_gol}}</th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div *ngFor="let sancion of lsSanciones">
-      <p class="text-muted">
-        (*)Se quitó {{ sancion.puntos_restados }} punto/s al equipo {{sancion.equipo.nombre}}. Motivo: {{ sancion.descripcion }}
-      </p>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <hr class="hr-text general" data-content="TABLA GENERAL">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover general">
+          <thead>
+            <tr>
+              <th>POS</th>
+              <th></th>
+              <th>EQUIPO</th>
+              <th>PTS</th>
+              <th>PJ</th>
+              <th>PG</th>
+              <th>PE</th>
+              <th>PP</th>
+              <th>GF</th>
+              <th>GC</th>
+              <th>DG</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let posicion of lsPosiciones; let i = index">
+              <td>{{i + 1}}</td>
+              <td>
+                <img [src]="config.imgUrl + posicion.equipo.imagePath">
+              </td>
+              <td>{{posicion.equipo.nombre}}</td>
+              <td>{{posicion.puntos}}</td>
+              <td>{{posicion.partidos_jugados}}</td>
+              <td>{{posicion.partidos_ganados}}</td>
+              <td>{{posicion.partidos_empatados}}</td>
+              <td>{{posicion.partidos_perdidos}}</td>
+              <td>{{posicion.goles_favor}}</td>
+              <td>{{posicion.goles_contra}}</td>
+              <td>{{posicion.dif_gol}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngFor="let sancion of lsSanciones">
+        <p class="text-muted">
+          (*)Se quitó {{ sancion.puntos_restados }} punto/s al equipo {{sancion.equipo.nombre}}. Motivo: {{ sancion.descripcion }}
+        </p>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="container">
   <div class="row" *ngIf="id_fase != 1">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
       <hr class="hr-text general" data-content="POSICIONES POR ZONA">
-      <div class="col-md-6 col-sm-6" *ngFor="let posicionesZona of lsPosicionesZona; let j = index">
+      <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let posicionesZona of lsPosicionesZona; let j = index">
         <div class="table-responsive">
           <div class="titulo_zona text-center">
             <h4> ZONA {{posicionesZona[j].zona.descripcion}}</h4>
@@ -72,19 +74,19 @@
             </thead>
             <tbody>
               <tr *ngFor="let posicion of posicionesZona; let i = index">
-                <th>
+                <td>
                   <img [src]="config.imgUrl + posicion.equipo.imagePath">
-                </th>
-                <th>{{i + 1}}</th>
-                <th class="nombre-equipo">{{posicion.equipo.nombre}}</th>
-                <th>{{posicion.puntos}}</th>
-                <th>{{posicion.partidos_jugados}}</th>
-                <th>{{posicion.partidos_ganados}}</th>
-                <th>{{posicion.partidos_empatados}}</th>
-                <th>{{posicion.partidos_perdidos}}</th>
-                <th>{{posicion.goles_favor}}</th>
-                <th>{{posicion.goles_contra}}</th>
-                <th>{{posicion.dif_gol}}</th>
+                </td>
+                <td>{{i + 1}}</td>
+                <td class="nombre-equipo">{{posicion.equipo.nombre}}</td>
+                <td>{{posicion.puntos}}</td>
+                <td>{{posicion.partidos_jugados}}</td>
+                <td>{{posicion.partidos_ganados}}</td>
+                <td>{{posicion.partidos_empatados}}</td>
+                <td>{{posicion.partidos_perdidos}}</td>
+                <td>{{posicion.goles_favor}}</td>
+                <td>{{posicion.goles_contra}}</td>
+                <td>{{posicion.dif_gol}}</td>
               </tr>
             </tbody>
           </table>

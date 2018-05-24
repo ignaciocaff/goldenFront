@@ -1,10 +1,10 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-12 col-sm-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
 
       <hr class="hr-text general" data-content="GOLEADORES">
-      <div class="table-responsive" style="width: 150%; margin-left: 12.5%;">
-        <div class="col-md-6 col-sm-6">
+      <div class="table-responsive">
+        <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2 col-xs-8">
           <table class="table table-striped table-hover general">
             <thead>
               <tr class="cabeza-tabla">
@@ -17,17 +17,17 @@
             </thead>
             <tbody>
               <tr *ngFor="let goleador of lsGoleadores; let i = index">
-                <th>
+                <td>
                   {{i + 1}}
-                </th>
-                <th>
+                </td>
+                <td>
                   <img [src]="config.imgUrl + goleador.equipo.imagePath">
-                </th>
-                <th>{{ goleador.equipo.nombre }}</th>
-                <th>
+                </td>
+                <td>{{ goleador.equipo.nombre }}</td>
+                <td>
                   <p> {{ goleador.jugador.apellido }}, {{goleador.jugador.nombre}} </p>
-                </th>
-                <th>{{ goleador.cantidad_goles }}</th>
+                </td>
+                <td>{{ goleador.cantidad_goles }}</td>
               </tr>
             </tbody>
           </table>
