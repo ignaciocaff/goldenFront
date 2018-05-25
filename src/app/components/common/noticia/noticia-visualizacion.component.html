@@ -40,7 +40,12 @@
 
       <div class="row">
         <div class="col-md-12 col-sm-12">
-          <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin">Editar noticia</button>
+          <div class="col-md-2 col-sm-12">
+            <button type="submit" (click)="editarNoticia()" class="btn btn-primary" *ngIf="esAdmin">Editar noticia</button>
+          </div>
+          <div class="col-md-2 col-sm-2">
+              <button type="submit" (click)="borrarNoticia()" class="btn btn-warning" *ngIf="esAdmin">Borrar noticia</button>
+          </div>
         </div>
       </div>
 

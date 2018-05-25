@@ -23,8 +23,8 @@ export class NoticiaService {
          return this.http.post(this.config.apiUrl + 'noticia/update', obj);
      }
 
-     delete(id: number) {
-         return this.http.delete(this.config.apiUrl + 'noticia/' + id);
+     borrarNoticia(id: number) {
+         return this.http.get(this.config.apiUrl + 'noticia/borrarNoticia/' + id).map((response: Response) => response.json());
      }
 
       getPrincipales(id_torneo: number) {

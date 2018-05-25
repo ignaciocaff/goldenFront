@@ -34,7 +34,7 @@
         <div class="col-md-12 col-sm-12 seccion-jugadores">
           <hr class="hr-text titulo-jugadores" data-content="Jugadores">
 
-          <div *ngFor="let jugador of lsJugadores">
+          <li *ngFor="let jugador of lsJugadores">
             <div class="row jugador">
               <div class="foto col-md-4 col-sm-4">
                 <img [src]="config.imgUrl + jugador.imagePath">
@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </li>
 
         </div>
       </div>

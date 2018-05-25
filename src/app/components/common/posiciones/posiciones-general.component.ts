@@ -39,15 +39,15 @@ export class PosicionesGeneralComponent implements OnInit {
             let posicion = new Posiciones();
             posicion = data[i];
             this.lsPosiciones.push(posicion);
-            this.buscarSancionesGeneral();
           }
+          this.buscarSancionesGeneral();
         } else {
           for (let i = 0; i < data.length; i++) {
             var lsPosicionZona = new Array<PosicionesZona>();
             lsPosicionZona = data[i];
             this.lsPosicionesZona.push(lsPosicionZona);
-            this.buscarSancionesEquiposZona(lsPosicionZona);
           }
+          this.buscarSancionesEquiposZona(lsPosicionZona);
         }
       },
       error => {

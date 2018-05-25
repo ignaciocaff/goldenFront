@@ -9,14 +9,14 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="fechaSeleccionada">
+  <div class="row hidden-sm hidden-xs" *ngIf="fechaSeleccionada">
     <div class="row text-center">
       <span class="fecha">FECHA {{numeroFecha}} </span>
       <span class="dia"> {{diaVisual}} </span>
     </div>
     <div class="col-md-12 col-sm-12 partido">
 
-      <div class="lista-partidos" *ngFor="let partido of lsPartidos">
+      <li class="lista-partidos" *ngFor="let partido of lsPartidos">
         <div class="row">
           <div class="col-md-12 col-sm-12 partido">
 
@@ -41,7 +41,7 @@
               <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
             </div>
 
-            <div class="col-md-2 col-sm-2 col-xs-2 text-center">
+            <div class="col-md-2 col-sm-2 col-xs-2 text-center centro">
               <div class="row">
                 <span class="resultado"> {{partido.lsGolesLocal.length}} - {{partido.lsGolesVisitante.length}} </span>
               </div>
@@ -69,16 +69,73 @@
 
           </div>
         </div>
-      </div>
+      </li>
     </div>
   </div>
 
-  <!-- Esta row "tamaño" se usa para que no se deforme la visualizacion (el navBar de config). Es necesario debido al funcionamiento heredado del container-fluid-->
-  <div class="row">
-    <div class="col-md-12 col-sm-12" style="visibility: hidden;">
-      <p>Declaración jurada para participar del torneo: Los firmantes de la presente declaración, participes del torneo, manifiestan
-        estar en perfectas condiciones físicas
-      </p>
+  <div class="row hidden-md hidden-lg" *ngIf="fechaSeleccionada">
+    <div class="row text-center">
+      <span class="fecha">FECHA {{numeroFecha}} </span>
+      <span class="dia"> {{diaVisual}} </span>
+    </div>
+    <div class="col-md-12 col-sm-12 partido">
+
+      <li class="lista-partidos" *ngFor="let partido of lsPartidos">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 partido">
+
+            <div class="row table-row">
+              <div class="col-xs-6 text-center">
+                <div class="goles">
+                  <div class="lista-goles" *ngFor="let gol of partido.lsGolesLocal">
+                    <span class="lista">
+                      <img [src]="config.assetsUrl + '/logos/pelota-futbol.png'"> {{gol.jugador.apellido}}, {{gol.jugador.nombre}} </span>
+                  </div>
+                </div>
+
+                <div class="tarjetas">
+                  <div class="lista-goles" *ngFor="let sancion of partido.lsSancionesLocal">
+                    <span class="lista">
+                      <img [src]="config.assetsUrl + '/amarilla.png'" *ngIf="sancion.tipo_sancion.id_tipo == 1">
+                      <img [src]="config.assetsUrl + '/roja.png'" *ngIf="sancion.tipo_sancion.id_tipo != 1"> {{sancion.jugador.apellido}}, {{sancion.jugador.nombre}} </span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-xs-6 text-center">
+                <div class="goles">
+                  <div class="lista-goles" *ngFor="let gol of partido.lsGolesVisitante">
+                    <span class="lista">
+                      <img [src]="config.assetsUrl + '/logos/pelota-futbol.png'"> {{gol.jugador.apellido}}, {{gol.jugador.nombre}} </span>
+                  </div>
+                </div>
+                <div class="tarjetas">
+                  <div class="lista-goles" *ngFor="let sancion of partido.lsSancionesVisitante">
+                    <span class="lista">
+                      <img [src]="config.assetsUrl + '/amarilla.png'" *ngIf="sancion.tipo_sancion.id_tipo == 1">
+                      <img [src]="config.assetsUrl + '/roja.png'" *ngIf="sancion.tipo_sancion.id_tipo != 1"> {{sancion.jugador.apellido}}, {{sancion.jugador.nombre}} </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-5">
+              <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+            </div>
+
+            <div class="col-xs-2 text-center centro">
+              <div class="row">
+                <span class="resultado"> {{partido.lsGolesLocal.length}} - {{partido.lsGolesVisitante.length}} </span>
+              </div>
+            </div>
+
+            <div class="col-xs-5">
+              <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+            </div>
+          </div>
+        </div>
+      </li>
     </div>
   </div>
 </div>
