@@ -165,3 +165,7 @@ p {
 .info-jugador span {
   font-size: 13px;
 }
+
+@media screen and (max-width: 768px) {
+  img { height: 15px; width: 15px;}
+}
