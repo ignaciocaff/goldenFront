@@ -75,21 +75,23 @@ export class PosicionesGeneralComponent implements OnInit {
   }
 
   buscarSancionesEquiposZona(lista: Array<PosicionesZona>) {
-    for (let i = 0; i < lista.length; i++) {
-      this.sancionEquipoService.getSancionesByEquipo(lista[i].equipo.id_equipo).subscribe(
-        data => {
-          if (data) {
-            for (let j = 0; j < data.length; j++) {
-              var sancion = new SancionEquipo();
-              sancion = data[j];
-              this.lsSanciones.push(sancion);
+    if (lista) {
+      for (let i = 0; i < lista.length; i++) {
+        this.sancionEquipoService.getSancionesByEquipo(lista[i].equipo.id_equipo).subscribe(
+          data => {
+            if (data) {
+              for (let j = 0; j < data.length; j++) {
+                var sancion = new SancionEquipo();
+                sancion = data[j];
+                this.lsSanciones.push(sancion);
+              }
             }
+          },
+          error => {
+            error.json()['Message'];
           }
-        },
-        error => {
-          error.json()['Message'];
-        }
-      );
+        );
+      }
     }
   }
 }
