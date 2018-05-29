@@ -84,8 +84,8 @@ export class ResultadoisualizacionComponent implements OnInit {
 
     formatearFecha(fecha: Date) {
         var semana = new Array('Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado');
-        var dia_nombre = semana[fecha.getDay()];
-        var dd = fecha.getDate();
+        var dia_nombre = semana[fecha.getUTCDay()];
+        var dd = fecha.getUTCDate();
         var mm = fecha.getMonth() + 1; //enero es 0
 
         /*         if (dd < 10) { var dd = '0' + dd }
