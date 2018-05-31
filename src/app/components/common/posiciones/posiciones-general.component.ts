@@ -47,6 +47,7 @@ export class PosicionesGeneralComponent implements OnInit {
             lsPosicionZona = data[i];
             this.lsPosicionesZona.push(lsPosicionZona);
           }
+
           this.buscarSancionesEquiposZona(lsPosicionZona);
         }
       },

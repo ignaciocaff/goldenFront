@@ -481,7 +481,39 @@ export class ResultadoUpdateComponent implements OnInit {
         });
     }
 
-    eliminarSancion(id_sancion: number) {
+    eliminarSancionLocal(id_sancion: number, id_jugador: number) {
+        this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
+            height: '200px',
+            width: '350px',
+            disableClose: false
+        });
+        this.dialogRefBorrado.componentInstance.confirmMessage = "Se eliminara la sanción al jugador."
+
+        this.dialogRefBorrado.afterClosed().subscribe(result => {
+            if (result) {
+                for (let i = 0; i < this.partido.lsSancionesLocal.length; i++) {
+                    if (id_jugador == this.partido.lsSancionesLocal[i]['jugador']['id_jugador']) {
+                        this.partido.lsSancionesLocal.splice(i, 1);
+                        this.dataSourceSLocal = new MatTableDataSource(this.partido.lsSancionesLocal);
+                        break;
+                    }
+                }
+
+                if (id_sancion) {
+                    this.partidoService.borrarSancion(id_sancion).subscribe(
+                        data => {
+                            this.toastr.success("La sanción fue eliminada correctamente.", "Éxito!");
+                        }, error => {
+
+                        }
+                    );
+                }
+            }
+            this.dialogRefBorrado = null;
+        });
+    }
+
+    eliminarSancionVisitante(id_sancion: number, id_jugador: number) {
         this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
             height: '200px',
             width: '350px',
@@ -492,43 +524,28 @@ export class ResultadoUpdateComponent implements OnInit {
         this.dialogRefBorrado.afterClosed().subscribe(result => {
             if (result) {
 
-                for (let i = 0; i < this.partido.lsSancionesLocal.length; i++) {
-                    if (id_sancion == this.partido.lsSancionesLocal[i]['id_sancion']) {
-                        const index = this.partido.lsSancionesLocal.findIndex((sancion: Sancion) => {
-                            return sancion.id_sancion == id_sancion;
-                        });
-                        if (index !== -1) {
-                            this.partido.lsSancionesLocal.splice(index, 1);
-                            this.dataSourceSLocal = new MatTableDataSource(this.partido.lsSancionesLocal);
-                        }
-                    }
-                }
-
                 for (let i = 0; i < this.partido.lsSancionesVisitante.length; i++) {
-                    if (id_sancion == this.partido.lsSancionesVisitante[i]['id_sancion']) {
-                        const index = this.partido.lsSancionesVisitante.findIndex((sancion: Sancion) => {
-                            return sancion.id_sancion == id_sancion;
-                        });
-                        if (index !== -1) {
-                            this.partido.lsSancionesVisitante.splice(index, 1);
-                            this.dataSourceSVisitante = new MatTableDataSource(this.partido.lsSancionesVisitante);
-                        }
+                    if (id_jugador == this.partido.lsSancionesVisitante[i]['jugador']['id_jugador']) {
+                        this.partido.lsSancionesVisitante.splice(i, 1);
+                        this.dataSourceSVisitante = new MatTableDataSource(this.partido.lsSancionesVisitante);
+                        break;
                     }
                 }
+                if (id_sancion) {
+                    this.partidoService.borrarSancion(id_sancion).subscribe(
+                        data => {
+                            this.toastr.success("La sanción fue eliminada correctamente.", "Éxito!");
+                        }, error => {
 
-                this.partidoService.borrarSancion(id_sancion).subscribe(
-                    data => {
-                        this.toastr.success("La sanción fue eliminada correctamente.", "Éxito!");
-                    }, error => {
-
-                    }
-                );
+                        }
+                    );
+                }
             }
             this.dialogRefBorrado = null;
         });
     }
 
-    eliminarGol(id_gol: number) {
+    eliminarGolLocal(id_gol: number, id_jugador: number) {
         this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
             height: '200px',
             width: '350px',
@@ -539,48 +556,68 @@ export class ResultadoUpdateComponent implements OnInit {
         this.dialogRefBorrado.afterClosed().subscribe(result => {
             if (result) {
                 for (let i = 0; i < this.partido.lsGolesLocal.length; i++) {
-                    if (id_gol == this.partido.lsGolesLocal[i]['id_gol']) {
-                        const index = this.partido.lsGolesLocal.findIndex((gol: Gol) => {
-                            return gol.id_gol == id_gol;
-                        });
-                        if (index !== -1) {
-                            this.partido.lsGolesLocal.splice(index, 1);
-                            this.dataSourceGLocal = new MatTableDataSource(this.partido.lsGolesLocal);
-                        }
+                    if (id_jugador == this.partido.lsGolesLocal[i]['jugador']['id_jugador']) {
+                        this.partido.lsGolesLocal.splice(i, 1);
+                        this.dataSourceGLocal = new MatTableDataSource(this.partido.lsGolesLocal);
+                        break;
                     }
                 }
 
-                for (let i = 0; i < this.partido.lsGolesVisitante.length; i++) {
-                    if (id_gol == this.partido.lsGolesVisitante[i]['id_gol']) {
-                        const index = this.partido.lsGolesVisitante.findIndex((gol: Gol) => {
-                            return gol.id_gol == id_gol;
-                        });
-                        if (index !== -1) {
-                            this.partido.lsGolesVisitante.splice(index, 1);
-                            this.dataSourceGVisitante = new MatTableDataSource(this.partido.lsGolesVisitante);
+                if (id_gol) {
+                    this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
+                        data => {
+                            this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
+                        }, error => {
+
                         }
-                    }
+                    );
                 }
 
-                this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
-                    data => {
-                        this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
-                    }, error => {
-
-                    }
-                );
             }
             this.dialogRefBorrado = null;
         });
     }
 
 
+    eliminarGolVisitante(id_gol: number, id_jugador: number) {
+        this.dialogRefBorrado = this.dialog.open(ConfirmationDialog, {
+            height: '200px',
+            width: '350px',
+            disableClose: false
+        });
+        this.dialogRefBorrado.componentInstance.confirmMessage = "Se eliminara el gol al jugador."
+
+        this.dialogRefBorrado.afterClosed().subscribe(result => {
+            if (result) {
+                for (let i = 0; i < this.partido.lsGolesVisitante.length; i++) {
+                    if (id_jugador == this.partido.lsGolesVisitante[i]['jugador']['id_jugador']) {
+                        this.partido.lsGolesVisitante.splice(i, 1);
+                        this.dataSourceGVisitante = new MatTableDataSource(this.partido.lsGolesVisitante);
+                        break;
+                    }
+                }
+
+                if (id_gol) {
+                    this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
+                        data => {
+                            this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
+                        }, error => {
+
+                        }
+                    );
+                }
+
+            }
+            this.dialogRefBorrado = null;
+        });
+    }
+
     modificarResultado() {
+
         var partido = new Partido();
         if (this.partido) {
             partido = this.parserService.parseResultado(this.partido, this.id_torneo);
         }
-
         if (this.esInterzonal == 1) {
             if (partido.lsGoleadoresLocales.length ==
                 partido.lsGoleadoresVisitantes.length) {

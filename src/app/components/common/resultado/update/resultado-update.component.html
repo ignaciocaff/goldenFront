@@ -178,12 +178,12 @@
                                                 <ng-container matColumnDef="id_gol">
                                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
                                                     <mat-cell *matCellDef="let row">
-                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarGol(row.id_gol)"></i>
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarGolLocal(row.id_gol,row.jugador.id_jugador)"></i>
                                                     </mat-cell>
                                                 </ng-container>
 
                                                 <mat-header-row *matHeaderRowDef="displayedColumnsG"></mat-header-row>
-                                                <mat-row *matRowDef="let row; columns: displayedColumnsG;">
+                                                <mat-row *matRowDef="let row; columns: displayedColumnsG">
                                                 </mat-row>
                                             </mat-table>
                                         </div>
@@ -209,7 +209,7 @@
                                                 <ng-container matColumnDef="id_sancion">
                                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
                                                     <mat-cell *matCellDef="let row">
-                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarSancionLocal(row.id_sancion,row.jugador.id_jugador)"></i>
                                                     </mat-cell>
                                                 </ng-container>
 
@@ -241,12 +241,12 @@
                                                 <ng-container matColumnDef="id_gol">
                                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
                                                     <mat-cell *matCellDef="let row">
-                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarGol(row.id_gol)"></i>
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarGolVisitante(row.id_gol,row.jugador.id_jugador)"></i>
                                                     </mat-cell>
                                                 </ng-container>
 
                                                 <mat-header-row *matHeaderRowDef="displayedColumnsG"></mat-header-row>
-                                                <mat-row *matRowDef="let row; columns: displayedColumnsG;">
+                                                <mat-row *matRowDef="let row; columns: displayedColumnsG">
                                                 </mat-row>
                                             </mat-table>
                                         </div>
@@ -272,7 +272,7 @@
                                                 <ng-container matColumnDef="id_sancion">
                                                     <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
                                                     <mat-cell *matCellDef="let row">
-                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarSancion(row.id_sancion)"></i>
+                                                        <i class="glyphicon glyphicon-trash" (click)="eliminarSancionVisitante(row.id_sancion,row.jugador.id_jugador)"></i>
                                                     </mat-cell>
                                                 </ng-container>
 
