@@ -1,0 +1,120 @@
+.well {
+  height: 250px;
+  width: 50%;
+}
+
+.customPanel {
+  border: 2px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.imgCustom {
+  height: 100px;
+  width: 100px;
+  border: 1px solid white, ;
+}
+
+fixture-update-fecha .row .ngx-dnd-container {
+  background-color: white;
+  border: 2px solid white;
+  /* flexbox setup */
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+fixture-update-fecha .row .ngx-dnd-container .ngx-dnd-item {
+  background-color: white;
+  border: 1px solid white !important;
+  width: 12%;
+  text-align: center;
+}
+
+fixture-update-fecha .row .ngx-dnd-container .ngx-dnd-item:hover {
+  border: 1px solid white !important;
+}
+
+fixture-update-fecha .row .enfrentamiento .ngx-dnd-container .ngx-dnd-item {
+  background-color: white;
+  width: 100%;
+  text-align: center;
+}
+
+fixture-update-fecha .row .enfrentamiento .ngx-dnd-container {
+  background-color: white;
+  /* flexbox setup */
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 200px;
+}
+
+.textTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.textEquipo {
+  text-align: center;
+  color: rgb(170, 145, 93);
+  font-weight: bold;
+  font-size: large;
+}
+
+.random {
+  color: rgb(170, 145, 93);
+  height: 200px;
+  line-height: 200px;
+  width: 50px;
+  font-weight: bold;
+  font-size: large;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  &:before {
+    content: ''; // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, rgb(170, 145, 93), transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+    padding: 0 .5em;
+    line-height: 1.5em; // this is really the only tricky part, you need to specify the background color of the container element...
+    color: rgb(170, 145, 93);
+    background-color: white;
+  }
+}
+
+.btn {
+  margin: 0 0.4em 0.4em 0;
+  padding: 0.4em 1em;
+}

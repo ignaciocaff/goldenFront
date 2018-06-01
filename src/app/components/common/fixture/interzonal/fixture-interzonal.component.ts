@@ -256,6 +256,10 @@ export class FixtureInterzonalComponent implements OnInit {
         this.router.navigate(['home/fixture-interzonal']);
     }
 
+    routeCambioFechaInterzonal() {
+        this.router.navigate(['home/fixture-interzonal-fecha']);
+    }
+
     verificarFecha() {
         if (this.fecha.fecha != null && this.zona.id_zona != null) {
             this.fixtureService.verificarFecha(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(

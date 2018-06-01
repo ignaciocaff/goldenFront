@@ -2,30 +2,30 @@ import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmi
 import { Router, NavigationExtras } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { FileService } from '../../../services/entity-services/file.service';
-import { ParserService } from '../../../services/common-services/index';
+import { FileService } from '../../../../services/entity-services/file.service';
+import { ParserService } from '../../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
     Turno, IEquipo, IPartido, Partido
-} from '../../../entities/index';
-import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../services/entity-services/index';
+} from '../../../../entities/index';
+import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { FixtureDialog } from './index';
-import { ConfirmationDialog } from '../../common/dialog/index';
+import { FixtureDialog } from '../index';
+import { ConfirmationDialog } from '../../../common/dialog/index';
 
 
 
 @Component({
-    selector: 'fixture-update-fecha',
+    selector: 'fixture-update-fecha-interzonal',
     moduleId: module.id,
-    templateUrl: './fixture-update-fecha.component.html',
-    styleUrls: ['./fixture-update-fecha.component.scss'],
+    templateUrl: './fixture-update-fecha-interzonal.component.html',
+    styleUrls: ['./fixture-update-fecha-interzonal.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [EquipoService, ZonaService]
 })
-export class FixtureUpdateFechaComponent implements OnInit {
+export class FixtureUpdateFechaInterzonalComponent implements OnInit {
     dialogRef: MatDialogRef<FixtureDialog>;
     dialogRefBorrado: MatDialogRef<ConfirmationDialog>;
 
@@ -35,7 +35,7 @@ export class FixtureUpdateFechaComponent implements OnInit {
     fixture = new Fixture();
     id_torneo: number;
     fecha = new Fecha();
-    nuevaFecha = new Fecha();
+    nuevaFecha = new Date();
     id_fecha_cambiar: number;
     habilitarBoton: Boolean = false;
 
@@ -47,72 +47,33 @@ export class FixtureUpdateFechaComponent implements OnInit {
 
     }
     ngOnInit() {
-        this.fixture.fechas = [];
-        this.zonaService.getAll(this.id_torneo).subscribe(
+        this.fechas();
+    }
+
+    fechas() {
+        this.fixtureService.obtenerFechasInterzonales(this.id_torneo).subscribe(
             data => {
-                this.lsZonas = [];
-                for (var i = 0; i < data.length; i++) {
-                    let zona: Zona;
-                    zona = data[i];
-                    if (zona.torneo.id_torneo != null) {
-                        this.lsZonas.push(zona);
+                this.lsFechas = [];
+                this.lsFechas = data;
+
+                for (let i = this.lsFechas.length - 1; i >= 0; i--) {
+                    for (let j = 0; j < this.lsFechas.length; j++) {
+                        if (this.lsFechas[i].fecha == this.lsFechas[j].fecha
+                            && this.lsFechas[i].id_fecha != this.lsFechas[j].id_fecha) {
+                            this.lsFechas.splice(i, 1);
+                            break;
+                        }
                     }
                 }
             }, error => {
-
-            }
-        );
-    }
-
-    fechasPorZona(zona: Zona) {
-        this.fixtureService.obtenerFechas(this.zona.id_zona, this.id_torneo).subscribe(
-            data => {
-                this.lsFechas = [];
-                this.fixture = data;
-                this.lsFechas = this.fixture.fechas;
-
-                for (var i = 0; i < this.fixture.fechas.length; i++) {
-
-                }
-            }, error => {
                 this.lsFechas = [];
             }
 
         );
     }
-
-    cambioFecha(obj: any) {
-        this.nuevaFecha = obj;
-    }
-
-    comparacionFechasFixture(obj: Date) {
-        let contador: number = 0;
-        var datePipe = new DatePipe('en-US');
-        this.habilitarBoton = false;
-        for (var i = 0; i < this.fixture.fechas.length; i++) {
-            var fPipe = datePipe.transform(this.fixture.fechas[i].fecha, 'yyyy-MM-dd');
-            if (fPipe == obj.toString()) {
-                contador = contador + 1;
-                this.toastr.error("Fecha ocupada para esa zona.", "Error!");
-            }
-        }
-
-        if (contador == 0) {
-            this.nuevaFecha.fecha = obj;
-            this.habilitarBoton = true;
-        }
-
-    }
-
 
     modificarFecha() {
-        for (var i = 0; i < this.fixture.fechas.length; i++) {
-            if (this.fixture.fechas[i].id_fecha == this.nuevaFecha.id_fecha) {
-                this.fixture.fechas[i] = this.nuevaFecha;
-            }
-        }
-
-        this.fixtureService.modificarFecha(this.fixture).subscribe(
+        this.fixtureService.modificarFechaInterzonal(this.id_torneo, this.nuevaFecha, this.fecha).subscribe(
             data => {
                 this.toastr.success('Se modificó correctamente la fecha', 'Éxito!');
                 this.limpiarCampos();
@@ -190,7 +151,7 @@ export class FixtureUpdateFechaComponent implements OnInit {
         this.router.navigate(['home/fixture-interzonal']);
     }
 
-    routeCambioFechaInterzonal(){
+    routeCambioFechaInterzonal() {
         this.router.navigate(['home/fixture-interzonal-fecha']);
     }
 }

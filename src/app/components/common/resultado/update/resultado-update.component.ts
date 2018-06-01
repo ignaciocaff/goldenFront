@@ -14,6 +14,7 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } fr
 import { SancionDialog, SancionDialogV } from '.././index';
 import { ConfirmationDialog } from '../../../common/dialog/index';
 import { AppConfig } from '../../../../app.config';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
     selector: 'resultado-update',
@@ -61,7 +62,8 @@ export class ResultadoUpdateComponent implements OnInit {
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog,
         public sancionService: SancionService, public partidoService: PartidoService,
-        public config: AppConfig) {
+        public config: AppConfig,
+        private spinnerService: Ng4LoadingSpinnerService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.id_fase = Number(sessionStorage.getItem('fase'));
 
@@ -613,7 +615,7 @@ export class ResultadoUpdateComponent implements OnInit {
     }
 
     modificarResultado() {
-
+        this.spinnerService.show();
         var partido = new Partido();
         if (this.partido) {
             partido = this.parserService.parseResultado(this.partido, this.id_torneo);
@@ -654,9 +656,12 @@ export class ResultadoUpdateComponent implements OnInit {
                 if (data) {
                     this.toastr.success("Se modificaron correctamente los resultados.", "Éxito!");
                     this.limpiarCampos();
+                    this.spinnerService.hide();
+
                 }
             }, error => {
                 this.toastr.error("Intente nuevamente más tarde.", "Error!");
+                this.spinnerService.hide();
             }
 
         );

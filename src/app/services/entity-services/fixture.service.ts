@@ -50,6 +50,10 @@ export class FixtureService {
         return this.http.post(this.config.apiUrl + 'fecha/modificarFecha', obj).map((response: Response) => response.json())
     }
 
+    modificarFechaInterzonal(id_torneo: number, nuevaFecha: any, fechaVieja: any) {
+        return this.http.post(this.config.apiUrl + 'fecha/modificarFechaInterzonal/' + id_torneo + '/' + nuevaFecha, fechaVieja).map((response: Response) => response.json())
+    }
+
     obtenerPartidoFZEquipo(obj: any, id_equipo: number, id_torneo: number, id_zona?: number, esInterzonal?: number) {
         if (!esInterzonal) {
             return this.http.post(this.config.apiUrl + 'fecha/obtenerPartido/' + id_equipo + '/' + id_torneo + '/' + id_zona, obj).map((response: Response) => response.json())
@@ -58,7 +62,7 @@ export class FixtureService {
         }
     }
 
-    obtenerFixtureFecha(obj: any, id_torneo: number){
+    obtenerFixtureFecha(obj: any, id_torneo: number) {
         return this.http.post(this.config.apiUrl + 'fecha/obtenerPartidosVisualizacionFixture/' + id_torneo, obj).map((response: Response) => response.json())
     }
 

@@ -46,7 +46,7 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
 import { LocalidadesCargaComponent } from './common/localidades';
 import { NgxDnDModule } from '@swimlane/ngx-dnd';
 import { FixtureComponent, FixtureUpdateComponent, FixtureDialog, FixtureUpdateFechaComponent } from "./common/fixture/index";
-import { FixtureInterzonalComponent } from "./common/fixture/interzonal/index";
+import { FixtureInterzonalComponent, FixtureUpdateFechaInterzonalComponent } from "./common/fixture/interzonal/index";
 
 import { ResultadoComponent, SancionDialog, SancionDialogV, ResultadoisualizacionComponent } from "./common/resultado/index";
 import { ResultadoUpdateComponent } from "./common/resultado/update/index";
@@ -119,7 +119,8 @@ import { OwlModule } from 'ngx-owl-carousel';
     FixtureInterzonalComponent,
     FaseComponent,
     ResultadoisualizacionComponent,
-    ZonaVisualizacionComponent
+    ZonaVisualizacionComponent,
+    FixtureUpdateFechaInterzonalComponent
   ],
   imports: [
     BrowserModule,

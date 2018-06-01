@@ -34,7 +34,7 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
 import { CanActivateRouteGuard } from './can-activate-route.guard';
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep';
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
-import { FixtureInterzonalComponent } from "./common/fixture/interzonal/index";
+import { FixtureInterzonalComponent, FixtureUpdateFechaInterzonalComponent } from "./common/fixture/interzonal/index";
 import { FaseComponent } from './common/fase/index';
 
 const homeRoutes: Routes = [
@@ -122,6 +122,10 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'fixture-interzonal', component: FixtureInterzonalComponent,
+                canActivate: [CanActivateRouteGuard]
+            },
+            {
+                path: 'fixture-interzonal-fecha', component: FixtureUpdateFechaInterzonalComponent,
                 canActivate: [CanActivateRouteGuard]
             },
             {

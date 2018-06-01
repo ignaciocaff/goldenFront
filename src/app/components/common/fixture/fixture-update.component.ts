@@ -14,6 +14,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { FixtureDialog } from './index';
 import { ConfirmationDialog } from '../../common/dialog/index';
 import { AppConfig } from '../../../app.config';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
     selector: 'fixture-update',
@@ -47,7 +48,8 @@ export class FixtureUpdateComponent implements OnInit {
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog,
-        public config: AppConfig) {
+        public config: AppConfig,
+        private spinnerService: Ng4LoadingSpinnerService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
 
     }
@@ -258,15 +260,17 @@ export class FixtureUpdateComponent implements OnInit {
     }
 
     actualizarFecha() {
+        this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
         this.fixtureService.update(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
             data => {
                 this.toastr.success('Se actualizo correctamente la fecha.', "Exito!");
                 this.limpiarCampos();
+                this.spinnerService.hide();
             }, error => {
                 this.toastr.error('Intente nuevamente más tarde.', "Error!");
-
+                this.spinnerService.hide();
             }
         );
     }
@@ -309,6 +313,10 @@ export class FixtureUpdateComponent implements OnInit {
 
     routeInterzonal() {
         this.router.navigate(['home/fixture-interzonal']);
+    }
+
+    routeCambioFechaInterzonal(){
+        this.router.navigate(['home/fixture-interzonal-fecha']);
     }
 
     eliminarPartido(partido: IPartido) {

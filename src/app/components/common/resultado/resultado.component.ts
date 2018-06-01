@@ -14,6 +14,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { ConfirmationDialog } from '../../common/dialog/index';
 import { SancionDialog, SancionDialogV } from './index';
 import { AppConfig } from '../../../app.config';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
     selector: 'resultado',
@@ -62,7 +63,9 @@ export class ResultadoComponent implements OnInit {
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog,
         public sancionService: SancionService, public partidoService: PartidoService,
-        public config: AppConfig) {
+        public config: AppConfig,
+        private spinnerService: Ng4LoadingSpinnerService
+    ) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.id_fase = Number(sessionStorage.getItem('fase'));
 
@@ -301,7 +304,7 @@ export class ResultadoComponent implements OnInit {
     }
 
     registrarResultado() {
-
+        this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parseResultados(this.partidos, this.id_torneo);
 
@@ -345,9 +348,11 @@ export class ResultadoComponent implements OnInit {
                 if (data) {
                     this.toastr.success("Se registraron correctamente los resultados.", "Éxito!");
                     this.limpiarCampos();
+                    this.spinnerService.hide();
                 }
             }, error => {
                 this.toastr.error("Intente nuevamente más tarde.", "Error!");
+                this.spinnerService.hide();
             }
 
         );

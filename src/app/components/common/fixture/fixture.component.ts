@@ -13,6 +13,8 @@ import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { FixtureDialog } from './index';
 import { AppConfig } from '../../../app.config';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 
 @Component({
     selector: 'fixture',
@@ -43,7 +45,8 @@ export class FixtureComponent implements OnInit {
         private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog,
-        public config: AppConfig) {
+        public config: AppConfig,
+        private spinnerService: Ng4LoadingSpinnerService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
     }
     ngOnInit() {
@@ -149,6 +152,7 @@ export class FixtureComponent implements OnInit {
     }
 
     registrarFecha() {
+        this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
         this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
@@ -156,9 +160,11 @@ export class FixtureComponent implements OnInit {
                 if (data) {
                     this.toastr.success('Se creo correctamente la fecha.', "Exito!");
                     this.limpiarCampos();
+                    this.spinnerService.hide();
                 }
             }, error => {
                 this.toastr.error("La fecha seleccionada ya esta creada, dirijase a modificación.", "Error!");
+                this.spinnerService.hide();
             }
         );
 
@@ -269,6 +275,10 @@ export class FixtureComponent implements OnInit {
 
     routeInterzonal() {
         this.router.navigate(['home/fixture-interzonal']);
+    }
+
+    routeCambioFechaInterzonal() {
+        this.router.navigate(['home/fixture-interzonal-fecha']);
     }
 
     verificarFecha() {
