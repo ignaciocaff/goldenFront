@@ -73,11 +73,6 @@ export class ZonaComponent implements OnInit {
             error => {
                 error.json()['Message'];
             });
-        if (this.id_fase == 3) {
-            this.cantidadZonas = 1;
-            this.armarZonas();
-        }
-
     }
 
     zonaA: any[] = [];
@@ -111,7 +106,7 @@ export class ZonaComponent implements OnInit {
         for (var i = 0; i < this.cantidadZonas; i++) {
             var zona = new Zona();
             if (this.id_fase == 3) {
-                zona.descripcion = 'PlayOff';
+                zona.descripcion = 'Playoff ' + this.intercambioLetraPorNumero((i + 1).toString());
             } else {
                 zona.descripcion = this.intercambioLetraPorNumero((i + 1).toString());
             }
@@ -155,61 +150,118 @@ export class ZonaComponent implements OnInit {
             contador = contador + 1;
         }
 
-        if (contador == this.cantidadZonas) {
+        if (contador == this.cantidadZonas && this.id_fase == 3) {
+            this.altaZonaPlayoff();
+        } else if (contador == this.cantidadZonas && this.id_fase != 3) {
             this.altaZona();
         } else {
             this.toastr.error("Es necesario completar todas las zonas que eligió", "Error!");
+
         }
     }
 
-    altaZona() {
+    altaZonaPlayoff() {
         for (var j = 0; j < this.zonas.length; j++) {
             switch (this.zonas[j].descripcion) {
-                case 'A':
+                case 'Playoff A':
                     for (var i = 0; i < this.zonaA.length; i++) {
                         this.lsEquiposA.push(new Equipo(this.zonaA[i].id_equipo, this.zonaA[i].nombre))
                     }
                     this.zonas[j].lsEquipos = this.lsEquiposA;
                     break;
-                case 'B':
+                case 'Playoff B':
                     for (var i = 0; i < this.zonaB.length; i++) {
                         this.lsEquiposB.push(new Equipo(this.zonaB[i].id_equipo, this.zonaB[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposB;
                     break;
-                case 'C':
+                case 'Playoff C':
                     for (var i = 0; i < this.zonaC.length; i++) {
                         this.lsEquiposC.push(new Equipo(this.zonaC[i].id_equipo, this.zonaC[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposC;
                     break;
-                case 'D':
+                case 'Playoff D':
                     for (var i = 0; i < this.zonaD.length; i++) {
                         this.lsEquiposD.push(new Equipo(this.zonaD[i].id_equipo, this.zonaD[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposD;
                     break;
-                case 'E':
+                case 'Playoff E':
                     for (var i = 0; i < this.zonaE.length; i++) {
                         this.lsEquiposE.push(new Equipo(this.zonaE[i].id_equipo, this.zonaE[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposE;
                     break;
-                case 'F':
+                case 'Playoff F':
                     for (var i = 0; i < this.zonaF.length; i++) {
                         this.lsEquiposF.push(new Equipo(this.zonaF[i].id_equipo, this.zonaF[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposF;
                     break;
-                case 'G':
+                case 'Playoff G':
                     for (var i = 0; i < this.zonaG.length; i++) {
                         this.lsEquiposG.push(new Equipo(this.zonaG[i].id_equipo, this.zonaG[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposG;
                     break;
-                case 'H':
+                case 'Playoff H':
                     for (var i = 0; i < this.zonaH.length; i++) {
                         this.lsEquiposH.push(new Equipo(this.zonaH[i].id_equipo, this.zonaH[i].nombre))
                     } this.zonas[j].lsEquipos = this.lsEquiposH;
                     break;
-                case 'PlayOff':
+            }
+        }
+
+        this.zonaService.create(this.zonas).subscribe(
+            data => {
+                if (data) {
+                    this.toastr.success('Las zonas se han creado', 'Éxito!');
+                    this.limpiarCampos();
+                }
+            },
+            error => {
+                this.toastr.error('Hubo un problema para crear las zonas', 'Error!');
+                this.limpiarCampos();
+            });
+    }
+    altaZona() {
+        for (var j = 0; j < this.zonas.length; j++) {
+            switch (this.zonas[j].descripcion) {
+                case 'A' || 'Playoff A':
                     for (var i = 0; i < this.zonaA.length; i++) {
                         this.lsEquiposA.push(new Equipo(this.zonaA[i].id_equipo, this.zonaA[i].nombre))
-                    } this.zonas[j].lsEquipos = this.lsEquiposA;
+                    }
+                    this.zonas[j].lsEquipos = this.lsEquiposA;
+                    break;
+                case 'B' || 'Playoff B':
+                    for (var i = 0; i < this.zonaB.length; i++) {
+                        this.lsEquiposB.push(new Equipo(this.zonaB[i].id_equipo, this.zonaB[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposB;
+                    break;
+                case 'C' || 'Playoff C':
+                    for (var i = 0; i < this.zonaC.length; i++) {
+                        this.lsEquiposC.push(new Equipo(this.zonaC[i].id_equipo, this.zonaC[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposC;
+                    break;
+                case 'D' || 'Playoff D':
+                    for (var i = 0; i < this.zonaD.length; i++) {
+                        this.lsEquiposD.push(new Equipo(this.zonaD[i].id_equipo, this.zonaD[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposD;
+                    break;
+                case 'E' || 'Playoff E':
+                    for (var i = 0; i < this.zonaE.length; i++) {
+                        this.lsEquiposE.push(new Equipo(this.zonaE[i].id_equipo, this.zonaE[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposE;
+                    break;
+                case 'F' || 'Playoff F':
+                    for (var i = 0; i < this.zonaF.length; i++) {
+                        this.lsEquiposF.push(new Equipo(this.zonaF[i].id_equipo, this.zonaF[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposF;
+                    break;
+                case 'G' || 'Playoff G':
+                    for (var i = 0; i < this.zonaG.length; i++) {
+                        this.lsEquiposG.push(new Equipo(this.zonaG[i].id_equipo, this.zonaG[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposG;
+                    break;
+                case 'H' || 'Playoff H':
+                    for (var i = 0; i < this.zonaH.length; i++) {
+                        this.lsEquiposH.push(new Equipo(this.zonaH[i].id_equipo, this.zonaH[i].nombre))
+                    } this.zonas[j].lsEquipos = this.lsEquiposH;
                     break;
             }
         }

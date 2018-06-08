@@ -31,6 +31,7 @@ export class ZonaVisualizacionComponent implements OnInit {
     lsEquiposH = new Array<Equipo>();
     esUltimoEquipo: Boolean = false;
     dibujarMensaje: Boolean = false;
+    mensajePlayoffActivo: Boolean = false;
 
     zonaA: any[] = [];
     zonaB: any[] = [];
@@ -59,24 +60,30 @@ export class ZonaVisualizacionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.zonaService.getAll(this.id_torneo).subscribe(
-            data => {
-                this.lsZonas = [];
-                for (var i = 0; i < data.length; i++) {
-                    let zona: Zona;
-                    zona = data[i];
-                    if (zona.torneo.id_torneo != null) {
-                        this.lsZonas.push(zona);
-                    }
-                }
-                if (this.lsZonas.length == 0) {
-                    this.dibujarMensaje = true;
-                }
-                this.armadoZonas();
-            }, error => {
 
-            }
-        );
+        if (this.id_fase != 3) {
+            this.zonaService.getAll(this.id_torneo).subscribe(
+                data => {
+                    this.lsZonas = [];
+                    for (var i = 0; i < data.length; i++) {
+                        let zona: Zona;
+                        zona = data[i];
+                        if (zona.torneo.id_torneo != null) {
+                            this.lsZonas.push(zona);
+                        }
+                    }
+                    if (this.lsZonas.length == 0) {
+                        this.dibujarMensaje = true;
+                    }
+                    this.armadoZonas();
+                }, error => {
+
+                }
+            );
+        }
+        else {
+            this.mensajePlayoffActivo = true;
+        }
     }
 
     armadoZonas() {
@@ -105,9 +112,6 @@ export class ZonaVisualizacionComponent implements OnInit {
                     break;
                 case 'H':
                     this.servicioZonasH(i);
-                    break;
-                case 'PlayOff':
-                    this.servicioZonasA(i);
                     break;
             }
         }

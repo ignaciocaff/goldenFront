@@ -5,30 +5,34 @@ import { FileService } from '../../../../services/entity-services/file.service';
 import { ParserService } from '../../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
-    Turno, IEquipo, IPartido, Partido
+    Turno, IEquipo, IPartido, Partido, Llave, Etapa
 } from '../../../../entities/index';
-import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../../services/entity-services/index';
+import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService, PlayoffService } from '../../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { FixtureDialog } from '.././index';
+import { FixtureDialog } from '../index';
 import { AppConfig } from '../../../../app.config';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+
 
 @Component({
-    selector: 'fixture-interzonal',
+    selector: 'playoff-fixture',
     moduleId: module.id,
-    templateUrl: './fixture-interzonal.component.html',
-    styleUrls: ['./fixture-interzonal.component.scss'],
+    templateUrl: './playoff-fixture.component.html',
+    styleUrls: ['./playoff-fixture.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [EquipoService, ZonaService]
 })
-export class FixtureInterzonalComponent implements OnInit {
+export class PlayoffFixtureComponent implements OnInit {
     dialogRef: MatDialogRef<FixtureDialog>;
     fecha = new Fecha();
     zona = new Zona();
     partidos = new Array<IPartido>();
     lsCanchas = new Array<Cancha>();
     horarios = new Array<HorarioFijo>();
+    lsLlaves = new Array<Llave>();
+    lsEtapas = new Array<Etapa>();
 
     equipos = new Array<IEquipo>();
     lsZonas = new Array<Zona>();
@@ -40,15 +44,38 @@ export class FixtureInterzonalComponent implements OnInit {
     id_fase: number;
     check: Boolean = false;
 
-    constructor(private fileService: FileService, public equipoService: EquipoService,
-        private router: Router, public zonaService: ZonaService, public toastr: ToastsManager,
-        public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
-        public fixtureService: FixtureService, public dialog: MatDialog,
-        public config: AppConfig) {
+    constructor(private fileService: FileService,
+        public equipoService: EquipoService,
+        private router: Router,
+        public zonaService: ZonaService,
+        public toastr: ToastsManager,
+        public horarioService: HorarioService,
+        public canchaService: CanchaService,
+        public parserService: ParserService,
+        public fixtureService: FixtureService,
+        public playoffService: PlayoffService,
+        public dialog: MatDialog,
+        public config: AppConfig,
+        private spinnerService: Ng4LoadingSpinnerService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.id_fase = Number(sessionStorage.getItem('fase'));
     }
     ngOnInit() {
+        this.zonaService.getAll(this.id_torneo).subscribe(
+            data => {
+                this.lsZonas = [];
+                for (var i = 0; i < data.length; i++) {
+                    let zona: Zona;
+                    zona = data[i];
+                    if (zona.torneo.id_torneo != null) {
+                        this.lsZonas.push(zona);
+                    }
+                }
+            }, error => {
+
+            }
+        );
+
         this.horarioService.getAll().subscribe(
             data => {
                 this.horarios = [];
@@ -56,6 +83,33 @@ export class FixtureInterzonalComponent implements OnInit {
                     var horario = new HorarioFijo();
                     horario = data[i];
                     this.horarios.push(horario);
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
+
+        this.playoffService.getEtapas().subscribe(
+            data => {
+                this.lsEtapas = [];
+                for (let i = 0; i < data.length; i++) {
+                    var etapa = new Etapa();
+                    etapa = data[i];
+                    this.lsEtapas.push(etapa);
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
+
+
+        this.playoffService.getLlaves().subscribe(
+            data => {
+                this.lsLlaves = [];
+                for (let i = 0; i < data.length; i++) {
+                    var llave = new Llave();
+                    llave = data[i];
+                    this.lsLlaves.push(llave);
                 }
             },
             error => {
@@ -76,24 +130,26 @@ export class FixtureInterzonalComponent implements OnInit {
             });
     }
 
-    public obtenerEquipos() {
+    public equiposPorZona(zona: Zona) {
         this.cantidadPartidos = null;
         this.partidos = [];
-        this.equipoService.getAllPorTorneo(this.id_torneo).subscribe(
+        this.equipoService.getAllPorZona(zona.id_zona).subscribe(
             data => {
                 this.equipos = [];
                 for (var j = 0; j < data.length; j++) {
                     var equipo = new IEquipo();
-                    equipo.id_equipo = data[j]['id_equipo'];
-                    equipo.nombre = data[j]['nombre'];
-                    equipo.logo = data[j]['logo'];
-                    this.equipos.push(equipo);
+                    if (this.id_torneo == data[j]['torneo']['id_torneo']) {
+                        equipo.id_equipo = data[j]['id_equipo'];
+                        equipo.nombre = data[j]['nombre'];
+                        equipo.logo = data[j]['logo'];
+                        this.equipos.push(equipo);
+                    }
                 }
                 for (let i = 0; i < this.equipos.length; i++) {
                     this.fileService.getImagesByEquipo(this.equipos[i].logo).subscribe(
                         data => {
-                            if (data['ThumbPath'] != null) {
-                                this.equipos[i].imagePath = data['ThumbPath'];
+                            if (data['ImagePath'] != null) {
+                                this.equipos[i].imagePath = data['ImagePath'];
                             }
                         },
                         error => {
@@ -134,16 +190,19 @@ export class FixtureInterzonalComponent implements OnInit {
     }
 
     registrarFecha() {
+        this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
-        lsPartidos = this.parserService.parseInterezonales(this.partidos, this.fecha);
-        this.fixtureService.createInterzonal(lsPartidos, this.id_torneo, this.id_fase).subscribe(
+        lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
+        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
             data => {
                 if (data) {
                     this.toastr.success('Se creo correctamente la fecha.', "Exito!");
                     this.limpiarCampos();
+                    this.spinnerService.hide();
                 }
             }, error => {
                 this.toastr.error("La fecha seleccionada ya esta creada, dirijase a modificación.", "Error!");
+                this.spinnerService.hide();
             }
         );
 

@@ -18,6 +18,12 @@ export class ParserService {
             partido.horario_fijo = partidos[i].horario;
             partido.cancha = partidos[i].cancha;
             partido.fecha.fecha = fecha.fecha;
+            if (partidos[i].etapa) {
+                partido.etapa = partidos[i].etapa;
+            }
+            if (partidos[i].llave) {
+                partido.llave = partidos[i].llave;
+            }
             partido.fecha.id_fecha = fecha.id_fecha;
             partido.estado.id_estado = 1;
             if (partidos[i].id_partido > 0) {

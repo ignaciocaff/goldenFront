@@ -46,3 +46,4 @@ export * from './posiciones';
 export * from './posiciones_zona';
 export * from './goleador';
 export * from './estados_torneo';
+export * from './etapa_playoff';

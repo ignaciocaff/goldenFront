@@ -44,8 +44,8 @@
 
       </div>
       <div class="dropdown">
-        <button class="dropbtn" (click)="zonasVisualizacion_Click()">ZONAS</button>
-
+        <button *ngIf="id_fase != 3" class="dropbtn" (click)="zonasVisualizacion_Click()">ZONAS</button>
+        <button *ngIf="id_fase == 3" class="dropbtn" (click)="playoffVisualizacion_Click()">PLAYOFF</button>
       </div>
       <div class="dropdown">
         <button *ngIf="user != null" class="dropbtn">ADMINISTRACIÓN</button>

@@ -39,6 +39,7 @@ export class FixtureComponent implements OnInit {
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
     id_torneo: number;
+    id_fase: number;
     check: Boolean = false;
 
     constructor(private fileService: FileService, public equipoService: EquipoService,
@@ -48,6 +49,7 @@ export class FixtureComponent implements OnInit {
         public config: AppConfig,
         private spinnerService: Ng4LoadingSpinnerService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
+        this.id_fase = Number(sessionStorage.getItem('fase'));
     }
     ngOnInit() {
         this.zonaService.getAll(this.id_torneo).subscribe(
@@ -279,6 +281,14 @@ export class FixtureComponent implements OnInit {
 
     routeCambioFechaInterzonal() {
         this.router.navigate(['home/fixture-interzonal-fecha']);
+    }
+
+    routePlayoffFixture() {
+        this.router.navigate(['home/playoff-fixture']);
+    }
+
+    routePlayoffFixtureUpdate() {
+        this.router.navigate(['home/playoff-fixture-update']);
     }
 
     verificarFecha() {

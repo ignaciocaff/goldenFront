@@ -34,8 +34,8 @@ export class FixtureService {
     obtenerPartidosClub(obj: any) {
         return this.http.post(this.config.apiUrl + 'fecha/obtenerPartidos', obj).map((response: Response) => response.json())
     }
-    eliminarPartido(obj: any) {
-        return this.http.post(this.config.apiUrl + 'fecha/eliminarPartido', obj).map((response: Response) => response.json())
+    eliminarPartido(obj: any, id_fase: number) {
+        return this.http.post(this.config.apiUrl + 'fecha/eliminarPartido/' + id_fase, obj).map((response: Response) => response.json())
     }
 
     obtenerFechas(id_zona: number, id_torneo: number) {

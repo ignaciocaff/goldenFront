@@ -1,9 +1,9 @@
-import { Component, ViewChild, Input, SimpleChange, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, Input, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationExtras, ActivatedRoute } from '@angular/router';
 import { FormGroupDirective } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Usuario, Torneo } from '../../entities/index'
-import { OnChanges, AfterViewChecked } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OnChanges, AfterViewChecked, DoCheck } from '@angular/core/src/metadata/lifecycle_hooks';
 import { SharedService, TorneoService } from '../../services/index';
 import { TorneoEmitter, TorneoLSEmitter } from '../../services/common-services/index';
 @Component({
@@ -13,10 +13,11 @@ import { TorneoEmitter, TorneoLSEmitter } from '../../services/common-services/i
     styleUrls: ['./nav.component.css'],
     providers: [TorneoService]
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, DoCheck {
     torneo: Torneo = new Torneo();
     user: Usuario;
     public lsTorneos = new Array<Torneo>();
+    id_fase: Number;
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -26,20 +27,29 @@ export class NavComponent implements OnInit {
         private torneoLsEmitter: TorneoLSEmitter
     ) {
         this.user = JSON.parse(sessionStorage.getItem('currentUser'));
-
+       
         this.torneoLsEmitter.torneoUpdate.subscribe((value) => {
             this.lsTorneos.push(value);
         }
         );
     }
 
+    ngDoCheck(){
+        if (this.id_fase !== Number(sessionStorage.getItem('fase'))) {
+            this.id_fase = Number(sessionStorage.getItem('fase'));
+            this.ngOnInit();
+        }
+    }
+
     ngOnInit() {
+        this.id_fase = Number(sessionStorage.getItem('fase'));
         this.userService.newUserSubject.subscribe(
             data => this.user = data
         );
 
         this.torneoService.getVigentes().subscribe(
             data => {
+                this.lsTorneos = [];
                 for (var i = 0; i < data.length; i++) {
                     let torneo = data[i];
                     this.lsTorneos.push(torneo);
@@ -118,6 +128,10 @@ export class NavComponent implements OnInit {
 
     zonasVisualizacion_Click() {
         this.router.navigate(['home/visualizacion-zonas']);
+    }
+
+    playoffVisualizacion_Click() {
+
     }
 
     setTorneo(nombre: String, id_torneo: Number) {

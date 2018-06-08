@@ -14,7 +14,8 @@
     <div>
       <div *ngIf="equiposSinZona.length > 0">
         <div>
-          <hr class="hr-text textTitle" data-content="Equipos sin zona">
+          <hr *ngIf="id_fase !=3" class="hr-text textTitle" data-content="Equipos sin zona">
+          <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Equipos sin Playoff">
         </div>
         <ngx-dnd-container [model]="equiposSinZona" dropZone="multiple-equipos" [copy]="false" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           (drop)="zona(equiposSinZona)">
@@ -26,7 +27,7 @@
       </div>
       <div *ngIf="zonaA.length >0" fxFlex="25%">
         <div>
-          <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="PlayOff">
+          <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff A">
           <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona A">
         </div>
         <ngx-dnd-container [model]="zonaA" dropZone="multiple-target-a" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
@@ -39,7 +40,8 @@
       </div>
       <div *ngIf="zonaB.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona B">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff B">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona B">
         </div>
         <ngx-dnd-container [model]="zonaB" dropZone="multiple-target-b" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaB)">
@@ -51,7 +53,8 @@
       </div>
       <div *ngIf="zonaC.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona C">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff C">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona C">
         </div>
         <ngx-dnd-container [model]="zonaC" dropZone="multiple-target-c" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaC)">
@@ -63,7 +66,8 @@
       </div>
       <div *ngIf="zonaD.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona D">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff D">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona D">
         </div>
         <ngx-dnd-container [model]="zonaD" dropZone="multiple-target-d" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaD)">
@@ -75,7 +79,8 @@
       </div>
       <div *ngIf="zonaE.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona E">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff E">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona E">
         </div>
         <ngx-dnd-container [model]="zonaE" dropZone="multiple-target-e" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaE)">
@@ -87,7 +92,8 @@
       </div>
       <div *ngIf="zonaF.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona F">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff F">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona F">
         </div>
         <ngx-dnd-container [model]="zonaF" dropZone="multiple-target-f" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaF)">
@@ -99,7 +105,8 @@
       </div>
       <div *ngIf="zonaG.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona G">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff G">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona G">
         </div>
         <ngx-dnd-container [model]="zonaG" dropZone="multiple-target-g" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaG)">
@@ -111,7 +118,8 @@
       </div>
       <div *ngIf="zonaH.length >0" fxFlex="25%">
         <div>
-          <hr class="hr-text textTitle" data-content="Zona H">
+            <hr *ngIf="id_fase ==3" class="hr-text textTitle" data-content="Playoff H">
+            <hr *ngIf="id_fase != 3" class="hr-text textTitle" data-content="Zona H">
         </div>
         <ngx-dnd-container [model]="zonaH" dropZone="multiple-target-h" [dropZones]="['multiple-target-a', 'multiple-target-b','multiple-target-c','multiple-target-d','multiple-target-e','multiple-target-f','multiple-target-g','multiple-target-h','multiple-equipos']"
           [removeOnSpill]="true" [moves]="zona(zonaH)">

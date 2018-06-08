@@ -1,30 +1,30 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmitter, HostListener, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { FileService } from '../../../services/entity-services/file.service';
-import { ParserService } from '../../../services/common-services/index';
+import { FileService } from '../../../../services/entity-services/file.service';
+import { ParserService } from '../../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
-    Turno, IEquipo, IPartido, Partido
-} from '../../../entities/index';
-import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService } from '../../../services/entity-services/index';
+    Turno, IEquipo, IPartido, Partido, Llave, Etapa
+} from '../../../../entities/index';
+import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService, PlayoffService } from '../../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { FixtureDialog } from './index';
-import { ConfirmationDialog } from '../../common/dialog/index';
-import { AppConfig } from '../../../app.config';
+import { FixtureDialog } from '../index';
+import { ConfirmationDialog } from '../../../common/dialog/index';
+import { AppConfig } from '../../../../app.config';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
-    selector: 'fixture-update',
+    selector: 'playoff-fixture-update',
     moduleId: module.id,
-    templateUrl: './fixture-update.component.html',
-    styleUrls: ['./fixture-update.component.scss'],
+    templateUrl: './playoff-fixture-update.component.html',
+    styleUrls: ['./playoff-fixture-update.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [EquipoService, ZonaService]
 })
-export class FixtureUpdateComponent implements OnInit {
+export class PlayoffFixtureUpdateComponent implements OnInit {
     dialogRef: MatDialogRef<FixtureDialog>;
     dialogRefBorrado: MatDialogRef<ConfirmationDialog>;
 
@@ -33,7 +33,8 @@ export class FixtureUpdateComponent implements OnInit {
     partidos = new Array<IPartido>();
     lsCanchas = new Array<Cancha>();
     horarios = new Array<HorarioFijo>();
-
+    lsLlaves = new Array<Llave>();
+    lsEtapas = new Array<Etapa>();
     equipos = new Array<IEquipo>();
     lsZonas = new Array<Zona>();
     local = new Array<IEquipo>();
@@ -50,6 +51,7 @@ export class FixtureUpdateComponent implements OnInit {
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog,
         public config: AppConfig,
+        public playoffService: PlayoffService,
         private spinnerService: Ng4LoadingSpinnerService) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
         this.id_fase = Number(sessionStorage.getItem('fase'));
@@ -67,7 +69,7 @@ export class FixtureUpdateComponent implements OnInit {
                     }
                 }
             }, error => {
-
+                error.json()['Message'];
             }
         );
 
@@ -78,6 +80,33 @@ export class FixtureUpdateComponent implements OnInit {
                     var horario = new HorarioFijo();
                     horario = data[i];
                     this.horarios.push(horario);
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
+
+        this.playoffService.getEtapas().subscribe(
+            data => {
+                this.lsEtapas = [];
+                for (let i = 0; i < data.length; i++) {
+                    var etapa = new Etapa();
+                    etapa = data[i];
+                    this.lsEtapas.push(etapa);
+                }
+            },
+            error => {
+                error.json()['Message'];
+            });
+
+
+        this.playoffService.getLlaves().subscribe(
+            data => {
+                this.lsLlaves = [];
+                for (let i = 0; i < data.length; i++) {
+                    var llave = new Llave();
+                    llave = data[i];
+                    this.lsLlaves.push(llave);
                 }
             },
             error => {
@@ -105,7 +134,7 @@ export class FixtureUpdateComponent implements OnInit {
         this.equiposPorZona(zona);
         this.cantidadPartidos = null;
         this.partidos = [];
-        this.fixtureService.obtenerPartidos(this.fecha, this.id_torneo, this.zona.id_zona, ).subscribe(
+        this.fixtureService.obtenerPartidos(this.fecha, this.id_torneo, this.zona.id_zona).subscribe(
             data => {
                 this.partidos = data;
             }, error => {
@@ -265,6 +294,12 @@ export class FixtureUpdateComponent implements OnInit {
         this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
+
+        for (var j = 0; j < lsPartidos.length; j++) {
+            lsPartidos[j].etapa.id_etapa = this.lsEtapas.find(x => x.descripcion == lsPartidos[j].etapa.descripcion).id_etapa;
+            lsPartidos[j].llave.id_llave = this.lsLlaves.find(x => x.descripcion == lsPartidos[j].llave.descripcion).id_llave;
+        }
+
         this.fixtureService.update(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
             data => {
                 this.toastr.success('Se actualizo correctamente la fecha.', "Exito!");
@@ -279,8 +314,11 @@ export class FixtureUpdateComponent implements OnInit {
 
     verificacionComponentes() {
         for (var i = 0; i < this.partidos.length; i++) {
+            this.partidos[i].etapa.id_etapa = this.lsEtapas.find(x => x.descripcion == this.partidos[i].etapa.descripcion).id_etapa;
+            this.partidos[i].llave.id_llave = this.lsLlaves.find(x => x.descripcion == this.partidos[i].llave.descripcion).id_llave;
             if (this.partidos[i].local.length == 0 || this.partidos[i].visitante.length == 0 ||
-                this.partidos[i].cancha.id_cancha == null || this.partidos[i].horario.id_horario == null) {
+                this.partidos[i].cancha.id_cancha == null || this.partidos[i].horario.id_horario == null
+                || this.partidos[i].etapa.id_etapa == null || this.partidos[i].llave.id_llave == null) {
                 this.check = false;
             } else {
                 this.check = true;
@@ -353,15 +391,4 @@ export class FixtureUpdateComponent implements OnInit {
             this.dialogRefBorrado = null;
         });
     }
-
-    /*verificarFecha() {
-        if (this.fecha.fecha != null && this.zona.id_zona != null) {
-            this.fixtureService.verificarFecha(this.fecha, this.zona.id_zona, this.id_torneo).subscribe(
-                data => {
-                }, error => {
-                    this.toastr.error('La fecha elegida ya fue creada, seleccione otra opción', 'Error');
-                }
-            );
-        }
-    }*/
 }

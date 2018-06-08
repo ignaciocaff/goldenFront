@@ -15,7 +15,7 @@ import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
 import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
 import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
-import {ZonaVisualizacionComponent} from './common/zona/visualizacion/index';
+import { ZonaVisualizacionComponent } from './common/zona/visualizacion/index';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { MultiSelectModule } from 'primeng/primeng';
@@ -31,7 +31,7 @@ import { ConfirmationDialog } from './common/dialog/index';
 import { NoticiaCargaComponent } from './common/noticia/index';
 import {
   CategoriaNoticiaService, NoticiaService, CanchaService,
-  HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, SancionService, PartidoService, PosicionesService
+  HorarioService, FixtureService, ReglaTorneoService, SancionEquipoService, SancionService, PartidoService, PosicionesService, PlayoffService
 } from '../services/entity-services/index';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { CKEDITOR_VALUE_ACCESSOR } from 'ngx-ckeditor/lib/src/ck-editor.component';
@@ -61,6 +61,7 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
 import { CanActivateRouteGuard } from './can-activate-route.guard'
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
+import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent } from './common/fixture/playoff/index'
 import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
@@ -120,7 +121,9 @@ import { OwlModule } from 'ngx-owl-carousel';
     FaseComponent,
     ResultadoisualizacionComponent,
     ZonaVisualizacionComponent,
-    FixtureUpdateFechaInterzonalComponent
+    FixtureUpdateFechaInterzonalComponent,
+    PlayoffFixtureComponent,
+    PlayoffFixtureUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -149,7 +152,7 @@ import { OwlModule } from 'ngx-owl-carousel';
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionService
-    , PartidoService, SancionEquipoService, PosicionesService, CanActivateRouteGuard, CanActivateRouteGuardRepre],
+    , PartidoService, SancionEquipoService, PosicionesService, PlayoffService, CanActivateRouteGuard, CanActivateRouteGuardRepre],
   exports: [HeaderComponent, NavComponent, AsideComponent, SectionComponent,
     FooterComponent, EscudosComponent, HomeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]

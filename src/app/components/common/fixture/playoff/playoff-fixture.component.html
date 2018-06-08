@@ -8,14 +8,14 @@
     <li class="nav-item">
         <a class="nav-link" (click)="routeCambioFecha()">Cambio Fecha</a>
     </li>
-    <li class="nav-item active">
-        <a class="nav-link active" (click)="routeInterzonal()">Interzonal</a>
+    <li class="nav-item">
+        <a class="nav-link" (click)="routeInterzonal()">Interzonal</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" (click)="routeCambioFechaInterzonal()">Cambio Fecha Interzonal</a>
     </li>
-    <li *ngIf="id_fase == 3" class="nav-item">
-        <a class="nav-link" (click)="routePlayoffFixture()">Playoff</a>
+    <li *ngIf="id_fase == 3" class="nav-item active">
+        <a class="nav-link active" (click)="routePlayoffFixture()">Playoff</a>
     </li>
     <li *ngIf="id_fase == 3" class="nav-item">
         <a class="nav-link" (click)="routePlayoffFixtureUpdate()">Modificación Playoff</a>
@@ -24,14 +24,30 @@
 <div class="row">
     <div class="col-md-3 col-sm-3">
         <div class="form-group has-feedback">
-            <label class="control-label">Fecha</label>
+            <label class="control-label">Fecha Playoff</label>
             <div class="inputGroupContainer">
                 <div class="input-group date">
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </span>
-                    <input [(ngModel)]="fecha.fecha" name="fecha" class="form-control" (blur)="obtenerEquipos()" (ngModelChange)="fecha.fecha = $event"
-                        type="date" />
+                    <input [(ngModel)]="fecha.fecha" name="fecha" class="form-control" (ngModelChange)="fecha.fecha = $event" type="date" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+            <label class="control-label">Playoff</label>
+            <div class="inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-list"></i>
+                    </span>
+                    <select [(ngModel)]="zona" name="zona" [disabled]="fecha.fecha == null" required class="form-control selectpicker" (blur)="verificarFecha();"
+                        (ngModelChange)="equiposPorZona(zona)">
+                        <option value="null">Elija su opción</option>
+                        <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -44,7 +60,7 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                     </span>
-                    <input [(ngModel)]="cantidadPartidos" [disabled]="!fecha.fecha" name="cantidadPartidos" required class="form-control" type="number"
+                    <input [(ngModel)]="cantidadPartidos" [disabled]="!zona.id_zona" name="cantidadPartidos" required class="form-control" type="number"
                         (blur)="dibujarPartidos()">
                 </div>
             </div>
@@ -127,6 +143,42 @@
                                             <select [(ngModel)]="partido.cancha" name="cancha" required (change)="compararHorarios(partido)" class="form-control">
                                                 <option value=" ">Elija su opción</option>
                                                 <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label">Etapa</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-list"></i>
+                                            </span>
+                                            <select [(ngModel)]="partido.etapa" name="etapa" required class="form-control">
+                                                <option value=" ">Elija su opción</option>
+                                                <option *ngFor="let etapa of lsEtapas" [ngValue]="etapa">{{etapa.descripcion}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="form-group has-feedback">
+                                    <label class="control-label">Llave</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="glyphicon glyphicon-list"></i>
+                                            </span>
+                                            <select [(ngModel)]="partido.llave" name="llave" required class="form-control">
+                                                <option value=" ">Elija su opción</option>
+                                                <option *ngFor="let llave of lsLlaves" [ngValue]="llave">{{llave.descripcion}}</option>
                                             </select>
                                         </div>
                                     </div>

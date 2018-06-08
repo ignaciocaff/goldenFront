@@ -32,7 +32,7 @@ export class FaseComponent {
         this.id_fase = Number(sessionStorage.getItem('fase'));
         this.lsFases.push({ id_fase: 1, descripcion: 'Primera Fase' });
         this.lsFases.push({ id_fase: 2, descripcion: 'Segunda Fase' });
-        this.lsFases.push({ id_fase: 3, descripcion: 'PlayOff' });
+        this.lsFases.push({ id_fase: 3, descripcion: 'Playoff' });
 
         if (this.id_fase == 1) {
             this.lsFases.splice(0, 1);

@@ -14,6 +14,12 @@
   <li class="nav-item active">
     <a class="nav-link active" (click)="routeCambioFechaInterzonal()">Cambio Fecha Interzonal</a>
   </li>
+  <li *ngIf="id_fase == 3" class="nav-item">
+    <a class="nav-link" (click)="routePlayoffFixture()">Playoff</a>
+  </li>
+  <li *ngIf="id_fase == 3" class="nav-item">
+    <a class="nav-link" (click)="routePlayoffFixtureUpdate()">Modificación Playoff</a>
+  </li>
 </ul>
 <div class="row">
   <div class="col-md-3 col-sm-3">
@@ -43,8 +49,7 @@
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-calendar"></i>
           </span>
-          <input [(ngModel)]="nuevaFecha" name="nuevaFecha"
-            class="form-control" type="date" />
+          <input [(ngModel)]="nuevaFecha" name="nuevaFecha" class="form-control" type="date" />
         </div>
       </div>
     </div>

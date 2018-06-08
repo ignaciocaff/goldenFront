@@ -1,6 +1,6 @@
 import {
     IEquipo, Cancha, HorarioFijo, Gol, Sancion, Jugador, Llave, Fecha
-    , Resultado, ResultadoZona
+    , Resultado, ResultadoZona, Etapa
 } from './index';
 
 export class IPartido {
@@ -22,6 +22,7 @@ export class IPartido {
     llave: Llave;
     desImagenes: boolean;
     desImagenesV: boolean;
+    etapa: Etapa;
     constructor(
         id_partido?: number,
         local?: Array<IEquipo>,
@@ -39,6 +40,7 @@ export class IPartido {
         jugadorLocal?: Jugador,
         jugadorVisitante?: Jugador,
         llave?: Llave,
+        etapa?: Etapa,
         desImagenes?: boolean,
         desImagenesV?: boolean
     ) {
@@ -83,6 +85,9 @@ export class IPartido {
 
         if (llave) this.llave = llave;
         else this.llave = new Llave();
+
+        if (etapa) this.etapa = etapa;
+        else this.etapa = new Etapa();
 
         if (desImagenes) this.desImagenes = desImagenes;
         else this.desImagenes = null;

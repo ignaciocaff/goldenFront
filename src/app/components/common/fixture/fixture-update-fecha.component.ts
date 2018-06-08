@@ -34,6 +34,7 @@ export class FixtureUpdateFechaComponent implements OnInit {
     lsZonas = new Array<Zona>();
     fixture = new Fixture();
     id_torneo: number;
+    id_fase: number;
     fecha = new Fecha();
     nuevaFecha = new Fecha();
     id_fecha_cambiar: number;
@@ -44,7 +45,7 @@ export class FixtureUpdateFechaComponent implements OnInit {
         public horarioService: HorarioService, public canchaService: CanchaService, public parserService: ParserService,
         public fixtureService: FixtureService, public dialog: MatDialog) {
         this.id_torneo = Number(sessionStorage.getItem('id_torneo'));
-
+        this.id_fase = Number(sessionStorage.getItem('fase'));
     }
     ngOnInit() {
         this.fixture.fechas = [];
@@ -190,7 +191,11 @@ export class FixtureUpdateFechaComponent implements OnInit {
         this.router.navigate(['home/fixture-interzonal']);
     }
 
-    routeCambioFechaInterzonal(){
+    routeCambioFechaInterzonal() {
         this.router.navigate(['home/fixture-interzonal-fecha']);
+    }
+
+    routePlayoffFixture() {
+        this.router.navigate(['home/playoff-fixture']);
     }
 }

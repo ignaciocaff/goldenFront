@@ -14,6 +14,12 @@
   <li class="nav-item">
     <a class="nav-link" (click)="routeCambioFechaInterzonal()">Cambio Fecha Interzonal</a>
   </li>
+  <li *ngIf="id_fase == 3" class="nav-item">
+    <a class="nav-link" (click)="routePlayoffFixture()">Playoff</a>
+  </li>
+  <li *ngIf="id_fase == 3" class="nav-item">
+    <a class="nav-link" (click)="routePlayoffFixtureUpdate()">Modificación Playoff</a>
+  </li>
 </ul>
 <div class="row">
   <div class="col-md-3 col-sm-3">
