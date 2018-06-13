@@ -131,7 +131,7 @@ export class NavComponent implements OnInit, DoCheck {
     }
 
     playoffVisualizacion_Click() {
-
+        this.router.navigate(['home/playoff']);
     }
 
     setTorneo(nombre: String, id_torneo: Number) {
