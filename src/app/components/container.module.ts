@@ -61,7 +61,7 @@ import { SancionEquipoCargaComponent, SancionEquipoBajaComponent } from './commo
 import { CanActivateRouteGuard } from './can-activate-route.guard'
 import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
-import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent } from './common/fixture/playoff/index'
+import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent } from './common/playoff/index'
 import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({

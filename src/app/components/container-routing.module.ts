@@ -36,7 +36,7 @@ import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep';
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
 import { FixtureInterzonalComponent, FixtureUpdateFechaInterzonalComponent } from "./common/fixture/interzonal/index";
 import { FaseComponent } from './common/fase/index';
-import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent } from './common/fixture/playoff/index'
+import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent } from './common/playoff/index'
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home/noticias' },

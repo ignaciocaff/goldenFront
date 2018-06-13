@@ -1,19 +1,19 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmitter, HostListener, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { FileService } from '../../../../services/entity-services/file.service';
-import { ParserService } from '../../../../services/common-services/index';
+import { FileService } from '../../../services/entity-services/file.service';
+import { ParserService } from '../../../services/common-services/index';
 import {
     Torneo, TipoTorneo, Modalidad, Regla, Categoria, Equipo, Zona, Fixture, Fecha, Cancha, HorarioFijo,
     Turno, IEquipo, IPartido, Partido, Llave, Etapa
-} from '../../../../entities/index';
-import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService, PlayoffService } from '../../../../services/entity-services/index';
+} from '../../../entities/index';
+import { EquipoService, ZonaService, HorarioService, CanchaService, FixtureService, PlayoffService } from '../../../services/entity-services/index';
 import { ToastsManager, Toast, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import * as moment from 'moment';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { FixtureDialog } from '../index';
-import { ConfirmationDialog } from '../../../common/dialog/index';
-import { AppConfig } from '../../../../app.config';
+import { FixtureDialog } from '../fixture/index';
+import { ConfirmationDialog } from '../../common/dialog/index';
+import { AppConfig } from '../../../app.config';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
