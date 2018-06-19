@@ -42,6 +42,7 @@ export class ResultadoComponent implements OnInit {
     lsZonas = new Array<Zona>();
     local = new Array<IEquipo>();
     visitante = new Array<IEquipo>();
+    lsEquiposPartido = new Array<IEquipo>();
     cantidadPartidos: number;
     imagesEscudos: Array<any> = [];
     cantidadZonas: number;
@@ -166,6 +167,12 @@ export class ResultadoComponent implements OnInit {
                         this.partidos[i].jugadorVisitante.acumAmarillas = 0;
                         this.partidos[i].jugadorVisitante.acumRojas = 0;
                         this.partidos[i].desImagenesV = true;
+                    }
+
+                    if (this.id_fase == 3) {
+                        this.partidos[i].equiposPartido = new Array<IEquipo>();
+                        this.partidos[i].equiposPartido.push(this.partidos[i].local[0]);
+                        this.partidos[i].equiposPartido.push(this.partidos[i].visitante[0]);
                     }
                 }
             }, error => {
@@ -340,9 +347,19 @@ export class ResultadoComponent implements OnInit {
                     lsPartidos[i].resultado_zona.ganador.id_equipo = lsPartidos[i].visitante.id_equipo;
                     lsPartidos[i].resultado_zona.perdedor.id_equipo = lsPartidos[i].local.id_equipo;
                 }
+
+                if (this.id_fase == 3 && lsPartidos[i].ganadorPlayoff.id_equipo) {
+                    if (lsPartidos[i].ganadorPlayoff.id_equipo == lsPartidos[i].local.id_equipo) {
+                        lsPartidos[i].resultado_zona.ganador.id_equipo = lsPartidos[i].local.id_equipo;
+                        lsPartidos[i].resultado_zona.perdedor.id_equipo = lsPartidos[i].visitante.id_equipo;
+                    } else {
+                        lsPartidos[i].resultado_zona.ganador.id_equipo = lsPartidos[i].visitante.id_equipo;
+                        lsPartidos[i].resultado_zona.perdedor.id_equipo = lsPartidos[i].local.id_equipo;
+                    }
+                    lsPartidos[i].resultado_zona.empate = null;
+                }
             }
         }
-
         this.partidoService.create(lsPartidos, this.id_fase, this.id_torneo, this.esInterzonal).subscribe(
             data => {
                 if (data) {
@@ -616,6 +633,9 @@ export class ResultadoComponent implements OnInit {
     limpiarComp() {
     }
 
+    public onSelectPenales(value: boolean) {
+        console.error('CHECK' + value);
+    }
 
     routeAlta() {
         this.router.navigate(['home/resultado-carga']);

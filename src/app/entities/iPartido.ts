@@ -23,6 +23,10 @@ export class IPartido {
     desImagenes: boolean;
     desImagenesV: boolean;
     etapa: Etapa;
+    equiposPartido: Array<IEquipo>;
+    ganadorPlayoff: IEquipo;
+    penales: boolean;
+    detallePenales: String;
     constructor(
         id_partido?: number,
         local?: Array<IEquipo>,
@@ -42,10 +46,17 @@ export class IPartido {
         llave?: Llave,
         etapa?: Etapa,
         desImagenes?: boolean,
-        desImagenesV?: boolean
+        desImagenesV?: boolean,
+        equiposPartido?: Array<IEquipo>,
+        ganadorPlayoff?: IEquipo,
+        penales?: boolean,
+        detallePenales?: String
     ) {
         if (id_partido) this.id_partido = id_partido;
         else this.id_partido = null;
+
+        if (ganadorPlayoff) this.ganadorPlayoff = ganadorPlayoff;
+        else this.ganadorPlayoff = new IEquipo();
 
         if (local) this.local = local;
         else this.local = new Array<IEquipo>();
@@ -77,6 +88,9 @@ export class IPartido {
         if (lsSancionesVisitante) this.lsSancionesVisitante = lsSancionesVisitante
         else this.lsSancionesVisitante = new Array<Sancion>();
 
+        if (equiposPartido) this.equiposPartido = equiposPartido
+        else this.equiposPartido = new Array<IEquipo>();
+
         if (jugadorLocal) this.jugadorLocal = jugadorLocal
         else this.jugadorLocal = new Jugador();
 
@@ -100,6 +114,14 @@ export class IPartido {
 
         if (resultado_zona) this.resultado_zona = resultado_zona;
         else this.resultado_zona = new ResultadoZona();
+
+        if (penales) this.penales = penales;
+        else this.penales = null;
+
+        if (detallePenales) this.detallePenales = detallePenales;
+        else this.detallePenales = null;
+
+
     }
 
     public get golesVisitante(): Array<Gol> {

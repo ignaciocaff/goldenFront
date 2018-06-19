@@ -219,6 +219,41 @@
                   </div>
                 </div>
               </div>
+              <div *ngIf="id_fase == 3 && (partido.lsGolesLocal.length == partido.lsGolesVisitante.length)" class="row">
+                <div class="col-md-4 col-sm-4 col-md-offset-1 col-sm-offset-1">
+                  <h5>Ganador</h5>
+                  <div class="form-group has-feedback">
+                    <div class="inputGroupContainer">
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-list"></i>
+                        </span>
+                        <select [(ngModel)]="partido.ganadorPlayoff" name="ganador" class="form-control">
+                          <option value=" ">Elija su opción</option>
+                          <option *ngFor="let ganador of partido.equiposPartido" [ngValue]="ganador">{{ganador.nombre}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-1">
+                  <h5>Penales</h5>
+                  <input [(ngModel)]="partido.penales" name="penales" type="checkbox">
+                </div>
+                <div *ngIf="partido.penales" class="col-md-4 col-sm-4">
+                    <h5>Detalle</h5>
+                    <div class="form-group has-feedback">
+                        <div class="inputGroupContainer">
+                          <div class="input-group">
+                            <span class="input-group-addon">
+                              <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                            <input [(ngModel)]="partido.detallePenales" name="detallePenales" class="form-control" type="text">
+                          </div>
+                        </div>
+                      </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

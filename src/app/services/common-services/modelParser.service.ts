@@ -101,7 +101,15 @@ export class ParserService {
             } else {
                 partido.lsGoleadoresVisitantes = new Array<Gol>();
             }
+            //Checkeos para playoff
+            if (partidos[i].lsGolesLocal.length == partidos[i].lsGolesVisitante.length) {
+                partido.ganadorPlayoff.id_equipo = partidos[i].ganadorPlayoff.id_equipo;
+            }
 
+            if (partidos[i].penales) {
+                partido.penales = partidos[i].penales;
+                partido.detallePenales = partidos[i].detallePenales;
+            }
             //Sanciones
 
             if (partidos[i].lsSancionesLocal) {
@@ -130,6 +138,7 @@ export class ParserService {
                 partido.visitante.torneo.id_torneo = id_torneo;
             }
             partido.llave = partidos[i].llave;
+            partido.etapa = partidos[i].etapa;
             partido.fecha.id_fecha = partidos[i].fecha.id_fecha;
             partido.fecha.fecha = partidos[i].fecha.fecha;
             lsPartidos.push(partido);

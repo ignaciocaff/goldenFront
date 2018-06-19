@@ -24,6 +24,9 @@ export class Partido {
     public lsSancionesVisitante: Array<Sancion>;
     public llave: Llave;
     public etapa: Etapa;
+    ganadorPlayoff: Equipo;
+    penales: boolean;
+    detallePenales: String;
     constructor(
         id_partido?: number,
         duracion?: string,
@@ -44,7 +47,10 @@ export class Partido {
         lsSancionesLocal?: Array<Sancion>,
         lsSancionesVisitante?: Array<Sancion>,
         llave?: Llave,
-        etapa?: Etapa
+        etapa?: Etapa,
+        ganadorPlayoff?: Equipo,
+        penales?: boolean,
+        detallePenales?: String
     ) {
         if (id_partido) this.id_partido = id_partido;
         else this.id_partido = null;
@@ -108,5 +114,14 @@ export class Partido {
 
         if (lsSancionesVisitante) this.lsSancionesVisitante = lsSancionesVisitante
         else this.lsSancionesVisitante = new Array<Sancion>();
+
+        if (penales) this.penales = penales;
+        else this.penales = null;
+
+        if (detallePenales) this.detallePenales = detallePenales;
+        else this.detallePenales = null;
+
+        if (ganadorPlayoff) this.ganadorPlayoff = ganadorPlayoff;
+        else this.ganadorPlayoff = new Equipo();
     }
 }
