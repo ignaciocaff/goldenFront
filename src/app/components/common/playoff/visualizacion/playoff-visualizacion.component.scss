@@ -1,35 +1,110 @@
-button {
-  margin: 20px 5px 20px 5px;
-  background-color: rgb(41, 41, 41);
-  color: rgb(170, 145, 93);
-  font-weight: bold;
-  border-radius: 50%;
-  width: 2.5em;
-  height: 2.5em;
+.playoff {
+  width: 100%;
 }
 
-button:hover {
-  background-color: rgb(35, 35, 35);
-  color: rgb(170, 145, 93);
-  font-weight: bolder;
+.etapa {
+  float: left;
 }
 
-button:focus {
-  background-color: rgb(170, 145, 93);
-  color: rgb(35, 35, 35);
-  font-weight: bolder;
+.texto-fase {
+  font-weight: 800;
+  font-size: 14px;
 }
 
-.button,
-button,
-.button:active,
-button:active,
-.button:focus,
-button:focus,
-.button:hover,
-button:hover {
-  border: none !important;
-  outline: none !important;
+.col-md-12,
+.col-md-3,
+.col-md-6,
+.row {
+  padding: 0px;
+  margin: 0px;
+}
+
+.golesEquipo {
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  margin-top: 3px;
+}
+
+.nombreEquipo {
+  text-align: center;
+  margin-top: 9px;
+}
+
+.equipo {
+  width: 235px;
+  height: 40px;
+  background: rgb(35, 35, 35);
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  border-style: solid;
+  border-width: 1px;
+/*   border-color: rgb(170, 145, 93);
+ */  border-radius: 5px;
+}
+
+
+.local {
+  border-left: 9px solid rgb(170, 145, 93);
+  /* border-width: 10px;  
+  border-color: red; */
+}
+
+.escudo img {
+  height: 38px;
+  width: 38px;
+}
+
+.ganador {
+  background: rgb(125, 125, 125);
+}
+
+.partido {
+  padding: 5px 50px 5px 0px;
+}
+
+/*Cuartos de final*/
+
+.cuartos-final .partido {
+  height: 100px;
+  background: right top no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAABkAQMAAAD+JvEYAAAAA3NCSVQICAjb4U/gAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAAsSAAALEgHS3X78AAAAFnRFWHRDcmVhdGlvbiBUaW1lADEwLzEwLzEyGAKeIwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNAay06AAAAAnSURBVCiRY/gPBgcYhjoNBPZQ/v4hQjeAHD0I3IGXRgpXqsbXEKEB2yGL0P7iVKIAAAAASUVORK5CYII=);
+}
+
+.cuartos-final .equipo {}
+
+.cuartos-final .equipo:first-child {
+  margin-bottom: 5px;
+}
+
+/*Semifinales*/
+
+.semifinal .partido {
+  padding-top: 30px;
+  height: 185px;
+  background: right top no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAC5AQMAAABQhv7pAAAAA3NCSVQICAjb4U/gAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAAsSAAALEgHS3X78AAAAFnRFWHRDcmVhdGlvbiBUaW1lADEwLzEwLzEyGAKeIwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNAay06AAAAArSURBVDiNY/gPBgcYRumBpYHAHsrfP0oPKboBFHmDwB2jNAk0Un77PwxoAJbztvAUr3KAAAAAAElFTkSuQmCC);
+}
+
+.semifinal .equipo:first-child {
+  margin-bottom: 70px;
+}
+
+/*Final*/
+
+.final .partido {
+  padding-top: 85px;
+  height: 350px;
+  background: top right no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAFeAQMAAAD9sN5nAAAAA3NCSVQICAjb4U/gAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAAsSAAALEgHS3X78AAAAFnRFWHRDcmVhdGlvbiBUaW1lADEwLzEwLzEyGAKeIwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNAay06AAAAA0SURBVEiJY/gPBgcYRulRepQmngYCeyh//yg9So/Sg45uAGXSQeCOUXqUHrI0Uj33fxjQAEJS8U50LMSKAAAAAElFTkSuQmCC);
+}
+
+.final .equipo:first-child {
+  margin-bottom: 180px;
+}
+
+/* Campeón*/
+
+.campeon {
+  padding-top: 200px;
 }
 
 .hr-text {
@@ -67,63 +142,4 @@ button:hover {
   color: rgb(170, 145, 93);
   text-align: center;
   font-size: xx-large;
-}
-
-span.cancha {
-  font-size: 17px;
-}
-
-span.horario {
-  font-size: 22px;
-}
-
-.centro {
-  margin-top: 25px;
-}
-
-span.fecha {
-  font-size: x-large;
-  font-weight: bold;
-}
-
-span.dia {
-  font-size: x-large;
-}
-
-h3 {
-  font-size: xx-large;
-  font-weight: 900;
-}
-
-.estiloFixture {
-   background-color: rgb(240,240,240); 
-}
-
-.playoff-resultado{
-  background-color:red;
-}
-.playoff-escudo{
-background-color:gray;
-}
-
-.partido {
-  margin-left: 0px;
-  margin-right: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-img {
-  height: 180px;
-  width: 180px;
-}
-
-@media screen and (max-width: 768px) {
-  span.cancha {font-size: 12px;}
-  span.horario {font-size: 12px; }
-  span.fecha { font-size: small; font-weight: bold; margin-bottom: 5px;}
-  span.dia { font-size: small; margin-bottom: 5px;}
-  h3 { font-size: x-large; font-weight: 900; margin-top: 0px;}
-  img { height: 100px; width: 100px;}
-  .centro { margin-top: 10px;}
 }
