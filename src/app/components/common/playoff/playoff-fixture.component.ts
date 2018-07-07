@@ -15,7 +15,6 @@ import { FixtureDialog } from '../fixture/index';
 import { AppConfig } from '../../../app.config';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
-
 @Component({
     selector: 'playoff-fixture',
     moduleId: module.id,
@@ -210,10 +209,11 @@ export class PlayoffFixtureComponent implements OnInit {
 
     verificacionComponentes() {
         for (var i = 0; i < this.partidos.length; i++) {
-            if (this.partidos[i].local.length == 0 || this.partidos[i].visitante.length == 0) {
-                this.check = false;
-            } else {
+            if (this.partidos[i].local.length != 0 && this.partidos[i].visitante.length != 0
+                && this.partidos[i].cancha.id_cancha && this.partidos[i].etapa.id_etapa && this.partidos[i].horario.id_horario && this.partidos[i].llave.id_llave) {
                 this.check = true;
+            } else {
+                this.check = false;
             }
         }
         return this.check;

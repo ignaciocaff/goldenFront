@@ -121,7 +121,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-list"></i>
                                             </span>
-                                            <select [(ngModel)]="partido.horario" name="horario" required class="form-control selectpicker" (change)="compararHorarios(partido)"
+                                            <select [(ngModel)]="partido.horario" (blur)="verificacionComponentes()" name="horario" required class="form-control selectpicker" (change)="compararHorarios(partido)"
                                                 required=''>
                                                 <option value="null">Elija su opción</option>
                                                 <option *ngFor="let horario of horarios" [ngValue]="horario">{{horario.inicio}}-{{horario.fin}}</option>
@@ -140,7 +140,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-list"></i>
                                             </span>
-                                            <select [(ngModel)]="partido.cancha" name="cancha" required (change)="compararHorarios(partido)" class="form-control">
+                                            <select [(ngModel)]="partido.cancha" (blur)="verificacionComponentes()" name="cancha" required (change)="compararHorarios(partido)" class="form-control">
                                                 <option value=" ">Elija su opción</option>
                                                 <option *ngFor="let cancha of lsCanchas" [ngValue]="cancha">{{cancha.nombre}}</option>
                                             </select>
@@ -158,7 +158,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-list"></i>
                                             </span>
-                                            <select [(ngModel)]="partido.etapa" name="etapa" required class="form-control">
+                                            <select [(ngModel)]="partido.etapa" (blur)="verificacionComponentes()" name="etapa" required class="form-control">
                                                 <option value=" ">Elija su opción</option>
                                                 <option *ngFor="let etapa of lsEtapas" [ngValue]="etapa">{{etapa.descripcion}}</option>
                                             </select>
@@ -176,7 +176,7 @@
                                             <span class="input-group-addon">
                                                 <i class="glyphicon glyphicon-list"></i>
                                             </span>
-                                            <select [(ngModel)]="partido.llave" name="llave" required class="form-control">
+                                            <select [(ngModel)]="partido.llave" (blur)="verificacionComponentes()" name="llave" required class="form-control">
                                                 <option value=" ">Elija su opción</option>
                                                 <option *ngFor="let llave of lsLlaves" [ngValue]="llave">{{llave.descripcion}}</option>
                                             </select>
