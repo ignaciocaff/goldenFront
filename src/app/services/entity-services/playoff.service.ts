@@ -14,4 +14,8 @@ export class PlayoffService {
     getLlaves() {
         return this.http.get(this.config.apiUrl + 'llaves/todas').map((response: Response) => response.json());
     }
+
+    getPlayoffsTorneo(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'playoff/' + id_torneo).map((response: Response) => response.json());
+    }
 }
