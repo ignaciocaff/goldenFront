@@ -41,6 +41,9 @@ export class FixtureService {
     obtenerFechas(id_zona: number, id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'fecha/obtenerTodas/' + id_zona + '/' + id_torneo).map((response: Response) => response.json())
     }
+    obtenerFechasParaSanciones(id_torneo: number) {
+        return this.http.get(this.config.apiUrl + 'fecha/obtenerTodasParaSancion/' + id_torneo).map((response: Response) => response.json())
+    }
 
     obtenerFechasInterzonales(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'fecha/obtenerFInterzonales/' + id_torneo).map((response: Response) => response.json())
