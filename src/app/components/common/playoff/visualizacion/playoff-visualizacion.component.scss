@@ -8,7 +8,8 @@
 
 .texto-fase {
   font-weight: 800;
-  font-size: 14px;
+  font-size: 25px;
+  color: rgb(222, 222, 222);
 }
 
 .col-md-12,
@@ -34,16 +35,16 @@
 .equipo {
   width: 235px;
   height: 40px;
-  background: rgb(35, 35, 35);
+  background: rgb(125, 125, 125);
   color: white;
   text-align: center;
   font-weight: 500;
   border-style: solid;
   border-width: 1px;
-/*   border-color: rgb(170, 145, 93);
- */  border-radius: 5px;
+  /*   border-color: rgb(170, 145, 93);
+ */
+  border-radius: 5px;
 }
-
 
 .local {
   border-left: 9px solid rgb(170, 145, 93);
@@ -57,7 +58,7 @@
 }
 
 .ganador {
-  background: rgb(125, 125, 125);
+  background: rgb(41, 41, 41);
 }
 
 .partido {
@@ -80,13 +81,13 @@
 /*Semifinales*/
 
 .semifinal .partido {
-  padding-top: 30px;
+  padding: 30px 50px 0px 0px;
   height: 185px;
   background: right top no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAC5AQMAAABQhv7pAAAAA3NCSVQICAjb4U/gAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAAsSAAALEgHS3X78AAAAFnRFWHRDcmVhdGlvbiBUaW1lADEwLzEwLzEyGAKeIwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNAay06AAAAArSURBVDiNY/gPBgcYRumBpYHAHsrfP0oPKboBFHmDwB2jNAk0Un77PwxoAJbztvAUr3KAAAAAAElFTkSuQmCC);
 }
 
 .semifinal .equipo:first-child {
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 }
 
 /*Final*/
@@ -94,17 +95,17 @@
 .final .partido {
   padding-top: 85px;
   height: 350px;
-  background: top right no-repeat url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAFeAQMAAAD9sN5nAAAAA3NCSVQICAjb4U/gAAAABlBMVEUAAAD///+l2Z/dAAAACXBIWXMAAAsSAAALEgHS3X78AAAAFnRFWHRDcmVhdGlvbiBUaW1lADEwLzEwLzEyGAKeIwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNAay06AAAAA0SURBVEiJY/gPBgcYRulRepQmngYCeyh//yg9So/Sg45uAGXSQeCOUXqUHrI0Uj33fxjQAEJS8U50LMSKAAAAAElFTkSuQmCC);
+  background: top right no-repeat url(../../../../../assets/final.png);
 }
 
 .final .equipo:first-child {
-  margin-bottom: 180px;
+  margin-bottom: 145px;
 }
 
 /* Campeón*/
 
 .campeon {
-  padding-top: 200px;
+  padding-top: 175px;
 }
 
 .hr-text {
