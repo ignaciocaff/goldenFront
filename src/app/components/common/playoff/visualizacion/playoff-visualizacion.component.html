@@ -19,7 +19,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center">CUARTOS</div>
+        <div class="col-md-3 text-center" *ngIf="playoffA[0].length">CUARTOS</div>
         <div class="col-md-3 text-center">SEMIS</div>
         <div class="col-md-3 text-center">FINAL</div>
         <div class="col-md-3 text-center">CAMPEÓN</div>
@@ -147,14 +147,14 @@
     </div>
   </div>
 
-  <div class="row playoff" *ngIf="playoffB[0].length || playoffB[1].length || playoffB[2].length">
+  <div class="row playoff" *ngIf="playoffB.length">
     <div class="row">
       <hr class="hr-text titulo" data-content="PLAYOFF B">
     </div>
     <div class="row">
       <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center">CUARTOS DE FINAL</div>
-        <div class="col-md-3 text-center">SEMIFINAL</div>
+        <div class="col-md-3 text-center" *ngIf="playoffB[0].length">CUARTOS</div>
+        <div class="col-md-3 text-center">SEMIS</div>
         <div class="col-md-3 text-center">FINAL</div>
         <div class="col-md-3 text-center">CAMPEÓN</div>
       </div>
@@ -281,14 +281,14 @@
     </div>
   </div>
 
-  <div class="row playoff" *ngIf="playoffC[0].length || playoffC[1].length || playoffC[2].length">
+  <div class="row playoff" *ngIf="playoffC.length">
     <div class="row">
       <hr class="hr-text titulo" data-content="PLAYOFF C">
     </div>
     <div class="row">
       <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center">CUARTOS DE FINAL</div>
-        <div class="col-md-3 text-center">SEMIFINAL</div>
+        <div class="col-md-3 text-center" *ngIf="playoffC[0].length">CUARTOS</div>
+        <div class="col-md-3 text-center">SEMIS</div>
         <div class="col-md-3 text-center">FINAL</div>
         <div class="col-md-3 text-center">CAMPEÓN</div>
       </div>
@@ -415,14 +415,14 @@
     </div>
   </div>
 
-  <div class="row playoff" *ngIf="playoffD[0].length || playoffD[1].length || playoffD[2].length">
+  <div class="row playoff" *ngIf="playoffD.length">
     <div class="row">
       <hr class="hr-text titulo" data-content="PLAYOFF D">
     </div>
     <div class="row">
       <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center">CUARTOS DE FINAL</div>
-        <div class="col-md-3 text-center">SEMIFINAL</div>
+        <div class="col-md-3 text-center" *ngIf="playoffD[0].length"> CUARTOS</div>
+        <div class="col-md-3 text-center">SEMIS</div>
         <div class="col-md-3 text-center">FINAL</div>
         <div class="col-md-3 text-center">CAMPEÓN</div>
       </div>
