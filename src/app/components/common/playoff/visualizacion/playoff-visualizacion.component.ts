@@ -21,41 +21,49 @@ export class PlayoffVisualizacionComponent implements OnInit {
     playoffA: any[] = [];
     cuartosA: any[] = [];
     semisA: any[] = [];
+    tercerYCuartoA: any[] = [];
     finalA: any[] = [];
 
     playoffB: any[] = [];
     cuartosB: any[] = [];
     semisB: any[] = [];
+    tercerYCuartoB: any[] = [];
     finalB: any[] = [];
 
     playoffC: any[] = [];
     cuartosC: any[] = [];
     semisC: any[] = [];
+    tercerYCuartoC: any[] = [];
     finalC: any[] = [];
 
     playoffD: any[] = [];
     cuartosD: any[] = [];
     semisD: any[] = [];
+    tercerYCuartoD: any[] = [];
     finalD: any[] = [];
 
     playoffE: any[] = [];
     cuartosE: any[] = [];
     semisE: any[] = [];
+    tercerYCuartoE: any[] = [];
     finalE: any[] = [];
 
     playoffF: any[] = [];
     cuartosF: any[] = [];
     semisF: any[] = [];
+    tercerYCuartoF: any[] = [];
     finalF: any[] = [];
 
     playoffG: any[] = [];
     cuartosG: any[] = [];
     semisG: any[] = [];
+    tercerYCuartoG: any[] = [];
     finalG: any[] = [];
 
     playoffH: any[] = [];
     cuartosH: any[] = [];
     semisH: any[] = [];
+    tercerYCuartoH: any[] = [];
     finalH: any[] = [];
 
     constructor(
@@ -131,10 +139,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffA = [];
         this.cuartosA = [];
         this.semisA = [];
+        this.tercerYCuartoA = [];
         this.finalA = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -148,6 +157,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisA.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoA.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoA.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalA.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -159,6 +173,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffA.push(this.cuartosA);
         this.playoffA.push(this.semisA);
+        this.playoffA.push(this.tercerYCuartoA);
         this.playoffA.push(this.finalA);
     }
 
@@ -166,10 +181,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffB = [];
         this.cuartosB = [];
         this.semisB = [];
+        this.tercerYCuartoB = [];
         this.finalB = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -183,6 +199,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisB.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoB.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoB.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalB.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -194,6 +215,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffB.push(this.cuartosB);
         this.playoffB.push(this.semisB);
+        this.playoffB.push(this.tercerYCuartoB);
         this.playoffB.push(this.finalB);
     }
 
@@ -201,10 +223,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffC = [];
         this.cuartosC = [];
         this.semisC = [];
+        this.tercerYCuartoC = [];
         this.finalC = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -218,6 +241,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisC.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoC.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoC.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalC.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -229,6 +257,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffC.push(this.cuartosC);
         this.playoffC.push(this.semisC);
+        this.playoffC.push(this.tercerYCuartoC);
         this.playoffC.push(this.finalC);
     }
 
@@ -236,10 +265,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffD = [];
         this.cuartosD = [];
         this.semisD = [];
+        this.tercerYCuartoD = [];
         this.finalD = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -253,6 +283,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisD.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                            case "Tercer puesto":
+                            this.tercerYCuartoD.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoD.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalD.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -264,6 +299,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffD.push(this.cuartosD);
         this.playoffD.push(this.semisD);
+        this.playoffD.push(this.tercerYCuartoD);
         this.playoffD.push(this.finalD);
     }
 
@@ -271,10 +307,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffE = [];
         this.cuartosE = [];
         this.semisE = [];
+        this.tercerYCuartoE = [];
         this.finalE = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -288,6 +325,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisE.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoE.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoE.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalE.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -299,6 +341,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffE.push(this.cuartosE);
         this.playoffE.push(this.semisE);
+        this.playoffE.push(this.tercerYCuartoE);
         this.playoffE.push(this.finalE);
     }
 
@@ -306,10 +349,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffF = [];
         this.cuartosF = [];
         this.semisF = [];
+        this.tercerYCuartoF = [];
         this.finalF = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -323,6 +367,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisF.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoF.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoF.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalF.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -334,6 +383,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffF.push(this.cuartosF);
         this.playoffF.push(this.semisF);
+        this.playoffF.push(this.tercerYCuartoF);
         this.playoffF.push(this.finalF);
     }
 
@@ -341,10 +391,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffG = [];
         this.cuartosG = [];
         this.semisG = [];
+        this.tercerYCuartoG = [];
         this.finalG = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -358,6 +409,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisG.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoG.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoG.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalG.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -369,6 +425,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffG.push(this.cuartosG);
         this.playoffG.push(this.semisG);
+        this.playoffG.push(this.tercerYCuartoG);
         this.playoffG.push(this.finalG);
     }
 
@@ -376,10 +433,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffH = [];
         this.cuartosH = [];
         this.semisH = [];
+        this.tercerYCuartoH = [];
         this.finalH = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = 0; g < this.lsPartidos.length; g++) {
+            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -393,6 +451,11 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisH.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
+                        case "Tercer puesto":
+                            this.tercerYCuartoH.push(this.lsPartidos[g]);
+                            this.lsPartidos.splice(g, 1);
+                            this.tercerYCuartoH.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
+                            break;
                         case 'Final':
                             this.finalH.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
@@ -404,6 +467,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         }
         this.playoffH.push(this.cuartosH);
         this.playoffH.push(this.semisH);
+        this.playoffH.push(this.tercerYCuartoH);
         this.playoffH.push(this.finalH);
     }
 }
