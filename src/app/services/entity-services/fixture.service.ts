@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { AppConfig } from '../../app.config';
-import { Categoria } from '../../entities/index';
+import { Categoria, ParametrosFixture } from '../../entities/index';
 
 @Injectable()
 export class FixtureService {
@@ -75,6 +75,14 @@ export class FixtureService {
 
     obtenerFechasJugadas(id_torneo: number) {
         return this.http.get(this.config.apiUrl + 'fecha/obtenerFechasJugadas/' + id_torneo).map((response: Response) => response.json())
+    }
+
+    generarFixtureAutomatico(parametros: ParametrosFixture) {
+        return this.http.post(this.config.apiUrl + 'fixtureAutomatico/torneo', parametros).map((response: Response) => response.json())
+    }
+
+    obtenerTiposDeFixture() {
+        return this.http.get(this.config.apiUrl + 'fixtureAutomatico/obtenerTipos/').map((response: Response) => response.json())
     }
 
 }

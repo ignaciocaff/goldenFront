@@ -37,6 +37,7 @@ import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/in
 import { FixtureInterzonalComponent, FixtureUpdateFechaInterzonalComponent } from "./common/fixture/interzonal/index";
 import { FaseComponent } from './common/fase/index';
 import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent, PlayoffVisualizacionComponent } from './common/playoff/index'
+import { FixtureAutomaticoComponent } from './common/fixture/automatico/index';
 
 const homeRoutes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'home/noticias' },
@@ -127,6 +128,10 @@ const homeRoutes: Routes = [
             },
             {
                 path: 'fixture-interzonal-fecha', component: FixtureUpdateFechaInterzonalComponent,
+                canActivate: [CanActivateRouteGuard]
+            },
+            {
+                path: 'fixture-automatico', component: FixtureAutomaticoComponent,
                 canActivate: [CanActivateRouteGuard]
             },
             {

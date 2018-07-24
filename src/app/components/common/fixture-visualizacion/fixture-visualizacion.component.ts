@@ -1,4 +1,4 @@
-import { Component, Directive, ViewChild, OnInit } from '@angular/core';
+import { Component, Directive, ViewChild, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Fixture, Fecha, IPartido } from '../../../entities/index';
 import { EquipoService, FixtureService } from '../../../services/entity-services/index';
@@ -15,7 +15,7 @@ import * as moment from 'moment';
     providers: []
 })
 export class FixtureVisualizacionComponent implements OnInit {
-
+    @Input() fixtureAutomatico: Fixture;
     lsFechas = new Array<Fecha>();
     id_torneo: number;
     fixture = new Fixture();
@@ -36,28 +36,34 @@ export class FixtureVisualizacionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.fixtureService.obtenerFechasInterzonales(this.id_torneo).subscribe(
-            data => {
-                if (data) {
-                    this.lsFechas = [];
-                    this.lsFechas = data;
+        if (this.fixtureAutomatico != undefined) {
+            this.lsFechas = [];
+            this.lsFechas = this.fixtureAutomatico.fechas;
+            this.mostrarFixtureFecha(this.lsFechas[0], 0);
+        } else {
+            this.fixtureService.obtenerFechasInterzonales(this.id_torneo).subscribe(
+                data => {
+                    if (data) {
+                        this.lsFechas = [];
+                        this.lsFechas = data;
 
-                    for (let i = this.lsFechas.length - 1; i >= 0; i--) {
-                        for (let j = 0; j < this.lsFechas.length; j++) {
-                            if (this.lsFechas[i].fecha == this.lsFechas[j].fecha
-                                && this.lsFechas[i].id_fecha != this.lsFechas[j].id_fecha) {
-                                this.lsFechas.splice(i, 1);
-                                break;
+                        for (let i = this.lsFechas.length - 1; i >= 0; i--) {
+                            for (let j = 0; j < this.lsFechas.length; j++) {
+                                if (this.lsFechas[i].fecha == this.lsFechas[j].fecha
+                                    && this.lsFechas[i].id_fecha != this.lsFechas[j].id_fecha) {
+                                    this.lsFechas.splice(i, 1);
+                                    break;
+                                }
                             }
                         }
+                        if (this.lsFechas.length)
+                            this.mostrarProximaFecha();
                     }
-                    if (this.lsFechas.length)
-                        this.mostrarProximaFecha();
-                }
-            },
-            error => {
-                this.lsFechas = [];
-            });
+                },
+                error => {
+                    this.lsFechas = [];
+                });
+        }
     }
 
     mostrarProximaFecha() {
@@ -65,7 +71,7 @@ export class FixtureVisualizacionComponent implements OnInit {
         let fecha = this.lsFechas[0];
         let posicion: number;
 
-        for (let i = this.lsFechas.length -1 ; i >= 0; i--) {
+        for (let i = this.lsFechas.length - 1; i >= 0; i--) {
             if (moment(this.lsFechas[i].fecha).isSameOrAfter(hoy, 'day')) {
                 fecha = this.lsFechas[i];
                 posicion = i;
@@ -74,23 +80,30 @@ export class FixtureVisualizacionComponent implements OnInit {
             }
         }
         this.mostrarFixtureFecha(fecha, posicion);
-//         document.getElementById("btnFecha3").focus();
-     }
+        //         document.getElementById("btnFecha3").focus();
+    }
 
     mostrarFixtureFecha(fecha: Fecha, i: number) {
         this.lsPartidos = [];
-        this.fixtureService.obtenerFixtureFecha(fecha, this.id_torneo).subscribe(
-            data => {
-                if (data) {
-                    this.lsPartidos = data;
-                    this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
-                    this.numeroFecha = i + 1;
-                    this.fechaSeleccionada = true;
-                }
-            },
-            error => {
-                error.json()['Message'];
-            });
+        if (this.fixtureAutomatico != undefined) {
+           this.lsPartidos = fecha.iPartidos;     
+           this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
+           this.numeroFecha = i + 1;
+           this.fechaSeleccionada = true;
+        } else {
+            this.fixtureService.obtenerFixtureFecha(fecha, this.id_torneo).subscribe(
+                data => {
+                    if (data) {
+                        this.lsPartidos = data;
+                        this.diaVisual = this.formatearFecha(new Date(fecha.fecha));
+                        this.numeroFecha = i + 1;
+                        this.fechaSeleccionada = true;
+                    }
+                },
+                error => {
+                    error.json()['Message'];
+                });
+        }
     }
 
     formatearFecha(fecha: Date) {
