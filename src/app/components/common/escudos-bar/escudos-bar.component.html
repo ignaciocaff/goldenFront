@@ -2,7 +2,7 @@
   <div *ngIf="nombre != null" class="col-sm-2 col-md-2 margin-name">
     {{nombre.toUpperCase()}} LEAGUE
   </div>
-  <div *ngIf="lsEquipos.length > 20" id="header" style="padding:0" class="col-sm-8 col-md-8">
+  <div *ngIf="lsEquipos.length >= 20" id="header" style="padding:0" class="col-sm-8 col-md-8">
     <!-- You can use owl-carousel selector to include its component -->
     <owl-carousel [options]="{items: 20, dots: false, navigation: false, autoplay:true, autoplayTimeout:2500, loop:true, autoplayHoverPause:true}"
       [items]="lsEquipos" [carouselClasses]="['owl-theme', 'row', 'sliding']">
