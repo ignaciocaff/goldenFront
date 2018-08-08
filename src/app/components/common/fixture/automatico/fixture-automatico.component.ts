@@ -27,6 +27,9 @@ export class FixtureAutomaticoComponent implements OnInit {
     lsTiposFixture = new Array<TipoFixture>();
     visualizarZonas = false;
     lsZonas = new Array<Zona>();
+    formValido: boolean = false;
+    fechaMinima = new Date().toJSON().split('T')[0];
+
     constructor(
         private router: Router, public toastr: ToastsManager,
         public fixtureService: FixtureService, public zonaService: ZonaService, public dialog: MatDialog,
@@ -100,10 +103,28 @@ export class FixtureAutomaticoComponent implements OnInit {
             this.parametros.esInterzonal = false;
         } else if (tipoDeFixture.id_tipo == 2) {
             this.visualizarZonas = false;
-            this.parametros.esInterzonal = false;
-        } else {
             this.parametros.esInterzonal = true;
+        } else {
+            this.parametros.esInterzonal = false;
             this.visualizarZonas = false;
+        }
+
+        if (tipoDeFixture.id_tipo) {
+            if (tipoDeFixture.id_tipo == 1 && !this.parametros.zona.id_zona) {
+                this.formValido = false;
+            } else {
+                this.formValido = true;
+            }
+        } else {
+            this.formValido = false;
+        }
+    }
+
+    formValidation() {
+        if (this.parametros.zona.id_zona && this.parametros.tipoDeFixture.id_tipo) {
+            this.formValido = true;
+        } else {
+            this.formValido = false;
         }
     }
 }
