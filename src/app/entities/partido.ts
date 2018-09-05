@@ -52,7 +52,7 @@ export class Partido {
         ganadorPlayoff?: Equipo,
         penales?: boolean,
         detallePenales?: String,
-        lsGolesABorrar?: Array<Gol>;
+        lsGolesABorrar?: Array<Gol>
     ) {
         if (id_partido) this.id_partido = id_partido;
         else this.id_partido = null;
