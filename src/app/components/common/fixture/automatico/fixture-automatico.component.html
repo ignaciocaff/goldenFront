@@ -1,0 +1,102 @@
+<div class="flex-item row-fluid">
+  <form #usuarioForm="ngForm" name="usuarioForm">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <legend>
+          Generación de fixture automático
+        </legend>
+      </div>
+      <div class="col-md-6 col-sm-6">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Fecha inicio fixture</label>
+          <div class="inputGroupContainer">
+            <div class="input-group date">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-calendar"></i>
+              </span>
+              <input [(ngModel)]="parametros.fechaInicioFixture" required name="fechaInicioFixture" class="form-control" type="date" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <div class="form-group has-feedback">
+          <label class="control-label">Tipo de fixture</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="parametros.tipoDeFixture" name="tipoDeFixture" [disabled]="!parametros.fechaInicioFixture" required
+                class="form-control selectpicker" (ngModelChange)="tipoDeFixture(parametros.tipoDeFixture)">
+                <option value="null">Elija su opción</option>
+                <option *ngFor="let tipo of lsTiposFixture" [ngValue]="tipo">{{tipo.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Días entre partidos</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-home"></i>
+              </span>
+              <input [(ngModel)]="parametros.cantidadDiasEntrePartidos" name="cantidadDiasEntrePartidos" required class="form-control"
+                type="number">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="visualizarZonas" class="row">
+      <div class="col-md-3 col-sm-3">
+        <div class="form-group has-feedback">
+          <label class="control-label">Zona</label>
+          <div class="inputGroupContainer">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-list"></i>
+              </span>
+              <select [(ngModel)]="parametros.zona" name="zona" (ngModelChange)="formValidation()" class="form-control selectpicker">
+                <option value="null">Elija su opción</option>
+                <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div *ngIf="parametros.tipoDeFixture.id_tipo == 1">
+          <b>Genera cruces y fechas para una sola zona, siempre y cuando tenga número de equipos par.</b>
+        </div>
+        <div *ngIf="parametros.tipoDeFixture.id_tipo == 2">
+          <b>Genera cruces y fechas para todas las zonas del torneo, siendo el número de zonas par, y número de equipos por
+            zona impar.
+          </b>
+        </div>
+        <div *ngIf="parametros.tipoDeFixture.id_tipo == 3">
+          <b>Genera cruces y fechas para todas las zonas del torneo, siendo el número de zonas par o impar, y número de equipos
+            por zona par.</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <button (click)="visualizarFixture()" [disabled]="usuarioForm.invalid || !formValido" type="button" class="btn btn-primary">Generar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -63,6 +63,7 @@ import { CanActivateRouteGuardRepre } from './can-activate-route.guard.rep'
 import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/index';
 import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent, PlayoffVisualizacionComponent } from './common/playoff/index'
 import { OwlModule } from 'ngx-owl-carousel';
+import { FixtureAutomaticoComponent, FixtureAutomaticoDialog } from './common/fixture/automatico/index';
 
 @NgModule({
   declarations: [
@@ -124,7 +125,9 @@ import { OwlModule } from 'ngx-owl-carousel';
     FixtureUpdateFechaInterzonalComponent,
     PlayoffFixtureComponent,
     PlayoffFixtureUpdateComponent,
-    PlayoffVisualizacionComponent
+    PlayoffVisualizacionComponent,
+    FixtureAutomaticoComponent,
+    FixtureAutomaticoDialog
   ],
   imports: [
     BrowserModule,
@@ -149,7 +152,7 @@ import { OwlModule } from 'ngx-owl-carousel';
     Ng4LoadingSpinnerModule.forRoot(),
     OwlModule
   ],
-  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog, SancionDialog, SancionDialogV],
+  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog, SancionDialog, SancionDialogV, FixtureAutomaticoDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionService

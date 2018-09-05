@@ -134,6 +134,10 @@ export class NavComponent implements OnInit, DoCheck {
         this.router.navigate(['home/playoff']);
     }
 
+    fixtureAutomatico_Click(){
+        this.router.navigate(['home/fixture-automatico']);
+    }
+
     setTorneo(nombre: String, id_torneo: Number) {
         this.torneoService.getByName(nombre).subscribe(
             data => {
