@@ -724,6 +724,7 @@ export class ResultadoUpdateComponent implements OnInit {
         this.partido = null;
         this.zona = null;
         this.equipo = null;
+        this.lsGolesABorrar = [];
         this.ngOnInit();
     }
 
