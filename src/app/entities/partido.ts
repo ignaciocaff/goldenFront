@@ -27,6 +27,7 @@ export class Partido {
     ganadorPlayoff: Equipo;
     penales: boolean;
     detallePenales: String;
+    lsGolesABorrar: Array<Gol>;
     constructor(
         id_partido?: number,
         duracion?: string,
@@ -50,7 +51,8 @@ export class Partido {
         etapa?: Etapa,
         ganadorPlayoff?: Equipo,
         penales?: boolean,
-        detallePenales?: String
+        detallePenales?: String,
+        lsGolesABorrar?: Array<Gol>;
     ) {
         if (id_partido) this.id_partido = id_partido;
         else this.id_partido = null;
@@ -102,6 +104,9 @@ export class Partido {
 
         if (etapa) this.etapa = etapa;
         else this.etapa = new Etapa();
+
+        if (lsGolesABorrar) this.lsGolesABorrar = lsGolesABorrar;
+        else this.lsGolesABorrar = new Array<Gol>();
 
         if (lsGoleadoresVisitantes) this.lsGoleadoresVisitantes = lsGoleadoresVisitantes;
         else this.lsGoleadoresVisitantes = new Array<Gol>();

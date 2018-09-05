@@ -103,7 +103,7 @@ export class ParserService {
             }
             //Checkeos para playoff
             if (partidos[i].lsGolesLocal.length == partidos[i].lsGolesVisitante.length) {
-                if(partidos[i].ganadorPlayoff != null){
+                if (partidos[i].ganadorPlayoff != null) {
                     partido.ganadorPlayoff.id_equipo = partidos[i].ganadorPlayoff.id_equipo;
                 }
             }
@@ -180,6 +180,11 @@ export class ParserService {
             partido.lsGoleadoresVisitantes = new Array<Gol>();
         }
 
+        if (partidoI.lsGolesABorrar) {
+            partido.lsGolesABorrar = partidoI.lsGolesABorrar;
+        } else {
+            partido.lsGolesABorrar = new Array<Gol>();
+        }
         //Sanciones
 
         if (partidoI.lsSancionesLocal) {

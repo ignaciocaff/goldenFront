@@ -27,6 +27,7 @@ export class IPartido {
     ganadorPlayoff: IEquipo;
     penales: boolean;
     detallePenales: String;
+    lsGolesABorrar: Array<Gol>;
     constructor(
         id_partido?: number,
         local?: Array<IEquipo>,
@@ -50,7 +51,8 @@ export class IPartido {
         equiposPartido?: Array<IEquipo>,
         ganadorPlayoff?: IEquipo,
         penales?: boolean,
-        detallePenales?: String
+        detallePenales?: String,
+        lsGolesABorrar?: Array<Gol>
     ) {
         if (id_partido) this.id_partido = id_partido;
         else this.id_partido = null;
@@ -121,6 +123,8 @@ export class IPartido {
         if (detallePenales) this.detallePenales = detallePenales;
         else this.detallePenales = null;
 
+        if (lsGolesABorrar) this.lsGolesABorrar = lsGolesABorrar;
+        else this.lsGolesABorrar = new Array<Gol>();
 
     }
 

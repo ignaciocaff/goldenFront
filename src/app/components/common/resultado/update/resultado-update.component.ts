@@ -48,6 +48,7 @@ export class ResultadoUpdateComponent implements OnInit {
     fixture = new Fixture();
     lsFechasInicio = new Array<Fecha>();
     lsFechasFin = new Array<Fecha>();
+    lsGolesABorrar = new Array<Gol>();
     partidos = new Array<IPartido>();
     dataSourceSLocal = new MatTableDataSource<Sancion>();
     dataSourceSVisitante = new MatTableDataSource<Sancion>();
@@ -592,21 +593,30 @@ export class ResultadoUpdateComponent implements OnInit {
             if (result) {
                 for (let i = 0; i < this.partido.lsGolesLocal.length; i++) {
                     if (id_jugador == this.partido.lsGolesLocal[i]['jugador']['id_jugador']) {
+                        if (id_gol) {
+                            var gol = new Gol();
+                            var equipo = new Equipo();
+                            gol.jugador.id_jugador = this.partido.lsGolesLocal[i]['jugador']['id_jugador'];
+                            gol.id_gol = this.partido.lsGolesLocal[i]['id_gol'];
+                            gol.equipo = equipo;
+                            gol.equipo.id_equipo = this.partido['local'][0]['id_equipo'];
+                            this.lsGolesABorrar.push(gol);
+                        }
                         this.partido.lsGolesLocal.splice(i, 1);
                         this.dataSourceGLocal = new MatTableDataSource(this.partido.lsGolesLocal);
                         break;
                     }
                 }
 
-                if (id_gol) {
-                    this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
-                        data => {
-                            this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
-                        }, error => {
-
-                        }
-                    );
-                }
+                /*  if (id_gol) {
+                      this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
+                          data => {
+                              this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
+                          }, error => {
+  
+                          }
+                      );
+                  }*/
 
             }
             this.dialogRefBorrado = null;
@@ -626,21 +636,30 @@ export class ResultadoUpdateComponent implements OnInit {
             if (result) {
                 for (let i = 0; i < this.partido.lsGolesVisitante.length; i++) {
                     if (id_jugador == this.partido.lsGolesVisitante[i]['jugador']['id_jugador']) {
+                        if (id_gol) {
+                            var gol = new Gol();
+                            var equipo = new Equipo();
+                            gol.jugador.id_jugador = this.partido.lsGolesVisitante[i]['jugador']['id_jugador'];
+                            gol.id_gol = this.partido.lsGolesVisitante[i]['id_gol'];
+                            gol.equipo = equipo;
+                            gol.equipo.id_equipo = this.partido['visitante'][0]['id_equipo'];
+                            this.lsGolesABorrar.push(gol);
+                        }
                         this.partido.lsGolesVisitante.splice(i, 1);
                         this.dataSourceGVisitante = new MatTableDataSource(this.partido.lsGolesVisitante);
                         break;
                     }
                 }
 
-                if (id_gol) {
-                    this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
-                        data => {
-                            this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
-                        }, error => {
-
-                        }
-                    );
-                }
+                /*  if (id_gol) {
+                      this.partidoService.borrarGol(id_gol, this.id_fase, this.zona == null ? 0 : this.zona.id_zona).subscribe(
+                          data => {
+                              this.toastr.success("El gol fue eliminado correctamente.", "Éxito!");
+                          }, error => {
+  
+                          }
+                      );
+                  }*/
 
             }
             this.dialogRefBorrado = null;
@@ -649,6 +668,7 @@ export class ResultadoUpdateComponent implements OnInit {
 
     modificarResultado() {
         this.spinnerService.show();
+        this.partido.lsGolesABorrar = this.lsGolesABorrar;
         var partido = new Partido();
         if (this.partido) {
             partido = this.parserService.parseResultado(this.partido, this.id_torneo);
