@@ -1,787 +1,912 @@
 <div class="container-fluid">
-  <!--   <div class="row">
-    <div class="col-md-12 col-sm-12">
-      <svg height="200" width="500">
-        <polyline points="0 0.53 25 0.53 25 102.53 0 102.53" style="fill:none;stroke:black;stroke-width:2" />
-        <polyline points="298.5 112.03 298.5 52.03 25 52.03" style="fill:none;stroke:black;stroke-width:2" />
-      </svg>
-
-      <svg height="200" width="500">
-        <polyline points="0 0.53 25 0.53 25 102.53 0 102.53" style="fill:none;stroke:black;stroke-width:2" />
-        <polyline points="298.5 112.03 298.5 52.03 25 52.03" style="fill:none;stroke:black;stroke-width:2" />
-      </svg>
-    </div>
-  </div> -->
-
-  <div class="playoff" *ngIf="playoffA.length">
-    <div class="row">
+  <div class="hidden-xs hidden-sm">
+    <div class="playoff" *ngIf="playoffA.length">
       <div class="row">
-        <hr class="hr-text titulo" data-content="PLAYOFF A">
+        <div class="row">
+          <hr class="hr-text titulo" data-content="PLAYOFF A">
+        </div>
+        <div class="row">
+          <div class="col-md-12 texto-fase">
+            <div class="col-md-3 text-center" *ngIf="playoffA[0].length">CUARTOS</div>
+            <div class="col-md-3 text-center">SEMIS</div>
+            <div class="col-md-3 text-center">FINAL</div>
+            <div class="col-md-3 text-center">CAMPEÓN</div>
+          </div>
+        </div>
+        <div class="etapa cuartos-final" *ngIf="playoffA[0].length">
+
+          <div class="partido" *ngFor="let partido of playoffA[0]">
+            <div class="row">
+              <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffA[1].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffA[1].length">
+          <div class="partido" *ngFor="let partido of playoffA[1]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background': partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background': partido.visitante[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="etapa final" *ngIf="playoffA[3].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa final" *ngIf="playoffA[3].length">
+          <div class="partido" *ngFor="let partido of playoffA[3]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="campeon" *ngIf="playoffA[3].length">
+            <div class="equipo" *ngIf="playoffA[3][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffA[3][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffA[3][0].ganadorPlayoff.nombre}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffA[3][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="campeon" *ngIf="playoffA[3].length == 0">
+            <div class="equipo"></div>
+          </div>
+        </div>
+
       </div>
-      <div class="row">
+
+      <div class="row" *ngIf="playoffA[2].length">
         <div class="col-md-12 texto-fase">
-          <div class="col-md-3 text-center" *ngIf="playoffA[0].length">CUARTOS</div>
-          <div class="col-md-3 text-center">SEMIS</div>
-          <div class="col-md-3 text-center">FINAL</div>
-          <div class="col-md-3 text-center">CAMPEÓN</div>
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center">TERCER PUESTO</div>
+          <div class="col-md-3 text-center">GANADOR</div>
         </div>
-      </div>
-      <div class="etapa cuartos-final" *ngIf="playoffA[0].length">
+        <div class="etapa tercer-puesto">
 
-        <div class="partido" *ngFor="let partido of playoffA[0]">
-          <div class="row">
-            <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+          <div class="partido" *ngFor="let partido of playoffA[2]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
               </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
               </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffA[1].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffA[1].length">
-        <div class="partido" *ngFor="let partido of playoffA[1]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background': partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background': partido.visitante[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
             </div>
           </div>
         </div>
-      </div>
 
-
-      <div class="etapa final" *ngIf="playoffA[3].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa final" *ngIf="playoffA[3].length">
-        <div class="partido" *ngFor="let partido of playoffA[3]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="campeon" *ngIf="playoffA[3].length">
-          <div class="equipo" *ngIf="playoffA[3][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffA[3][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffA[3][0].ganadorPlayoff.nombre}}</span>
+        <div class="etapa">
+          <div class="ganador-tercer-puesto" *ngIf="playoffA[2].length">
+            <div class="equipo" *ngIf="playoffA[2][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffA[2][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffA[2][0].ganadorPlayoff.nombre}}</span>
+                </div>
               </div>
             </div>
+            <div class="equipo" *ngIf="playoffA[2][0].ganadorPlayoff.id_equipo == null"></div>
           </div>
-          <div class="equipo" *ngIf="playoffA[3][0].ganadorPlayoff.id_equipo == null"> </div>
+          <div class="ganador-tercer-puesto" *ngIf="playoffA[2].length == 0">
+            <div class="equipo"></div>
+          </div>
         </div>
-        <div class="campeon" *ngIf="playoffA[3].length == 0">
-          <div class="equipo"></div>
-        </div>
-      </div>
 
+      </div>
     </div>
 
-    <div class="row" *ngIf="playoffA[2].length">
-      <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center">TERCER PUESTO</div>
-        <div class="col-md-3 text-center">GANADOR</div>
-      </div>
-      <div class="etapa tercer-puesto">
+    <div class="playoff" *ngIf="playoffB.length">
+      <div class="row">
+        <div class="row">
+          <hr class="hr-text titulo" data-content="PLAYOFF B">
+        </div>
+        <div class="row">
+          <div class="col-md-12 texto-fase">
+            <div class="col-md-3 text-center" *ngIf="playoffB[0].length">CUARTOS</div>
+            <div class="col-md-3 text-center">SEMIS</div>
+            <div class="col-md-3 text-center">FINAL</div>
+            <div class="col-md-3 text-center">CAMPEÓN</div>
+          </div>
+        </div>
+        <div class="etapa cuartos-final" *ngIf="playoffB[0].length">
 
-        <div class="partido" *ngFor="let partido of playoffA[2]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+          <div class="partido" *ngFor="let partido of playoffB[0]">
+            <div class="row">
+              <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
               </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
               </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffB[1].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffB[1].length">
+          <div class="partido" *ngFor="let partido of playoffB[1]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
               </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
             </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="etapa final" *ngIf="playoffB[3].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa final" *ngIf="playoffB[3].length">
+          <div class="partido" *ngFor="let partido of playoffB[3]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="campeon" *ngIf="playoffB[3].length">
+            <div class="equipo" *ngIf="playoffB[3][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffB[3][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffB[3][0].ganadorPlayoff.nombre}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffB[3][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="campeon" *ngIf="playoffB[3].length == 0">
+            <div class="equipo"></div>
           </div>
         </div>
       </div>
 
-      <div class="etapa">
-        <div class="ganador-tercer-puesto" *ngIf="playoffA[2].length">
-          <div class="equipo" *ngIf="playoffA[2][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffA[2][0].ganadorPlayoff.imagePath">
+      <div class="row" *ngIf="playoffB[2].length">
+        <div class="col-md-12 texto-fase">
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center">TERCER PUESTO</div>
+          <div class="col-md-3 text-center">GANADOR</div>
+        </div>
+        <div class="etapa tercer-puesto">
+
+          <div class="partido" *ngFor="let partido of playoffB[2]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
               </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffA[2][0].ganadorPlayoff.nombre}}</span>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
               </div>
             </div>
           </div>
-          <div class="equipo" *ngIf="playoffA[2][0].ganadorPlayoff.id_equipo == null"></div>
         </div>
-        <div class="ganador-tercer-puesto" *ngIf="playoffA[2].length == 0">
-          <div class="equipo"></div>
+
+        <div class="etapa">
+          <div class="ganador-tercer-puesto" *ngIf="playoffB[2].length">
+            <div class="equipo" *ngIf="playoffB[2][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffB[2][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffB[2][0].ganadorPlayoff.nombre}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffB[2][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="ganador-tercer-puesto" *ngIf="playoffB[2].length == 0">
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="playoff" *ngIf="playoffC.length">
+      <div class="row">
+        <div class="row">
+          <hr class="hr-text titulo" data-content="PLAYOFF C">
+        </div>
+        <div class="row">
+          <div class="col-md-12 texto-fase">
+            <div class="col-md-3 text-center" *ngIf="playoffC[0].length">CUARTOS</div>
+            <div class="col-md-3 text-center">SEMIS</div>
+            <div class="col-md-3 text-center">FINAL</div>
+            <div class="col-md-3 text-center">CAMPEÓN</div>
+          </div>
+        </div>
+        <div class="etapa cuartos-final" *ngIf="playoffC[0].length">
+
+          <div class="partido" *ngFor="let partido of playoffC[0]">
+            <div class="row">
+              <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffC[1].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffC[1].length">
+          <div class="partido" *ngFor="let partido of playoffC[1]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="etapa final" *ngIf="playoffC[3].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa final" *ngIf="playoffC[3].length">
+          <div class="partido" *ngFor="let partido of playoffC[3]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="campeon" *ngIf="playoffC[3].length">
+            <div class="equipo" *ngIf="playoffC[3][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffC[3][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffC[3][0].ganadorPlayoff.nombre}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffC[3][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="campeon" *ngIf="playoffC[3].length == 0">
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row" *ngIf="playoffC[2].length">
+        <div class="col-md-12 texto-fase">
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center">TERCER PUESTO</div>
+          <div class="col-md-3 text-center">GANADOR</div>
+        </div>
+        <div class="etapa tercer-puesto">
+
+          <div class="partido" *ngFor="let partido of playoffC[2]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="ganador-tercer-puesto" *ngIf="playoffC[2].length">
+            <div class="equipo" *ngIf="playoffC[2][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffC[2][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffC[2][0].ganadorPlayoff.nombre}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffC[2][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="ganador-tercer-puesto" *ngIf="playoffC[2].length == 0">
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="playoff" *ngIf="playoffD.length">
+      <div class="row">
+        <div class="row">
+          <hr class="hr-text titulo" data-content="PLAYOFF D">
+        </div>
+        <div class="row">
+          <div class="col-md-12 texto-fase">
+            <div class="col-md-3 text-center" *ngIf="playoffD[0].length"> CUARTOS</div>
+            <div class="col-md-3 text-center">SEMIS</div>
+            <div class="col-md-3 text-center">FINAL</div>
+            <div class="col-md-3 text-center">CAMPEÓN</div>
+          </div>
+        </div>
+        <div class="etapa cuartos-final" *ngIf="playoffD[0].length">
+
+          <div class="partido" *ngFor="let partido of playoffD[0]">
+            <div class="row">
+              <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffD[1].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa semifinal" *ngIf="playoffD[1].length">
+          <div class="partido" *ngFor="let partido of playoffD[1]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="etapa final" *ngIf="playoffD[3].length == 0">
+          <div class="partido">
+            <div class="equipo"></div>
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+        <div class="etapa final" *ngIf="playoffD[3].length">
+          <div class="partido" *ngFor="let partido of playoffD[3]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="campeon" *ngIf="playoffD[3].length">
+            <div class="equipo" *ngIf="playoffD[3][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffD[3][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffD[3][0].ganadorPlayoff.nombre}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffD[3][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="campeon" *ngIf="playoffD[3].length == 0">
+            <div class="equipo"></div>
+          </div>
         </div>
       </div>
 
+      <div class="row" *ngIf="playoffD[2].length">
+        <div class="col-md-12 texto-fase">
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center"></div>
+          <div class="col-md-3 text-center">TERCER PUESTO</div>
+          <div class="col-md-3 text-center">GANADOR</div>
+        </div>
+        <div class="etapa tercer-puesto">
+
+          <div class="partido" *ngFor="let partido of playoffD[2]">
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.local[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{partido.visitante[0].nombre}}</span>
+                </div>
+                <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="ganador-tercer-puesto" *ngIf="playoffD[2].length">
+            <div class="equipo" *ngIf="playoffD[2][0].ganadorPlayoff.id_equipo != null">
+              <div class="col-md-12 equipo ganador">
+                <div class="col-md-3 escudo">
+                  <img class="img-responsive" [src]="config.imgUrl + playoffD[2][0].ganadorPlayoff.imagePath">
+                </div>
+                <div class="col-md-6 nombreEquipo">
+                  <span> {{playoffD[2][0].ganadorPlayoff.nombre}}</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="equipo" *ngIf="playoffD[2][0].ganadorPlayoff.id_equipo == null"> </div>
+          </div>
+          <div class="ganador-tercer-puesto" *ngIf="playoffD[2].length == 0">
+            <div class="equipo"></div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
-  <div class="playoff" *ngIf="playoffB.length">
+  <div class="container-fluid hidden-lg hidden-md">
     <div class="row">
-      <div class="row">
-        <hr class="hr-text titulo" data-content="PLAYOFF B">
-      </div>
-      <div class="row">
-        <div class="col-md-12 texto-fase">
-          <div class="col-md-3 text-center" *ngIf="playoffB[0].length">CUARTOS</div>
-          <div class="col-md-3 text-center">SEMIS</div>
-          <div class="col-md-3 text-center">FINAL</div>
-          <div class="col-md-3 text-center">CAMPEÓN</div>
-        </div>
-      </div>
-      <div class="etapa cuartos-final" *ngIf="playoffB[0].length">
-
-        <div class="partido" *ngFor="let partido of playoffB[0]">
-          <div class="row">
-            <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffB[1].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffB[1].length">
-        <div class="partido" *ngFor="let partido of playoffB[1]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="etapa final" *ngIf="playoffB[3].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa final" *ngIf="playoffB[3].length">
-        <div class="partido" *ngFor="let partido of playoffB[3]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="campeon" *ngIf="playoffB[3].length">
-          <div class="equipo" *ngIf="playoffB[3][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffB[3][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffB[3][0].ganadorPlayoff.nombre}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="equipo" *ngIf="playoffB[3][0].ganadorPlayoff.id_equipo == null"> </div>
-        </div>
-        <div class="campeon" *ngIf="playoffB[3].length == 0">
-          <div class="equipo"></div>
-        </div>
-      </div>
+      <hr class="hr-text titulo" data-content="PLAYOFF">
+    </div>
+    <div class="row" style="margin-bottom: 15px;">
+      <ul class="nav nav-pills nav-fill">
+        <li class="nav-item" (click)="mostrarPlayoff('A')" *ngIf="playoffA.length"><a>Playoff A</a></li>
+        <li class="nav-item" (click)="mostrarPlayoff('B')" *ngIf="playoffB.length"><a>Playoff B</a></li>
+        <li class="nav-item" (click)="mostrarPlayoff('C')" *ngIf="playoffC.length"><a>Playoff C</a></li>
+        <li class="nav-item" (click)="mostrarPlayoff('D')" *ngIf="playoffD.length"><a>Playoff D</a></li>
+      </ul>
     </div>
 
-    <div class="row" *ngIf="playoffB[2].length">
-      <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center">TERCER PUESTO</div>
-        <div class="col-md-3 text-center">GANADOR</div>
-      </div>
-      <div class="etapa tercer-puesto">
-
-        <div class="partido" *ngFor="let partido of playoffB[2]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="ganador-tercer-puesto" *ngIf="playoffB[2].length">
-          <div class="equipo" *ngIf="playoffB[2][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffB[2][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffB[2][0].ganadorPlayoff.nombre}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="equipo" *ngIf="playoffB[2][0].ganadorPlayoff.id_equipo == null"> </div>
-        </div>
-        <div class="ganador-tercer-puesto" *ngIf="playoffB[2].length == 0">
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="playoff" *ngIf="playoffC.length">
     <div class="row">
-      <div class="row">
-        <hr class="hr-text titulo" data-content="PLAYOFF C">
-      </div>
-      <div class="row">
-        <div class="col-md-12 texto-fase">
-          <div class="col-md-3 text-center" *ngIf="playoffC[0].length">CUARTOS</div>
-          <div class="col-md-3 text-center">SEMIS</div>
-          <div class="col-md-3 text-center">FINAL</div>
-          <div class="col-md-3 text-center">CAMPEÓN</div>
-        </div>
-      </div>
-      <div class="etapa cuartos-final" *ngIf="playoffC[0].length">
+      <div class="col-sm-12 col-xs-12">
+        <ul class="nav nav-tabs nav-fill">
+          <li class="nav-item active">
+            <a data-toggle="tab" href="#cuartos" *ngIf="playoffActivo[0].length">Cuartos</a>
+          </li>
+          <li class="nav-item">
+            <a data-toggle="tab" href="#semis">Semis</a>
+          </li>
+          <li class="nav-item">
+            <a data-toggle="tab" href="#final">Final</a>
+          </li>
+        </ul>
 
-        <div class="partido" *ngFor="let partido of playoffC[0]">
-          <div class="row">
-            <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+        <div class="tab-content">
+          <div id="cuartos" class="tab-pane fade in active">
+            <div class="partidoMobile" *ngFor="let partido of playoffActivo[0]">
+              <div class="row">
+                <div class="col-sm-12 col-xs-12 equipoMobile local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                  <div class="col-sm-3 col-xs-3 escudo">
+                    <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                  </div>
+                  <div class="col-sm-6 col-xs-6 nombreEquipo">
+                    <span> {{partido.local[0].nombre}}</span>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+                </div>
               </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffC[1].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffC[1].length">
-        <div class="partido" *ngFor="let partido of playoffC[1]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="etapa final" *ngIf="playoffC[3].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa final" *ngIf="playoffC[3].length">
-        <div class="partido" *ngFor="let partido of playoffC[3]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="campeon" *ngIf="playoffC[3].length">
-          <div class="equipo" *ngIf="playoffC[3][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffC[3][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffC[3][0].ganadorPlayoff.nombre}}</span>
+              <div class="row">
+                <div class="col-sm-12 col-xs-12 equipoMobile" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                  <div class="col-sm-3 col-xs-3 escudo">
+                    <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                  </div>
+                  <div class="col-sm-6 col-xs-6 nombreEquipo">
+                    <span> {{partido.visitante[0].nombre}}</span>
+                  </div>
+                  <div class="col-sm-3 col-xs-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="equipo" *ngIf="playoffC[3][0].ganadorPlayoff.id_equipo == null"> </div>
-        </div>
-        <div class="campeon" *ngIf="playoffC[3].length == 0">
-          <div class="equipo"></div>
+
+          <div id="semis" class="tab-pane fade">
+
+            <div *ngIf="playoffActivo[1].length == 0">
+              <div class="partidoMobile">
+                <div class="equipoMobile"></div>
+                <div class="equipoMobile"></div>
+              </div>
+              <div class="partidoMobile">
+                <div class="equipoMobile"></div>
+                <div class="equipoMobile"></div>
+              </div>
+            </div>
+
+            <div *ngIf="playoffActivo[1].length">
+              <div class="partidoMobile" *ngFor="let partido of playoffActivo[1]">
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12 equipoMobile local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                    <div class="col-sm-3 col-xs-3 escudo">
+                      <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                    </div>
+                    <div class="col-sm-6 col-xs-6 nombreEquipo">
+                      <span> {{partido.local[0].nombre}}</span>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12 equipoMobile" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                    <div class="col-sm-3 col-xs-3 escudo">
+                      <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                    </div>
+                    <div class="col-sm-6 col-xs-6 nombreEquipo">
+                      <span> {{partido.visitante[0].nombre}}</span>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="final" class="tab-pane fade">
+
+            <div *ngIf="playoffActivo[2].length == 0">
+              <div class="partidoMobile">
+                <div class="equipoMobile"></div>
+                <div class="equipoMobile"></div>
+              </div>
+            </div>
+
+            <div *ngIf="playoffActivo[2].length">
+              <div class="partidoMobile" *ngFor="let partido of playoffActivo[2]">
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12 equipoMobile local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                    <div class="col-sm-3 col-xs-3 escudo">
+                      <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
+                    </div>
+                    <div class="col-sm-6 col-xs-6 nombreEquipo">
+                      <span> {{partido.local[0].nombre}}</span>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12 col-xs-12 equipoMobile" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
+                    <div class="col-sm-3 col-xs-3 escudo">
+                      <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
+                    </div>
+                    <div class="col-sm-6 col-xs-6 nombreEquipo">
+                      <span> {{partido.visitante[0].nombre}}</span>
+                    </div>
+                    <div class="col-sm-3 col-xs-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
 
-    <div class="row" *ngIf="playoffC[2].length">
-      <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center">TERCER PUESTO</div>
-        <div class="col-md-3 text-center">GANADOR</div>
-      </div>
-      <div class="etapa tercer-puesto">
 
-        <div class="partido" *ngFor="let partido of playoffC[2]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="ganador-tercer-puesto" *ngIf="playoffC[2].length">
-          <div class="equipo" *ngIf="playoffC[2][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffC[2][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffC[2][0].ganadorPlayoff.nombre}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="equipo" *ngIf="playoffC[2][0].ganadorPlayoff.id_equipo == null"> </div>
-        </div>
-        <div class="ganador-tercer-puesto" *ngIf="playoffC[2].length == 0">
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-    </div>
   </div>
-
-  <div class="playoff" *ngIf="playoffD.length">
-    <div class="row">
-      <div class="row">
-        <hr class="hr-text titulo" data-content="PLAYOFF D">
-      </div>
-      <div class="row">
-        <div class="col-md-12 texto-fase">
-          <div class="col-md-3 text-center" *ngIf="playoffD[0].length"> CUARTOS</div>
-          <div class="col-md-3 text-center">SEMIS</div>
-          <div class="col-md-3 text-center">FINAL</div>
-          <div class="col-md-3 text-center">CAMPEÓN</div>
-        </div>
-      </div>
-      <div class="etapa cuartos-final" *ngIf="playoffD[0].length">
-
-        <div class="partido" *ngFor="let partido of playoffD[0]">
-          <div class="row">
-            <div class="col-md-12 equipo local" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffD[1].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa semifinal" *ngIf="playoffD[1].length">
-        <div class="partido" *ngFor="let partido of playoffD[1]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="etapa final" *ngIf="playoffD[3].length == 0">
-        <div class="partido">
-          <div class="equipo"></div>
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-      <div class="etapa final" *ngIf="playoffD[3].length">
-        <div class="partido" *ngFor="let partido of playoffD[3]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="campeon" *ngIf="playoffD[3].length">
-          <div class="equipo" *ngIf="playoffD[3][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffD[3][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffD[3][0].ganadorPlayoff.nombre}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="equipo" *ngIf="playoffD[3][0].ganadorPlayoff.id_equipo == null"> </div>
-        </div>
-        <div class="campeon" *ngIf="playoffD[3].length == 0">
-          <div class="equipo"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row" *ngIf="playoffD[2].length">
-      <div class="col-md-12 texto-fase">
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center"></div>
-        <div class="col-md-3 text-center">TERCER PUESTO</div>
-        <div class="col-md-3 text-center">GANADOR</div>
-      </div>
-      <div class="etapa tercer-puesto">
-
-        <div class="partido" *ngFor="let partido of playoffD[2]">
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.local[0].id_equipo == partido.ganadorPlayoff.id_equipo ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.local[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.local[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesLocal.length}} </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 equipo" [ngStyle]="{'background':partido.lsGolesVisitante.length > partido.lsGolesLocal.length ? 'rgb(41, 41, 41)' : 'rgb(125, 125, 125)' }">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + partido.visitante[0].imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{partido.visitante[0].nombre}}</span>
-              </div>
-              <div class="col-md-3 golesEquipo"> {{partido.lsGolesVisitante.length}} </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="etapa">
-        <div class="ganador-tercer-puesto" *ngIf="playoffD[2].length">
-          <div class="equipo" *ngIf="playoffD[2][0].ganadorPlayoff.id_equipo != null">
-            <div class="col-md-12 equipo ganador">
-              <div class="col-md-3 escudo">
-                <img class="img-responsive" [src]="config.imgUrl + playoffD[2][0].ganadorPlayoff.imagePath">
-              </div>
-              <div class="col-md-6 nombreEquipo">
-                <span> {{playoffD[2][0].ganadorPlayoff.nombre}}</span>
-              </div>
-
-            </div>
-          </div>
-          <div class="equipo" *ngIf="playoffD[2][0].ganadorPlayoff.id_equipo == null"> </div>
-        </div>
-        <div class="ganador-tercer-puesto" *ngIf="playoffD[2].length == 0">
-          <div class="equipo"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
