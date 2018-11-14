@@ -66,6 +66,15 @@ export class PlayoffVisualizacionComponent implements OnInit {
     tercerYCuartoH: any[] = [];
     finalH: any[] = [];
 
+
+    //Esto se usa para visualizacion mobile.
+    playoffActivo: any[] = [];
+    cuartosActivo: any[] = [];
+    semisActivo: any[] = [];
+    tercerYCuartoActivo: any[] = [];
+    finalActivo: any[] = [];
+
+
     constructor(
         public config: AppConfig,
         public zonaService: ZonaService,
@@ -143,7 +152,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalA = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -175,6 +184,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffA.push(this.semisA);
         this.playoffA.push(this.tercerYCuartoA);
         this.playoffA.push(this.finalA);
+        this.playoffActivo = this.playoffA;
     }
 
     servicioPlayoffB(i: number) {
@@ -185,7 +195,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalB = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -227,7 +237,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalC = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -269,7 +279,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalD = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -283,7 +293,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
                             this.lsPartidos.splice(g, 1);
                             this.semisD.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
                             break;
-                            case "Tercer puesto":
+                        case "Tercer puesto":
                             this.tercerYCuartoD.push(this.lsPartidos[g]);
                             this.lsPartidos.splice(g, 1);
                             this.tercerYCuartoD.sort((a, b) => a.llave.id_llave - b.llave.id_llave);
@@ -311,7 +321,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalE = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -353,7 +363,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalF = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -395,7 +405,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalG = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -437,7 +447,7 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.finalH = [];
 
         for (let f = this.lsZonas[i].lsEquipos.length - 1; f >= 0; f--) {
-            for (var g = this.lsPartidos.length -1 ; g >= 0; g--) {
+            for (var g = this.lsPartidos.length - 1; g >= 0; g--) {
                 if ((this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].local[0].id_equipo) ||
                     (this.lsZonas[i].lsEquipos[f].id_equipo == this.lsPartidos[g].visitante[0].id_equipo)) {
                     switch (this.lsPartidos[g].etapa.descripcion) {
@@ -469,5 +479,29 @@ export class PlayoffVisualizacionComponent implements OnInit {
         this.playoffH.push(this.semisH);
         this.playoffH.push(this.tercerYCuartoH);
         this.playoffH.push(this.finalH);
+    }
+
+
+
+
+
+
+    //PARTE MOBILE
+
+    mostrarPlayoff(i: string) {
+        switch (i) {
+            case 'A':
+                this.playoffActivo = this.playoffA;
+                break;
+            case 'B':
+                this.playoffActivo = this.playoffB;
+                break;
+            case 'C':
+                this.playoffActivo = this.playoffC;
+                break;
+            case 'D':
+                this.playoffActivo = this.playoffD;
+                break;
+        }
     }
 }

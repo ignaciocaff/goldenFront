@@ -15,6 +15,12 @@
 .col-md-12,
 .col-md-3,
 .col-md-6,
+.col-sm-12,
+.col-sm-3,
+.col-sm-6,
+.col-xs-12,
+.col-xs-3,
+.col-xs-6,
 .row {
   padding: 0px;
   margin: 0px;
@@ -41,15 +47,32 @@
   font-weight: 500;
   border-style: solid;
   border-width: 1px;
-  /*   border-color: rgb(170, 145, 93);
- */
   border-radius: 5px;
+}
+
+.equipoMobile {
+  height: 40px;
+  background: rgb(125, 125, 125);
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  border-style: solid;
+  border-width: 1px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.partidoMobile {
+  margin-top: 10px;
+  margin-bottom: 35px;
+}
+
+.nav>li>a {
+  color: rgb(170, 145, 93);
 }
 
 .local {
   border-left: 9px solid rgb(170, 145, 93);
-  /* border-width: 10px;  
-  border-color: red; */
 }
 
 .escudo img {
