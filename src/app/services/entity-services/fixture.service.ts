@@ -8,8 +8,8 @@ import { Categoria, ParametrosFixture } from '../../entities/index';
 export class FixtureService {
     constructor(private http: Http, private config: AppConfig) { }
 
-    create(obj: any, id_zona: number, id_torneo: number) {
-        return this.http.post(this.config.apiUrl + 'fecha/registrar/' + id_zona + '/' + id_torneo, obj);
+    create(obj: any, id_zona: number, id_torneo: number, fecha: Date) {
+        return this.http.post(this.config.apiUrl + 'fecha/registrar/' + id_zona + '/' + id_torneo + '/' + fecha, obj);
     }
 
     createInterzonal(obj: any, id_torneo: number, id_fase: number) {

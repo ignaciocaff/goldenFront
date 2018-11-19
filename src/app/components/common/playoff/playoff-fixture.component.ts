@@ -192,7 +192,7 @@ export class PlayoffFixtureComponent implements OnInit {
         this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
-        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
+        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo, this.fecha.fecha).subscribe(
             data => {
                 if (data) {
                     this.toastr.success('Se creo correctamente la fecha.', "Exito!");
@@ -212,10 +212,16 @@ export class PlayoffFixtureComponent implements OnInit {
             if (this.partidos[i].local.length != 0 && this.partidos[i].visitante.length != 0
                 && this.partidos[i].cancha.id_cancha && this.partidos[i].etapa.id_etapa && this.partidos[i].horario.id_horario && this.partidos[i].llave.id_llave) {
                 this.check = true;
-            } else {
+            }
+            else {
                 this.check = false;
             }
         }
+
+        if (this.fecha.fecha && this.zona.id_zona && !this.cantidadPartidos) {
+            this.check = true;
+        }
+
         return this.check;
     }
 

@@ -44,7 +44,7 @@
                         <i class="glyphicon glyphicon-list"></i>
                     </span>
                     <select [(ngModel)]="zona" name="zona" [disabled]="fecha.fecha == null" required class="form-control selectpicker" (blur)="verificarFecha();"
-                        (ngModelChange)="equiposPorZona(zona)">
+                        (ngModelChange)="equiposPorZona(zona); verificacionComponentes()">
                         <option value="null">Elija su opción</option>
                         <option *ngFor="let zonas of lsZonas" [ngValue]="zonas">{{zonas.descripcion}}</option>
                     </select>
@@ -60,7 +60,7 @@
                     <span class="input-group-addon">
                         <i class="glyphicon glyphicon-home"></i>
                     </span>
-                    <input [(ngModel)]="cantidadPartidos" [disabled]="!zona.id_zona" name="cantidadPartidos" required class="form-control" type="number"
+                    <input [(ngModel)]="cantidadPartidos" [disabled]="!zona.id_zona" name="cantidadPartidos"  class="form-control" type="number"
                         (blur)="dibujarPartidos()">
                 </div>
             </div>

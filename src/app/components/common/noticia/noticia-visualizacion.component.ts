@@ -97,11 +97,9 @@ export class NoticiaVisualizacionComponent {
             if (result) {
                 this.noticiaService.borrarNoticia(this.noticia.id_noticia).subscribe(
                     data => {
-                        console.log("ENTRO AL DATA");
                         this.router.navigate(['home/noticias']);
                     },
                     error => {
-                        console.log("Entro al error");
                         error.json()['Message'];
                     });
             }

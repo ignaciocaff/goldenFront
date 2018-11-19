@@ -182,7 +182,6 @@ export class EquipoUpdateComponent implements OnInit {
                             if(data.tipo_sancion && data.tipo_sancion.id_tipo != 1){
                                 this.lsJugadores[j].acumRojas = 1;  
                             }   
-                            console.log(this.lsJugadores[j]);
                         },
                         error => {}
                       );
@@ -255,7 +254,6 @@ export class EquipoUpdateComponent implements OnInit {
         }else{
         const grupo: any = new Object();
         grupo.jugador = jugador;
-        console.log(jugador);
         grupo.equipo = this.equipo;
         this.dialogRefSancion = this.dialog.open(SancionUpdateDialog, {
             data: grupo,

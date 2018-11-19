@@ -157,7 +157,7 @@ export class FixtureComponent implements OnInit {
         this.spinnerService.show();
         var lsPartidos = new Array<Partido>();
         lsPartidos = this.parserService.parsePartidos(this.partidos, this.fecha);
-        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo).subscribe(
+        this.fixtureService.create(lsPartidos, this.zona.id_zona, this.id_torneo, this.fecha.fecha).subscribe(
             data => {
                 if (data) {
                     this.toastr.success('Se creo correctamente la fecha.', "Exito!");
@@ -180,6 +180,11 @@ export class FixtureComponent implements OnInit {
                 this.check = true;
             }
         }
+
+        if (this.fecha.fecha && this.zona.id_zona && !this.cantidadPartidos) {
+            this.check = true;
+        }
+
         return this.check;
     }
 
