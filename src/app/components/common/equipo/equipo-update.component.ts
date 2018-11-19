@@ -10,6 +10,11 @@ import { MatPaginator, MatSort, MatTableDataSource, MatDialogRef, MatDialog } fr
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { ConfirmationDialog } from '../../common/dialog/index';
 import { AppConfig } from '../../../app.config';
+import { SancionUpdateDialog } from './modificar-sancion/sancion-dialog';
+import {
+    SancionService
+  } from '../../../services/entity-services/index';
+
 @Component({
     selector: 'equipo-update',
     moduleId: module.id,
@@ -23,7 +28,8 @@ export class EquipoUpdateComponent implements OnInit {
     @ViewChild(MatSort) sort: MatSort;
 
     dialogRef: MatDialogRef<ConfirmationDialog>;
-    displayedColumns = ['apellido', 'nombre', 'nro_documento', 'id_jugador'];
+    dialogRefSancion: MatDialogRef<SancionUpdateDialog>;
+    displayedColumns = ['apellido', 'nombre', 'nro_documento', 'id_jugador', 'id_jugador_sancion'];
 
 
     public equipo = new Equipo();
@@ -51,6 +57,7 @@ export class EquipoUpdateComponent implements OnInit {
         private equipoService: EquipoService,
         public toastr: ToastsManager,
         private fileService: FileService,
+        public sancionService: SancionService,
         private router: Router,
         public dialog: MatDialog,
         public config: AppConfig
@@ -168,6 +175,18 @@ export class EquipoUpdateComponent implements OnInit {
                 if (this.lsJugadores.length == 0) {
                     this.eligioEquipo = false;
                 }
+
+                for(let j = 0; j < this.lsJugadores.length;j++){
+                    this.sancionService.getUltimaSancion(this.lsJugadores[j].id_jugador).subscribe(
+                        data => {
+                            if(data.tipo_sancion && data.tipo_sancion.id_tipo != 1){
+                                this.lsJugadores[j].acumRojas = 1;  
+                            }   
+                            console.log(this.lsJugadores[j]);
+                        },
+                        error => {}
+                      );
+                }
                 this.dataSource = new MatTableDataSource(this.lsJugadores);
             },
             error => {
@@ -229,6 +248,30 @@ export class EquipoUpdateComponent implements OnInit {
     routeModificacion() {
         this.router.navigate(['home/equipo-update']);
     }
+
+    modificarSancion(jugador: Jugador) {
+        if(jugador.acumRojas != 1){
+            this.toastr.info('El jugador seleccionado no tiene ultima sanción vigente.', 'Info!'); 
+        }else{
+        const grupo: any = new Object();
+        grupo.jugador = jugador;
+        console.log(jugador);
+        grupo.equipo = this.equipo;
+        this.dialogRefSancion = this.dialog.open(SancionUpdateDialog, {
+            data: grupo,
+            height: '250px',
+            width: '700px',
+            disableClose: false
+        });
+        this.dialogRefSancion.afterClosed().subscribe(result => {
+            if (result) {
+                this.toastr.success('La sanción fue modificada correctamente.', 'Exito!');
+            }
+            this.dialogRefSancion = null;
+        });
+        }
+    }
+
     eliminarJugador(id_jugador: number) {
         this.dialogRef = this.dialog.open(ConfirmationDialog, {
             height: '200px',

@@ -1,0 +1,89 @@
+<div class="montserrat-font">
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <h4>
+                Datos de sanción
+            </h4>
+        </div>
+        <div class="col-md-8 col-sm-8">
+        </div>
+    </div>
+    <form #sancionForm="ngForm" name="sancionForm">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Tipo Sanción (*)</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-list"></i>
+                            </span>
+                            <select [(ngModel)]="sancion.tipo_sancion.descripcion" name="san_descrip" required (ngModelChange)="onTipoSancionChange($event)" class="form-control selectpicker">
+                                <option value="null">Elija su opción</option>
+                                <option *ngFor="let tipo_sancion of lsTiposSanciones">{{tipo_sancion.descripcion}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Fecha inicio</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-list"></i>
+                            </span>
+                            <input [ngModel]="sancion.fecha_inicio.fecha | date:'dd/MM/yyyy'" disabled name="inicio" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Fecha fin anterior</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-list"></i>
+                            </span>
+                            <input [ngModel]="sancion.fecha_fin.fecha | date:'dd/MM/yyyy'" disabled name="fin" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Nueva fecha fin (*)</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-list"></i>
+                                    </span>
+                            <select [(ngModel)]="nuevaFecha" name="fin_nueva" required class="form-control selectpicker" (ngModelChange)="onChangeNuevaFecha(nuevaFecha)">
+                                        <option value="null">Elija su opción</option>
+                                        <option *ngFor="let fin of lsNuevasFechas" [ngValue]="fin">{{fin.fecha | date:'dd/MM/yyyy'}}</option>
+                                    </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Detalle</label>
+                    <input [(ngModel)]="sancion.detalle" name="descripcion" class="form-control" placeholder="Detalle sanción (Otras)" />
+                </div>
+            </div>
+        </div>
+        <div class="posicion row">
+            <div class="col-md-6">
+                <button type="button" (click)="modificarSancion()" class="boton btn btn-primary">Modificar</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" (click)="dialogRefSancion.close(false)" class="boton btn btn-primary">Salir</button>
+            </div>
+        </div>
+    </form>
+</div>

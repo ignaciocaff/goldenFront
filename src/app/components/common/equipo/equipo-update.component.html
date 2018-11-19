@@ -1,207 +1,210 @@
 <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" (click)="routeAlta()">Alta</a>
-  </li>
-  <li class="nav-item active">
-    <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
-  </li>
+    <li class="nav-item">
+        <a class="nav-link" (click)="routeAlta()">Alta</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link active" (click)="routeModificacion()">Modificación</a>
+    </li>
 </ul>
 <div class="flex-item">
-  <form #equipoForm="ngForm" name="equipoForm">
-    <div class="row">
-      <div class="col-md-3 col-sm-3">
-        <h4>Equipos</h4>
-        <div class="form-group has-feedback">
-          <div class="inputGroupContainer">
-            <div class="input-group">
-              <span class="input-group-addon">
+    <form #equipoForm="ngForm" name="equipoForm">
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <h4>Equipos</h4>
+                <div class="form-group has-feedback">
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [(ngModel)]="equipo" name="equipo" required (change)="onChange(equipo)" class="form-control">
+                            <select [(ngModel)]="equipo" name="equipo" required (change)="onChange(equipo)" class="form-control">
                 <option value=" ">Elija su opción</option>
                 <option *ngFor="let equipo of lsEquipos" [ngValue]="equipo">{{equipo.nombre}}</option>
               </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
 
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group has-feedback">
-          <label for="nombre" class="control-label">Nombre</label>
-          <div class="inputGroupContainer">
-            <div class="input-group">
-              <span class="input-group-addon">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group has-feedback">
+                    <label for="nombre" class="control-label">Nombre</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
                 <i class="glyphicon glyphicon-user"></i>
               </span>
-              <input [(ngModel)]="equipo.nombre" name="nombre" required class="form-control" type="text">
+                            <input [(ngModel)]="equipo.nombre" name="nombre" required class="form-control" type="text">
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-md-3">
-        <div class="form-group has-feedback">
-          <label class="control-label">Tipo Categoría</label>
-          <div class="inputGroupContainer">
-            <div class="input-group">
-              <span class="input-group-addon">
+            <div class="col-md-3">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Tipo Categoría</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [ngModel]="equipo.categoria.descripcion" name="categoria" (ngModelChange)="onTipoCategoriaChange($event)" required
-                class="form-control selectpicker">
+                            <select [ngModel]="equipo.categoria.descripcion" name="categoria" (ngModelChange)="onTipoCategoriaChange($event)" required class="form-control selectpicker">
                 <option value=" ">Elija su opción</option>
                 <option *ngFor="let categoria of lsCategorias">{{categoria.descripcion}}</option>
               </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-md-3">
-        <div class="form-group has-feedback">
-          <label class="control-label">Categoría</label>
-          <div class="inputGroupContainer">
-            <div class="input-group">
-              <span class="input-group-addon">
+            <div class="col-md-3">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Categoría</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [ngModel]="equipo.torneo.nombre" name="torneo" (ngModelChange)="onCategoriaChange($event)" required class="form-control selectpicker">
+                            <select [ngModel]="equipo.torneo.nombre" name="torneo" (ngModelChange)="onCategoriaChange($event)" required class="form-control selectpicker">
                 <option value=" ">Elija su opción</option>
                 <option *ngFor="let torneo of lsCategoriasTorneo">{{torneo.nombre}}</option>
               </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
+            <div class="col-md-2">
 
-      </div>
+            </div>
 
-      <div class="col-md-3 inexistente">
-        <div class="form-group has-feedback">
-          <label class="control-label">Club</label>
-          <div class="inputGroupContainer">
-            <div class="input-group">
-              <span class="input-group-addon">
+            <div class="col-md-3 inexistente">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Club</label>
+                    <div class="inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
                 <i class="glyphicon glyphicon-list"></i>
               </span>
-              <select [(ngModel)]="equipo.club" name="club" required class="form-control selectpicker">
+                            <select [(ngModel)]="equipo.club" name="club" required class="form-control selectpicker">
                 <option value="null">Elija su opción</option>
                 <option *ngFor="let club of lsClub" [ngValue]="club">{{club.nombre}}</option>
               </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-
-    <div class="row">
-      <div class="col-md-3">
-        <div class="form-group has-feedback">
-          <label class="control-label">Descripción</label>
-          <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo."
-            maxlength="1000"></textarea>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <div class="row">
-          <div class="col-md-4 text-center">
-            <div class="form-group has-feedback">
-              <label class="control-label" for="logo">Seleccione el escudo</label>
-              <app-file-upload projectId="GOLDEN" sectionId="ESCUDOS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('ESCUDOS')"></app-file-upload>
-            </div>
-          </div>
-          <div class="col-md-4 text-center">
-            <div class="form-group has-feedback">
-              <label class="control-label" for="camiseta">Seleccione camiseta</label>
-              <app-file-upload projectId="GOLDEN" sectionId="CAMISETAS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('CAMISETAS')"></app-file-upload>
-            </div>
-          </div>
-          <div class="col-md-4 text-center">
-            <div class="form-group has-feedback">
-              <label class="control-label" for="camisetalogo">Seleccione Foto</label>
-              <app-file-upload projectId="GOLDEN" sectionId="CAMISETAESCUDO" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('CAMISETAESCUDO')"></app-file-upload>
-            </div>
-          </div>
-        </div>
 
         <div class="row">
-          <div class="col-md-4 text-center">
-            <div class="form-group has-feedback">
-              <label class="control-label"></label>
-              <img *ngFor="let img of imagesEscudos" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
+            <div class="col-md-3">
+                <div class="form-group has-feedback">
+                    <label class="control-label">Descripción</label>
+                    <textarea [(ngModel)]="equipo.descripcion" name="descripcion" class="form-control" rows="3" placeholder="Utilice este campo para agregar información referida al equipo." maxlength="1000"></textarea>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 text-center">
-            <div class="form-group has-feedback">
-              <label class="control-label"></label>
-              <img *ngFor="let img of imagesCamisetas" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
-            </div>
-          </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="logo">Seleccione el escudo</label>
+                            <app-file-upload projectId="GOLDEN" sectionId="ESCUDOS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('ESCUDOS')"></app-file-upload>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="camiseta">Seleccione camiseta</label>
+                            <app-file-upload projectId="GOLDEN" sectionId="CAMISETAS" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('CAMISETAS')"></app-file-upload>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="form-group has-feedback">
+                            <label class="control-label" for="camisetalogo">Seleccione Foto</label>
+                            <app-file-upload projectId="GOLDEN" sectionId="CAMISETAESCUDO" maxFiles="1" maxSize="2" fileExt="JPG, GIF, PNG" (uploadStatus)="refreshImages('CAMISETAESCUDO')"></app-file-upload>
+                        </div>
+                    </div>
+                </div>
 
-          <div class="col-md-4 text-center">
-            <div class="form-group has-feedback">
-              <label class="control-label"></label>
-              <img *ngFor="let img of imagesCE" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="form-group has-feedback">
+                            <label class="control-label"></label>
+                            <img *ngFor="let img of imagesEscudos" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="form-group has-feedback">
+                            <label class="control-label"></label>
+                            <img *ngFor="let img of imagesCamisetas" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 text-center">
+                        <div class="form-group has-feedback">
+                            <label class="control-label"></label>
+                            <img *ngFor="let img of imagesCE" [src]="config.imgUrl + img.ThumbPath" class="img-thumbnail" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Empieza el funcionamiento de la tabla de jugadores dentro del equipo -->
-    <div *ngIf="eligioEquipo">
-      <div class="example-header">
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-        </mat-form-field>
-      </div>
+        <!-- Empieza el funcionamiento de la tabla de jugadores dentro del equipo -->
+        <div *ngIf="eligioEquipo">
+            <div class="example-header">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+                </mat-form-field>
+            </div>
 
-      <div class="example-container mat-elevation-z8">
+            <div class="example-container mat-elevation-z8">
 
-        <mat-table [dataSource]="dataSource" matSort>
+                <mat-table [dataSource]="dataSource" matSort>
 
-          <!-- ID Column -->
-          <ng-container matColumnDef="apellido">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.apellido}} </mat-cell>
-          </ng-container>
+                    <!-- ID Column -->
+                    <ng-container matColumnDef="apellido">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Apellido </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.apellido}} </mat-cell>
+                    </ng-container>
 
-          <!-- Progress Column -->
-          <ng-container matColumnDef="nombre">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
-          </ng-container>
+                    <!-- Progress Column -->
+                    <ng-container matColumnDef="nombre">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.nombre}} </mat-cell>
+                    </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="nro_documento">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Documento </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.nro_documento}} </mat-cell>
-          </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="nro_documento">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Documento </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.nro_documento}} </mat-cell>
+                    </ng-container>
 
-          <!-- Name Column -->
-          <ng-container matColumnDef="id_jugador">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
-            <mat-cell *matCellDef="let row"> <i class="glyphicon glyphicon-trash" (click)="eliminarJugador(row.id_jugador)"></i> </mat-cell>
-          </ng-container>
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="id_jugador">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> <i class="glyphicon glyphicon-trash" (click)="eliminarJugador(row.id_jugador)"></i> </mat-cell>
+                    </ng-container>
 
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;">
-          </mat-row>
-        </mat-table>
+                    <ng-container matColumnDef="id_jugador_sancion">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Modificar sanción </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> <i class="glyphicon glyphicon-pencil" (click)="modificarSancion(row)"></i> </mat-cell>
+                    </ng-container>
 
-        <mat-paginator [length]="lsJugadores.length" [pageSize]="30" [pageSizeOptions]="[5, 10, 30]"></mat-paginator>
-      </div>
-    </div>
-    <div class="row" id="boton">
-      <div class="col-md-3">
-        <button [disabled]="!equipoForm.valid" (click)="modificarEquipo()" type="button" class="btn btn-primary">Modificar</button>
-      </div>
-    </div>
-  </form>
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                    </mat-row>
+                </mat-table>
+
+                <mat-paginator [length]="lsJugadores.length" [pageSize]="30" [pageSizeOptions]="[5, 10, 30]"></mat-paginator>
+            </div>
+        </div>
+        <div class="row" id="boton">
+            <div class="col-md-3">
+                <button [disabled]="!equipoForm.valid" (click)="modificarEquipo()" type="button" class="btn btn-primary">Modificar</button>
+            </div>
+        </div>
+    </form>
 </div>

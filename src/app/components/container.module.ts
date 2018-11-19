@@ -13,7 +13,8 @@ import { HomeRoutingModule } from './container-routing.module';
 import { LoginComponent, LoginCargaComponent } from './common/login/index';
 import { EscudosComponent } from './common/escudos-bar/index';
 import { TorneoComponent, TorneoUpdateComponent } from './common/torneo/index';
-import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent } from './common/equipo/index';
+import { EquipoComponent, EquipoUpdateComponent, EquiposTorneoComponent, EquipoVisualizacionComponent,
+   SancionUpdateDialog } from './common/equipo/index';
 import { ZonaComponent, ZonaUpdateComponent, ZonaDeleteComponent } from './common/zona/index';
 import { ZonaVisualizacionComponent } from './common/zona/visualizacion/index';
 import { HorariosComponent, HorariosUpdateComponent } from './common/horarios/index';
@@ -64,6 +65,7 @@ import { FixtureVisualizacionComponent } from './common/fixture-visualizacion/in
 import { PlayoffFixtureComponent, PlayoffFixtureUpdateComponent, PlayoffVisualizacionComponent } from './common/playoff/index'
 import { OwlModule } from 'ngx-owl-carousel';
 import { FixtureAutomaticoComponent, FixtureAutomaticoDialog } from './common/fixture/automatico/index';
+
 
 @NgModule({
   declarations: [
@@ -127,7 +129,8 @@ import { FixtureAutomaticoComponent, FixtureAutomaticoDialog } from './common/fi
     PlayoffFixtureUpdateComponent,
     PlayoffVisualizacionComponent,
     FixtureAutomaticoComponent,
-    FixtureAutomaticoDialog
+    FixtureAutomaticoDialog,
+    SancionUpdateDialog
   ],
   imports: [
     BrowserModule,
@@ -152,7 +155,8 @@ import { FixtureAutomaticoComponent, FixtureAutomaticoDialog } from './common/fi
     Ng4LoadingSpinnerModule.forRoot(),
     OwlModule
   ],
-  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog, SancionDialog, SancionDialogV, FixtureAutomaticoDialog],
+  entryComponents: [ConfirmationDialog, FixtureDialog, UsuariosDialog,
+     SancionDialog, SancionDialogV, FixtureAutomaticoDialog, SancionUpdateDialog],
   providers: [FileService, TorneoService, ClubService, CategoriaService, EquipoService, CategoriaNoticiaService,
     TorneoEmitter, TorneoLSEmitter, NoticiaService, { provide: MatPaginatorIntl, useValue: getCustomPaginator() },
     CanchaService, HorarioService, ParserService, FixtureService, ReglaTorneoService, HorarioService, ReglasService, SancionService

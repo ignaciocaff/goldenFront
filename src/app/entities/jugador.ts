@@ -9,6 +9,7 @@ export class Jugador extends Persona {
     public equipo: Equipo;
     public acumAmarillas: number;
     public acumRojas: number;
+    public tieneUltSancion: boolean;
 
     constructor(
         id_jugador?: number,
@@ -17,7 +18,8 @@ export class Jugador extends Persona {
         fecha_alta?: Date,
         equipo?: Equipo,
         acumAmarillas?: number,
-        acumRojas?: number
+        acumRojas?: number,
+        tieneUltSancion?: boolean
     ) {
         super();
 
@@ -62,5 +64,15 @@ export class Jugador extends Persona {
         } else {
             this.equipo = new Equipo();
         }
+
+        if (tieneUltSancion) {
+            this.tieneUltSancion = tieneUltSancion;
+        } else {
+            this.tieneUltSancion = false;
+        }
+    }
+
+    public set setUltimaSancion(tiene:any) {
+        this.tieneUltSancion = tiene;
     }
 }
